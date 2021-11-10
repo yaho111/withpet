@@ -2,9 +2,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.ch</groupId>
-	<artifactId>board1</artifactId> 
-	<name>board1</name>
+	<groupId>com.project.withpet</groupId>
+	<artifactId>withpet</artifactId> 
+	<name>withpet</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
@@ -71,7 +71,8 @@
 			<version>11.2.0.3</version>
 			<scope>compile</scope>
 		</dependency>
-		<!-- dbcp jdbc connection pool -->
+		
+		<!-- dbcp jdbc connection pool : ComboPooledDataSource 클래스를 사용할때 필요함-->
 		<dependency>
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>
@@ -82,6 +83,16 @@
 			<artifactId>c3p0</artifactId>
 			<version>0.9.1.2</version>
 		</dependency>
+		
+		
+		<!-- transaction(springmember) -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+		
+		
 		<!-- mybatis -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
@@ -93,6 +104,7 @@
 			<artifactId>mybatis-spring</artifactId>
 			<version>1.2.1</version>
 		</dependency>
+		
 		<!-- ibatis -->
 		<dependency>
 			<groupId>org.apache.ibatis</groupId>
@@ -104,12 +116,14 @@
 			<artifactId>spring-ibatis</artifactId>
 			<version>2.0.8</version>
 		</dependency>
+		
 		<!-- cglib ibatis-->
 		<dependency>
 			<groupId>cglib</groupId>
 			<artifactId>cglib</artifactId>
 			<version>2.2</version>
 		</dependency>
+		
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -209,6 +223,7 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
+		
 		<!-- Test -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -216,6 +231,8 @@
 			<version>4.7</version>
 			<scope>test</scope>
 		</dependency>
+		
+		<!-- 파일 업로드 라이브러리 -->
 		<dependency>
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
@@ -254,6 +271,7 @@
 			<artifactId>scala-library</artifactId>
 			<version>2.10.4</version>
 		</dependency>
+		
 		<!-- javax.mail-->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -264,6 +282,13 @@
 			<groupId>javax.mail</groupId>
 			<artifactId>mail</artifactId>
 			<version>1.4.7</version>
+		</dependency>
+		
+		<!-- EMail(springmember) -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-email</artifactId>
+			<version>1.3.3</version>
 		</dependency>
 	</dependencies>
 
