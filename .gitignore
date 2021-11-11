@@ -1,0 +1,16 @@
+### IntelliJ IDEA ###
+*.iml
+/.idea
+
+### Eclipse ###
+/.settings/
+.classpath
+.project
+.springBeans
+
+### Build ###
+/target/
+
+
+### DB config ###
+src/main/resources/jdbc.properties
