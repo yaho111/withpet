@@ -30,6 +30,8 @@ public class MemberController {
     @RequestMapping(value = "/login.do", method = RequestMethod.POST)
     public String login(@RequestParam("id") String id, @RequestParam("pwd") String pwd,
                         HttpSession session, Model model) throws Exception {
+        System.out.println("login");
+
         // 로그인 실패 시 다른 결과값을 보여주기 위한 변수 result
         int result = 0;
         Member member = memberService.login(id);
@@ -63,7 +65,13 @@ public class MemberController {
     }
 
     // 로그아웃
+    @RequestMapping(value = "/logout.do")
+    public String logout(HttpSession session) {
+        System.out.println("logout");
+        session.invalidate();
 
+        return "member/loginForm";
+    }
 
     // 회원 가입 폼
 
