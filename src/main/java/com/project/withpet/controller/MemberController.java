@@ -1,27 +1,26 @@
 package com.project.withpet.controller;
 
 import com.project.withpet.model.Member;
-import com.project.withpet.service.MemberServiceImpl;
+import com.project.withpet.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
 public class MemberController {
 
     @Autowired
-    private MemberServiceImpl memberService;
+    private MemberService memberService;
 
     // 로그인 폼
     @RequestMapping(value = "/login_form.do")
-    public String member_loginForm() {
+    public String forwardLoginForm() {
         System.out.println("login_form");
         return "member/loginForm";
     }
@@ -74,10 +73,46 @@ public class MemberController {
     }
 
     // 회원 가입 폼
+    @RequestMapping(value = "/join_form.do")
+    public String forwardJoinForm() {
+        return "member/joinForm";
+    }
 
+    // 아이디 중복 검사
+    @RequestMapping(value = "/id_check.do", method = RequestMethod.POST)
+    public String idCheck(@RequestParam("id") String id, Model model) throws Exception {
+        int result = memberService.checkMemberId(id);
+        System.out.println(result);
+
+        model.addAttribute("result", result);
+
+        return "member/idCheckResult";
+    }
 
     // 회원 가입
+    @RequestMapping(value = "/join.do", method = RequestMethod.POST)
+    public String join(Member member, HttpServletRequest request) throws  Exception {
 
+        String addr = request.getParameter("post") + "-" + request.getParameter("addr")
+                + "-" + request.getParameter("specificAddress");
+        String email = request.getParameter("mailId") + "@" + request.getParameter("domain");
+        String phone = request.getParameter("frontNum") + "-" + request.getParameter("middleNum")
+                + "-" + request.getParameter("backNum");
+
+        member.setId(request.getParameter("id").trim());
+        member.setNick(request.getParameter("nick").trim());
+        member.setPwd(request.getParameter("pwd").trim());
+        member.setAddr(addr);
+        member.setName(request.getParameter("name").trim());
+        member.setEmail(email);
+        member.setPhone(phone);
+        member.setGender(request.getParameter("gender"));
+
+        memberService.insertMember(member);
+
+        return "redirect:login_form.do";
+
+    }
 
     // 비밀번호 찾기 폼
 

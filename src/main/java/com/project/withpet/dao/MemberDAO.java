@@ -11,26 +11,26 @@ import javax.servlet.http.HttpSession;
 
 
 @Repository
-public class MemberDAOImpl {
+public class MemberDAO {
 
     @Autowired
     private SqlSession sqlSession;
 
-//    // 아이디 중복 체크
-//    public int checkMemberId(String id) throws Exception {
-//
-//        int result = -1; // 사용 가능한 ID
-//        Member member = sqlSession.selectOne("member_check", id);
-//
-//        if (member != null) result = 1; // 중복 ID
-//
-//        return result;
-//    }
-//
-//    // 회원 가입
-//    public void insertMember(Member member) throws Exception {
-//        sqlSession.insert("member_insert", member);
-//    }
+    // 아이디 중복 체크
+    public int checkMemberId(String id) throws Exception {
+
+        int result = -1; // 사용 가능한 ID
+        Member member = sqlSession.selectOne("login", id);
+
+        if (member != null) result = 1; // 중복 ID
+
+        return result;
+    }
+
+    // 회원 가입
+    public void insertMember(Member member) throws Exception {
+        sqlSession.insert("join", member);
+    }
 
     // 로그인
     public Member login(String id) throws Exception {

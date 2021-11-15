@@ -1,25 +1,25 @@
 package com.project.withpet.service;
 
-import com.project.withpet.dao.MemberDAOImpl;
+import com.project.withpet.dao.MemberDAO;
 import com.project.withpet.model.Member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MemberServiceImpl {
+public class MemberService {
 
     @Autowired
-    private MemberDAOImpl memberDAO;
+    private MemberDAO memberDAO;
 
-//    // 아이디 중복 체크
-//    public int checkMemberId(String id) throws Exception {
-//        return memberDAO.checkMemberId(id);
-//    }
-//
-//    // 회원 가입
-//    public void insertMember(Member member) throws Exception {
-//        memberDAO.insertMember(member);
-//    }
+    // 아이디 중복 체크
+    public int checkMemberId(String id) throws Exception {
+        return memberDAO.checkMemberId(id);
+    }
+
+    // 회원 가입
+    public void insertMember(Member member) throws Exception {
+        memberDAO.insertMember(member);
+    }
 
     // 로그인
     public Member login(String id) throws Exception {
