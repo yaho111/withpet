@@ -23,8 +23,14 @@ public class MemberService {
 
     // 로그인
     public Member login(String id) throws Exception {
-       return memberDAO.login(id);
+        return memberDAO.login(id);
     }
+
+    // 비밀번호 검색
+    public Member findPwd(Member member) throws Exception {
+        return memberDAO.findPwd(member);
+    }
+
 
 //    // 내 정보
 //    public Member selectMember(String id) throws Exception {
@@ -46,10 +52,6 @@ public class MemberService {
 //        return memberDAO.findid(member);
 //    }
 //
-//    // 비밀번호 검색
-//    public Member findpwd(Member member) throws Exception {
-//        return memberDAO.findpwd(member);
-//    }
 
 
 }

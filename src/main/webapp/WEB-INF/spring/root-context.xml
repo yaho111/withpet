@@ -27,14 +27,14 @@
 	
 	<bean id="session" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory" />
-	</bean>	
-	
+	</bean>
+
 	<!-- SET default mail properties -->
 	<bean id="jMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="smtp.naver.com" />
 		<property name="port" value="465" />
-		<property name="username" value="giduck23" />
-		<property name="password" value="xxxxxxx" />
+		<property name="username" value="byeongchae44" />
+		<property name="password" value="xptmxmdyd123*" />
 		<property value="smtps" name="protocol" />
 		<property value="utf-8" name="defaultEncoding" />
 		<property name="javaMailProperties">
@@ -47,7 +47,7 @@
 			</props>
 		</property>
 	</bean>
-	
+
 		<!-- 트랜잭션 매니저 설정(트랜잭션 처리를 위한 객체를 생성) -->
 	<!-- <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"> 
 		<property name="dataSource" ref="dataSource"/> </bean> 트랜잭션 어노테이션 인식 <tx:annotation-driven 

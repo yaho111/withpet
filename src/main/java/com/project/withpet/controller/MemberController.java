@@ -2,15 +2,19 @@ package com.project.withpet.controller;
 
 import com.project.withpet.model.Member;
 import com.project.withpet.service.MemberService;
+import org.apache.commons.mail.HtmlEmail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.PrintWriter;
 
 @Controller
 public class MemberController {
@@ -36,7 +40,7 @@ public class MemberController {
         Member member = memberService.login(id);
 
         // 등록되지 않은 맴버일 경우
-        if(member == null) {
+        if (member == null) {
 
             result = 1;
             model.addAttribute("result", result);
@@ -44,7 +48,7 @@ public class MemberController {
             return "member/loginFail";
         } else {
             // 로그인 성공할 경우
-            if( member.getPwd().equals(pwd)) {
+            if (member.getPwd().equals(pwd)) {
                 session.setAttribute("id", id);
 
                 String name = member.getName();
@@ -91,7 +95,7 @@ public class MemberController {
 
     // 회원 가입
     @RequestMapping(value = "/join", method = RequestMethod.POST)
-    public String join(Member member, HttpServletRequest request) throws  Exception {
+    public String join(Member member, HttpServletRequest request) throws Exception {
 
         String addr = request.getParameter("post") + "-" + request.getParameter("addr")
                 + "-" + request.getParameter("specificAddress");
@@ -115,16 +119,61 @@ public class MemberController {
     }
 
     // 비밀번호 찾기 폼
-//    @RequestMapping(value = "/pwdFindForm")
-//    public String forwardFindPwdForm() {
-//        return "member/pwdFindForm";
-//    }
-//
-//    // 비밀번호 찾기
-//    @RequestMapping(value = "/pwdFind", method = RequestMethod.POST)
-//    public String findPwd(@RequestParam("id") String id, @RequestParam("name") String name) throws Exception {
-//        return "";
-//    }
+    @RequestMapping(value = "/pwdFindForm")
+    public String forwardFindPwdForm() {
+        return "member/pwdFindForm";
+    }
+
+    // 비밀번호 찾기
+    @RequestMapping(value = "/findPwd", method = RequestMethod.POST)
+    public String findPwd(@ModelAttribute Member member, HttpServletResponse response, Model model) throws Exception {
+
+
+        Member foundMember = memberService.findPwd(member);
+
+        if(foundMember == null) {
+            return "member/pwdResult";
+        } else {
+
+            // Mail Server 설정
+            String charSet = "utf-8";
+            String hostSmtp = "smtp.naver.com";
+            String hostSmtpId = "byeongchae44@naver.com";
+            String hostSmtpPwd = "xptmxmdyd123*";
+
+            // 보내는 사람 Email, 제목, 내용
+            String emailSender = "byeongchae44@naver.com";
+            String senderName = "withpet 사이트 관리자";
+            String content = "비밀번호 찾기";
+
+            // 받는 사람 Email 주소
+            String mail = foundMember.getEmail();
+
+            try {
+                HtmlEmail htmlEmail = new HtmlEmail();
+                htmlEmail.setDebug(true);
+                htmlEmail.setCharset(charSet);
+                htmlEmail.setSSL(true);
+                htmlEmail.setHostName(hostSmtp);
+                htmlEmail.setSmtpPort(465);
+
+                htmlEmail.setAuthentication(hostSmtpId, hostSmtpPwd);
+                htmlEmail.setTLS(true);
+                htmlEmail.addTo(mail, charSet);
+                htmlEmail.setFrom(emailSender, senderName, charSet);
+                htmlEmail.setSubject(content);
+                htmlEmail.setHtmlMsg("<p align = 'center'>비밀번호 찾기</p><br>" + "<div align='center'> 비밀번호 : "
+                        + foundMember.getPwd() + "</div>");
+                htmlEmail.send();
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+
+            model.addAttribute("pwdResult", "등록된 Email 을 확인하세요.");
+            return "member/pwdFindForm";
+        }
+
+    }
     // 내 정보
 
     // 내 정보 수정 폼

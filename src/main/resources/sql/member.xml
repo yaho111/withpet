@@ -14,5 +14,10 @@
             (#{id}, #{nick}, #{pwd}, #{addr}, #{name}, #{email}, #{phone}, #{gender}, sysdate, '' ,'user')
     </insert>
 
+    <!-- 비밀번호 찾기 -->
+    <select id="pwd_find" resultType="member" parameterType="member">
+        select * from MEMBER where ID = #{id} and NAME = #{name}
+    </select>
+
 </mapper>
 

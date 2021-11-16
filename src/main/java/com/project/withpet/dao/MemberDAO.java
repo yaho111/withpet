@@ -37,6 +37,11 @@ public class MemberDAO {
         return sqlSession.selectOne("login", id);
     }
 
+    // 비밀번호 검색
+    public Member findPwd(Member member) throws Exception {
+        return sqlSession.selectOne("pwd_find", member);
+    }
+
 //    // 내 정보
 //    public Member selectMember(String id) throws Exception {
 //        return sqlSession.selectOne("member_select", id);
@@ -57,10 +62,6 @@ public class MemberDAO {
 //        return sqlSession.selectOne("id_find", member);
 //    }
 //
-//    // 비밀번호 검색
-//    public Member findpwd(Member member) throws Exception {
-//        return sqlSession.selectOne("pwd_find", member);
-//    }
 
 
 }
