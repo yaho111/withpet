@@ -15,7 +15,6 @@
     <meta charset="UTF-8">
     <title>회원가입폼</title>
 
-    <!-- <script src="/springmember/js/jquery.js"></script> -->
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="<%=request.getContextPath()%>/js/member.js"></script>
     <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
@@ -37,7 +36,7 @@
 <body>
 <div id="join_wrap">
     <h2 class="join_title">회원가입</h2>
-    <form name="f" method="post" action="join.do"
+    <form name="f" method="post" action="join"
           onsubmit="return check()">
         <!-- 이진파일을 업로드 할려면 enctype 속성을 지정 -->
         <table id="join_table">

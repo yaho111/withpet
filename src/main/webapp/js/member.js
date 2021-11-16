@@ -95,7 +95,7 @@ function id_check() {
     //아이디 중복확인
     $.ajax({
         type: "POST",
-        url: "id_check.do",
+        url: "idCheck",
         data: {"id": id},
         success: function (data) {
             alert("return success=" + data);

@@ -19,14 +19,14 @@ public class MemberController {
     private MemberService memberService;
 
     // 로그인 폼
-    @RequestMapping(value = "/login_form.do")
+    @RequestMapping(value = "/loginForm")
     public String forwardLoginForm() {
-        System.out.println("login_form");
+        System.out.println("loginForm");
         return "member/loginForm";
     }
 
     // 로그인
-    @RequestMapping(value = "/login.do", method = RequestMethod.POST)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(@RequestParam("id") String id, @RequestParam("pwd") String pwd,
                         HttpSession session, Model model) throws Exception {
         System.out.println("login");
@@ -64,7 +64,7 @@ public class MemberController {
     }
 
     // 로그아웃
-    @RequestMapping(value = "/logout.do")
+    @RequestMapping(value = "/logout")
     public String logout(HttpSession session) {
         System.out.println("logout");
         session.invalidate();
@@ -73,13 +73,13 @@ public class MemberController {
     }
 
     // 회원 가입 폼
-    @RequestMapping(value = "/join_form.do")
+    @RequestMapping(value = "/joinForm")
     public String forwardJoinForm() {
         return "member/joinForm";
     }
 
     // 아이디 중복 검사
-    @RequestMapping(value = "/id_check.do", method = RequestMethod.POST)
+    @RequestMapping(value = "/idCheck", method = RequestMethod.POST)
     public String idCheck(@RequestParam("id") String id, Model model) throws Exception {
         int result = memberService.checkMemberId(id);
         System.out.println(result);
@@ -90,7 +90,7 @@ public class MemberController {
     }
 
     // 회원 가입
-    @RequestMapping(value = "/join.do", method = RequestMethod.POST)
+    @RequestMapping(value = "/join", method = RequestMethod.POST)
     public String join(Member member, HttpServletRequest request) throws  Exception {
 
         String addr = request.getParameter("post") + "-" + request.getParameter("addr")
@@ -110,15 +110,21 @@ public class MemberController {
 
         memberService.insertMember(member);
 
-        return "redirect:login_form.do";
+        return "redirect:loginForm";
 
     }
 
     // 비밀번호 찾기 폼
-
-
-    // 비밀번호 찾기
-
+//    @RequestMapping(value = "/pwdFindForm")
+//    public String forwardFindPwdForm() {
+//        return "member/pwdFindForm";
+//    }
+//
+//    // 비밀번호 찾기
+//    @RequestMapping(value = "/pwdFind", method = RequestMethod.POST)
+//    public String findPwd(@RequestParam("id") String id, @RequestParam("name") String name) throws Exception {
+//        return "";
+//    }
     // 내 정보
 
     // 내 정보 수정 폼
