@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="path" value="${pageContext.request.contextPath }" />
 <html>
 
 <head>
@@ -16,15 +17,15 @@
     <meta name="author" content=""/>
     <title>Withpet</title>
     <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href="<%=request.getContextPath()%>/assets/favicon.ico"/>
+    <link rel="icon" type="image/x-icon" href="${path}/assets/favicon.ico"/>
     <!-- Bootstrap icons-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet"/>
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="<%=request.getContextPath()%>/css/styles.css" rel="stylesheet"/>
+    <link href="${path}/css/styles.css" rel="stylesheet"/>
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
-    <script src="<%=request.getContextPath()%>/js/scripts.js"></script>
+    <script src="${path}/js/scripts.js"></script>
 </head>
 
 <body>
@@ -32,7 +33,7 @@
 <div class="container">
     <div class="row">
         <div class="col">
-            <a class="navbar-brand" href="#!"><img src="<%=request.getContextPath()%>/images/withpet_logo.png"></a>
+            <a class="navbar-brand" href="#!"><img src="${path}/images/withpet_logo.png"></a>
         </div>
         <div class="col">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
