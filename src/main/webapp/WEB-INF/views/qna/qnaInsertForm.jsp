@@ -62,6 +62,6 @@
     <input type="reset" value="취소" onClick="history.back()"/>
   
   </form>
-
+<%@ include file="../layout/footer.jsp"%>
 </body>
 </html>
