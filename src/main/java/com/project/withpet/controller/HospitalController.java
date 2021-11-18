@@ -129,16 +129,16 @@ public class HospitalController {
 	}
 	
 //	// 상세 페이지
-//	@RequestMapping("hospitalView")
-//	public String hospitalView(int hos_no, String page, Model model ) {
-//		hospitalService.updateReadcnt(hos_no);				// 조회수 증가
-//		Hospital hospital = hospitalService.select(hos_no);	// 데이터 1개 구하기
-//		
-//		model.addAttribute("hospital", hospital);
-//		model.addAttribute("page", page);
-//		
-//		return "hospital/hospitalView";
-//	}
+	@RequestMapping("hospitalView")
+	public String hospitalView(int hos_no, String page, Model model ) {
+		hospitalService.updateReadcnt(hos_no);				// 조회수 증가
+		Hospital hospital = hospitalService.select(hos_no);	// 데이터 1개 구하기
+		System.out.println("상세페이지 컨트롤러 in");
+		model.addAttribute("hospital", hospital);
+		model.addAttribute("page", page);
+		
+		return "hospital/hospitalView";
+	}
 	
 	// 글 수정 폼
 	

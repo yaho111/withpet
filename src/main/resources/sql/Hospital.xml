@@ -43,13 +43,13 @@
 	</select>
 	
 	<!-- 상세 페이지 : 조회수 증가 -->
-	<!-- <update id="updateReadcnt" parameterType="int">
+	<update id="updateReadcnt" parameterType="int">
 		update hospital set hos_readcnt = hos_readcnt+1 where hos_no=#{hos_no}
-	</update> -->
+	</update>
 	
 	<!-- 상세 페이지 : 데이터 1개 구하기 -->
-	<!-- <select id="select" parameterType="int" resultType="hospital">
+	<select id="select" parameterType="int" resultType="hospital">
 		select * from hospital where hos_no=#{hos_no}
-	</select> -->
+	</select>
 	
 </mapper>

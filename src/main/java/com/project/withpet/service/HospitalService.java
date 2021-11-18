@@ -29,13 +29,13 @@ public class HospitalService {
 	}
 
 	// 상세 페이지 : 조회수 증가
-//	public void updateReadcnt(int hos_no) {
-//		hospitalDAO.updateReadcnt(hos_no);
-//	}
+	public void updateReadcnt(int hos_no) {
+		hospitalDAO.updateReadcnt(hos_no);
+	}
 
 	// 상세 페이지 : 데이터 1개 구하기
-//	public Hospital select(int hos_no) {
-//		return hospitalDAO.select(hos_no);
-//	}
+	public Hospital select(int hos_no) {
+		return hospitalDAO.select(hos_no);
+	}
 
 }
