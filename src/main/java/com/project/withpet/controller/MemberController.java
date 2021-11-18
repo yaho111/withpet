@@ -3,6 +3,7 @@ package com.project.withpet.controller;
 import com.project.withpet.model.Member;
 import com.project.withpet.service.MemberService;
 import org.apache.commons.mail.HtmlEmail;
+import org.apache.ibatis.io.Resources;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.Reader;
+import java.util.Properties;
 
 @Controller
 public class MemberController {
@@ -135,14 +139,24 @@ public class MemberController {
             return "member/pwdResult";
         } else {
 
+            // .properties 파일 읽어오기
+            Properties properties = new Properties();
+            try{
+                Reader reader = Resources.getResourceAsReader("application.properties");
+                properties.load(reader);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
             // Mail Server 설정
             String charSet = "utf-8";
             String hostSmtp = "smtp.naver.com";
-            String hostSmtpId = "byeongchae44@naver.com";
-            String hostSmtpPwd = "xptmxmdyd123*";
+            String hostSmtpId = properties.getProperty("mail.hostSmtpId");
+            String hostSmtpPwd = properties.getProperty("mail.hostSmtpPwd");
 
             // 보내는 사람 Email, 제목, 내용
-            String emailSender = "byeongchae44@naver.com";
+
             String senderName = "withpet 사이트 관리자";
             String content = "비밀번호 찾기";
 
@@ -160,7 +174,7 @@ public class MemberController {
                 htmlEmail.setAuthentication(hostSmtpId, hostSmtpPwd);
                 htmlEmail.setTLS(true);
                 htmlEmail.addTo(mail, charSet);
-                htmlEmail.setFrom(emailSender, senderName, charSet);
+                htmlEmail.setFrom(hostSmtpId, senderName, charSet);
                 htmlEmail.setSubject(content);
                 htmlEmail.setHtmlMsg("<p align = 'center'>비밀번호 찾기</p><br>" + "<div align='center'> 비밀번호 : "
                         + foundMember.getPwd() + "</div>");
