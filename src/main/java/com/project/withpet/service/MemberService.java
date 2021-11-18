@@ -31,7 +31,10 @@ public class MemberService {
         return memberDAO.findPwd(member);
     }
 
-
+    // 아이디 검색
+    public Member findId(Member member) {
+        return memberDAO.findId(member);
+    }
 //    // 내 정보
 //    public Member selectMember(String id) throws Exception {
 //        return memberDAO.selectMember(id);

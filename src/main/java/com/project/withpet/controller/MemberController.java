@@ -130,7 +130,7 @@ public class MemberController {
 
     // 비밀번호 찾기
     @RequestMapping(value = "/findPwd", method = RequestMethod.POST)
-    public String findPwd(@ModelAttribute Member member, HttpServletResponse response, Model model) throws Exception {
+    public String findPwd(@ModelAttribute Member member, Model model) throws Exception {
 
 
         Member foundMember = memberService.findPwd(member);
@@ -188,6 +188,33 @@ public class MemberController {
         }
 
     }
+
+    // 아이디 찾기 폼
+    @RequestMapping(value = "/idFindForm")
+    public String forwardIdFindForm(){
+        return "member/idFindForm";
+    }
+    // 아이디 찾기
+    @RequestMapping(value = "/findId")
+    public String findId(@ModelAttribute Member member, Model model) {
+
+        member.setName(member.getName().trim());
+        member.setEmail(member.getEmail().trim());
+
+        Member foundMember = memberService.findId(member);
+
+
+        if(foundMember == null) {
+            return "member/idResult";
+        } else {
+            String foundId = foundMember.getId();
+            model.addAttribute("idResult", foundId);
+            return "member/idFindForm";
+        }
+
+
+    }
+
     // 내 정보
 
     // 내 정보 수정 폼

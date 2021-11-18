@@ -15,9 +15,13 @@
     </insert>
 
     <!-- 비밀번호 찾기 -->
-    <select id="pwd_find" resultType="member" parameterType="member">
+    <select id="pwd_find" parameterType="member" resultType="member">
         select * from MEMBER where ID = #{id} and NAME = #{name}
     </select>
 
+    <!-- 아이디 찾기 -->
+    <select id="id_find" parameterType="member" resultType="member">
+        select * from MEMBER where NAME = #{name} and EMAIL = #{email}
+    </select>
 </mapper>
 

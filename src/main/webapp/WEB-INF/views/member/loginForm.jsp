@@ -25,9 +25,15 @@
             }
         }
 
-        /*비번찾기 공지창*/
+        /*비밀번호 찾기 공지창*/
         function pwd_find(){
             window.open("pwdFindForm","비밀번호 찾기","width=450,height=500");
+            //자바 스크립트에서 window객체의 open("공지창경로와 파일명","공지창이름","공지창속성")
+            //메서드로 새로운 공지창을 만듬.폭이 400,높이가 400인 새로운 공지창을 만듬.단위는 픽셀
+        }
+        /*아이디 찾기 공지창*/
+        function id_find(){
+            window.open("idFindForm","아이디 찾기","width=450,height=500");
             //자바 스크립트에서 window객체의 open("공지창경로와 파일명","공지창이름","공지창속성")
             //메서드로 새로운 공지창을 만듬.폭이 400,높이가 400인 새로운 공지창을 만듬.단위는 픽셀
         }
@@ -60,8 +66,10 @@
                    onclick="$('#id').focus();" />
             <input type="button" value="회원가입" class="input_button"
                    onclick="location.href = 'joinForm'" />
-            <input type="button" value="비번찾기" class="input_button"
+            <input type="button" value="비밀번호 찾기" class="input_button"
                    onclick="pwd_find()" />
+            <input type="button" value="아이디 찾기" class="input_button"
+                   onclick="id_find()" />
         </div>
     </form>
 </div>
