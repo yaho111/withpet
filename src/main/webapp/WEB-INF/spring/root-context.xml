@@ -30,7 +30,7 @@
 	</bean>	
 	
 	<!-- SET default mail properties -->
-	<bean id="jMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+	<!-- <bean id="jMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="smtp.naver.com" />
 		<property name="port" value="465" />
 		<property name="username" value="giduck23" />
@@ -43,10 +43,10 @@
 				<prop key="mail.smtp.starttls.enable">true</prop>
 				<prop key="mail.smtps.ssl.checkserveridentity">true</prop>
 				<prop key="mail.smtps.ssl.trust">*</prop>
-				<!-- <prop key="mail.debug">true</prop> -->
+				<prop key="mail.debug">true</prop>
 			</props>
 		</property>
-	</bean>
+	</bean> -->
 	
 		<!-- 트랜잭션 매니저 설정(트랜잭션 처리를 위한 객체를 생성) -->
 	<!-- <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"> 

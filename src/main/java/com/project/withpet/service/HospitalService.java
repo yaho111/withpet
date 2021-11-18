@@ -13,18 +13,29 @@ public class HospitalService {
 	@Autowired
 	private HospitalDAO hospitalDAO;
 
-	// 병원 게시판 글 작성 폼
-	public int getTotal(Hospital hospital) {
-		return hospitalDAO.getTotal(hospital);
-	}
-
-	// 글 작성(Insert)
+	// 글 작성(insert)
 	public void insert(Hospital hospital) {
 		hospitalDAO.insert(hospital); 
 	}
+	
+	// 총 데이터 개수 구하기
+//	public int getTotal(Hospital hospital) {
+//		return hospitalDAO.getTotal(hospital);
+//	}
 
-	public List<Hospital> list(Hospital hospital) {
-		return hospitalDAO.list(hospital);
-	}
+	// 데이터(게시글) 10개 구하기
+//	public List<Hospital> list(Hospital hospital) {
+//		return hospitalDAO.list(hospital);
+//	}
+
+	// 상세 페이지 : 조회수 증가
+//	public void updateReadcnt(int hos_no) {
+//		hospitalDAO.updateReadcnt(hos_no);
+//	}
+
+	// 상세 페이지 : 데이터 1개 구하기
+//	public Hospital select(int hos_no) {
+//		return hospitalDAO.select(hos_no);
+//	}
 
 }
