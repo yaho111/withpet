@@ -6,8 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="path" value="${pageContext.request.contextPath }" />
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="path" value="${pageContext.request.contextPath }"/>
 <html>
 
 <head>
@@ -16,6 +17,8 @@
     <meta name="description" content=""/>
     <meta name="author" content=""/>
     <title>Withpet</title>
+    <!-- jQuery-->
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="${path}/assets/favicon.ico"/>
     <!-- Bootstrap icons-->
@@ -33,7 +36,7 @@
 <div class="container">
     <div class="row">
         <div class="col">
-            <a class="navbar-brand" href="#!"><img src="${path}/images/withpet_logo.png"></a>
+            <a class="navbar-brand" href="main.do"><img src="${path}/images/withpet_logo.png"></a>
         </div>
         <div class="col">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -43,18 +46,11 @@
         </div>
         <div class="col">
             <form class="d-flex">
-                <button class="btn btn-outline-success" type="submit">
-                    <!-- <i class="bi-cart-fill me-1"></i> -->
-                    회원가입
-                    <!-- <span class="badge bg-dark text-white ms-1 rounded-pill">0</span> -->
-                </button>
-                <button class="btn-outline-success" >
-                    <!-- <i class="bi-cart-fill me-1"></i> -->
-                    로그인
-                    <!-- <span class="badge bg-dark text-white ms-1 rounded-pill">0</span> -->
-                </button>
+                <input type="button" class="btn btn-outline-success" value="회원 가입" onclick="location.href='joinForm'">
+                <input type="button" class="btn btn-outline-success" value="로그인" onclick="location.href='loginForm'">
             </form>
         </div>
+
 
     </div>
 
@@ -67,11 +63,11 @@
                 aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">커뮤니티</a></li>
-                <li class="nav-item"><a class="nav-link" href="#!">스토어</a></li>
-                <li class="nav-item"><a class="nav-link" href="#!">병원</a></li>
-                <li class="nav-item"><a class="nav-link" href="#!">Q&A</a></li>
-                <li class="nav-item"><a class="nav-link" href="#!">공지사항</a></li>
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="boardList">커뮤니티</a></li>
+                <li class="nav-item"><a class="nav-link" href="productList">스토어</a></li>
+                <li class="nav-item"><a class="nav-link" href="hospitalList">병원</a></li>
+                <li class="nav-item"><a class="nav-link" href="qnaList">Q&A</a></li>
+                <li class="nav-item"><a class="nav-link" href="notList">공지사항</a></li>
                 <!-- <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
