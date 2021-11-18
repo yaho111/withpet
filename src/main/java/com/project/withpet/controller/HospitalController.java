@@ -24,17 +24,25 @@ public class HospitalController {
 	@Autowired
 	private HospitalService hospitalService;
 
-	// 병원 게시판 글 작성 폼
+	// 글 작성 폼
 	@RequestMapping("insertForm")
 	public String insertForm() {
 		return "hospital/insertForm";
 	}
 
-	// 글 작성(Insert)
+	// 글 작성(insert)
 	@RequestMapping("insert")
 	public String insert(@RequestParam("hos_file1") MultipartFile multiFile, Hospital hospital, HttpServletRequest request,
 			Model model) throws Exception {
 		
+		// 1) 주소 처리
+		String hos_addr = request.getParameter("post") + "-" + request.getParameter("addr")
+        + "-" + request.getParameter("specificAddress");
+		
+		hospital.setHos_addr(hos_addr);
+		
+		
+		// 2) 첨부파일 처리
 		String filename = multiFile.getOriginalFilename(); // 첨부파일명
 		int size = (int) multiFile.getSize(); // 첨부파일의 크기 (단위: Byte)
 
@@ -64,7 +72,7 @@ public class HospitalController {
 			file[0] = st.nextToken(); // 파일명 Koala
 			file[1] = st.nextToken(); // 확장자 jpg
 
-			if(size > 100000) { // 100KB
+			if(size > 1024000) { // 1MB
 				result = 1;
 				model.addAttribute("result", result);
 
@@ -85,31 +93,68 @@ public class HospitalController {
 			
 		hospital.setHos_file(newfilename);
 
+		// 3) insert 수행
 		hospitalService.insert(hospital);
 		return "redirect:hospitalList";
 	}
 
-	// 병원 게시판 목록 검색 (전체 목록, 검색 목록)
-	@RequestMapping("hospitalList")
-	public String hospitalList(String page, Hospital hospital, Model model) {
-		final int rowPerPage = 10; // 화면에 출력할 데이터 갯수
-		if (page == null || page.equals("")) {
-			page = "1";
-		}
-		int currentPage = Integer.parseInt(page); 		// 현재 페이지 번호
-		int total = hospitalService.getTotal(hospital); // 총 데이터 개수
-		int startRow = (currentPage - 1) * rowPerPage + 1;
-		int endRow = startRow + rowPerPage - 1;
-		PagingPgm pp = new PagingPgm(total, rowPerPage, currentPage);
-		
-		hospital.setStartRow(startRow);
-		hospital.setEndRow(endRow);
-		
-		int no = total - startRow + 1;
-		List<Hospital> list = hospitalService.list(hospital);
-		
-		
-		return "hospital/hospitalList";
-	}
+	// 게시판 목록 검색 (전체 목록, 검색 목록)
+//	@RequestMapping("hospitalList")
+//	public String hospitalList(String page, Hospital hospital, Model model) {
+//		final int rowPerPage = 10; // 화면에 출력할 데이터 갯수
+//		if (page == null || page.equals("")) {
+//			page = "1";
+//		}
+//		int currentPage = Integer.parseInt(page); 		// 현재 페이지 번호
+//		int total = hospitalService.getTotal(hospital); // 총 데이터 개수
+//		int startRow = (currentPage - 1) * rowPerPage + 1;
+//		int endRow = startRow + rowPerPage - 1;
+//		PagingPgm pp = new PagingPgm(total, rowPerPage, currentPage);
+//		System.out.println("pp:" +pp);
+//		hospital.setStartRow(startRow);
+//		hospital.setEndRow(endRow);
+//		System.out.println("startRow:"+startRow);
+//		int no = total - startRow + 1;
+//		List<Hospital> list = hospitalService.list(hospital);	// 10개 데이터 구하기
+//		
+//		model.addAttribute("list", list);
+//		model.addAttribute("no", no);
+//		model.addAttribute("pp", pp);
+//		
+//		// 검색
+//		model.addAttribute("search", hospital.getSearch());
+//		model.addAttribute("keyword", hospital.getKeyword());
+//			
+//		return "hospital/hospitalList";
+//	}
+//	
+//	// 상세 페이지
+//	@RequestMapping("hospitalView")
+//	public String hospitalView(int hos_no, String page, Model model ) {
+//		hospitalService.updateReadcnt(hos_no);				// 조회수 증가
+//		Hospital hospital = hospitalService.select(hos_no);	// 데이터 1개 구하기
+//		
+//		model.addAttribute("hospital", hospital);
+//		model.addAttribute("page", page);
+//		
+//		return "hospital/hospitalView";
+//	}
+	
+	// 글 수정 폼
+	
+	
+	// 글 수정(update)
+	
+	
+	// 글 삭제 폼
+	
+	
+	// 글 삭제(delete)
+	
+	
+	// 정렬
+	
+	
+	// 필터 검색
 
 }

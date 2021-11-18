@@ -3,35 +3,18 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="hospitalns">
-	<!-- Use type aliases to avoid typing the full classname every time. -->
-	<!-- <resultMap id="boardResult"      type="board">
-		<result property="num"	     column="num" />
-		<result property="writer"    column="writer" />
-		<result property="subject"   column="subject" />
-		<result property="content"   column="content" />
-		<result property="email"     column="email" />
-		<result property="readcount" column="readcount" />
-		<result property="passwd"    column="passwd" />
-		<result property="ref"     	 column="ref" />
-		<result property="re_step"	 column="re_step" />
-		<result property="re_level"  column="re_level" />
-		<result property="ip"  		 column="ip" />
-		<result property="reg_date"	 column="reg_date" />
-		<result property="del" 		 column="del" />
-	</resultMap> -->
 	
-	<!-- 병원 게시판 글 작성 -->
+	<!-- 글 작성(insert) -->
 	<insert id="insert" parameterType="hospital">
 		insert into hospital values (hospital_seq.nextval,#{hos_name},#{hos_writer},#{hos_addr},
-			#{hos_tel},#{hos_file,jdbcType=VARCHAR},#{hos_lat},#{hos_long},
-			#{hos_time},#{hos_24},#{hos_holiday},#{hos_parking},#{hos_content},
+			#{hos_tel},#{hos_file,jdbcType=VARCHAR},#{hos_time},#{hos_24},#{hos_holiday},#{hos_parking},#{hos_content},
 			#{hos_link},0,0,sysdate)
 	</insert>
 	
 	<!-- 총 데이터 개수 구하기 -->
-	<select id="getTotal" parameterType="hospital" resultType="int">
+	<!-- <select id="getTotal" parameterType="hospital" resultType="int">
 		select count(*) from hospital
-		<!-- <where>
+		<where>
 			<if test="keyword != null and search !='subcon'">
 				${search} like '%'||#{keyword}||'%'
 			</if>
@@ -39,14 +22,14 @@
 				subject like '%'||#{keyword}||'%' or
 				content like '%'||#{keyword}||'%'
 			</if>
-		</where> -->
-	</select>
+		</where>
+	</select> -->
 	
 	<!-- 데이터(게시글) 10개 구하기 -->
-	<select id="list" parameterType="hospital" resultType="hospital">
+	<!-- <select id="list" parameterType="hospital" resultType="hospital">
 		select * from (select rowNum rnum, hospital.* from (
 			select * from hospital
-		<!-- <where>
+		<where>
 			<if test="keyword != null and search!='subcon'">
 				${search} like '%'||#{keyword}||'%'
 			</if>
@@ -54,12 +37,19 @@
 				subject like '%'||#{keyword}||'%' or
 				content like '%'||#{keyword}||'%'
 			</if>
-		</where> -->
+		</where>
 			order by hos_no desc) hospital )
 			  where rnum between #{startRow} and #{endRow}
-	</select>
+	</select> -->
 	
+	<!-- 상세 페이지 : 조회수 증가 -->
+	<!-- <update id="updateReadcnt" parameterType="int">
+		update hospital set hos_readcnt = hos_readcnt+1 where hos_no=#{hos_no}
+	</update> -->
 	
-	
+	<!-- 상세 페이지 : 데이터 1개 구하기 -->
+	<!-- <select id="select" parameterType="int" resultType="hospital">
+		select * from hospital where hos_no=#{hos_no}
+	</select> -->
 	
 </mapper>

@@ -1,3 +1,4 @@
+
 package com.project.withpet.model;
 
 import java.sql.Date;
@@ -9,13 +10,11 @@ public class Hospital {
 		private String hos_addr;  	/* 주소 */
 		private String hos_tel;  	/* 전화번호 */
 		private String hos_file;  	/* 병원 이미지 */
-		private String hos_lat; 	/* 위도 */
-		private String hos_long;  	/* 경도 */
 		private String hos_time;  	/* 운영시간 */
 		private String hos_24;  	/* 24시 여부 */
 		private String hos_holiday;	/* 연중무휴 여부 */
 		private String hos_parking;	/* 주차 가능 여부 */
-		private String hos_content;	/* 설명 */
+		private String hos_content;	/* 병원 소개 */
 		private String hos_link;  	/* 링크 */
 		private int hos_readcnt;  	/* 조회수 */
 		private int hos_likecnt;	/* 추천수 */
@@ -64,18 +63,6 @@ public class Hospital {
 		}
 		public void setHos_file(String hos_file) {
 			this.hos_file = hos_file;
-		}
-		public String getHos_lat() {
-			return hos_lat;
-		}
-		public void setHos_lat(String hos_lat) {
-			this.hos_lat = hos_lat;
-		}
-		public String getHos_long() {
-			return hos_long;
-		}
-		public void setHos_long(String hos_long) {
-			this.hos_long = hos_long;
 		}
 		public String getHos_time() {
 			return hos_time;
@@ -154,6 +141,6 @@ public class Hospital {
 		}
 		public void setKeyword(String keyword) {
 			this.keyword = keyword;
-		}							
+		}	
 }
 

@@ -4,8 +4,8 @@
 
 <configuration>
 
-<!-- 	<typeAliases>
-		<typeAlias alias="" type="com.project.withpet.model." />
-	</typeAliases>	 -->
+	<typeAliases>
+		<typeAlias alias="hospital" type="com.project.withpet.model.Hospital" />
+	</typeAliases>	
 	
 </configuration>
