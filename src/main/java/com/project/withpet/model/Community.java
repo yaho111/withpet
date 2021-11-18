@@ -1,6 +1,7 @@
 package com.project.withpet.model;
 
-import java.security.Timestamp;
+
+import java.util.Date;
 
 public class Community {
 	
@@ -8,7 +9,7 @@ public class Community {
 	    private String com_title;
 	    private String com_writer;
 	    private int com_readcnt;
-	    private Timestamp com_reg;
+	    private Date com_reg;
 	    private String com_content;
 	    private String com_file;
 	    private int com_likecnt;
@@ -25,7 +26,7 @@ public class Community {
 		public int getCom_readcnt() {
 			return com_readcnt;
 		}
-		public Timestamp getCom_reg() {
+		public Date getCom_reg() {
 			return com_reg;
 		}
 		public String getCom_content() {
@@ -49,7 +50,7 @@ public class Community {
 		public void setCom_readcnt(int com_readcnt) {
 			this.com_readcnt = com_readcnt;
 		}
-		public void setCom_reg(Timestamp com_reg) {
+		public void setCom_reg(Date com_reg) {
 			this.com_reg = com_reg;
 		}
 		public void setCom_content(String com_content) {
