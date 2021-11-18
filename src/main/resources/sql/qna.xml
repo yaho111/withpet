@@ -11,7 +11,7 @@
 	</insert>
 
 	<!-- 총데이터 구하기 -->
-	<!-- <select id="getCount" parameterType="qna" resultType="int">
+	<select id="getCount" parameterType="qna" resultType="int">
 		select count(*) from qna
 		<where>		
 				
@@ -23,10 +23,10 @@
 				</if>
 		
 		</where>
-	</select> -->
+	</select>
 
 	<!-- 목록 구해오기 --><!-- 여기서 오류 발생 : ORA-00923: FROM keyword not found where expected -->
-	<!-- <select id="qnaList" parameterType="qna" resultType="qna">
+	<select id="qnaList" parameterType="qna" resultType="qna">
 	select * from (select rowNum rn, qnaBoard.* from 
 				  (select * from qna
 		<where>				
@@ -40,7 +40,7 @@
 		</where>
 			order by qna_ref desc, qna_seq asc) qnaBoard)
 			where rn between #{startRow} and #{endRow}	
-	</select> -->
+	</select>
 	
 	<!-- 조회수 증가 -->
 	<!-- <update id="qnaReadcnt" parameterType="int">

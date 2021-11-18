@@ -4,8 +4,8 @@
 
 <configuration>
 
-<!-- 	<typeAliases>
-		<typeAlias alias="" type="com.project.withpet.model." />
-	</typeAliases>	 -->
+<typeAliases>
+		<typeAlias alias="qna" type="com.project.withpet.model.Qna" />
+	</typeAliases>
 	
 </configuration>

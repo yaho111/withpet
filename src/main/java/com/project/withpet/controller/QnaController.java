@@ -115,48 +115,48 @@ public class QnaController {
 	}
 
 	// 글목록 파트
-//	// 글 목록 (검색 - 커뮤니티, 병원, 쇼핑몰, 회원) - 검색기능에 2중으로 가능한가??
-//	@RequestMapping(value = "qnaList", method = RequestMethod.GET)
-//	public String qnaList(String pageNum, Qna qna, Model model) {
-//
-//		// 한 화면에 출력할 데이터 갯수
-//		final int limit = 10;
-//
-//		if (pageNum == null || pageNum.equals("")) {
-//			pageNum = "1";
-//		}
-//
-//		// 현제 페이지 (pageNum 변환)
-//		int currentPage = Integer.parseInt(pageNum);
-//
-//		// 총 데이터 구해오기
-//		int totalData = qnaService.getCount(qna);
-//		System.out.println("totalData:"+totalData);
-//
-//		// 한페이지에 데이터 시작 값, 끝값
-//		int startRow = (currentPage - 1) * limit + 1; // 1, 11, 21, 31 , DTO에 저장
-//		int endRow = startRow + limit - 1; // 10, 20, 30, 40 , DTO에 저장
-//
-//		Paging paging = new Paging(totalData, limit, currentPage);
-//
-//		qna.setStartRow(startRow);
-//		qna.setEndRow(endRow);
-//
-//		int no = totalData - startRow + 1; // 화면 출력 번호
-//
-//		List<Qna> list = qnaService.list(qna);
-//		System.out.println("list : " + list);
-//
-//		model.addAttribute("list", list);
-//		model.addAttribute("no", no);
-//		model.addAttribute("paging", paging);
-//
-//		// 검색
-//		model.addAttribute("search", qna.getSearch());
-//		model.addAttribute("keyword", qna.getKeyword());
-//
-//		return "qna/qnaList";
-//	}
+	// 글 목록 (검색 - 커뮤니티, 병원, 쇼핑몰, 회원) - 검색기능에 2중으로 가능한가??
+	@RequestMapping(value = "qnaList", method = RequestMethod.GET)
+	public String qnaList(String pageNum, Qna qna, Model model) {
+
+		// 한 화면에 출력할 데이터 갯수
+		final int limit = 10;
+
+		if (pageNum == null || pageNum.equals("")) {
+			pageNum = "1";
+		}
+
+		// 현제 페이지 (pageNum 변환)
+		int currentPage = Integer.parseInt(pageNum);
+
+		// 총 데이터 구해오기
+		int totalData = qnaService.getCount(qna);
+		System.out.println("totalData:"+totalData);
+
+		// 한페이지에 데이터 시작 값, 끝값
+		int startRow = (currentPage - 1) * limit + 1; // 1, 11, 21, 31 , DTO에 저장
+		int endRow = startRow + limit - 1; // 10, 20, 30, 40 , DTO에 저장
+
+		Paging paging = new Paging(totalData, limit, currentPage);
+
+		qna.setStartRow(startRow);
+		qna.setEndRow(endRow);
+
+		int no = totalData - startRow + 1; // 화면 출력 번호
+
+		List<Qna> list = qnaService.list(qna);
+		System.out.println("list : " + list);
+
+		model.addAttribute("list", list);
+		model.addAttribute("no", no);
+		model.addAttribute("paging", paging);
+
+		// 검색
+		model.addAttribute("search", qna.getSearch());
+		model.addAttribute("keyword", qna.getKeyword());
+
+		return "qna/qnaList";
+	}
 
 	// 상세 페이지 파트
 //	// 글 상세(관리자 : 답변, 삭제 / 사용자(작성자) : 수정, 삭제 / 사용자(작성자 외) : X)

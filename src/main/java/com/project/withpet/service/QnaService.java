@@ -23,17 +23,17 @@ public class QnaService{
 	}
 
 	// 글 목록 파트
-//	// 총데이터 갯수 구하기
-//	public int getCount(Qna qna) {
-//		System.out.println("getCount serive");
-//		return qnaDao.getCount(qna);
-//	}
-//
-//	// 목록 구해오기
-//	public List<Qna> list(Qna qna) {
-//		System.out.println("list serive");
-//		return qnaDao.list(qna);
-//	}
+	// 총데이터 갯수 구하기
+	public int getCount(Qna qna) {
+		System.out.println("getCount serive");
+		return qnaDao.getCount(qna);
+	}
+
+	// 목록 구해오기
+	public List<Qna> list(Qna qna) {
+		System.out.println("list serive");
+		return qnaDao.list(qna);
+	}
 
 	// 상세 페이지 파트
 //	// 조회수 증가
