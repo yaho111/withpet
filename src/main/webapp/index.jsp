@@ -9,7 +9,7 @@
 <body>
 <script type="text/javascript">
 // location.href = "main.do";
-location.href = "insertForm";
+location.href = "hospitalList";
 </script>
 
 </body>

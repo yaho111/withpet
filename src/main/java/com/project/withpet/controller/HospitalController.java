@@ -99,35 +99,35 @@ public class HospitalController {
 	}
 
 	// 게시판 목록 검색 (전체 목록, 검색 목록)
-//	@RequestMapping("hospitalList")
-//	public String hospitalList(String page, Hospital hospital, Model model) {
-//		final int rowPerPage = 10; // 화면에 출력할 데이터 갯수
-//		if (page == null || page.equals("")) {
-//			page = "1";
-//		}
-//		int currentPage = Integer.parseInt(page); 		// 현재 페이지 번호
-//		int total = hospitalService.getTotal(hospital); // 총 데이터 개수
-//		int startRow = (currentPage - 1) * rowPerPage + 1;
-//		int endRow = startRow + rowPerPage - 1;
-//		PagingPgm pp = new PagingPgm(total, rowPerPage, currentPage);
-//		System.out.println("pp:" +pp);
-//		hospital.setStartRow(startRow);
-//		hospital.setEndRow(endRow);
-//		System.out.println("startRow:"+startRow);
-//		int no = total - startRow + 1;
-//		List<Hospital> list = hospitalService.list(hospital);	// 10개 데이터 구하기
-//		
-//		model.addAttribute("list", list);
-//		model.addAttribute("no", no);
-//		model.addAttribute("pp", pp);
-//		
-//		// 검색
-//		model.addAttribute("search", hospital.getSearch());
-//		model.addAttribute("keyword", hospital.getKeyword());
-//			
-//		return "hospital/hospitalList";
-//	}
-//	
+	@RequestMapping("/hospitalList")
+	public String hospitalList(String page, Hospital hospital, Model model) {
+		final int rowPerPage = 10; // 화면에 출력할 데이터 갯수
+		if (page == null || page.equals("")) {
+			page = "1";
+		}
+		int currentPage = Integer.parseInt(page); 		// 현재 페이지 번호
+		int total = hospitalService.getTotal(hospital); // 총 데이터 개수
+		int startRow = (currentPage - 1) * rowPerPage + 1;
+		int endRow = startRow + rowPerPage - 1;
+		PagingPgm pp = new PagingPgm(total, rowPerPage, currentPage);
+		System.out.println("pp:" +pp);
+		hospital.setStartRow(startRow);
+		hospital.setEndRow(endRow);
+		System.out.println("startRow:"+startRow);
+		int no = total - startRow + 1;
+		List<Hospital> list = hospitalService.list(hospital);	// 10개 데이터 구하기
+		
+		model.addAttribute("list", list);
+		model.addAttribute("no", no);
+		model.addAttribute("pp", pp);
+		
+		// 검색
+		model.addAttribute("search", hospital.getSearch());
+		model.addAttribute("keyword", hospital.getKeyword());
+			
+		return "hospital/hospitalList";
+	}
+	
 //	// 상세 페이지
 //	@RequestMapping("hospitalView")
 //	public String hospitalView(int hos_no, String page, Model model ) {
