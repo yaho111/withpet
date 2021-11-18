@@ -26,41 +26,14 @@ public class CommunityDAO {
 		// TODO Auto-generated method stub
 		return session.selectList("List", page);
 	}
-//	public void updatecount(int com_no) {
-//		// TODO Auto-generated method stub
-//		session.update("read", com_no);
-//	}
-//
-//	public Community getBoard(int com_no) {
-//		// TODO Auto-generated method stub
-//		return session.selectOne("Content", com_no);
-//	}
-	
-//	public Community getBoard(int no) {
-//		// TODO Auto-generated method stub
-//		return session.selectOne("com_content", no);
-//	}
+	public void updatecount(int com_no) {
+		// TODO Auto-generated method stub
+		session.update("read", com_no);
+	}
 
-
-//	public int getCount() {
-//		// TODO Auto-generated method stub
-//		return session.selectOne("communityns.count");
-//	}
-//
-//	public List<Community> getCommunityList(int page) {
-//		// TODO Auto-generated method stub
-//		return session.selectList("list", page);
-//	}
-//	
-//	public void updatecount(int no) {
-//		// TODO Auto-generated method stub
-//		session.update("hit", no);
-//	}
-//
-//	public Community getCommunity(int no) {
-//		// TODO Auto-generated method stub
-//		return session.selectOne("content", no);
-//	}
-
-	
+	public Community getBoard(int com_no) {
+		// TODO Auto-generated method stub
+		return session.selectOne("Content", com_no);
+	}
 }
+	

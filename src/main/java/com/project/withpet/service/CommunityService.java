@@ -24,16 +24,16 @@ public class CommunityService {
 	}
 	public List<Community> getBoardList(int page) {		
 		return dao.getBoardList(page);
-}
-//	public void updatecount(int com_no) {
-//		// TODO Auto-generated method stub
-//		dao.updatecount(com_no);
-//	}
-//
-//	public Community getBoard(int com_no) {
-//		// TODO Auto-generated method stub
-//		return dao.getBoard(com_no);
-//	}
+    }
+	public void updatecount(int com_no) {
+		// TODO Auto-generated method stub
+		dao.updatecount(com_no);
+	}
+
+	public Community getBoard(int com_no) {
+		// TODO Auto-generated method stub
+		return dao.getBoard(com_no);
+	}
 
 
 	
