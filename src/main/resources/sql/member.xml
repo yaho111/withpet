@@ -3,8 +3,8 @@
 
 <mapper namespace="memberns">
 
-    <!-- 로그인, 아이디 중복 검사 -->
-    <select id="login" parameterType="String" resultType="member">
+    <!-- 로그인, 아이디 중복 검사, 내 정보 -->
+    <select id="check_id" parameterType="String" resultType="member">
         select * from MEMBER where ID = #{id}
     </select>
 

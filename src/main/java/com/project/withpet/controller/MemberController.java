@@ -11,12 +11,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.Reader;
 import java.util.Properties;
 
@@ -135,13 +132,13 @@ public class MemberController {
 
         Member foundMember = memberService.findPwd(member);
 
-        if(foundMember == null) {
+        if (foundMember == null) {
             return "member/pwdResult";
         } else {
 
             // .properties 파일 읽어오기
             Properties properties = new Properties();
-            try{
+            try {
                 Reader reader = Resources.getResourceAsReader("application.properties");
                 properties.load(reader);
             } catch (IOException e) {
@@ -191,9 +188,10 @@ public class MemberController {
 
     // 아이디 찾기 폼
     @RequestMapping(value = "/idFindForm")
-    public String forwardIdFindForm(){
+    public String forwardIdFindForm() {
         return "member/idFindForm";
     }
+
     // 아이디 찾기
     @RequestMapping(value = "/findId")
     public String findId(@ModelAttribute Member member, Model model) {
@@ -204,7 +202,7 @@ public class MemberController {
         Member foundMember = memberService.findId(member);
 
 
-        if(foundMember == null) {
+        if (foundMember == null) {
             return "member/idResult";
         } else {
             String foundId = foundMember.getId();
@@ -216,6 +214,18 @@ public class MemberController {
     }
 
     // 내 정보
+    @RequestMapping(value = "/myPage")
+    public String myPage(HttpSession session, Model model) throws Exception {
+        String id = session.getAttribute("id").toString();
+        System.out.println(id);
+
+        Member member = memberService.selectMember(id);
+
+
+        model.addAttribute(member);
+
+        return "member/myPage";
+    }
 
     // 내 정보 수정 폼
 

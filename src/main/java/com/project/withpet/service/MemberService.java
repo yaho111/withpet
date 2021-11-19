@@ -35,11 +35,12 @@ public class MemberService {
     public Member findId(Member member) {
         return memberDAO.findId(member);
     }
-//    // 내 정보
-//    public Member selectMember(String id) throws Exception {
-//        return memberDAO.selectMember(id);
-//    }
-//
+
+    // 내 정보
+    public Member selectMember(String id) throws Exception {
+        return memberDAO.selectMember(id);
+    }
+
 //    // 내 정보 수정
 //    public void updateMember(Member member) throws Exception {
 //        memberDAO.updateMember(member);
