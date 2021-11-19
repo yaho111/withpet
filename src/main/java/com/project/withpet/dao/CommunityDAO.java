@@ -30,10 +30,18 @@ public class CommunityDAO {
 		// TODO Auto-generated method stub
 		session.update("read", com_no);
 	}
-
 	public Community getBoard(int com_no) {
 		// TODO Auto-generated method stub
 		return session.selectOne("Content", com_no);
 	}
+//	public int update(Community community) {
+//		// TODO Auto-generated method stub
+//		return session.update("upDateBoard", community);
+//	}
+//	public int delete(int com_no) {
+//		// TODO Auto-generated method stub
+//		return session.delete("deleteBoard", com_no);
+//	}
+//	
 }
 	

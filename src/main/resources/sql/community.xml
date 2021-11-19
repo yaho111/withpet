@@ -33,7 +33,13 @@
 	<select id="Content" parameterType="int" resultType="community">
 	   select * from community where com_no = #{com_no}
 	</select>
-
-
-
-</mapper>
+	<!-- 글수정 
+	<update id="upDateBoard" parameterType="community">
+		update community set com_writer=#{com_writer}, com_title=#{com_title},
+		com_paswd=#{com_paswd},com_content=#{com_content}, com_reg=sysdate where com_no=#{com_no}
+	</update>-->
+	<!--  글삭제 
+	<delete id="deleteBoard" parameterType="int">
+		delete from community where com_no = #{com_no}
+	</delete>	-->
+	</mapper>

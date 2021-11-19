@@ -29,28 +29,16 @@ public class CommunityService {
 		// TODO Auto-generated method stub
 		dao.updatecount(com_no);
 	}
-
 	public Community getBoard(int com_no) {
 		// TODO Auto-generated method stub
 		return dao.getBoard(com_no);
 	}
-
-
-	
-	
-//	public Community getBoard(int no) {
-		// TODO Auto-generated method stub
-//		return dao.getBoard(no);
-//	}
-
-//	public int getCount() {
+//	public int update(Community community) {
 //		// TODO Auto-generated method stub
-//		return dao.getCount();
+//		return dao.update(community);
 //	}
-//
-//	public List<Community> getCommunityList(int page) {
+//	public int delete(int com_no) {
 //		// TODO Auto-generated method stub
-//		return dao.getCommunityList(page);
+//		return dao.delete(com_no);
 //	}
-
 }

@@ -97,3 +97,51 @@ public class CommunityController {
 		return "board/boardContent";
 	}
 }
+//	// 수정 폼
+//		@RequestMapping("/boardUpDateForm")
+//		public String boardUpDateForm(int com_no, String page, Model model) {
+//			
+//			Community board = service.getBoard(com_no);		// 상세 정보 구하기
+//			
+//			model.addAttribute("board", board);
+//			model.addAttribute("page", page);
+//			
+//			return "board/boardUpDateForm";
+//		}
+//		// 글수정
+//	@RequestMapping("/boardupdate")
+//	public String boardupdate(@ModelAttribute Community community, String page, Model model) {
+//		int result = 0;
+//		Community old = service.getBoard(community.getCom_no());
+//		if (old.getCom_paswd().equals(community.getCom_paswd())) { // 비번 일치시
+//			result = service.update(community);
+//		} else { // 비번 불일치시
+//			result = -1;
+//		}
+//			model.addAttribute("result", result);
+//			model.addAttribute("Community", community);
+//			model.addAttribute("page", page);
+//			
+//			return "board/upDateResult";
+//		}
+//	    // 삭제 폼
+//		@RequestMapping("/boardDeleteForm")
+//		public String boardDeleteForm() {
+//			return "board/boardDeleteForm";
+//		}
+//		// 글삭제
+//		@RequestMapping("/boarddelete")
+//		public String boarddelete(@ModelAttribute Community community, String page, Model model) {
+//			int result = 0;
+//			Community old = service.getBoard(community.getCom_no());
+//			if(old.getCom_paswd().equals(community.getCom_paswd())) { //비번 일치시
+//				result = service.delete(community.getCom_no());
+//			}else {		// 비번 불일치시
+//				result = -1;
+//			}
+//			model.addAttribute("result", result);
+//			model.addAttribute("page", page);
+//			
+//			return "board/deleteResult";
+//		}
+//}

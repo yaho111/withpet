@@ -8,6 +8,7 @@ public class Community {
 	    private int com_no;
 	    private String com_title;
 	    private String com_writer;
+	    private String com_paswd;
 	    private int com_readcnt;
 	    private Date com_reg;
 	    private String com_content;
@@ -22,6 +23,9 @@ public class Community {
 		}
 		public String getCom_writer() {
 			return com_writer;
+		}
+		public String getCom_paswd() {
+			return com_paswd;
 		}
 		public int getCom_readcnt() {
 			return com_readcnt;
@@ -46,6 +50,9 @@ public class Community {
 		}
 		public void setCom_writer(String com_writer) {
 			this.com_writer = com_writer;
+		}
+		public void setCom_paswd(String com_paswd) {
+			this.com_paswd = com_paswd;
 		}
 		public void setCom_readcnt(int com_readcnt) {
 			this.com_readcnt = com_readcnt;

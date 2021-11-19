@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +13,8 @@
 </head>
 <body>
 
-	<a href="/boardForm">글작성</a> 글갯수 : ${listcount}
+	<a href="/boardForm">글작성</a> 
+	글갯수 : ${listcount}
 	<table border=1 align="center" width=800>
 		<caption>커뮤니티 게시판 목록</caption>
 		<tr>
@@ -21,6 +23,7 @@
 			<th>작성자</th>
 			<th>날짜</th>
 			<th>조회수</th>
+			<th>추천수</th>
 		</tr>
 
 		<!-- 화면 출력 번호  -->
@@ -29,14 +32,20 @@
 		<c:forEach var="board" items="${boardList}">
 
 			<tr>
-				<td>${num}<c:set var="num" value="${num-1}" />
+				<td>${num}
+				<c:set var="num" value="${num-1}" />
 				</td>
-				<td><a href="/boardContent?no=${board.com_no}&page=${page}">
+				<td><a href="/boardContent?com_no=${board.com_no}&page=${page}">
 						${board.com_title} </a></td>
 				<td>${board.com_writer}</td>
-				<td><fmt:formatDate value="${board.com_reg}"
-						pattern="yyyy-MM-dd" /> </td>
-				<td>${board.com_readcnt }</td>
+				<td>
+				<fmt:formatDate value="${board.com_reg}"
+						pattern="yyyy-MM-dd" /> 
+				</td>
+				<td>${board.com_readcnt}</td>
+				
+			    <td>${board.com_likecnt}</td>     
+			
 			</tr>
 		</c:forEach>
 	</table>
