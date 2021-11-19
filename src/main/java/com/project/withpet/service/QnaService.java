@@ -36,17 +36,17 @@ public class QnaService{
 	}
 
 	// 상세 페이지 파트
-//	// 조회수 증가
-//	public void qnaReadcnt(int no) {
-//		System.out.println("qnaReadcnt service");
-//		qnaDao.qnaReadcnt(no);
-//	}
-//
-//	// 상세정보 구해오기
-//	public Qna qnaSelect(int no) {
-//		System.out.println("qnaSelect service");
-//		return qnaDao.qnaSelect(no);
-//	}
+	// 조회수 증가
+	public void qnaReadcnt(int no) {
+		System.out.println("qnaReadcnt service");
+		qnaDao.qnaReadcnt(no);
+	}
+
+	// 상세정보 구해오기
+	public Qna qnaSelect(int no) {
+		System.out.println("qnaSelect service");
+		return qnaDao.qnaSelect(no);
+	}
 
 	// 답글 파트
 //	// 답글 

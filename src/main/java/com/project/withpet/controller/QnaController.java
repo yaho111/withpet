@@ -159,16 +159,16 @@ public class QnaController {
 	}
 
 	// 상세 페이지 파트
-//	// 글 상세(관리자 : 답변, 삭제 / 사용자(작성자) : 수정, 삭제 / 사용자(작성자 외) : X)
-//	@RequestMapping(value = "qnaView", method = RequestMethod.GET)
-//	public String view(int qna_no, String pageNum, Model model) {
-//		qnaService.qnaReadcnt(qna_no);	// 조회수 증가
-//		Qna qna = qnaService.qnaSelect(qna_no);	// 상세 정보 구하기
-//		model.addAttribute("qna", qna);
-//		model.addAttribute("pageNum", pageNum);
-//		
-//		return "qna/qnaView";
-//	}
+	// 글 상세(관리자 : 답변, 삭제 / 사용자(작성자) : 수정, 삭제 / 사용자(작성자 외) : X)
+	@RequestMapping(value = "qnaView", method = RequestMethod.GET)
+	public String view(int qna_no, String pageNum, Model model) {
+		qnaService.qnaReadcnt(qna_no);	// 조회수 증가
+		Qna qna = qnaService.qnaSelect(qna_no);	// 상세 정보 구하기
+		model.addAttribute("qna", qna);
+		model.addAttribute("pageNum", pageNum);
+		
+		return "qna/qnaView";
+	}
 	
 	// 답글 파트
 //	// 답글 폼 : springboard(댓글)

@@ -43,14 +43,14 @@
 	</select>
 	
 	<!-- 조회수 증가 -->
-	<!-- <update id="qnaReadcnt" parameterType="int">
+	<update id="qnaReadcnt" parameterType="int">
 		update qna set qna_readcnt = qna_readcnt+1 where qna_no = #{qna_no}
-	</update> -->
+	</update>
 	
 	<!-- 상세 정보 구하기 -->
-	<!-- <select id="qnaSelect" parameterType="int" resultType="qna">
+	<select id="qnaSelect" parameterType="int" resultType="qna">
 		select * from qna where qna_no=#{qna_no}
-	</select> -->
+	</select>
 	
 	<!-- 답글 레벨 +1 -->
 	<!-- <update id="replyUp" parameterType="qna">

@@ -35,17 +35,17 @@ public class QnaDAO{
 	}
 
 	// 상세 페이지 파트
-//	// 조회수 증가
-//	public void qnaReadcnt(int no) {
-//		System.out.println("qnaReadcnt DAO");
-//		qnaSession.update("qnans.qnaReadcnt", no);
-//	}
-//
-//	// 상세정보 구하기
-//	public Qna qnaSelect(int no) {
-//		System.out.println("qnaSelect DAO");
-//		return qnaSession.selectOne("qnans.qnaSelect", no);
-//	}
+	// 조회수 증가
+	public void qnaReadcnt(int no) {
+		System.out.println("qnaReadcnt DAO");
+		qnaSession.update("qnans.qnaReadcnt", no);
+	}
+
+	// 상세정보 구하기
+	public Qna qnaSelect(int no) {
+		System.out.println("qnaSelect DAO");
+		return qnaSession.selectOne("qnans.qnaSelect", no);
+	}
 
 	// 답변 파트
 //	/* 답변글 레벨 증가  */
