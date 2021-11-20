@@ -7,6 +7,7 @@ public class Hospital {
 		private int hos_no;			/* 번호 */
 		private String hos_name;  	/* 동물병원 이름 */
 		private String hos_writer;  /* 작성자 */
+		private String hos_loc;		/* 지역 */
 		private String hos_addr;  	/* 주소 */
 		private String hos_tel;  	/* 전화번호 */
 		private String hos_file;  	/* 병원 이미지 */
@@ -18,7 +19,7 @@ public class Hospital {
 		private String hos_link;  	/* 링크 */
 		private int hos_readcnt;  	/* 조회수 */
 		private int hos_likecnt;	/* 추천수 */
-		private Date hos_reg;		/* 작성일 */
+		private Date hos_reg;		/* 작성일 */	
 		
 		// page
 		private int startRow;
@@ -141,6 +142,12 @@ public class Hospital {
 		}
 		public void setKeyword(String keyword) {
 			this.keyword = keyword;
-		}	
+		}
+		public String getHos_loc() {
+			return hos_loc;
+		}
+		public void setHos_loc(String hos_loc) {
+			this.hos_loc = hos_loc;
+		}		
 }
 

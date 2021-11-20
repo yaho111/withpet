@@ -36,11 +36,13 @@ public class HospitalController {
 			Model model) throws Exception {
 		
 		// 1) 주소 처리
+		// 우편번호 + 주소 + 상세 주소
 		String hos_addr = request.getParameter("post") + "-" + request.getParameter("addr")
         + "-" + request.getParameter("specificAddress");
 		
-		hospital.setHos_addr(hos_addr);
+		hospital.setHos_addr(hos_addr);	
 		
+		System.out.println("hospital.hos_loc");
 		
 		// 2) 첨부파일 처리
 		String filename = multiFile.getOriginalFilename(); // 첨부파일명
@@ -101,20 +103,27 @@ public class HospitalController {
 	// 게시판 목록 검색 (전체 목록, 검색 목록)
 	@RequestMapping("/hospitalList")
 	public String hospitalList(String page, Hospital hospital, Model model) {
+		
 		final int rowPerPage = 10; // 화면에 출력할 데이터 갯수
+		
 		if (page == null || page.equals("")) {
 			page = "1";
 		}
-		int currentPage = Integer.parseInt(page); 		// 현재 페이지 번호
-		int total = hospitalService.getTotal(hospital); // 총 데이터 개수
+		
+		int currentPage = Integer.parseInt(page); 			// 현재 페이지 번호
+		int total = hospitalService.getTotal(hospital); 	// 총 데이터 개수
 		int startRow = (currentPage - 1) * rowPerPage + 1;
 		int endRow = startRow + rowPerPage - 1;
+		
 		PagingPgm pp = new PagingPgm(total, rowPerPage, currentPage);
 		System.out.println("pp:" +pp);
+		
 		hospital.setStartRow(startRow);
 		hospital.setEndRow(endRow);
 		System.out.println("startRow:"+startRow);
-		int no = total - startRow + 1;
+		System.out.println("startRow:"+endRow);
+		
+		int no = total - startRow + 1;							// 출력할 글 번호
 		List<Hospital> list = hospitalService.list(hospital);	// 10개 데이터 구하기
 		
 		model.addAttribute("list", list);
@@ -128,7 +137,7 @@ public class HospitalController {
 		return "hospital/hospitalList";
 	}
 	
-//	// 상세 페이지
+	// 상세 페이지
 	@RequestMapping("hospitalView")
 	public String hospitalView(int hos_no, String page, Model model ) {
 		hospitalService.updateReadcnt(hos_no);				// 조회수 증가

@@ -6,7 +6,7 @@
 	
 	<!-- 글 작성(insert) -->
 	<insert id="insert" parameterType="hospital">
-		insert into hospital values (hospital_seq.nextval,#{hos_name},#{hos_writer},#{hos_addr},
+		insert into hospital values (hospital_seq.nextval,#{hos_name},#{hos_writer},#{hos_loc},#{hos_addr},
 			#{hos_tel},#{hos_file,jdbcType=VARCHAR},#{hos_time},#{hos_24},#{hos_holiday},#{hos_parking},#{hos_content},
 			#{hos_link},0,0,sysdate)
 	</insert>
@@ -15,12 +15,8 @@
 	<select id="getTotal" parameterType="hospital" resultType="int">
 		select count(*) from hospital
 		<where>
-			<if test="keyword != null and search !='subcon'">
+			<if test="keyword != null">
 				${search} like '%'||#{keyword}||'%'
-			</if>
-			<if test="keyword != null and search=='subcon'">
-				subject like '%'||#{keyword}||'%' or
-				content like '%'||#{keyword}||'%'
 			</if>
 		</where>
 	</select>
@@ -30,12 +26,8 @@
 		select * from (select rowNum rnum, hospital.* from (
 			select * from hospital
 		<where>
-			<if test="keyword != null and search!='subcon'">
+			<if test="keyword != null">
 				${search} like '%'||#{keyword}||'%'
-			</if>
-			<if test="keyword != null and search=='subcon'">
-				subject like '%'||#{keyword}||'%' or
-				content like '%'||#{keyword}||'%'
 			</if>
 		</where>
 			order by hos_no desc) hospital )

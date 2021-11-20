@@ -24,7 +24,9 @@
                     // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
                     // 우편번호와 주소 정보를 해당 필드에 넣고, 커서를 상세주소 필드로 이동한다.
                     document.getElementById('post').value = data.zonecode;
-                    document.getElementById('addr').value = data.address;
+                    document.getElementById('addr').value = data.address; 
+                    document.getElementById('hos_loc').value = data.sido+' '+data.sigungu;
+                   // document.getElementById('hos_loc').value = data.sido.concat	(" ", data.sigungu);
                 }
             }).open();
         }
@@ -35,9 +37,10 @@
 	<div class="container" align="center">
 		<h2>병원 게시판 글 작성</h2>
 		<form action="insert" method="post" onsubmit="return check()" enctype="multipart/form-data">
+		<input type="hidden" name="hos_loc" id="hos_loc">
 			<table border=1 align="center" width="600">
 				<tr>
-					<th>병원 이름</th>
+					<th>병원 이름 *필수</th>
 					<td><input type="text" name="hos_name" id="hos_name"></td>
 				</tr>
 				<tr>
