@@ -18,20 +18,15 @@
         select count(*) from product
     </select>
 
-<!--    &lt;!&ndash; 02. 상품 상세보기 &ndash;&gt;-->
-<!--    <select id="detailProduct" resultType="Product">-->
-<!--        SELECT-->
-<!--            pro_no AS pro_no-->
-<!--             , pro_name AS pro_name-->
-<!--             , price AS price-->
-<!--             , pro_content AS pro_content-->
-<!--             , pro_img AS pro_img-->
-<!--             , pro_del AS pro_del-->
-<!--             , stock AS stock-->
-<!--             , pro_readcnt AS pro_readcnt-->
-<!--        FROM product-->
-<!--        WHERE pro_no = #{pro_no}-->
-<!--    </select>-->
+    <!-- 02-1 조회수 증가 -->
+    <update id="hit" parameterType="int">
+        update product set pro_readcnt = pro_readcnt+1 where pro_no = #{pro_no}
+    </update>
+
+    <!-- 02 상세정보 구하기 -->
+    <select id="pro_content" parameterType="int" resultType="com.project.withpet.model.Product">
+        select * from product where pro_no = #{pro_no}
+    </select>
 
 
 </mapper>

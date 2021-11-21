@@ -21,7 +21,7 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    // 상품 전체 목록
+    // 01. 01-1 상품 전체 목록
     @RequestMapping("/productList")
     public String productList(HttpServletRequest request, Model model){
         int page = 1;
@@ -54,6 +54,21 @@ public class ProductController {
         model.addAttribute("endPage", endPage);
 
         return "product/productList";
+    }
+
+    // 02. 02-1 상세 페이지 : 조회수 1증가 + 상세정보 구하기
+    @RequestMapping("/productDetail")
+    public String productDetail(@RequestParam("no") int pro_no, String page, Model model) {
+
+-        productService.updatepro_readcnt(pro_no);				// 조회수 1증가
+        Product product = productService.getProductDetail(pro_no);	    // 상세 정보 구하기
+        String pro_content = product.getPro_content().replace("\n", "<br>");
+
+        model.addAttribute("product", product);
+        model.addAttribute("pro_content", pro_content);
+        model.addAttribute("page", page);
+
+        return "product/productDetail";
     }
 
 

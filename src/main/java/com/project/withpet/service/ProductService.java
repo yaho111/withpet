@@ -28,13 +28,17 @@ public class ProductService {
         return productDAO.getCount();
     }
 
+    // 02 -1 상세페이지 조회수 증가
+    public void updatepro_readcnt(int pro_no) {
+        productDAO.updatepro_readcnt(pro_no);
+    }
+
+    // 02 -1 상세페이지 정보
+    public Product getProductDetail(int pro_no) {
+        return productDAO.getProductDetail(pro_no);
+    }
 
 
-
-//    // 02. 상품상세
-//    public Product detailProduct(int pro_no) {
-//        return productDAO.detailProduct(pro_no);
-//    }
 
 
 

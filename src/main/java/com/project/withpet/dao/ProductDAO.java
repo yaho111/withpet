@@ -28,6 +28,19 @@ public class ProductDAO {
         return sqlSession.selectOne("countProduct");
     }
 
+    // 02 -1 상세페이지 조회수 증가
+    public void updatepro_readcnt(int pro_no) {
+        // TODO Auto-generated method stub
+        sqlSession.update("hit", pro_no);
+    }
+
+    // 02  상세페이지 정보
+    public Product getProductDetail(int pro_no) {
+        // TODO Auto-generated method stub
+        return sqlSession.selectOne("pro_content", pro_no);
+    }
+
+
 
 
 
