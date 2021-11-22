@@ -25,14 +25,34 @@ function check() {
 		$("#specificAddress").focus();
 		return false;
 	}
-	if ($("#hos_tel").val() == "") {
+	if ($("#middleNum").val() == "") {
 		alert("전화번호를 입력하세요!");
-		$("#hos_tel").focus();
+		$("#middleNum").focus();
 		return false;
 	}
-	if ($("#hos_tel").val().length > 50) {
-		alert("전화번호를 50자 이하로 입력하세요!");
-		$("#hos_tel").focus();
+	if (isNaN($("#middleNum").val())) {
+		alert("전화번호는 숫자만 입력 가능합니다!");
+		$("#middleNum").val("").focus();
+		return false;
+	}
+	if ($("#middleNum").val().length > 20) {
+		alert("전화번호 길이가 너무 깁니다!");
+		$("#middleNum").val("").focus();
+		return false;
+	}
+	if ($("#backNum").val() == "") {
+		alert("전화번호를 입력하세요!");
+		$("#backNum").focus();
+		return false;
+	}
+	if (isNaN($("#backNum").val())) {
+		alert("전화번호는 숫자만 입력 가능합니다!");
+		$("#backNum").val("").focus();
+		return false;
+	}
+	if ($("#backNum").val().length > 20) {
+		alert("전화번호 길이가 너무 깁니다!");
+		$("#backNum").val("").focus();
 		return false;
 	}
 	if ($("#hos_time").val() == "") {
@@ -65,6 +85,11 @@ function check() {
 	if ($("#hos_content").val().length > 150) {
 		alert("병원 소개를 150자 이하로 입력하세요!");
 		$("#hos_content").focus();
+		return false;
+	}
+	if ($("#hos_link").val().length >= 300) {
+		alert("링크를 300자 이하로 입력하세요");
+		$("#hos_link").focus();
 		return false;
 	}
 }

@@ -12,7 +12,7 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 
 <!-- 외부 자바스크립트 파일(유효성 검사) 불러오기 -->
-<script src="<%=request.getContextPath()%>/js/hospitalCheck.js"></script>
+<script src="${path}/js/hospitalCheck.js"></script>
 
 <!-- 다음 주소 API -->
  <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
@@ -35,12 +35,12 @@
 </head>
 <body>
 	<div class="container" align="center">
-		<h2>병원 게시판 글 작성</h2>
+		<h2>병원 등록</h2>
 		<form action="insert" method="post" onsubmit="return check()" enctype="multipart/form-data">
 		<input type="hidden" name="hos_loc" id="hos_loc">
-			<table border=1 align="center" width="600">
+			<table border=1 align="center" width="650">
 				<tr>
-					<th>병원 이름 *필수</th>
+					<th>병원 이름</th>
 					<td><input type="text" name="hos_name" id="hos_name"></td>
 				</tr>
 				<tr>
@@ -74,17 +74,25 @@
             </tr>
 				<tr>
 					<th>전화번호</th>
-					<td><input type="text" name="hos_tel" id="hos_tel"></td>
+					<td>
+						<select name="frontNum" id="frontNum">
+							<option value="02">02</option>
+							<option value="031">031</option>
+							<option value="032">032</option> 
+						</select> -		
+						<input type="text" name="middleNum" id="middleNum"> -	
+						<input type="text" name="backNum" id="backNum">		
+					</td>
 				</tr>
 				<tr>
-					<th>병원 이미지</th>
+					<th>병원 이미지 <font size="1" color="gray">*선택</font></th>
 					<td><input type="file" name="hos_file1" id="hos_file1"></td>
 				</tr>
 				<tr>
 					<th>운영 시간</th>
 					<td><textarea rows="5" cols="30" name= "hos_time" id= "hos_time"
 						placeholder="평일 10:00 - 20:00 &#13;&#10;토요일 10:00 - 19:00&#13;&#10;일요일  휴무
-						&#13;&#10;위의 형식처럼 입력해주세요."></textarea></td>
+						&#13;&#10;위의 형식으로 입력해주세요."></textarea></td>
 				</tr>
 				<tr>
 					<th>24시 여부</th>
@@ -106,8 +114,8 @@
 					<td><textarea rows="5" cols="30" name="hos_content" id="hos_content"></textarea></td>
 				</tr>
 				<tr>
-					<th>병원 홈페이지/블로그 링크</th>
-					<td><input type="text" name="hos_link" id="hos_link" placeholder="있는 경우만 기재"></td>
+					<th>병원 홈페이지/블로그 링크 <font size="1" color="gray">*선택</font></th>
+					<td><input type="text" name="hos_link" id="hos_link" style="width:300px;" placeholder="www.naver.com의 형식으로 입력해주세요."></td>
 				</tr>
 				<tr>
 					<td colspan="2" align="center">
