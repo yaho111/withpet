@@ -28,5 +28,16 @@
         select * from product where pro_no = #{pro_no}
     </select>
 
+    <!-- 03. 글작성 -->
+    <insert id="productWrite" parameterType="com.project.withpet.model.Product">
+        insert into product (
+             pro_no, bus_id, pro_name, stock, pro_content,
+             pro_img, price, pro_readcnt, pro_likecnt, pro_del
+             ) values (
+             product_seq.NEXTVAL,#{bus_id},#{pro_name},#{stock},#{pro_content},
+             #{pro_img},#{price},0,0,'n')
+
+    </insert>
+
 
 </mapper>

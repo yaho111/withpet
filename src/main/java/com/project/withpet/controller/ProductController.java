@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.util.List;
 
 @Controller
@@ -60,7 +61,7 @@ public class ProductController {
     @RequestMapping("/productDetail")
     public String productDetail(@RequestParam("no") int pro_no, String page, Model model) {
 
--        productService.updatepro_readcnt(pro_no);				// 조회수 1증가
+        productService.updatepro_readcnt(pro_no);				// 조회수 1증가
         Product product = productService.getProductDetail(pro_no);	    // 상세 정보 구하기
         String pro_content = product.getPro_content().replace("\n", "<br>");
 
@@ -70,13 +71,27 @@ public class ProductController {
 
         return "product/productDetail";
     }
+    // 03. 글작성 폼
+    @RequestMapping("productWrite")
+    public String productForm(){
+        return "product/productWrite";
+    }
+
+    // 03-1 글작성 결과
+    @RequestMapping("productInsert")
+    public String productewrite(Product product, Model model) {
+        System.out.println("bus_id:"+ product.getBus_id());
+
+        int result = productService.productInsert(product);
+        System.out.println("result:"+result);
+
+        model.addAttribute("result", result);
+
+        return "product/productInsert";
+    }
 
 
-//    // 상품 상세보기
-//    @RequestMapping("productDetail/{pro_no}")
-//
-//    public String detail(int pro_no, String page, Model model)
-//
+
 
 
 

@@ -40,14 +40,11 @@ public class ProductDAO {
         return sqlSession.selectOne("pro_content", pro_no);
     }
 
+    // 03. 글쓰기
+    public int productInsert(Product product) {
+        return sqlSession.insert("product.productWrite", product);
+    }
 
-
-
-
-//    // 02. 상품상세
-//    public Product detailProduct(int pro_no) {
-//        return sqlSession.selectOne("product.detailProduct", pro_no);
-//    }
 
 
 }

@@ -38,7 +38,10 @@ public class ProductService {
         return productDAO.getProductDetail(pro_no);
     }
 
-
+    // 03 글쓰기
+    public int productInsert(Product product) {
+        return productDAO.productInsert(product);
+    }
 
 
 
