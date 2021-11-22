@@ -44,7 +44,13 @@ public class HospitalController {
 		
 		System.out.println("hospital.hos_loc");
 		
-		// 2) 첨부파일 처리
+		// 2) 전화번호 처리
+		String hos_tel = request.getParameter("frontNum") + "-" + request.getParameter("middleNum") + 
+							"-" + request.getParameter("backNum");
+		
+		hospital.setHos_tel(hos_tel);
+		
+		// 3) 첨부파일 처리
 		String filename = multiFile.getOriginalFilename(); // 첨부파일명
 		int size = (int) multiFile.getSize(); // 첨부파일의 크기 (단위: Byte)
 
@@ -89,6 +95,7 @@ public class HospitalController {
 			}
 		}
 
+		// 첨부파일 전송
 		if (size > 0) {
 			multiFile.transferTo(new File(path + "/" + newfilename)); // 첨부파일을 서버측으로 전송시키는 코드
 		}
@@ -143,19 +150,129 @@ public class HospitalController {
 		hospitalService.updateReadcnt(hos_no);				// 조회수 증가
 		Hospital hospital = hospitalService.select(hos_no);	// 데이터 1개 구하기
 		System.out.println("상세페이지 컨트롤러 in");
+		
+		String hos_content = hospital.getHos_content().replace("\n", "<br>");
+		String hos_time = hospital.getHos_time().replace("\n", "<br>");
+		
 		model.addAttribute("hospital", hospital);
+		model.addAttribute("hos_content", hos_content);
+		model.addAttribute("hos_time", hos_time);
 		model.addAttribute("page", page);
 		
 		return "hospital/hospitalView";
 	}
 	
 	// 글 수정 폼
-	
+	@RequestMapping("updateForm")
+	public String updateForm(int hos_no, String page, Model model) {
+		Hospital hospital = hospitalService.select(hos_no);
+		
+		StringTokenizer st = new StringTokenizer(hospital.getHos_tel(), "-");
+		
+		String frontNum = st.nextToken();	// 전화번호 첫째 자리
+		String middleNum = st.nextToken();	// 전화번호 가운데 자리
+		String backNum = st.nextToken();	// 전화번호 끝자리
+				
+		model.addAttribute("hospital", hospital);
+		model.addAttribute("frontNum", frontNum);
+		model.addAttribute("middleNum", middleNum);
+		model.addAttribute("backNum", backNum);
+		model.addAttribute("hos_no", hos_no);
+		model.addAttribute("page", page);
+		
+		return "hospital/updateForm";
+	}
 	
 	// 글 수정(update)
-	
-	
-	// 글 삭제 폼
+	@RequestMapping("update")
+	public String update(@RequestParam("hos_file1") MultipartFile multi, 
+						Hospital hospital, 
+						String page,
+						HttpServletRequest request,
+						Model model) throws Exception {
+		
+		// 1) 주소 처리
+		// 우편번호 + 주소 + 상세 주소
+		String hos_addr = request.getParameter("post") + "-" + request.getParameter("addr")
+		        + "-" + request.getParameter("specificAddress");
+				
+		hospital.setHos_addr(hos_addr);	
+				
+		System.out.println("hospital.hos_loc");
+				
+		// 2) 전화번호 처리
+		String hos_tel = request.getParameter("frontNum") + "-" + request.getParameter("middleNum") + 
+									"-" + request.getParameter("backNum");
+				
+		hospital.setHos_tel(hos_tel);
+				
+		// 3) 첨부파일 처리				
+		String filename = multi.getOriginalFilename();
+		int size = (int) multi.getSize();
+		
+		String path = request.getRealPath("hos_upload");
+		System.out.println("path:"+path);
+		
+		int result = 0;
+		String file[] = new String[2];
+		
+		String newfilename = "";
+		
+		if(filename != "") {	// 첨부파일이 전송된 경우
+			
+			// 파일 중복 문제 해결
+			String extension = filename.substring(filename.lastIndexOf("."), filename.length());
+			System.out.println("extension:"+extension);
+			
+			UUID uuid = UUID.randomUUID();
+			
+			newfilename = uuid.toString() + extension;
+			System.out.println("newfilename:"+newfilename);
+			
+			StringTokenizer st = new StringTokenizer(filename, ".");
+			file[0] = st.nextToken();		// 파일명
+			file[1] = st.nextToken();		// 확장자
+			
+			if(size > 1024000) {
+				result = 1;
+				model.addAttribute("result", result);
+				
+				return "hospital/uploadResult";
+				
+			}else if(!file[1].equals("jpg") &&
+					 !file[1].equals("gif") &&
+					 !file[1].equals("png") ) {
+				
+				result = 2;
+				model.addAttribute("result", result);
+				
+				return "hospital/uploadResult";
+			}
+			
+		}
+		
+		// 첨부파일 전송
+		if(size > 0) {
+			
+			multi.transferTo(new File(path + "/" + newfilename));
+		}
+		
+		Hospital oldHospital = hospitalService.select(hospital.getHos_no());
+		
+		if(size > 0) {		// 첨부 파일이 수정되면
+			hospital.setHos_file(newfilename);
+		}else {				// 첨부파일이 수정되지 않으면
+			hospital.setHos_file(oldHospital.getHos_file());
+		}
+		
+		int updateResult = hospitalService.update(hospital);	// 수정 메소드 호출
+		
+		model.addAttribute("updateResult", updateResult);
+		model.addAttribute("hos_no", hospital.getHos_no());
+		model.addAttribute("page", page);
+		
+		return "hospital/result";
+	}
 	
 	
 	// 글 삭제(delete)

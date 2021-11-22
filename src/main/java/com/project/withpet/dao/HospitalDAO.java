@@ -39,4 +39,9 @@ public class HospitalDAO {
 		return sqlSession.selectOne("select", hos_no);
 	}
 
+	// 글 수정(update)
+	public int update(Hospital hospital) {
+		return sqlSession.update("update", hospital);
+	}
+
 }

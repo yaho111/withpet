@@ -38,4 +38,9 @@ public class HospitalService {
 		return hospitalDAO.select(hos_no);
 	}
 
+	// 글 수정(update)
+	public int update(Hospital hospital) {
+		return hospitalDAO.update(hospital);
+	}
+
 }
