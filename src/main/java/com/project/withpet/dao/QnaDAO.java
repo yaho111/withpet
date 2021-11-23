@@ -62,16 +62,16 @@ public class QnaDAO{
 
 	
 	// 글 수정
-//	public int qnaUpdate(Qna qna) {
-//		System.out.println("수정 DAO");
-//		return qnaSession.update("qnans.qnaUpdate", qna);
-//	}
-//
-//	// 글삭제
-//	public int qnaDelete(int qna_no) {
-//		System.out.println("삭제 DAO");
-//		return qnaSession.delete("qnans.qnaDelete", qna_no);
-//	}
+	public int qnaUpdate(Qna qna) {
+		System.out.println("수정 DAO");
+		return qnaSession.update("qnans.qnaUpdate", qna);
+	}
+
+	// 글삭제
+	public int qnaDelete(int qna_no) {
+		System.out.println("삭제 DAO");
+		return qnaSession.delete("qnans.qnaDelete", qna_no);
+	}
 
 	
 	

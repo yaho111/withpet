@@ -62,18 +62,18 @@ public class QnaService{
 		return qnaDao.reInsertQna(qna);
 	}
 	
-//	// 수정 파트
-//	// 수정
-//	public int qnaUpdate(Qna qna) {
-//		System.out.println("수정 service");
-//		return qnaDao.qnaUpdate(qna);
-//	}
-//
-//	// 글삭제
-//	public int qnaDelete(int qna_no) {
-//		System.out.println("삭제 service");
-//		return qnaDao.qnaDelete(qna_no);
-//	}
+	// 수정 파트
+	// 수정
+	public int qnaUpdate(Qna qna) {
+		System.out.println("수정 service");
+		return qnaDao.qnaUpdate(qna);
+	}
+
+	// 글삭제
+	public int qnaDelete(int qna_no) {
+		System.out.println("삭제 service");
+		return qnaDao.qnaDelete(qna_no);
+	}
 	
 	
 	

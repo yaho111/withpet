@@ -68,15 +68,15 @@
 	</insert>
 	
 	<!-- 수정 -->
-<!-- 	<update id="qnaUpdate" parameterType="qna">
+	<update id="qnaUpdate" parameterType="qna">
 	update qna set qna_title = #{qna_title}, qna_content = #{qna_content}, qna_file = #{qna_file,jdbcType=VARCHAR} 
 	where qna_no = #{qna_no}
-	</update> -->
+	</update>
 	
 	<!-- 삭제 -->
-<!-- 	<delete id="qnaDelete" parameterType="int">
+	<delete id="qnaDelete" parameterType="int">
 	delete from qna where qna_no = #{qna_no}
-	</delete> -->   
+	</delete>   
 	  
 	   
 	
