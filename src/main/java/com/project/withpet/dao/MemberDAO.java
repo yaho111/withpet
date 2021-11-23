@@ -57,11 +57,11 @@ public class MemberDAO {
         sqlSession.update("info_update", member);
     }
 
-//    // 회원 탈퇴
-//    public void deleteMember(Member member) throws Exception {
-//        sqlSession.delete("member_delete", member);
-//    }
-//
+    // 회원 탈퇴
+    public void deleteMember(String id) throws Exception {
+        sqlSession.delete("member_delete", id);
+    }
+
 
 
 

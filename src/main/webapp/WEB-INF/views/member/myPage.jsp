@@ -15,6 +15,7 @@
         </div>
         <div class="col">
             <input class="btn btn-outline-secondary" type="button" value="정보 수정" onclick="location.href='infoUpdateForm'">
+            <input class="btn btn-outline-secondary" type="button" value="회원 탈퇴" onclick="location.href='memberDeleteForm'">
         </div>
     </div>
     <div class="row">

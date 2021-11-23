@@ -46,11 +46,11 @@ public class MemberService {
         memberDAO.updateMember(member);
     }
 
-//    // 회원 탈퇴
-//    public void deleteMember(Member member) throws Exception {
-//        memberDAO.deleteMember(member);
-//    }
-//
+    // 회원 탈퇴
+    public void deleteMember(String id) throws Exception {
+        memberDAO.deleteMember(id);
+    }
+
 
 
 

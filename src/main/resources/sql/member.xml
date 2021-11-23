@@ -32,6 +32,7 @@
           and EMAIL = #{email}
     </select>
 
+    <!-- 회원 정보 수정 -->
     <update id="info_update" parameterType="member">
         update MEMBER
         set PWD = #{pwd},
@@ -39,8 +40,13 @@
             ADDR = #{addr},
             PHONE = #{phone},
             EMAIL = #{email},
-            PROFILE = #{profile}
+            PROFILE = #{profile,jdbcType=VARCHAR}
         where ID = #{id}
     </update>
+
+    <!-- 회원 탈퇴 -->
+    <delete id="member_delete" parameterType="String">
+        delete from MEMBER where id = #{id}
+    </delete>
 </mapper>
 

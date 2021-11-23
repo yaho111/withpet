@@ -345,8 +345,36 @@ public class MemberController {
     }
 
     // 회원 탈퇴 폼
+    @RequestMapping(value = "/memberDeleteForm")
+    public String forwardWithdrawForm(){
+        return "member/memberDeleteForm";
+    }
 
     // 회원 탈퇴
+    @RequestMapping(value = "/deleteMember", method = RequestMethod.POST)
+    public String withdraw(@RequestParam("pwd") String pwd ,HttpSession session) throws Exception{
+        String loginId = (String) session.getAttribute("id");
+
+        Member loginMember = memberService.selectMember(loginId);
+
+        if (loginMember.getPwd().equals(pwd)) {
+            String path = session.getServletContext().getRealPath("upload");
+            String profile = loginMember.getProfile();
+
+            if(profile != null){
+               File needToDelete = new File(path + "/" + profile);
+               needToDelete.delete();
+            }
+            memberService.deleteMember(loginId);
+
+            session.invalidate();
+
+            return "redirect:loginForm";
+        } else {
+            return "member/memberDeleteResult";
+        }
+    }
+
 
     // 펫 등록 폼
 
