@@ -146,7 +146,6 @@ function domain_list() {
         //도메인입력란으로 입력대기상태
     } else {
         //리스트목록을 선택했을때
-        var value
         f.domain.value = f.mail_list.options[num].value;
         /*num변수에는 해당리스트 목록번호가 저장되어있다.해당리스트 번호의 option value값이 도메인입력란에 선택된다.options속성은 select객체의 속성으로서 해당리스트번호의 value값을 가져온다
         */
@@ -201,9 +200,9 @@ function edit_check() {
         $("#backNum").val("").focus();
         return false;
     }
-    if ($.trim($("#join_mailid").val()) == "") {
+    if ($.trim($("#mailId").val()) == "") {
         alert("메일 아이디를 입력하세요!");
-        $("#join_mailid").val("").focus();
+        $("#mailId").val("").focus();
         return false;
     }
     if ($.trim($("#domain").val()) == "") {

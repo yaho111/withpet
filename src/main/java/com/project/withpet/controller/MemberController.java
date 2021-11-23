@@ -11,11 +11,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.Properties;
+import java.util.UUID;
 
 @Controller
 public class MemberController {
@@ -228,8 +232,117 @@ public class MemberController {
     }
 
     // 내 정보 수정 폼
+    @RequestMapping(value = "/infoUpdateForm")
+    public String forwardMyInfoUpdateForm(HttpSession session, Model model) throws Exception {
+
+        String loginId = session.getAttribute("id").toString();
+
+        Member loginMember = memberService.selectMember(loginId);
+
+        String[] addr = loginMember.getAddr().split("-");
+        String post = addr[0];
+        String address = addr[1];
+        String specificAddress = addr[2];
+
+        String[] phoneNum = loginMember.getPhone().split("-");
+        String frontNum = phoneNum[0];
+        String middleNum = phoneNum[1];
+        String backNum = phoneNum[2];
+
+        String[] email = loginMember.getEmail().split("@");
+        String mailId = email[0];
+        String domain = email[1];
+
+        model.addAttribute(loginMember);
+        model.addAttribute("post", post);
+        model.addAttribute("address", address);
+        model.addAttribute("specificAddress", specificAddress);
+        model.addAttribute("frontNum", frontNum);
+        model.addAttribute("middleNum", middleNum);
+        model.addAttribute("backNum", backNum);
+        model.addAttribute("mailId", mailId);
+        model.addAttribute("domain", domain);
+        return "member/infoUpdateForm";
+    }
+
 
     // 내 정보 수정
+    @RequestMapping(value = "/updateInfo", method = RequestMethod.POST)
+    public String updateMyInfo(@RequestParam("profilePic") MultipartFile multipartFile,
+                               Member member,
+                               HttpServletRequest request,
+                               HttpSession session,
+                               Model model) throws Exception {
+
+        // 필요한 변수 생성
+        String filename = multipartFile.getOriginalFilename();
+        int size = (int) multipartFile.getSize();
+        int result = 0;
+
+        String path = request.getRealPath("upload");
+        System.out.println("path: " + path);
+        String[] file;
+        String newFileName = "";
+
+        String loginId = session.getAttribute("id").toString();
+        Member loginMember = memberService.selectMember(loginId);
+
+        // 파일이 전송된 경우
+        if (filename != "") {
+
+            file = filename.split("\\.");
+
+            String extension = "." + file[1];
+
+            UUID uuid = UUID.randomUUID();
+
+            newFileName = uuid + extension;
+            System.out.println(newFileName);
+
+            if (size > 100000) { // 파일크기가 지정 한도를 초과하는 경우
+                result = 1;
+                model.addAttribute("result", result);
+
+                return "member/uploadResult";
+            } else if (!file[1].equals("jpg") &&
+                    !file[1].equals("gif") &&
+                    !file[1].equals("png")) { // 파일의 확장자가 가능한 확장자가 아닌 경우
+
+                result = 2;
+                model.addAttribute("result", result);
+
+                return "member/uploadResult";
+            }
+
+
+        }
+
+        if (size > 0) {
+            multipartFile.transferTo(new File(path + "/" + newFileName));
+            member.setProfile(newFileName);
+        } else {
+            member.setProfile(loginMember.getProfile());
+        }
+
+        // 정보 수정 입력폼에서 받은 데이터를 DB 형식에 맞게 변형
+        String addr = request.getParameter("post").trim() + "-" + request.getParameter("addr").trim()
+                + "-" + request.getParameter("specificAddress").trim();
+        String phone = request.getParameter("frontNum").trim() + "-" + request.getParameter("middleNum").trim()
+                + "-" + request.getParameter("backNum").trim();
+        String email = request.getParameter("mailId").trim() + "@" + request.getParameter("domain").trim();
+
+        member.setId(loginId);
+        member.setPwd(request.getParameter("pwd").trim());
+        member.setName(request.getParameter("name").trim());
+        member.setAddr(addr);
+        member.setPhone(phone);
+        member.setEmail(email);
+
+        memberService.updateMember(member);
+
+        return "redirect:myPage";
+
+    }
 
     // 회원 탈퇴 폼
 

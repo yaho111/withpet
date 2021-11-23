@@ -3,25 +3,44 @@
 
 <mapper namespace="memberns">
 
-    <!-- 로그인, 아이디 중복 검사, 내 정보 -->
+    <!-- 로그인, 아이디 중복 검사, 내 정보, 내 정보 수정폼 -->
     <select id="check_id" parameterType="String" resultType="member">
-        select * from MEMBER where ID = #{id}
+        select *
+        from MEMBER
+        where ID = #{id}
     </select>
 
     <!-- 회원가입 -->
     <insert id="join" parameterType="member">
-        insert into MEMBER values
-            (#{id}, #{nick}, #{pwd}, #{addr}, #{name}, #{email}, #{phone}, #{gender}, sysdate, '' ,'user')
+        insert into MEMBER
+        values (#{id}, #{nick}, #{pwd}, #{addr}, #{name}, #{email}, #{phone}, #{gender}, sysdate, '', 'user')
     </insert>
 
     <!-- 비밀번호 찾기 -->
     <select id="pwd_find" parameterType="member" resultType="member">
-        select * from MEMBER where ID = #{id} and NAME = #{name}
+        select *
+        from MEMBER
+        where ID = #{id}
+          and NAME = #{name}
     </select>
 
     <!-- 아이디 찾기 -->
     <select id="id_find" parameterType="member" resultType="member">
-        select * from MEMBER where NAME = #{name} and EMAIL = #{email}
+        select *
+        from MEMBER
+        where NAME = #{name}
+          and EMAIL = #{email}
     </select>
+
+    <update id="info_update" parameterType="member">
+        update MEMBER
+        set PWD = #{pwd},
+            NAME = #{name},
+            ADDR = #{addr},
+            PHONE = #{phone},
+            EMAIL = #{email},
+            PROFILE = #{profile}
+        where ID = #{id}
+    </update>
 </mapper>
 

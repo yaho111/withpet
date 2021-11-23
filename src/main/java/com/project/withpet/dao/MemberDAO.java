@@ -47,26 +47,22 @@ public class MemberDAO {
         return sqlSession.selectOne("id_find", member);
     }
 
-    // 내 정보
+    // 내 정보, 내 정보 수정 폼
     public Member selectMember(String id) throws Exception {
         return sqlSession.selectOne("check_id", id);
     }
 
-//    // 내 정보 수정
-//    public void updateMember(Member member) throws Exception {
-//        sqlSession.update("member_edit", member);
-//    }
-//
+    // 내 정보 수정
+    public void updateMember(Member member) throws Exception {
+        sqlSession.update("info_update", member);
+    }
+
 //    // 회원 탈퇴
 //    public void deleteMember(Member member) throws Exception {
 //        sqlSession.delete("member_delete", member);
 //    }
 //
-//    // 아이디 검색
-//    public Member findid(Member member) throws Exception {
-//        return sqlSession.selectOne("id_find", member);
-//    }
-//
+
 
 
 }

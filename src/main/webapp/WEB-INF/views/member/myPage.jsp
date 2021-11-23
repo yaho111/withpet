@@ -10,14 +10,25 @@
 
 <div class="container">
     <div class="row">
-        ${member.name}님 페이지
+        <div class="col">
+            ${member.name}님 페이지
+        </div>
+        <div class="col">
+            <input class="btn btn-outline-secondary" type="button" value="정보 수정" onclick="location.href='infoUpdateForm'">
+        </div>
     </div>
     <div class="row">
         <div class="col">
             프로필
         </div>
         <div class="col">
-            ${member.profile}
+            <c:if test="${member.profile == null}">
+
+            </c:if>
+            <c:if test="${member.profile != null}">
+                <img src="${path}/upload/${member.profile}" width="100" height="100" />
+            </c:if>
+
         </div>
     </div>
     <div class="row">
