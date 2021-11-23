@@ -48,7 +48,7 @@
 	<update id="update" parameterType="hospital">
 		update hospital set hos_name=#{hos_name}, hos_writer=#{hos_writer},
 							hos_loc=#{hos_loc}, hos_addr=#{hos_addr}, hos_tel=#{hos_tel},
-							hos_file=#{hos_file}, hos_time=#{hos_time}, hos_24=#{hos_24},
+							hos_file=#{hos_file,jdbcType=VARCHAR}, hos_time=#{hos_time}, hos_24=#{hos_24},
 							hos_holiday=#{hos_holiday}, hos_parking=#{hos_parking},
 							hos_content=#{hos_content}, hos_link=#{hos_link}
 							where hos_no=#{hos_no}

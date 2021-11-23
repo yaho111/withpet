@@ -167,16 +167,29 @@ public class HospitalController {
 	public String updateForm(int hos_no, String page, Model model) {
 		Hospital hospital = hospitalService.select(hos_no);
 		
-		StringTokenizer st = new StringTokenizer(hospital.getHos_tel(), "-");
+		// 1) 주소 처리
+		StringTokenizer st01 = new StringTokenizer(hospital.getHos_addr(), "-");
 		
-		String frontNum = st.nextToken();	// 전화번호 첫째 자리
-		String middleNum = st.nextToken();	// 전화번호 가운데 자리
-		String backNum = st.nextToken();	// 전화번호 끝자리
+		String post = st01.nextToken();
+		String addr = st01.nextToken();
+		String specificAddress = st01.nextToken();
+		
+		// 2) 전화번호 처리
+		StringTokenizer st02 = new StringTokenizer(hospital.getHos_tel(), "-");
+		
+		String frontNum = st02.nextToken();	// 전화번호 첫째 자리
+		String middleNum = st02.nextToken();	// 전화번호 가운데 자리
+		String backNum = st02.nextToken();	// 전화번호 끝자리
 				
-		model.addAttribute("hospital", hospital);
+		model.addAttribute("post", post);
+		model.addAttribute("addr", addr);
+		model.addAttribute("specificAddress", specificAddress);
+		
 		model.addAttribute("frontNum", frontNum);
 		model.addAttribute("middleNum", middleNum);
 		model.addAttribute("backNum", backNum);
+		
+		model.addAttribute("hospital", hospital);
 		model.addAttribute("hos_no", hos_no);
 		model.addAttribute("page", page);
 		
@@ -189,21 +202,20 @@ public class HospitalController {
 						Hospital hospital, 
 						String page,
 						HttpServletRequest request,
-						Model model) throws Exception {
+						Model model) throws Exception {				
 		
-		// 1) 주소 처리
+		// 1) 주소 처리		
 		// 우편번호 + 주소 + 상세 주소
 		String hos_addr = request.getParameter("post") + "-" + request.getParameter("addr")
-		        + "-" + request.getParameter("specificAddress");
-				
-		hospital.setHos_addr(hos_addr);	
-				
-		System.out.println("hospital.hos_loc");
+        + "-" + request.getParameter("specificAddress");
+		
+		hospital.setHos_addr(hos_addr);				
+		System.out.println("hos_addr:"+hos_addr);
+		
 				
 		// 2) 전화번호 처리
 		String hos_tel = request.getParameter("frontNum") + "-" + request.getParameter("middleNum") + 
-									"-" + request.getParameter("backNum");
-				
+									"-" + request.getParameter("backNum");			
 		hospital.setHos_tel(hos_tel);
 				
 		// 3) 첨부파일 처리				
@@ -256,12 +268,12 @@ public class HospitalController {
 			
 			multi.transferTo(new File(path + "/" + newfilename));
 		}
-		
-		Hospital oldHospital = hospitalService.select(hospital.getHos_no());
-		
+				
 		if(size > 0) {		// 첨부 파일이 수정되면
 			hospital.setHos_file(newfilename);
 		}else {				// 첨부파일이 수정되지 않으면
+			// 원본 데이터(게시글) 구하기
+			Hospital oldHospital = hospitalService.select(hospital.getHos_no());
 			hospital.setHos_file(oldHospital.getHos_file());
 		}
 		
@@ -276,7 +288,11 @@ public class HospitalController {
 	
 	
 	// 글 삭제(delete)
-	
+	@RequestMapping("delete")
+	public String delete() {
+		
+		return "hospitalList";
+	}
 	
 	// 정렬
 	
