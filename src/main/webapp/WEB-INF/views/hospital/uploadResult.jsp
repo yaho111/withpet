@@ -1,6 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ include file="../layout/header.jsp"%>
 
 
 <c:if test="${result == 1 }">
@@ -16,3 +15,5 @@
 		history.go(-1);
 	</script>
 </c:if>
+
+<%@ include file="../layout/footer.jsp"%>
