@@ -4,8 +4,12 @@
 
 <configuration>
 
+
     <typeAliases>
         <typeAlias alias="member" type="com.project.withpet.model.Member"/>
-    </typeAliases>
+  
+	    	<typeAlias alias="community" type="com.project.withpet.model.Community" />
+	</typeAliases> 
+
 
 </configuration>
