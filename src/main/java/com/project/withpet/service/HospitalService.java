@@ -14,8 +14,8 @@ public class HospitalService {
 	private HospitalDAO hospitalDAO;
 
 	// 글 작성(insert)
-	public void insert(Hospital hospital) {
-		hospitalDAO.insert(hospital); 
+	public int insert(Hospital hospital) {
+		return hospitalDAO.insert(hospital); 
 	}
 	
 	// 총 데이터 개수 구하기

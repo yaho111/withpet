@@ -15,8 +15,8 @@ public class HospitalDAO {
 	private SqlSession sqlSession;
 
 	// 글 작성(insert)
-	public void insert(Hospital hospital) {
-		sqlSession.insert("hospitalns.insert", hospital);
+	public int insert(Hospital hospital) {
+		return sqlSession.insert("hospitalns.insert", hospital);
 	}
 
 	// 총 데이터 개수 구하기

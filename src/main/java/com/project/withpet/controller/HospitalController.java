@@ -103,8 +103,11 @@ public class HospitalController {
 		hospital.setHos_file(newfilename);
 
 		// 3) insert 수행
-		hospitalService.insert(hospital);
-		return "redirect:hospitalList";
+		int insertResult = hospitalService.insert(hospital);
+		
+		model.addAttribute("insertResult", insertResult);
+		
+		return "hospital/result";
 	}
 
 	// 게시판 목록 검색 (전체 목록, 검색 목록)
