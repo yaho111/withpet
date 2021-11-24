@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="memberns">
+
+    <!-- 로그인, 아이디 중복 검사 -->
+    <select id="login" parameterType="String" resultType="member">
+        select * from MEMBER where ID = #{id}
+    </select>
+
+    <!-- 회원가입 -->
+    <insert id="join" parameterType="member">
+        insert into MEMBER values
+            (#{id}, #{nick}, #{pwd}, #{addr}, #{name}, #{email}, #{phone}, #{gender}, sysdate, '' ,'user')
+    </insert>
+
+    <!-- 비밀번호 찾기 -->
+    <select id="pwd_find" resultType="member" parameterType="member">
+        select * from MEMBER where ID = #{id} and NAME = #{name}
+    </select>
+
+</mapper>
+
