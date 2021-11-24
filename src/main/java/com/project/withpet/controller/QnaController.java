@@ -188,10 +188,7 @@ public class QnaController {
 		
 		Qna qna = qnaService.qnaSelect(qna_no);
 		
-//		String title =  qna.getQna_title();
-		
 		model.addAttribute("qna_no", qna_no);
-//		model.addAttribute("title", title);
 		model.addAttribute("qna", qna);
 		model.addAttribute("pageNum", pageNum);
 		
