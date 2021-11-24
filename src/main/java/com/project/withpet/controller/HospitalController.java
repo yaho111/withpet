@@ -122,8 +122,8 @@ public class HospitalController {
 		int startRow = (currentPage - 1) * rowPerPage + 1;
 		int endRow = startRow + rowPerPage - 1;
 		
-		PagingPgm pp = new PagingPgm(total, rowPerPage, currentPage);
-		System.out.println("pp:" +pp);
+		PagingPgm paging = new PagingPgm(total, rowPerPage, currentPage);
+		System.out.println("paging:" +paging);
 		
 		hospital.setStartRow(startRow);
 		hospital.setEndRow(endRow);
@@ -135,7 +135,7 @@ public class HospitalController {
 		
 		model.addAttribute("list", list);
 		model.addAttribute("no", no);
-		model.addAttribute("pp", pp);
+		model.addAttribute("paging", paging);
 		
 		// 검색
 		model.addAttribute("search", hospital.getSearch());
@@ -149,12 +149,24 @@ public class HospitalController {
 	public String hospitalView(int hos_no, String page, Model model ) {
 		hospitalService.updateReadcnt(hos_no);				// 조회수 증가
 		Hospital hospital = hospitalService.select(hos_no);	// 데이터 1개 구하기
-		System.out.println("상세페이지 컨트롤러 in");
+		//System.out.println("상세페이지 컨트롤러 in");
 		
+		
+		// 1) 주소 처리
+		// 지도 출력을 위한 '주소'만 얻기 위해 우편번호 + 주소 + 상세 주소로 나누기
+		StringTokenizer st = new StringTokenizer(hospital.getHos_addr(), "-");
+		
+		String post = st.nextToken();
+		String addr = st.nextToken();
+		String specificAddress = st.nextToken();
+		//System.out.println("addr:"+addr);
+		
+		// 2) 내용과 운영시간 줄바꿈 처리
 		String hos_content = hospital.getHos_content().replace("\n", "<br>");
 		String hos_time = hospital.getHos_time().replace("\n", "<br>");
 		
 		model.addAttribute("hospital", hospital);
+		model.addAttribute("addr", addr);
 		model.addAttribute("hos_content", hos_content);
 		model.addAttribute("hos_time", hos_time);
 		model.addAttribute("page", page);
