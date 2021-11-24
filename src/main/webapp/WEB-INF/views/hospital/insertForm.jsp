@@ -44,7 +44,7 @@
 				</tr>
 				<tr>
 					<th>작성자</th>
-					<td><input type="text" name="hos_writer" id="hos_writer"></td>
+					<td><input type="text" name="hos_writer" id="hos_writer" value="${sessionScope.id}" readonly></td>
 				</tr>
 				<tr>
                 <th>우편번호</th>

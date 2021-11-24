@@ -121,12 +121,14 @@
 	</table>
 
 	<div align="center">
-		<input type="button" value="수정"
-			onClick="location.href='updateForm?hos_no=${hospital.hos_no}&page=${page}'">
-		<input type="button" value="삭제"
-			onClick="location.href='delete?hos_no=${hospital.hos_no}&page=${page}'">
-		<input type="button" value="목록"
-			onClick="location.href='hospitalList?page=${page}'">
+		<c:if test="${sessionScope.id == hospital.hos_writer}">
+			<input type="button" value="수정"
+				onClick="location.href='updateForm?hos_no=${hospital.hos_no}&page=${page}'">
+			<input type="button" value="삭제"
+				onClick="location.href='delete?hos_no=${hospital.hos_no}&page=${page}'">
+		</c:if>
+			<input type="button" value="목록"
+				onClick="location.href='hospitalList?page=${page}'">
 	</div>
 
 	<!-- Ajax 댓글 -->
