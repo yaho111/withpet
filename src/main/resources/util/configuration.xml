@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-config.dtd">
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
 
-  <typeAliases>
-		<typeAlias alias="community" type="com.project.withpet.model.Community" />
+
+    <typeAliases>
+        <typeAlias alias="member" type="com.project.withpet.model.Member"/>
+  
+	    	<typeAlias alias="community" type="com.project.withpet.model.Community" />
 	</typeAliases> 
+
 
 </configuration>

@@ -12,5 +12,5 @@
 /target/
 
 
-### DB config ###
-src/main/resources/jdbc.properties
+### config ###
+src/main/resources/*.properties
