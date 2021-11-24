@@ -115,7 +115,7 @@
 		</tr>
 		<tr>
 			<c:if test="${not empty hospital.hos_link}">
-				<td colspan=2><a href="http://${hospital.hos_link}"
+				<td colspan=2><a href="http://${hospital.hos_link}" target="_blank"
 					style="text-decoration: none">${hospital.hos_link}</a></td>
 			</c:if>
 		</tr>
