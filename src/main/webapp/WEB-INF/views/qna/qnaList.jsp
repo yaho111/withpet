@@ -40,9 +40,7 @@
 			<!-- 반복문 시작 -->
 			<c:forEach var="qna" items="${list }">
 				<tr>
-					<th>
-					<c:out value="${no}"/>			
-					<c:set var="no" value="${no}"/>
+					<th>${no}
 					</th>
 					<th>
 					
@@ -63,6 +61,7 @@
 					<th><fmt:formatDate value="${qna.qna_reg}" pattern="YYYY/MM/dd HH:mm:ss EEE요일"/></th>
 					<th>${qna.qna_readcnt}</th>
 				</tr>
+				<c:set var="no" value="${no-1}" />
 			</c:forEach>
 		</c:if>
 	</table>

@@ -2,14 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../layout/header.jsp"%>
 <script src="${path}/js/notice.js"></script>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-<div align="center">
+
+<center>
 <h2>공지사항을 작성해주세요.</h2>
 
 <form method="post" enctype="multipart/form-data" action="noticeInsert"  onSubmit="return notice_check()"> 
@@ -50,8 +44,5 @@
     <input type="reset" value="취소" onClick="history.back()"/>
   
   </form>
-</div>
-</body>
-</html>
-
-<%-- <%@ include file="../layout/footer.jsp"%> --%>
+</center>
+<%@ include file="../layout/footer.jsp"%>

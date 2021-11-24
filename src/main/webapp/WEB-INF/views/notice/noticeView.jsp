@@ -1,13 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../layout/header.jsp"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
 <!-- 댓글 아작스 기술 필요 -->
 
 
@@ -42,15 +35,14 @@
 		</tr>
 	</table>
 <!-- 관리자 -->
-<input type="submit" value="수정" onClick="location.href='noticeUpdateForm?pageNum=${paging.currentPage}&not_no=${notice.not_no}' ">
-<input type="submit" value="삭제" onClick="location.href='noticeDelete?pageNum=${paging.currentPage}&not_no=${notice.not_no}' ">
+<input type="submit" value="수정" onClick="location.href='noticeUpdateForm?not_no=${notice.not_no}&pageNum=${paging.currentPage}' ">
+<input type="submit" value="삭제" onClick="location.href='noticeDelete?not_no=${notice.not_no}&pageNum=${paging.currentPage}' ">
 
 <!-- 사용자 + 관리자 -->
-<input type="submit" value="목록" onClick="location.href='noticeList?pageNum=${paging.currentPage}&not_no=${notice.not_no}' ">
+<input type="submit" value="목록" onClick="location.href='notList?not_no=${notice.not_no}&pageNum=${paging.currentPage}' ">
 
 <!-- 댓글 -->
 <!-- <input type="submit" value="" onClick=""> -->
 
-</body>
-</html>
-<%-- <%@ include file="../layout/footer.jsp"%> --%>
+
+<%@ include file="../layout/footer.jsp"%>

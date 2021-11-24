@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="../layout/header.jsp"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +12,7 @@
 	<c:if test="${result == 1}">
 		<script type="text/javascript">
 			alert('공지사항 작성 성공');
-			location.href = "noticeList?pageNum=${paging.currentPage}&not_no=${notice.not_no}";
+			location.href = "notList?pageNum=${paging.currentPage}&not_no=${notice.not_no}";
 		</script>
 	</c:if>
 
