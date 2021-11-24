@@ -45,10 +45,19 @@
             <button class="btn btn-outline-primary" type="submit">Search</button>
         </div>
         <div class="col">
-            <form class="d-flex">
-                <input type="button" class="btn btn-outline-success" value="회원 가입" onclick="location.href='joinForm'">
-                <input type="button" class="btn btn-outline-success" value="로그인" onclick="location.href='loginForm'">
-            </form>
+            <c:if test="${sessionScope.id != null}">
+                <form class="d-flex">
+                    <input type="button" class="btn btn-outline-success" value="내 정보" onclick="location.href='myPage'">
+                    <input type="button" class="btn btn-outline-success" value="로그아웃" onclick="location.href='logout'">
+                </form>
+            </c:if>
+            <c:if test="${sessionScope.id == null}">
+                <form class="d-flex">
+                    <input type="button" class="btn btn-outline-success" value="회원 가입" onclick="location.href='joinForm'">
+                    <input type="button" class="btn btn-outline-success" value="로그인" onclick="location.href='loginForm'">
+                </form>
+            </c:if>
+
         </div>
 
 
