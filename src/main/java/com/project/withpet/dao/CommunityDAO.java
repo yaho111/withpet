@@ -43,5 +43,12 @@ public class CommunityDAO {
 //		return session.delete("deleteBoard", com_no);
 //	}
 //	
+	public int getTotal(Community community) {
+		// TODO Auto-generated method stub
+		return session.selectOne("getTotal", community);
+	}
+	public List<Community> list(Community community) {
+		// TODO Auto-generated method stub
+		return session.selectList("list", community); 
+	}
 }
-	

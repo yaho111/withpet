@@ -41,4 +41,12 @@ public class CommunityService {
 //		// TODO Auto-generated method stub
 //		return dao.delete(com_no);
 //	}
+	public int getTotal(Community community) {
+		// TODO Auto-generated method stub
+		return dao.getTotal(community);
+	}
+	public List<Community> list(Community community) {
+		// TODO Auto-generated method stub
+		return dao.list(community);
+	}
 }

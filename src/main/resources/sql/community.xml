@@ -10,36 +10,50 @@
 		values(community_seq.nextval,#{com_title},#{com_writer},
 		0,sysdate,#{com_content},#{com_file},0)
 	</insert>
+	
 	<!-- 글갯수 -->
-	<select id="count" resultType="int">
-		select count(*) from community
+	<select id="getTotal" parameterType="community" resultType="int">
+		select count(*) from community 
+		<where>
+			<if test="keyword != null">
+				${search} like '%'||#{keyword}||'%'
+			</if>
+			
+		</where>
 	</select>
+	
 	<!-- 글목록 -->
-	<!-- 방법1 : <![CDATA[ ]]> -->
-	<!-- 방법2 : > : &gt; , < : &lt; -->
-	<select id="List" parameterType="int" resultType="community">
-		<!-- <![CDATA[ -->
-		select * from ( select rownum rnum, community.* from (
-		select * from community order by com_no desc) community )
-		where rnum &gt;=	((#{page}-1) * 10+1) and
-		      rnum &lt;= (#{page}*10)
-		<!-- ]]> -->
+	<select id="list" parameterType="community" resultType="community">
+		select * from (select a.*,rowNum rn from (
+			select * from community
+		<where>
+			<if test="keyword != null and search!='subcon'">
+				${search} like '%'||#{keyword}||'%'
+			</if>
+		</where>			
+			 order by com_no desc) a )
+			where rn between #{startRow} and #{endRow}
 	</select>
+	
 	<!-- 조회수 증가 -->
 	<update id="read" parameterType="int">
 	   update community set com_readcnt=com_readcnt+1 where com_no=#{com_no}
 	</update>
+	
 	<!-- 상세정보 구하기 -->
 	<select id="Content" parameterType="int" resultType="community">
 	   select * from community where com_no = #{com_no}
 	</select>
-	<!-- 글수정 
-	<update id="upDateBoard" parameterType="community">
-		update community set com_writer=#{com_writer}, com_title=#{com_title},
-		com_paswd=#{com_paswd},com_content=#{com_content}, com_reg=sysdate where com_no=#{com_no}
+	
+	<!-- 글수정
+	<update id="updateBoard" parameterType="community">
+		update community set com_writer=#{com_writer}, com_title=#{com_title}
+		,com_content=#{com_content}, com_reg=sysdate where com_no=#{com_no}
 	</update>-->
-	<!--  글삭제 
+	
+	<!-- 글삭제   
 	<delete id="deleteBoard" parameterType="int">
-		delete from community where com_no = #{com_no}
+
+	delete from community where com_no = #{com_no}
 	</delete>	-->
 	</mapper>
