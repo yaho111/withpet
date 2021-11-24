@@ -5,7 +5,6 @@ import java.util.Date;
 public class Qna {
 	private int qna_no;			/* 번호 */
 	private String qna_title;	/* 제목 */
-//	private String qna_select;	
 	private String qna_writer;	/* 작성자 */
 	private int qna_readcnt;	/* 조회수 */
 	private Date qna_reg;		/* 작성일 */
@@ -20,7 +19,6 @@ public class Qna {
 	private int endRow;
 	
 	// 검색
-//	private String boardSelect;
 	private String search;
 	private String keyword;
 		
@@ -108,16 +106,4 @@ public class Qna {
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	} 
-//	public String getQna_select() {
-//		return qna_select;
-//	}
-//	public void setQna_select(String qna_select) {
-//		this.qna_select = qna_select;
-//	}
-//	public String getBoardSelect() {
-//		return boardSelect;
-//	}
-//	public void setBoardSelect(String boardSelect) {
-//		this.boardSelect = boardSelect;
-//	}
 }
