@@ -11,7 +11,6 @@
 </head>
 <body>
 
-  <h2>게시판 입력폼</h2>
   <form method="post" enctype="multipart/form-data" action="qnaInsert"  onSubmit="return qna_check()"> 
    <table>
     <tr>

@@ -11,7 +11,7 @@
 	<c:if test="${result == 1}">
 	<script type="text/javascript">
 		alert('글작성 성공');
-		location.href = "qnaList";
+		location.href = "qnaList?pageNum=${paging.currentPage}&qna_no=${qna.qna_no}";
 	</script>
 	</c:if>
 	
