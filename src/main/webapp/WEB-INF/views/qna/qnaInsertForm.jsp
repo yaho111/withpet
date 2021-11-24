@@ -3,14 +3,6 @@
 <%@ include file="../layout/header.jsp"%>
 <script src="${path}/js/qna.js"></script>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>With Pet Q/A</title>
-</head>
-<body>
-
   <form method="post" enctype="multipart/form-data" action="qnaInsert"  onSubmit="return qna_check()"> 
    <table>
     <tr>
@@ -61,6 +53,4 @@
     <input type="reset" value="취소" onClick="history.back()"/>
   
   </form>
-<%-- <%@ include file="../layout/footer.jsp"%> --%>
-</body>
-</html>
+<%@ include file="../layout/footer.jsp"%>

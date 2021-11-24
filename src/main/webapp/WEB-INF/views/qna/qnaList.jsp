@@ -1,31 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../layout/header.jsp"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
-<title>WithPet</title>
-<!-- <link rel="stylesheet" href="/resources/demos/style.css">
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
-<script>
-	$(function() {
-		$("#accordion").accordion({
-			collapsible : true
-		});
-	});
-</script>  아코디언 -->
-</head>
-<body>
+<%-- <%@page import="java.text.SimpleDateFormat"%> --%>
+<!-- 
+1. 비밀 글입니다. 구현 필요 
+-->
 
-	총 질문 갯수 = ${qna.totalData}
+
+	<!-- 글작성 버튼 -->
 	<br>
 	<a href="qnaInsertForm">글작성</a>
 	<br>
 
-
+	<!-- 목록 -->
 	<table border="1">
 		<tr>
 			<th>번호</th>
@@ -34,6 +21,9 @@
 			<th>작성일</th>
 			<th>조회수</th>
 		</tr>
+<%-- 		<%
+		SimpleDateFormat sd = new SimpleDateFormat("YYYY/MM/dd HH:mm:ss EEE요일");
+		%> --%>
 
 		<c:if test="${empty list}">
 			<tr>
@@ -41,24 +31,42 @@
 			</tr>
 		</c:if>
 
-		
+
 		<c:if test="${not empty list}">
+			
+			<!-- 화면 출력 번호  변수 정의 -->
 			<c:set var="no" value="${no}"></c:set>
+			
+			<!-- 반복문 시작 -->
 			<c:forEach var="qna" items="${list }">
-						<tr>
-							<th>${no}</th>
-							<th><a
-								href="qnaView?qna_no=${qna.qna_no}&pageNum=${paging.currentPage}">
-									${qna.qna_title} </a></th>
-							<th>${qna.qna_writer}</th>
-							<th>${qna.qna_reg}</th>
-							<th>${qna.qna_readcnt}</th>
-						</tr>
-				<c:set var="no" value="${no - 1}" />
+				<tr>
+					<th>
+					<c:out value="${no}"/>			
+					<c:set var="no" value="${no}"/>
+					</th>
+					<th>
+					
+						<div align="left">
+
+							<c:if test="${qna.qna_lev != 0}">
+								<c:forEach var="k" begin="1" end="${qna.qna_lev}">
+									&nbsp;&nbsp;			
+								</c:forEach>
+								<img src="./images/AnswerLine.gif">
+							</c:if>
+
+							<a href="qnaView?qna_no=${qna.qna_no}&pageNum=${paging.currentPage}">
+								${qna.qna_title} </a>
+						</div>
+					</th>
+					<th>${qna.qna_writer}</th>
+					<th><fmt:formatDate value="${qna.qna_reg}" pattern="YYYY/MM/dd HH:mm:ss EEE요일"/></th>
+					<th>${qna.qna_readcnt}</th>
+				</tr>
 			</c:forEach>
 		</c:if>
-
 	</table>
+	<!-- 목록 끝 -->
 
 
 	<!-- 검색 기능 -->
@@ -90,7 +98,7 @@
 		<!-- dto -->
 		<input type="submit" value="확인">
 	</form>
-
+	<!-- 글 검색 끝 -->
 
 
 	<!-- 검색 했을 경우의 페이징 처리 -->
@@ -101,13 +109,15 @@
 			<a href="qnaList?pageNum=1&search=${search}&keyword=${keyword}">
 				<< </a>
 		</c:if>
-
+		&nbsp;
+		
 		<!-- 이전 블록이동 -->
-		<c:if test="${paging.startPage > paging.block }">
+		<c:if test="${paging.startPage > paging.pagePerBlk }">
 			<a
 				href="qnaList?pageNum=${paging.startPage - 1}&search=${search}&keyword=${keyword}">
 				< </a>
 		</c:if>
+		&nbsp;
 
 		<!-- 번호 -->
 		<c:forEach var="i" begin="${paging.startPage}" end="${paging.endPage}">
@@ -118,16 +128,17 @@
 		</c:forEach>
 
 		<!-- 다음 블록으로 이동 -->
-		<c:if test="${paging.endPage < paging.allPage}">
+		<c:if test="${paging.endPage < paging.totalPage}">
 			<a
 				href="qnaList?pageNum=${paging.endPage + 1}&search=${search}&keyword=${keyword}">
 				> </a>
 		</c:if>
+		&nbsp;
 
 		<!-- 마지막 페이지 이동 -->
-		<c:if test="${paging.currentPage!=paging.allPage}">
+		<c:if test="${paging.currentPage!=paging.totalPage}">
 			<a
-				href="qnaList?pageNum=${paging.allPage}&search=${search}&keyword=${keyword}">
+				href="qnaList?pageNum=${paging.totalPage}&search=${search}&keyword=${keyword}">
 				>> </a>
 		</c:if>
 
@@ -139,11 +150,13 @@
 		<c:if test="${paging.currentPage!=1}">
 			<a href="qnaList?pageNum=1"> << </a>
 		</c:if>
-
+		&nbsp;
+	
 		<!-- 이전 블록이동 -->
-		<c:if test="${paging.startPage > paging.block}">
+		<c:if test="${paging.startPage > paging.pagePerBlk}">
 			<a href="qnaList?pageNum=${paging.startPage - 1}"> < </a>
 		</c:if>
+		&nbsp;
 
 		<!-- 번호 -->
 		<c:forEach var="i" begin="${paging.startPage}" end="${paging.endPage}">
@@ -152,19 +165,19 @@
 				<a href="qnaList?pageNum=${i}">${i}</a>
 			</c:if>
 		</c:forEach>
+		&nbsp;
 
 		<!-- 다음 블록으로 이동 -->
-		<c:if test="${paging.endPage < paging.allPage}">
+		<c:if test="${paging.endPage < paging.totalPage}">
 			<a href="qnaList?pageNum=${paging.endPage + 1}"> > </a>
 		</c:if>
+		&nbsp;
 
 		<!-- 마지막 페이지 이동 -->
-		<c:if test="${paging.currentPage!=paging.allPage}">
-			<a href="qnaList?pageNum=${paging.allPage}"> >> </a>
+		<c:if test="${paging.currentPage!=paging.totalPage}">
+			<a href="qnaList?pageNum=${paging.totalPage}"> >> </a>
 		</c:if>
 
 	</c:if>
 
-<%-- 	<%@ include file="../layout/footer.jsp"%> --%>
-</body>
-</html>
+<%@ include file="../layout/footer.jsp"%>

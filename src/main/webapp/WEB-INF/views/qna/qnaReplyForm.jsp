@@ -3,14 +3,6 @@
 <%@ include file="../layout/header.jsp"%>
 <script src="${path}/js/qna.js"></script>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>With Pet Q/A</title>
-</head>
-<body>
-
   <h2>게시판 입력폼</h2>
   <form method="post" enctype="multipart/form-data" action="qnaReply"  onSubmit="return qna_check()"> 
   <input type="hidden" name="qna_no" value="${qna.qna_no}" />
@@ -60,6 +52,4 @@
   
   </form>
 
-</body>
-</html>
-<%-- <%@ include file="../layout/footer.jsp"%> --%>
+<%@ include file="../layout/footer.jsp"%>
