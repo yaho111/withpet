@@ -2,6 +2,7 @@ package com.project.withpet.controller;
 
 import java.io.File;
 
+
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -20,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.project.withpet.model.Qna;
-import com.project.withpet.service.Paging;
+import com.project.withpet.service.PagingPgm;
 import com.project.withpet.service.QnaService;
 
 // 참고 예제 : spring(전체적인 기본), springboard(댓글), springmember(첨부파일), board1(검색 처리)
@@ -28,21 +29,18 @@ import com.project.withpet.service.QnaService;
 // 글작성 폼
 // 글작성(첨부파일)
 
-// 글 목록
+// 글 목록 오류 : 번호 출력 확인
 
 // 글 상세(관리자 : 답변, 삭제 / 사용자(작성자) : 수정, 삭제 / 사용자(작성자 외) : X)
 
 
 // 답글 폼
 // 답글 : 
-// 댓글 오류 : 1. 댓글을 달면 글 그룹이 0이 됨. 그래서 대댓글도 0으로 그룹핑 되어 대댓글 도 불가능 
-//			2. 수정으로 들어가면 저장된 값이 전달이 안됨 
-// 			3. 답글작성이 성공하면 답글 상세포기 페이지로 이동했으면 좋겠음
+// 댓글 오류 : 
 			
 
-// 글 수정 폼	오류 : 수정으로 들어가면 저장된 값이 전달이 안됨 
+// 글 수정 폼	 
 // 글 수정 : 
-// 오류 발생 : 첨부파일을 수정하면 이미지 출력이 안되고 첨부파일을 수정하지 않으면 이미지 안 뜸
 
 // 글 삭제 (관리자 : alert / 사용자 : 회원 세션 확인)
 
@@ -133,7 +131,7 @@ public class QnaController {
 		// 뷰페이지에서 체크박스 Y일경우 작성자, 관리자 빼고 '비밀글입니다'접근 걸기
 
 		// 한 화면에 출력할 데이터 갯수
-		final int limit = 10;
+		final int rowPerPage = 10;
 
 		if (pageNum == null || pageNum.equals("")) {
 			pageNum = "1";
@@ -143,23 +141,19 @@ public class QnaController {
 		int currentPage = Integer.parseInt(pageNum);
 
 		// 총 데이터 구해오기
-		int totalData = qnaService.getCount(qna);
-		System.out.println("totalData:"+totalData);
+		int total = qnaService.getCount(qna);
+		System.out.println("totalData:"+total);
 
 		// 한페이지에 데이터 시작 값, 끝값
-		int startRow = (currentPage - 1) * limit + 1; // 1, 11, 21, 31 , DTO에 저장
-		int endRow = startRow + limit - 1; // 10, 20, 30, 40 , DTO에 저장
+		int startRow = (currentPage - 1) * rowPerPage + 1; // 1, 11, 21, 31 , DTO에 저장
+		int endRow = startRow + rowPerPage - 1; // 10, 20, 30, 40 , DTO에 저장
 
-		Paging paging = new Paging(totalData, limit, currentPage);
+		PagingPgm paging = new PagingPgm(total, rowPerPage, currentPage);
 
 		qna.setStartRow(startRow);
 		qna.setEndRow(endRow);
 
-		int no = totalData - startRow + 1; // 화면 출력 번호
-		
-//		시간을 자바로 출력 해볼려고 하니 문제 발생
-//		SimpleDateFormat sd = new SimpleDateFormat("YYYY/MM/dd HH:mm:ss EEE요일");
-//		String date = sd.format(qna.getQna_reg());
+		int no = total - startRow + 1; // 화면 출력 번호
 		
 		List<Qna> list = qnaService.list(qna);
 		System.out.println("list : " + list);
@@ -167,7 +161,6 @@ public class QnaController {
 		model.addAttribute("list", list);
 		model.addAttribute("no", no);
 		model.addAttribute("paging", paging);
-//		model.addAttribute("date", date);
 
 		// 검색
 		model.addAttribute("search", qna.getSearch());
@@ -205,8 +198,8 @@ public class QnaController {
 		return "qna/qnaReplyForm";
 	}
 	
-	// 답글 (첨부파일 넣을까? - 넣는다. )	 400 오류 발생
-	// 댓글 오류 : 댓글을 달면 원문 아래에 글이 생성되어야 하는데 지금 댓글 구역 글 구역으로 나눠져 버림
+	// 답글
+	// 댓글 오류 
 	@RequestMapping(value = "qnaReply", method = RequestMethod.POST)
 	public String qnaReply(@RequestParam("qna_file1") MultipartFile mutiFile, Qna qna, HttpServletRequest request, String pageNum,
 			Model model) throws Exception {
@@ -341,7 +334,7 @@ public class QnaController {
 		}
 
 		// 오류 발생 : 첨부파일을 수정하면 이미지 출력이 안되고 첨부파일을 수정하지 않으면 이미지 안 뜸
-		
+		// 아래와 같이 해결
 		// 기존 데이터를 조회하기
 		Qna updateFile = qnaService.qnaSelect(qna.getQna_no());
 		
