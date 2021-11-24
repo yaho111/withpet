@@ -46,16 +46,16 @@ public class NoticeService {
 
 
 	// 글수정
-//	public int noticeUpdate(Notice notice) {
-//		System.out.println("글수정 서비스");
-//		return noticeDAO.noticeUpdate(notice);
-//	}
+	public int noticeUpdate(Notice notice) {
+		System.out.println("글수정 서비스");
+		return noticeDAO.noticeUpdate(notice);
+	}
 	
 	// 글 삭제
-//	public int noticeDelete(int not_no) {
-//		System.out.println("글 삭제 서비스");
-//		return noticeDAO.noticeDelete(not_no);
-//	}
+	public int noticeDelete(int not_no) {
+		System.out.println("글 삭제 서비스");
+		return noticeDAO.noticeDelete(not_no);
+	}
 	
 
 }

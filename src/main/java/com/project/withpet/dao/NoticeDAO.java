@@ -46,16 +46,16 @@ public class NoticeDAO {
 
 
 	// 글수정
-//	public int noticeUpdate(Notice notice) {
-//		System.out.println("글수정 DAO");
-//		return noticeSession.update("noticens.noticeUpdate", notice);
-//	}
+	public int noticeUpdate(Notice notice) {
+		System.out.println("글수정 DAO");
+		return noticeSession.update("noticens.noticeUpdate", notice);
+	}
 	
 	// 글삭제
-//	public int noticeDelete(int not_no) {
-//		System.out.println("글삭제 DAO");
-//		return noticeSession.delete("noticens.noticeDelete", not_no);
-//	}
+	public int noticeDelete(int not_no) {
+		System.out.println("글삭제 DAO");
+		return noticeSession.delete("noticens.noticeDelete", not_no);
+	}
 	
 	
 	

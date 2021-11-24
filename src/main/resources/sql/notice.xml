@@ -4,8 +4,8 @@
 
 	<!-- 글작성 -->
 	<insert id="noticeInsert" parameterType="notice">
-	insert into notice values (notice_seq.nextval, #{not_title}, #{not_writer}, 
-	0, sysdate, #{not_content}, #{not_file,jdbcType=VARCHAR})	
+		insert into notice values (notice_seq.nextval, #{not_title}, #{not_writer}, 
+		0, sysdate, #{not_content}, #{not_file,jdbcType=VARCHAR})	
 	</insert>
 	
 	<!-- 총 데이터 갯수-->
@@ -28,8 +28,8 @@
 		
 	<!-- 목록 구하기 --><!-- list = null 여기서 sql 문제인듯 -->
 	<select id="noticeList" parameterType="notice" resultType="notice">
-	select * from (select rowNum rn, noticeBoard.* from 
-				  (select * from notice
+		select * from (select rowNum rn, noticeBoard.* from 
+				  	  (select * from notice
 		<where>				
 				<if test="keyword != null and search !='subcon'">
 					${search} like '%'||#{keyword}||'%'
@@ -53,15 +53,15 @@
 	</select>
 
 	<!-- 수정 -->
-<!-- 	<update id="noticeUpdate" parameterType="notice">
-	update notice set not_title = #{not_title}, not_content = #{not_content}, not_file = #{not_file,jdbcType=VARCHAR} 
-	where not_no = #{not_no}
-	</update> -->
+	<update id="noticeUpdate" parameterType="notice">
+		update notice set not_title = #{not_title}, not_content = #{not_content}, not_reg = sysdate, not_file = #{not_file,jdbcType=VARCHAR} 
+		where not_no = #{not_no}
+	</update>
 	
 	<!-- 삭제 -->
-<!-- 	<delete id="noticeDelete" parameterType="int">
+	<delete id="noticeDelete" parameterType="int">
 		delete from notice where not_no = #{not_no}
-	</delete> -->
+	</delete>
 	
 	
 </mapper>
