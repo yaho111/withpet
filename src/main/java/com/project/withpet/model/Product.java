@@ -25,7 +25,7 @@ public class Product {
     private int pro_likecnt;
     private String price;
     private String pro_del; // 삭제 쿼리 Y or N
-    private MultipartFile pro_Photo; // 상품이미지파일
+    private MultipartFile pro_photo; // 상품이미지파일
 
 
 
@@ -108,15 +108,15 @@ public class Product {
         return productList;
     }
 
-    public MultipartFile getPro_Photo() {
-        return pro_Photo;
+    public MultipartFile getPro_photo() {
+        return pro_photo;
     }
-    public void setPro_Photo(MultipartFile productPhoto) {
-        this.pro_Photo = productPhoto;
+    public void setPro_photo(MultipartFile productPhoto) {
+        this.pro_photo = productPhoto;
     }
 
     @Override
     public String toString() {
-        return "Product[pro_no="+pro_no+",bus_id=" +bus_id+",pro_name"+pro_name+",stock="+stock+",pro_content="+pro_content+",pro_img="+pro_img+",pro_readcnt="+pro_readcnt+",pro_likecnt="+pro_likecnt+",price="+price+",pro_Photo="+pro_Photo+"]";
+        return "Product[pro_no="+pro_no+",bus_id=" +bus_id+",pro_name"+pro_name+",stock="+stock+",pro_content="+pro_content+",pro_img="+pro_img+",pro_readcnt="+pro_readcnt+",pro_likecnt="+pro_likecnt+",price="+price+",pro_photo="+pro_photo+"]";
     }
 }

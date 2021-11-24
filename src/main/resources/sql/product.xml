@@ -39,5 +39,16 @@
 
     </insert>
 
+    <update id="productUpdate" parameterType="com.project.withpet.model.Product">
+        update product
+            set
+                pro_name = #{pro_name},
+                stock = #{stock},
+                pro_content = #{pro_content},
+                pro_img = #{pro_img, jdbcType=VARCHAR},
+                price = #{price}
+            where pro_no = #{pro_no}
+    </update>
+
 
 </mapper>

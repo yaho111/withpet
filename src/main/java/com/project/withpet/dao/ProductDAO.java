@@ -45,6 +45,8 @@ public class ProductDAO {
         return sqlSession.insert("product.productWrite", product);
     }
 
+    public int productUpdate(Product product) {
+        return sqlSession.update("product.productUpdate", product); }
 
 
 }

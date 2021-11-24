@@ -1,9 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
-
+<%@ include file="../layout/header.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +11,7 @@
 </head>
 <body>
 
-<a href="boardform.do">글작성</a>
+<a href="${path}/productWrite/">글작성</a>
 글갯수 : ${listcount }
 <table border=1 align="center" width=800>
     <caption>게시판 목록</caption>
@@ -28,22 +27,48 @@
     <c:set var="num" value="${listcount-(page-1)*10 }"/>
 
     <c:forEach var="pl" items="${productList}">
-        <tr>
-            <td>${num}
-                <c:set var="num" value="${num-1}"/>
-            </td>
-            <td>
-                <a href="${path}/productDetail/?no=${pl.pro_no}&page=${page}">
-                        ${pl.pro_name}
-                </a>
-            </td>
-            <td>
-                <a href="${path}/productDetail/?no=${pl.pro_name}&page=${page}">
-                    <img src="${path}/images/${pl.pro_no}" width="120ox" height="110px"></a>
-            </td>
-            <td>${pl.bus_id}</td>
-            <td>${pl.pro_readcnt }</td>
-        </tr>
+        <c:choose>
+            <c:when test="${pl.pro_del eq 'n' and pl.stock ne '0'}">
+                <%--재고가 있고 삭제여부가 아닐경우--%>
+                <tr>
+                    <td>
+                        ${pl.pro_no}
+                    </td>
+                    <td>
+                        <a href="${path}/productDetail/?no=${pl.pro_no}&page=${page}">
+                                ${pl.pro_name}
+                        </a>
+                    </td>
+                    <td>
+                        <a href="${path}/productDetail/?no=${pl.pro_no}&page=${page}">
+                            <img src="${path}/upload/${pl.pro_img}" width="120px" height="110px"></a>
+                    </td>
+                    <td>${pl.bus_id}</td>
+                    <td>${pl.pro_readcnt }</td>
+                </tr>
+            </c:when>
+            <c:otherwise>
+                <tr>
+                    <td colspan="5" align="center"> 재고가 없거나, 삭제된 상품입니다.</td>
+                </tr>
+            </c:otherwise>
+        </c:choose>
+<%--        <tr>--%>
+<%--            <td>${num}--%>
+<%--                <c:set var="num" value="${num-1}"/>--%>
+<%--            </td>--%>
+<%--            <td>--%>
+<%--                <a href="${path}/productDetail/?no=${pl.pro_no}&page=${page}">--%>
+<%--                        ${pl.pro_name}--%>
+<%--                </a>--%>
+<%--            </td>--%>
+<%--            <td>--%>
+<%--                <a href="${path}/productDetail/?no=${pl.pro_no}&page=${page}">--%>
+<%--                    <img src="${path}/upload/${pl.pro_img}" width="120px" height="110px"></a>--%>
+<%--            </td>--%>
+<%--            <td>${pl.bus_id}</td>--%>
+<%--            <td>${pl.pro_readcnt }</td>--%>
+<%--        </tr>--%>
     </c:forEach>
 </table>
 
@@ -83,4 +108,4 @@
 
 </body>
 </html>
-
+<%@ include file="../layout/footer.jsp"%>
