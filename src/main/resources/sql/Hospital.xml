@@ -54,4 +54,9 @@
 							where hos_no=#{hos_no}
 	</update>
 	
+	<!-- 글 삭제(delete) -->
+	<delete id="delete" parameterType="int">
+		delete from hospital where hos_no=#{hos_no}
+	</delete>
+	
 </mapper>

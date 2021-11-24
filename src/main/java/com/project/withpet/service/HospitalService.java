@@ -43,4 +43,9 @@ public class HospitalService {
 		return hospitalDAO.update(hospital);
 	}
 
+	// 글 삭제(delete)
+	public int delete(int hos_no) {
+		return hospitalDAO.delete(hos_no);
+	}
+
 }

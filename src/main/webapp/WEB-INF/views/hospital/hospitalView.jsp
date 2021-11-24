@@ -7,6 +7,19 @@
 <meta charset="UTF-8">
 <title>상세 페이지</title>
 
+<!-- 글 삭제 confirm 창 띄우기 -->
+<script>
+	function deleteCheck(){
+		if(confirm("정말로 삭제하시겠습니까?") == true){	// 확인
+			location.href="delete?hos_no=${hospital.hos_no}&page=${page}"
+		}else{										// 취소
+			alert("취소되었습니다.");
+			return false;
+		}
+	}
+
+</script>
+
 <script type="text/javascript">
 	$('#reply').load('${path}/reply?hos_no=${hospital.hos_no}')
 
@@ -125,7 +138,7 @@
 			<input type="button" value="수정"
 				onClick="location.href='updateForm?hos_no=${hospital.hos_no}&page=${page}'">
 			<input type="button" value="삭제"
-				onClick="location.href='delete?hos_no=${hospital.hos_no}&page=${page}'">
+				onClick="deleteCheck()">
 		</c:if>
 			<input type="button" value="목록"
 				onClick="location.href='hospitalList?page=${page}'">

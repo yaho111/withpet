@@ -304,9 +304,14 @@ public class HospitalController {
 	
 	// 글 삭제(delete)
 	@RequestMapping("delete")
-	public String delete() {
+	public String delete(int hos_no, String page, Model model) {
 		
-		return "hospitalList";
+		int deleteResult = hospitalService.delete(hos_no);
+		
+		model.addAttribute("deleteResult", deleteResult);
+		model.addAttribute("page", page);
+		
+		return "hospital/result";
 	}
 	
 	// 정렬

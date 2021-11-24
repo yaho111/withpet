@@ -44,4 +44,9 @@ public class HospitalDAO {
 		return sqlSession.update("update", hospital);
 	}
 
+	// 글 삭제(delete)
+	public int delete(int hos_no) {
+		return sqlSession.delete("delete", hos_no);
+	}
+
 }
