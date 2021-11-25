@@ -13,13 +13,12 @@
 
 <a href="${path}/productWrite/">글작성</a>
 글갯수 : ${listcount }
-<table border=1 align="center" width=800>
-    <caption>게시판 목록</caption>
+<table border="1" align="center" width=800>
     <tr>
         <th>상품번호</th>
-        <th>상품명</th>
         <th>이미지</th>
-        <th>상품사</th>
+        <th>상품명</th>
+        <th>판매사</th>
         <th>조회수</th>
     </tr>
 
@@ -31,17 +30,17 @@
             <c:when test="${pl.pro_del eq 'n' and pl.stock ne '0'}">
                 <%--재고가 있고 삭제여부가 아닐경우--%>
                 <tr>
-                    <td>
+                    <td align="center">
                         ${pl.pro_no}
+                    </td>
+                    <td>
+                        <a href="${path}/productDetail/?no=${pl.pro_no}&page=${page}">
+                            <img src="${path}/upload/${pl.pro_img}" width="120px" height="110px"></a>
                     </td>
                     <td>
                         <a href="${path}/productDetail/?no=${pl.pro_no}&page=${page}">
                                 ${pl.pro_name}
                         </a>
-                    </td>
-                    <td>
-                        <a href="${path}/productDetail/?no=${pl.pro_no}&page=${page}">
-                            <img src="${path}/upload/${pl.pro_img}" width="120px" height="110px"></a>
                     </td>
                     <td>${pl.bus_id}</td>
                     <td>${pl.pro_readcnt }</td>
@@ -49,7 +48,12 @@
             </c:when>
             <c:otherwise>
                 <tr>
-                    <td colspan="5" align="center"> 재고가 없거나, 삭제된 상품입니다.</td>
+                    <td align="center">
+                        ${pl.pro_no}
+                    </td>
+                    <td colspan="4" align="center" style="color: red">
+                        재고가 없거나, 삭제된 상품입니다.
+                    </td>
                 </tr>
             </c:otherwise>
         </c:choose>
