@@ -38,7 +38,7 @@
              #{pro_img},#{price},0,0,'n')
 
     </insert>
-
+    <!-- 04. 글 수정-->
     <update id="productUpdate" parameterType="com.project.withpet.model.Product">
         update product
             set
@@ -48,6 +48,16 @@
                 pro_img = #{pro_img, jdbcType=VARCHAR},
                 price = #{price}
             where pro_no = #{pro_no}
+    </update>
+<!--05. 삭제-->
+    <!--업데이트로 삭제 처리 테이블 자체 삭제가 되면 안됨 -->
+    <update id="productDelete">
+        UPDATE
+            product
+        SET
+            pro_del = 'y'
+        WHERE
+            pro_no = #{pro_no}
     </update>
 
 
