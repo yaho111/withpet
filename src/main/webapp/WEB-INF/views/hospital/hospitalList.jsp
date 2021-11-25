@@ -1,23 +1,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="../layout/header.jsp"%>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>병원 게시판</title>
-
 <style type="text/css">
 	a {text-decoration:none}
 </style>
 
-</head>
-<body>
+<%@ include file="../sort.jsp" %>
 
 	<table border="1" width=900 align="center">
-		<caption>
-			<h2>동물병원 게시판</h2>
-		</caption>
+		
+			<h3 align="center">동물병원 게시판</h3>
+		
 		<tr>
 			<th>번호</th>
 			<th colspan=2>동물병원 이름</th>
@@ -137,8 +130,5 @@
 		</c:if>
 	</c:if>
 	</div>
-	
-</body>
-</html>
 
 <%@ include file="../layout/footer.jsp"%>
