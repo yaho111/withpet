@@ -6,6 +6,7 @@
 
     <typeAliases>
         <typeAlias alias="member" type="com.project.withpet.model.Member"/>
+        <typeAlias alias="business" type="com.project.withpet.model.Business"/>
     </typeAliases>
 
 </configuration>
