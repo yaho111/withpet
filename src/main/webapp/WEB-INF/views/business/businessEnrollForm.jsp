@@ -10,7 +10,7 @@
 <section class="py-5">
     <div id="enroll_wrap" class="container-body">
         <h2 class="body-title">사업자 등록</h2>
-        <form name="form" method="post" action="businessEnroll" onsubmit="return check()">
+        <form name="form" method="post" action="enrollBusiness" onsubmit="return check()">
             <table id="business_enroll_table" class="table">
                 <tr>
                     <th>등록할 아이디</th>
@@ -79,11 +79,11 @@
                         <label class="form-check-label" for="shopping">
                             쇼핑몰 사업자
                         </label>
-                        <input class="form-check-input" type="radio" name="sort" id="shopping" value="쇼핑몰 사업자">
+                        <input class="form-check-input" type="radio" name="bus_sort" id="shopping" value="쇼핑몰 사업자">
                         <label class="form-check-label" for="hospital">
                             병원 사업자
                         </label>
-                        <input class="form-check-input" type="radio" name="sort" id="hospital" value="병원 사업자">
+                        <input class="form-check-input" type="radio" name="bus_sort" id="hospital" value="병원 사업자">
                     </td>
                 </tr>
             </table>

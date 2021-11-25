@@ -29,7 +29,7 @@ function check() {
         $("#backNum").val("").focus();
         return false;
     }
-    if($("input[name=sort]:radio:checked").length < 1) {
+    if($("input[name=bus_sort]:radio:checked").length < 1) {
         alert("사업 분류를 선택하세요");
         $("#shopping").focus();
         return false;

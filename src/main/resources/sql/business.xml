@@ -2,4 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="businessns">
+    <!-- 사업자 등록 -->
+    <insert id="enroll_business" parameterType="business">
+        insert into BUSINESS
+        values (BUSINESS_SEQ.nextval, #{bus_name}, #{bus_addr}, #{bus_tel}, #{bus_sort}, #{bus_id}, 0)
+    </insert>
 </mapper>

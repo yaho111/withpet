@@ -1,6 +1,7 @@
 package com.project.withpet.service;
 
 import com.project.withpet.dao.BusinessDAO;
+import com.project.withpet.model.Business;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +12,9 @@ public class BusinessService {
     private BusinessDAO businessDAO;
 
     // 사업자 등록 신청
+    public void enrollBusiness(Business business) throws Exception{
+        businessDAO.enrollBusiness(business);
+    }
 
     // 사업자 변경 신청
 
