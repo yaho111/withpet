@@ -74,11 +74,7 @@
 				<tr>
 					<th>전화번호</th>
 					<td>
-						<select name="frontNum" id="frontNum">
-							<option value="02">02</option>
-							<option value="031">031</option>
-							<option value="032">032</option> 
-						</select> -		
+						<input type="text" name="frontNum" id="frontNum"> -		
 						<input type="text" name="middleNum" id="middleNum"> -	
 						<input type="text" name="backNum" id="backNum">		
 					</td>

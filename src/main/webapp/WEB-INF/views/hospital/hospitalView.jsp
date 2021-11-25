@@ -1,12 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="../layout/header.jsp"%>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>상세 페이지</title>
-
 <!-- 글 삭제 confirm 창 띄우기 -->
 <script>
 	function deleteCheck(){
@@ -120,17 +114,20 @@
 			</c:if>
 		</tr>
 		<tr>
-			<c:if
-				test="${hospital.hos_24 == 'Y' || hospital.hos_holiday == 'Y' || hospital.hos_parking == 'Y'}">
-				<td><c:if
-						test="${not empty hospital.hos_24 && hospital.hos_24 == 'Y'}">24시&nbsp;</c:if>
-					<c:if
-						test="${not empty hospital.hos_holiday && hospital.hos_holiday == 'Y'}">연중무휴&nbsp;&nbsp;</c:if>
-					<c:if
-						test="${not empty hospital.hos_parking && hospital.hos_parking == 'Y'}">주차 가능</c:if>
+			<c:if test="${hospital.hos_24 == 'Y' || hospital.hos_holiday == 'Y' || hospital.hos_parking == 'Y'}">
+				<td colspan=2><c:if test="${not empty hospital.hos_24 && hospital.hos_24 == 'Y'}">24시&nbsp;</c:if>
+					<c:if test="${not empty hospital.hos_holiday && hospital.hos_holiday == 'Y'}">연중무휴&nbsp;&nbsp;</c:if>
+					<c:if test="${not empty hospital.hos_parking && hospital.hos_parking == 'Y'}">주차 가능</c:if>
 				</td>
 			</c:if>
 		</tr>
+		<c:if test="${sessionScope.id != null}">
+			<tr>
+				<td colspan=2 align="center">
+					<input type="button" value="추천" onClick="">
+				</td>
+			</tr>
+		</c:if>
 	</table>
 
 	<div align="center">
@@ -162,7 +159,5 @@
 			</tr>
 		</table>
 	</form>
-</body>
-</html>
 
 <%@ include file="../layout/footer.jsp"%>

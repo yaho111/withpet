@@ -76,11 +76,7 @@
 				<tr>
 					<th>전화번호</th>
 					<td>
-						<select name="frontNum" id="frontNum">
-							<option value="02" <c:if test="${frontNum == '02'}">${'selected'}</c:if> >02</option>
-							<option value="031" <c:if test="${frontNum == '031'}">${'selected'}</c:if> >031</option>
-							<option value="032" <c:if test="${frontNum == '032'}">${'selected'}</c:if> >032</option> 
-						</select> -		
+						<input type="text" name="frontNum" id="frontNum" value="${frontNum}"> -		
 						<input type="text" name="middleNum" id="middleNum" value="${middleNum}"> -	
 						<input type="text" name="backNum" id="backNum" value="${backNum}">		
 					</td>
