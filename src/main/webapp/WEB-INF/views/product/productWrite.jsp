@@ -6,7 +6,7 @@
 <!-- jquery -->
 <script type="text/javascript" src="jquery-3.4.1.min.js" ></script>
 <!-- ckeditor 4 -->
-<link rel="stylesheet" href="${path}//ckeditor/contents.css">
+<link rel="stylesheet" href="${path}//ckeditor/contents.css"> <%--content에 ckeditro 걸어두기--%>
 <!-- <script src="https://cdn.ckeditor.com/4.12.1/standard-all/ckeditor.js"></script> -->
 <script type="text/javascript" src="${path}/ckeditor/ckeditor.js" ></script>
 
@@ -14,7 +14,7 @@
 <body>
 
 
-<form method="post" action="${path}/productInsert" enctype="multipart/form-data">
+<form method="post" action="${path}/productResult" enctype="multipart/form-data">
     <table border="1" width="800px" align="center">
         <caption>글작성</caption>
         <c:if test="${product ne null and product.pro_no ne null and product.pro_no ne ''}">
