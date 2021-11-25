@@ -53,11 +53,11 @@
             </c:if>
             <c:if test="${sessionScope.id == null}">
                 <form class="d-flex">
+
                     <input type="button" class="btn btn-outline-success" value="회원 가입" onclick="location.href='joinForm'">
                     <input type="button" class="btn btn-outline-success" value="로그인" onclick="location.href='loginForm'">
                 </form>
             </c:if>
-
         </div>
 
 
