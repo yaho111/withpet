@@ -45,8 +45,13 @@ public class ProductDAO {
         return sqlSession.insert("product.productWrite", product);
     }
 
+    // 04. 글수정
     public int productUpdate(Product product) {
         return sqlSession.update("product.productUpdate", product); }
 
+//    // 05. 글 삭제
+//    public int productDelete(int pro_no) throws Exception{
+//        sqlSession.delete("product.productDelete,pro_no");
+//    }
 
 }

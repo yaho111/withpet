@@ -8,15 +8,11 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.util.List;
 import java.util.UUID;
@@ -76,7 +72,7 @@ public class ProductController {
 
         return "product/productDetail";
     }
-    // 03. 글작성 폼
+    // 03. 글작성 폼 04.수정페이지 폼
     @RequestMapping("productWrite")
     public String productForm(@RequestParam(value = "no", required = false, defaultValue = "0") String pro_no_str, Model model){
 //        Product product = new Product();
@@ -91,8 +87,8 @@ public class ProductController {
         return "product/productWrite";
     }
 
-    // 03-1 글작성 결과
-    @RequestMapping("productInsert")  // 이름 변경
+    // 03-1 글작성 결과, 04-1 수정시 이미지 변경사하 확인
+    @RequestMapping("productResult")  // 이름 변경
     public String producteWrite(HttpServletRequest req, Product product, Model model) throws Exception {
         System.out.println("bus_id:"+ product.getBus_id());
         int result = 0;
@@ -149,8 +145,16 @@ public class ProductController {
 
         model.addAttribute("result", result);
 
-        return "product/productInsert";
+        return "product/productResult";
     }
+
+//    //05. 게시글 삭제
+//    @RequestMapping("deleteProduct")
+//    public String productDelete(@RequestParam int pro_no) throws Exception{
+//        productService.productDelete(pro_no);
+//        return "redirect:productDelete";
+//
+//    }
 
 
 

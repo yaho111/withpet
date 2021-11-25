@@ -43,10 +43,14 @@ public class ProductService {
         return productDAO.productInsert(product);
     }
 
+    // 04. 글 수정
     public int productUpdate(Product product) {
         return productDAO.productUpdate(product);
     }
 
-
+//    // 05. 글 삭제
+//    public int productDelete(int pro_no){
+//        return productDAO.productDelete(pro_no);
+//    }
 }
 
