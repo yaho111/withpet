@@ -27,7 +27,11 @@ function check() {
         $("#name").val("").focus();
         return false;
     }
-
+    if($("input[name=gender]:radio:checked").length < 1) {
+        alert("성별을 선택하세요");
+        $("#male").focus();
+        return false;
+    }
     if ($.trim($("#addr").val()) == "") {
         alert("주소를 입력하세요!");
         $("#addr").val("").focus();
