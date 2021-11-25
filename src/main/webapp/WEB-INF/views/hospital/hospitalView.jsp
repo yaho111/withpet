@@ -15,7 +15,7 @@
 </script>
 
 <script type="text/javascript">
-	$('#reply').load('${path}/reply?hos_no=${hospital.hos_no}')
+	/* $('#reply').load('${path}/reply?hos_no=${hospital.hos_no}')
 
 	${'#repInsert'}.click(function(){
 		if(!frm.repText.value){
@@ -29,9 +29,7 @@
 	$.post('${path}/repInsert', frmData, function(data)){
 		$('#reply').html(data);
 		frm.reptext.value='';
-	}
-	
-	
+	} */	
 </script>
 
 </head>
@@ -51,12 +49,13 @@
 			<td>
 				<div id="map" style="width: 400px; height: 300px;"></div> <script
 					type="text/javascript"
-					src="//dapi.kakao.com/v2/maps/sdk.js?appkey=edb50793cf788e6a058efaf0acf9f9b1&libraries=services"></script>
+					src="//dapi.kakao.com/v2/maps/sdk.js?appkey=edb50793cf788e6a058efaf0acf9f9b1&libraries=services,clusterer,drawing"></script>
 				<script>
+				// 지도를 표시할 영역(container) 지정
 					var mapContainer = document.getElementById('map');
 					var mapOption = {
-						center: new kakao.maps.LatLng(33.450701, 126.570667),
-						level: 2
+						center: new kakao.maps.LatLng(33.450701, 126.570667),	// 지도의 중심 좌표
+						level: 2	// 지도의 확대 레벨
 					};
 
 					var map = new kakao.maps.Map(mapContainer, mapOption);
@@ -70,21 +69,40 @@
 					    // 정상적으로 검색이 완료됐으면 
 					     if (status === kakao.maps.services.Status.OK) {
 
+					    	 // 마커가 표시될 위치
 					        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 
-					        // 결과값으로 받은 위치를 마커로 표시
+					        // 마커 생성(결과값으로 받은 위치를 마커로 표시)
 					        var marker = new kakao.maps.Marker({
 					            map: map,
 					            position: coords
 					        });
+					        
+					     	// 커스텀 오버레이에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+					        var content = '<div class="customoverlay">' +
+					            '  <a href="https://map.kakao.com/link/search/${addr}" target="_blank">' +
+					            '    <span class="title">${hospital.hos_name}</span>' +
+					            '  </a>' +
+					            '</div>';
+
+					        // 커스텀 오버레이가 표시될 위치입니다 
+					        var position = new kakao.maps.LatLng(result[0].y, result[0].x);  
+
+					        // 커스텀 오버레이를 생성합니다
+					        var customOverlay = new kakao.maps.CustomOverlay({
+					            map: map,
+					            position: position,
+					            content: content,
+					            yAnchor: 0 
+					        });
 
 					        // 인포윈도우로 장소에 대한 설명을 표시
-					        var infowindow = new kakao.maps.InfoWindow({
+					        /* var infowindow = new kakao.maps.InfoWindow({
 					            content: '<a href="https://map.kakao.com/link/search/${addr}" target="_blank">' +
 					            	'<div style="width:150px;text-align:center;padding:6px 0;">${hospital.hos_name}</div>' +
 					            	'</a>'
 					        });
-					        infowindow.open(map, marker);
+					        infowindow.open(map, marker); */
 
 					        // 지도의 중심을 결과값으로 받은 위치로 이동
 					        map.setCenter(coords);
@@ -143,11 +161,11 @@
 
 	<!-- Ajax 댓글 -->
 
-	<div id="reply"></div>
+	<%-- <div id="reply"></div>
 
 	<form name="frm" id="frm">
-		<input type="hidden" name="replyer" value="작성자"> <input
-			type="hidden" name="bno" value="${hospital.hos_no}">
+		<input type="hidden" name="id" value="${sessionScope.id}"> 
+		<input type="hidden" name="hos_no" value="${hospital.hos_no}">
 		<table border="1" align="center">
 			<tr>
 				<td colspan="2">작성자</td>
@@ -158,6 +176,6 @@
 				<td><input type="button" value="등록" id="repInsert"></td>
 			</tr>
 		</table>
-	</form>
+	</form> --%>
 
 <%@ include file="../layout/footer.jsp"%>
