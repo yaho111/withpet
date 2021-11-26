@@ -5,7 +5,7 @@
     <!-- 사업자 등록 -->
     <insert id="enroll_business" parameterType="business">
         insert into BUSINESS
-        values (BUSINESS_SEQ.nextval, #{bus_name}, #{bus_addr}, #{bus_tel}, #{bus_sort}, #{bus_id}, 0)
+        values (#{bus_no}, #{bus_name}, #{bus_addr}, #{bus_tel}, #{bus_sort}, #{bus_id}, 0)
     </insert>
 
     <!-- 사업자 등록 요청 리스트 -->
@@ -14,7 +14,7 @@
     </select>
 
     <!-- 사업자 등록 요청 상세 조회 -->
-    <select id="select_business" parameterType="int" resultType="business">
+    <select id="select_business" parameterType="String" resultType="business">
         select * from BUSINESS where BUS_NO = #{bus_no}
     </select>
 
@@ -30,7 +30,7 @@
     </update>
 
     <!-- 사업 정보 삭제 -->
-    <delete id="delete_business" parameterType="int">
+    <delete id="delete_business" parameterType="String">
         delete from BUSINESS where BUS_NO = #{bus_no}
     </delete>
 </mapper>

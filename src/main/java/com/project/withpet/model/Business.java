@@ -2,7 +2,7 @@ package com.project.withpet.model;
 
 public class Business {
 
-    private int bus_no;
+    private String bus_no;
     private String bus_name;
     private String bus_addr;
     private String bus_tel;
@@ -10,11 +10,11 @@ public class Business {
     private String bus_id;
     private int bus_accept;
 
-    public int getBus_no() {
+    public String getBus_no() {
         return bus_no;
     }
 
-    public void setBus_no(int bus_no) {
+    public void setBus_no(String bus_no) {
         this.bus_no = bus_no;
     }
 

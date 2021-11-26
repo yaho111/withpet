@@ -13,6 +13,7 @@
     <table class="table table-hover">
       <tr>
         <th>회사명</th>
+        <th>사업자 등록번호</th>
         <th>연락처</th>
         <th>사업 분류</th>
         <th>승인 상태</th>
@@ -21,6 +22,7 @@
       <c:forEach var="business" items="${businessList}">
         <tr>
           <td>${business.bus_name}</td>
+          <td>${business.bus_no}</td>
           <td>${business.bus_tel}</td>
           <td>${business.bus_sort}</td>
           <c:if test="${business.bus_accept != 1}">

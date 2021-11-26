@@ -11,8 +11,7 @@
     <div id="enroll_wrap" class="container-body">
         <h2 class="body-title">사업자 정보 변경</h2>
         <form name="form" method="post" action="updateBusiness" onsubmit="return check()">
-            <input type="hidden" name="bus_no" id="bus_no" value="${selectedBusiness.bus_no}"/>
-            <table id="business_enroll_table" class="table">
+            <table id="business_update_table" class="table">
                 <tr>
                     <th>등록할 아이디</th>
                     <td>
@@ -23,6 +22,13 @@
                     <th>사업명</th>
                     <td>
                         <input name="bus_name" id="bus_name" class="form-control" value="${selectedBusiness.bus_name}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <th>사업자 등록번호</th>
+                    <td>
+                        <input name="bus_no" id="bus_no" class="form-control" value="${selectedBusiness.bus_no}"
+                               placeholder=" ex) 000-00-00000 "/>
                     </td>
                 </tr>
                 <tr>
@@ -90,8 +96,8 @@
                     </td>
                 </tr>
             </table>
-            <div id="join_menu" class="body-menu">
-                <input type="submit" value="등록" class="btn btn-primary"/>
+            <div id="body_menu" class="body-menu">
+                <input type="submit" value="수정" class="btn btn-primary"/>
                 <input type="reset" value="이전" class="btn btn-outline-secondary" onclick="history.go(-1);"/>
             </div>
         </form>

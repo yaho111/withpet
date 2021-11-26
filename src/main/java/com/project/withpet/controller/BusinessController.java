@@ -37,9 +37,6 @@ public class BusinessController {
         business.setBus_addr(bus_addr);
         business.setBus_tel(bus_tel);
 
-        System.out.println(business.getBus_id());
-        System.out.println(business.getBus_sort());
-        System.out.println(business.getBus_name());
         businessService.enrollBusiness(business);
 
         return "redirect:myPage";
@@ -60,7 +57,7 @@ public class BusinessController {
     // 사업자 변경 신청 페이지
     @RequestMapping(value = "/businessUpdateForm")
     public String forwardBusinessUpdateForm(HttpServletRequest request, Model model) throws Exception {
-        int bus_no = Integer.parseInt(request.getParameter("bus_no"));
+        String bus_no = request.getParameter("bus_no");
 
         Business selectedBusiness = businessService.selectBusiness(bus_no);
 
@@ -96,12 +93,11 @@ public class BusinessController {
         String bus_tel = request.getParameter("frontNum") + "-" + request.getParameter("middleNum")
                 + "-" + request.getParameter("backNum");
 
-        int bus_no = Integer.parseInt(request.getParameter("bus_no"));
 
         // 변형된 데이터를 객체에 다시 세팅
         business.setBus_addr(bus_addr);
         business.setBus_tel(bus_tel);
-        business.setBus_no(bus_no);
+
 
         // 쿼리가 진행되었을 시 1, 아닐 시 0 이 리턴
         int result = businessService.updateBusiness(business);
@@ -113,9 +109,9 @@ public class BusinessController {
 
     // 사업 삭제
     @RequestMapping(value = "/deleteBusiness")
-    public String deleteBusiness(HttpServletRequest request, Model model) throws Exception {
+    public String deleteBusiness(HttpServletRequest request) throws Exception {
 
-        int bus_no = Integer.parseInt(request.getParameter("bus_no"));
+        String bus_no = request.getParameter("bus_no");
 
         businessService.deleteBusiness(bus_no);
 

@@ -24,7 +24,7 @@ public class BusinessService {
     }
 
     // 사업자 등록 요청 상세 조회
-    public Business selectBusiness(int bus_no) throws Exception {
+    public Business selectBusiness(String bus_no) throws Exception {
         return businessDAO.selectBusiness(bus_no);
     }
 
@@ -34,7 +34,7 @@ public class BusinessService {
     }
 
     // 사업 삭제
-    public void deleteBusiness(int bus_id) throws Exception {
+    public void deleteBusiness(String bus_id) throws Exception {
         businessDAO.deleteBusiness(bus_id);
     }
 

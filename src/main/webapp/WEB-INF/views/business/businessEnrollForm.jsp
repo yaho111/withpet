@@ -25,6 +25,12 @@
                     </td>
                 </tr>
                 <tr>
+                    <th>사업자 등록번호</th>
+                    <td>
+                        <input name="bus_no" id="bus_no" class="form-control" placeholder=" ex) 000-00-00000 "/>
+                    </td>
+                </tr>
+                <tr>
                     <th>우편번호</th>
                     <td>
                         <div class="input-group">
