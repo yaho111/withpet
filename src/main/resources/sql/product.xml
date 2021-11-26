@@ -51,7 +51,7 @@
     </update>
 <!--05. 삭제-->
     <!--업데이트로 삭제 처리 테이블 자체 삭제가 되면 안됨 -->
-    <update id="productDelete">
+    <update id="productDelete" parameterType="int">
         UPDATE
             product
         SET

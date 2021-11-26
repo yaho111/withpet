@@ -30,9 +30,9 @@
 
 
             <td>
-                <form name="form1" method="post" action="${path}/basket/basketList">
+                <form name="form1" method="post" action="${path}/basketInsert">
                     <input type="hidden" name="pro_no" value="${product.pro_no}">
-                    <select name="stock">
+                    <select name="ea">
                         <c:forEach begin="1" end="10" var="i">
                             <option value="${i}">${i}</option>
                         </c:forEach>

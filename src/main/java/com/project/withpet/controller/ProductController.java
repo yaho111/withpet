@@ -148,13 +148,13 @@ public class ProductController {
         return "product/productResult";
     }
 
-//    //05. 게시글 삭제
-//    @RequestMapping("deleteProduct")
-//    public String productDelete(@RequestParam int pro_no) throws Exception{
-//        productService.productDelete(pro_no);
-//        return "redirect:productDelete";
-//
-//    }
+    //05. 게시글 삭제
+    @RequestMapping("productDelete")
+    public String productDelete(@RequestParam int pro_no) throws Exception{
+        productService.productDelete(pro_no);
+        return "redirect:productDelete";
+
+    }
 
 
 

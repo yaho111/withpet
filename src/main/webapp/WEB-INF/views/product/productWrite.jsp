@@ -8,6 +8,7 @@
 <!-- ckeditor 4 -->
 <link rel="stylesheet" href="${path}//ckeditor/contents.css"> <%--content에 ckeditro 걸어두기--%>
 <!-- <script src="https://cdn.ckeditor.com/4.12.1/standard-all/ckeditor.js"></script> -->
+
 <script type="text/javascript" src="${path}/ckeditor/ckeditor.js" ></script>
 
 <head></head>
