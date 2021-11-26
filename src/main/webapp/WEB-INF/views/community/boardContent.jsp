@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <%@ include file="../layout/header.jsp"%>
-<!-- 글 삭제 confirm 창 띄우기 
+<!--   글 삭제 confirm 창 띄우기 -->
 <script>
 	function deleteCheck(){
 		if(confirm("정말로 삭제하시겠습니까?") == true){	// 확인
@@ -12,7 +12,7 @@
 			return false;
 		}
 	}
-</script>-->
+</script>
 
 <form method=post action="delete">
 	<input type="hidden" name="com_no" value="${community.com_no}">
@@ -51,10 +51,10 @@
 		<c:if test="${sessionScope.id == community.com_writer}">
 			<input type="button" value="수정"
 				onClick="location.href='boardUpdateForm?com_no=${community.com_no}&page=${page}'">
-		<!--  	<input type="button" value="삭제"
+		  	<input type="button" value="삭제"
 				onClick="deleteCheck()">
-				<input type="button" value="♥like" 
-                onClick="location.href='./boardList?page=${page}' ">  -->				
+			<!--  	<input type="button" value="♥like" 
+                onClick="location.href='./boardList?page=${page}' ">  	-->			
 		</c:if>
 			<input type="button" value="목록"
 				onClick="location.href='boardList?page=${page}'">

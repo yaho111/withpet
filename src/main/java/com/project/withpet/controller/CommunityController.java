@@ -206,22 +206,22 @@ public class CommunityController {
 			System.out.println(page);
 			return "community/updateResult";
 		}
-}
 
-//		// 글삭제
-//	
-//	@RequestMapping("/delete")
-//	public String delete(int com_no, String page, Model model) {
-//
-//		service.delete(com_no);
-//		Community community = service.getBoard(com_no); 
-//		int result = service.delete(com_no);
-//		
-//		model.addAttribute("result",result);
-//		model.addAttribute("community", community);
-//		model.addAttribute("page", page);
-//		
-//		return "community/deleteResult";
-//	}
-//}
-//	
+
+		// 글삭제
+	
+	@RequestMapping("/delete")
+	public String delete(int com_no, String page, Model model) {
+
+		service.delete(com_no);
+		Community community = service.getBoard(com_no); 
+		int result = service.delete(com_no);
+		
+		model.addAttribute("result",result);
+		model.addAttribute("community", community);
+		model.addAttribute("page", page);
+		
+		return "community/deleteResult";
+	}
+}
+	

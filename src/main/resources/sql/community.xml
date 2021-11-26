@@ -53,8 +53,8 @@
 	</update>
 	
 	
-	  <!-- 글삭제     
+	  <!-- 글삭제     -->
 	<delete id="delete" parameterType="int">
 	delete from community where com_no = #{com_no}
-	</delete>	--> 
+	</delete>	 
 	</mapper>
