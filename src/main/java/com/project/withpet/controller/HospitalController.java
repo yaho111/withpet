@@ -58,7 +58,7 @@ public class HospitalController {
 		String filename = multiFile.getOriginalFilename(); // 첨부파일명
 		int size = (int) multiFile.getSize(); // 첨부파일의 크기 (단위: Byte)
 
-		String path = request.getRealPath("hos_upload");
+		String path = request.getRealPath("upload/hospital");
 		System.out.println("multiFile=" + multiFile);
 		System.out.println("filename=" + filename); // filename="Koala.jpg"
 		System.out.println("size=" + size);
@@ -256,7 +256,7 @@ public class HospitalController {
 		String filename = multi.getOriginalFilename();
 		int size = (int) multi.getSize();
 		
-		String path = request.getRealPath("hos_upload");
+		String path = request.getRealPath("upload/hospital");
 		System.out.println("path:"+path);
 		
 		int result = 0;

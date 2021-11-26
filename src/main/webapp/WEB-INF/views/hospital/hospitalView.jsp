@@ -40,11 +40,9 @@
 		</tr>
 		<tr>
 			<td><c:if test="${empty hospital.hos_file}">
-					<img src="${path}/hos_upload/hospitalimg.jpg" height="300"
-						width="300" />
+					<img src="${path}/upload/hospital/hospitalimg.jpg" height="300" width="300" />
 				</c:if> <c:if test="${not empty hospital.hos_file}">
-					<img src="${path}/hos_upload/${hospital.hos_file}" height="300"
-						width="300" />
+					<img src="${path}/upload/hospital/${hospital.hos_file}" height="300" width="300" />
 				</c:if></td>
 			<td>
 				<div id="map" style="width: 400px; height: 300px;"></div> <script
@@ -139,13 +137,18 @@
 				</td>
 			</c:if>
 		</tr>
-		<c:if test="${sessionScope.id != null}">
 			<tr>
-				<td colspan=2 align="center">
-					<input type="button" value="추천" onClick="">
-				</td>
+				<c:if test="${sessionScope.id == null}">
+					<td colspan=2 align="center">
+						<input type="button" value="추천" onClick="">
+					</td>
+				</c:if>
+				<c:if test="${sessionScope.id != null}">
+					<td colspan=2 align="center">
+						<input type="button" value="추천" onClick="">
+					</td>
+				</c:if>
 			</tr>
-		</c:if>
 	</table>
 
 	<div align="center">
