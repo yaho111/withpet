@@ -35,7 +35,7 @@
 
     <!-- 01-1 장바구니 값 합산-->
     <select id="sumMoney" resultType="int">
-        SELECT NVL(SUM(pro.price * ea), 0) money
+        SELECT NVL(SUM(pro.price * bas.ea), 0) money
         FROM
             basket bas, product pro
         WHERE
@@ -48,6 +48,17 @@
         where id = #{id} and PRO_NO = #{pro_no}
     </select>
 
+    <!--01-4 장바구니 상품 수량 수정 -->
+    <update id="updateBasket">
+        update basket Set ea = #{ea}
+        where id = #{id} and PRO_NO = ${pro_no}
+    </update>
+
+    <!--02 장바구니 수정-->
+    <update id="modifyBasket"  >
+        select count(*) from BASKET
+        where id = #{id} and PRO_NO = ${pro_no}
+    </update>
 
 
 

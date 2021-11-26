@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
@@ -20,7 +21,8 @@ public class BasketController {
     @Autowired
     private BasketService basketService;
 
-    // 01, 01-1 장바구니 리스트 및 값 정리
+    // 01 장바구니 리스트
+    // 01-1 장바구니 금액 불러오기
     @RequestMapping("/basketList")
     public String basketList(HttpSession session, Model model) {
         Map<String, Object> map = new HashMap<String, Object>();
@@ -36,7 +38,9 @@ public class BasketController {
         return "basket/basketList";
     }
 
-    // 01-2, 01-3 장바구니에 상품 추가
+    // 01-2 장바구니 상품 추가
+    // 01-3 장바구니 상품 확인
+    // 01-4 장바구니 상품 수량 변경
 
     @RequestMapping("/basketInsert")
     public String insert(@ModelAttribute Basket basket, HttpSession session) {
@@ -46,10 +50,28 @@ public class BasketController {
         int count = basketService.countBasket(basket.getPro_no(),id);
         if(count == 0){
             // 없으면 insert
-        basketService.insert(basket);
+            basketService.insert(basket);
+        } else { // 있으면 업데이트
+            basketService.updateBasket(basket);
+        }
+        return "redirect:/basketList";
+        }
+
+        // 02 장바구니 상품 수정
+    @RequestMapping("/basketUpdate")
+    public String update(@RequestParam int[] ea, @RequestParam int[] pro_no, HttpSession session) {
+        // session의 id
+        String id = (String) session.getAttribute("id");
+        // 레코드의 갯수 만큰 반복문 실행
+        for(int i=0; i<pro_no.length; i++){
+            Basket basket = new Basket();
+            basket.setId(id);
+            basket.setEa(ea[i]);
+            basket.setPro_no(pro_no[i]);
+            basketService.modifyBasket(basket);
         }
 
         return "redirect:/basketList";
-        }
+    }
     }
 

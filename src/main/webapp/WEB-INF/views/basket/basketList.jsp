@@ -23,8 +23,9 @@ $(document).ready(function (){
         장바구니가 비어있습니다.
     </c:when>
     <c:otherwise>
-        <table>
+        <table class="table">
             <tr>
+                <th width="140px">이미지</th>
                 <th>상품명</th>
                 <th>단가</th>
                 <th>수량</th>
@@ -33,12 +34,15 @@ $(document).ready(function (){
             </tr>
             <c:forEach var="row" items="${list}" varStatus="i">
                 <tr>
+                    <td width="140px">
+                        <img src="${path}/upload/${row.pro_img}" width="120px" height="110px">
+                    </td>
                     <td>
                             ${row.pro_name}
                     </td>
                     <td>
 <%--                    <fmt:formatNumber pattern="###,###,###" value=" --%>
-                    ${row.price}
+                         ${row.price}
 <%--"/>--%>
                     </td>
                     <td>
@@ -56,8 +60,20 @@ $(document).ready(function (){
                 </tr>
             </c:forEach>
             <tr>
-                <td>
+                <td colspan="2">
 
+                </td>
+                <td>
+                    장바구니 금액 합계 : ${totalOrderPrice}
+                </td>
+                <td>
+                    배송료 : ${shippingFee}
+                </td>
+                <td>
+                    전체 주문금액 : ${allSum}
+                </td>
+                <td>
+                    <a href=""> 결제 하기 </a>
                 </td>
             </tr>
         </table>

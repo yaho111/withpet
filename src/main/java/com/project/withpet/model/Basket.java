@@ -9,14 +9,14 @@ public class Basket {
 //	price VARCHAR2(50) NOT NULL, /* 가격 */
 //	ea NUMBER NOT NULL /* 수량 */
 
-    private int pro_no;
-    private String id;
-    private int basket_no;
-    private int ea;
-    private String pro_name;
-    private String pro_img;
-    private int stock;
-    private int order_price;
+    private int pro_no; //상품 번호
+    private String id;  //id
+    private int basket_no;  //장바구니 번호(상품 순서를 정할 때 사용)
+    private int ea; //수량
+    private String pro_name;    // 상품명
+    private String pro_img;     // 상품 이미지
+    private int stock;          // 재고
+    private int order_price;    // 주문가격(상품 합산)
 
     public int getOrder_price() {
         return order_price;

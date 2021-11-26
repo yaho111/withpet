@@ -38,4 +38,15 @@ public class BasketDAO {
         map.put("id", id);
         return sqlSession.selectOne("basket.countBasket",map);
     }
+
+    //01-4 장바구니 상품 수량 변경
+
+    public void updateBasket(Basket basket) {
+        sqlSession.update("basket.updateBasket", basket);
+    }
+
+    // 02 장바구니 수정
+    public void modifyBasket(Basket basket) {
+        sqlSession.update("basket.modifyBasket", basket);
+    }
 }
