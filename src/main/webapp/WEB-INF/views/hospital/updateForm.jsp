@@ -1,12 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="../layout/header.jsp"%>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>병원 게시판</title>
-
 <!-- jquery 라이브러리 -->
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 
@@ -149,7 +143,5 @@
 			</table>
 		</form>
 	</div>
-</body>
-</html>
 
 <%@ include file="../layout/footer.jsp"%>
