@@ -25,6 +25,21 @@ function check() {
 		$("#specificAddress").focus();
 		return false;
 	}
+	if ($("#frontNum").val() == "") {
+		alert("전화번호를 입력하세요!");
+		$("#frontNum").focus();
+		return false;
+	}
+	if (isNaN($("#frontNum").val())) {
+		alert("전화번호는 숫자만 입력 가능합니다!");
+		$("#frontNum").val("").focus();
+		return false;
+	}
+	if ($("#frontNum").val().length > 10) {
+		alert("전화번호 길이가 너무 깁니다!");
+		$("#frontNum").val("").focus();
+		return false;
+	}
 	if ($("#middleNum").val() == "") {
 		alert("전화번호를 입력하세요!");
 		$("#middleNum").focus();
@@ -35,7 +50,7 @@ function check() {
 		$("#middleNum").val("").focus();
 		return false;
 	}
-	if ($("#middleNum").val().length > 20) {
+	if ($("#middleNum").val().length > 10) {
 		alert("전화번호 길이가 너무 깁니다!");
 		$("#middleNum").val("").focus();
 		return false;
@@ -50,7 +65,7 @@ function check() {
 		$("#backNum").val("").focus();
 		return false;
 	}
-	if ($("#backNum").val().length > 20) {
+	if ($("#backNum").val().length > 10) {
 		alert("전화번호 길이가 너무 깁니다!");
 		$("#backNum").val("").focus();
 		return false;
