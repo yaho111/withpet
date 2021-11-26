@@ -11,7 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.activation.CommandMap;
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.util.List;
@@ -87,7 +89,8 @@ public class ProductController {
         return "product/productWrite";
     }
 
-    // 03-1 글작성 결과, 04-1 수정시 이미지 변경사하 확인
+    // 03-1 글작성 결과
+    // 04-1 수정시 이미지 변경사항 확인
     @RequestMapping("productResult")  // 이름 변경
     public String producteWrite(HttpServletRequest req, Product product, Model model) throws Exception {
         System.out.println("bus_id:"+ product.getBus_id());
@@ -150,13 +153,9 @@ public class ProductController {
 
     //05. 게시글 삭제
     @RequestMapping("productDelete")
-    public String productDelete(@RequestParam int pro_no) throws Exception{
+    public String productDelete(@RequestParam("no") int pro_no) throws Exception {
         productService.productDelete(pro_no);
-        return "redirect:productDelete";
-
+        return "product/productDelete";
     }
-
-
-
 
 }

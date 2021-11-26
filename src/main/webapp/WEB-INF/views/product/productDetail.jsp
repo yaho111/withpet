@@ -6,9 +6,8 @@
 <html>
 <head></head>
 
-    <table border=1 width=400 align="center">
-        <caption>상세 페이지</caption>
 
+    <table border=1 width=400 align="center">
         <tr>
             <td>상품명</td>
             <td>${product.pro_name }</td>
@@ -59,7 +58,6 @@
 
                 <input type="button" value="수정"
                        onClick="location.href='${path}/productWrite/?no=${product.pro_no}&page=${page}' ">
-
                 <input type="button" value="삭제"
                        onClick="location.href='${path}/productDelete/?no=${product.pro_no}&page=${page}' ">
             </td>
