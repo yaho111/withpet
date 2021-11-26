@@ -57,18 +57,34 @@ public class BusinessController {
         return "business/businessList";
     }
 
-//    // 사업자 변경 신청 페이지
-//    @RequestMapping(value = "/businessUpdateForm")
-//    public String forwardBusinessUpdateForm(HttpServletRequest request, Model model) throws Exception{
-//        int bus_no = Integer.parseInt(request.getParameter("bus_no"));
-//
-//        Business selectedBusiness = businessService.selectBusiness(bus_no);
-//
-//        model.addAttribute("selectedBusiness", selectedBusiness);
-//
-//        return "business/businessUpdateForm";
-//
-//    }
+    // 사업자 변경 신청 페이지
+    @RequestMapping(value = "/businessUpdateForm")
+    public String forwardBusinessUpdateForm(HttpServletRequest request, Model model) throws Exception{
+        int bus_no = Integer.parseInt(request.getParameter("bus_no"));
+
+        Business selectedBusiness = businessService.selectBusiness(bus_no);
+
+        String[] addr = selectedBusiness.getBus_addr().split("-");
+
+        String post = addr[0];
+        String address = addr[1];
+        String specificAddress = addr[2];
+
+        String[] tel = selectedBusiness.getBus_tel().split("-");
+        String frontNum = tel[0];
+        String middleNum = tel[1];
+        String backNum = tel[2];
+
+        model.addAttribute("selectedBusiness", selectedBusiness);
+        model.addAttribute("post", post);
+        model.addAttribute("address", address);
+        model.addAttribute("specificAddress", specificAddress);
+        model.addAttribute("frontNum", frontNum);
+        model.addAttribute("middleNum", middleNum);
+        model.addAttribute("backNum", backNum);
+        return "business/businessUpdateForm";
+
+    }
 
     // 사업자 변경 신청
 

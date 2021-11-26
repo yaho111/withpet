@@ -31,8 +31,10 @@
           </c:if>
           <td>
             <div class="input-group">
-              <input type="button" class="btn btn-outline-secondary" value="수정" onclick="location.href=''">
-              <input type="button" class="btn btn-outline-secondary" value="삭제" onclick="location.href=''">
+              <input type="button" class="btn btn-outline-secondary" value="수정"
+                     onclick="location.href='businessUpdateForm?bus_no=${business.bus_no}'">
+              <input type="button" class="btn btn-outline-secondary" value="삭제"
+                     onclick="location.href=''">
             </div>
           </td>
         </tr>

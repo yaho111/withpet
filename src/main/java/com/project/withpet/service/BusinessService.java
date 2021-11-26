@@ -23,10 +23,10 @@ public class BusinessService {
         return businessDAO.selectBusinessList(bus_id);
     }
 
-//    // 사업자 등록 요청 상세 조회
-//    public Business selectBusiness(int bus_no) throws Exception {
-//        return businessDAO.selectBusiness(bus_no);
-//    }
+    // 사업자 등록 요청 상세 조회
+    public Business selectBusiness(int bus_no) throws Exception {
+        return businessDAO.selectBusiness(bus_no);
+    }
 
     // 사업자 변경 신청
 

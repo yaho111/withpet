@@ -23,10 +23,10 @@ public class BusinessDAO {
         return sqlSession.selectList("select_businessList", bus_id);
     }
 
-//    // 사업자 등록 요청 상세 조회
-//    public Business selectBusiness(int bus_no) throws Exception {
-//        return sqlSession.selectOne("select_business", bus_no);
-//    }
+    // 사업자 등록 요청 상세 조회
+    public Business selectBusiness(int bus_no) throws Exception {
+        return sqlSession.selectOne("select_business", bus_no);
+    }
     // 사업자 변경 신청
 
     // 사업 삭제

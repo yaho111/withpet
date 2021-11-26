@@ -13,8 +13,8 @@
         select * from BUSINESS where BUS_ID = #{bus_id}
     </select>
 
-    <!-- 사업자 등록 요청 상세 조회
+    <!-- 사업자 등록 요청 상세 조회 -->
     <select id="select_business" parameterType="int" resultType="business">
         select * from BUSINESS where BUS_NO = #{bus_no}
-    </select>-->
+    </select>
 </mapper>
