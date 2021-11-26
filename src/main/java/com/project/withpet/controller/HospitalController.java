@@ -1,12 +1,16 @@
 package com.project.withpet.controller;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.Reader;
 import java.util.List;
+import java.util.Properties;
 import java.util.StringTokenizer;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.ibatis.io.Resources;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -168,10 +172,25 @@ public class HospitalController {
 		String hos_content = hospital.getHos_content().replace("\n", "<br>");
 		String hos_time = hospital.getHos_time().replace("\n", "<br>");
 		
+		// 3) 앱 키 보안 처리(변수화)		
+		// .properties 파일 읽어오기
+        Properties properties = new Properties();
+        try {
+            Reader reader = Resources.getResourceAsReader("application.properties");
+            properties.load(reader);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+        // appKey 변수 선언
+        String appKey = properties.getProperty("daumpost.appKey");		
+		
+        // 공유 설정
 		model.addAttribute("hospital", hospital);
 		model.addAttribute("addr", addr);
 		model.addAttribute("hos_content", hos_content);
 		model.addAttribute("hos_time", hos_time);
+		model.addAttribute("appKey", appKey);
 		model.addAttribute("page", page);
 		
 		return "hospital/hospitalView";

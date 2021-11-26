@@ -49,7 +49,7 @@
 			<td>
 				<div id="map" style="width: 400px; height: 300px;"></div> <script
 					type="text/javascript"
-					src="//dapi.kakao.com/v2/maps/sdk.js?appkey=edb50793cf788e6a058efaf0acf9f9b1&libraries=services,clusterer,drawing"></script>
+					src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${appKey}&libraries=services,clusterer,drawing"></script>
 				<script>
 				// 지도를 표시할 영역(container) 지정
 					var mapContainer = document.getElementById('map');
