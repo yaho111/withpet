@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class BusinessController {
@@ -43,7 +45,30 @@ public class BusinessController {
         return "redirect:myPage";
     }
 
-    // 사업자 변경 신청 페이지
+    // 사업 관리 페이지
+    @RequestMapping(value = "/businessList")
+    public String forwardBusinessList(HttpSession session, Model model) throws Exception{
+        String id = (String) session.getAttribute("id");
+
+        List<Business> businessList = businessService.selectBusinessList(id);
+
+        model.addAttribute(businessList);
+
+        return "business/businessList";
+    }
+
+//    // 사업자 변경 신청 페이지
+//    @RequestMapping(value = "/businessUpdateForm")
+//    public String forwardBusinessUpdateForm(HttpServletRequest request, Model model) throws Exception{
+//        int bus_no = Integer.parseInt(request.getParameter("bus_no"));
+//
+//        Business selectedBusiness = businessService.selectBusiness(bus_no);
+//
+//        model.addAttribute("selectedBusiness", selectedBusiness);
+//
+//        return "business/businessUpdateForm";
+//
+//    }
 
     // 사업자 변경 신청
 

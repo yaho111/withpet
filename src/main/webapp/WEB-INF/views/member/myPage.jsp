@@ -47,6 +47,8 @@
                     <div class="body-menu">
                         <input class="btn btn-outline-secondary" type="button" value="사업자 등록"
                                onclick="location.href='businessEnrollForm'">
+                        <input class="btn btn-outline-secondary" type="button" value="내 사업"
+                               onclick="location.href='businessList'">
                         <input class="btn btn-outline-secondary" type="button" value="정보 수정"
                                onclick="location.href='infoUpdateForm'">
                         <input class="btn btn-outline-secondary" type="button" value="회원 탈퇴"
