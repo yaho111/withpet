@@ -2,6 +2,7 @@ package com.project.withpet.controller;
 
 import com.project.withpet.model.Basket;
 import com.project.withpet.service.BasketService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +15,6 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("basket/*")
 public class BasketController {
 
     @Autowired
@@ -26,14 +26,13 @@ public class BasketController {
         Map<String, Object> map = new HashMap<String, Object>();
         String id = (String) session.getAttribute("id"); //session에 저장된 userId
         List<Basket> list = basketService.basketList(id); //장바구니 정보
-        int sumMoney = basketService.sumMoney(id); //장바구니 전체 금액 호출
-        int fee = 2500;
-        map.put("list", list);				// 장바구니 정보를 map에 저장
-        map.put("count", list.size());		// 장바구니 상품의 유무
-        map.put("sumMoney", sumMoney);		// 장바구니 전체 금액
-        map.put("fee", fee); 				// 배송금액
-        map.put("allSum", sumMoney+fee);	// 주문 상품 전체 금액
-        model.addAttribute("map", map);			// map 변수 저장
+        int totalOrderPrice = basketService.sumMoney(id); //장바구니 전체 금액 호출
+        int shippingFee = 2500;
+        model.addAttribute("list", list);				// 장바구니 정보를 map에 저장
+        model.addAttribute("count", list.size());		// 장바구니 상품의 유무
+        model.addAttribute("totalOrderPrice", totalOrderPrice);		// 장바구니 전체 금액
+        model.addAttribute("shippingFee", shippingFee); 				// 배송금액
+        model.addAttribute("allSum", totalOrderPrice+shippingFee);	// 주문 상품 전체 금액
         return "basket/basketList";
     }
 
@@ -50,7 +49,7 @@ public class BasketController {
         basketService.insert(basket);
         }
 
-        return "redirect:/basket/basketList";
+        return "redirect:/basketList";
         }
     }
 

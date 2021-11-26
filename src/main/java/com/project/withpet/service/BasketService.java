@@ -2,6 +2,7 @@ package com.project.withpet.service;
 
 import com.project.withpet.dao.BasketDAO;
 import com.project.withpet.model.Basket;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,8 +21,8 @@ public class BasketService {
     }
     
     // 01-1 . 장바구니 금액 불러오기
-    public int sumMoney(String userId) {
-        return basketDao.sumMoney(userId);
+    public int sumMoney(String id) {
+        return basketDao.sumMoney(id);
     }
 
     // 01-2. 장바구니에 상품 추가

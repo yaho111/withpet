@@ -4,40 +4,48 @@
 
 <mapper namespace="basket">
 
+    <!--01-3 장바구니 추가-->
     <insert id="basketInsert">
         insert into basket(
-            pro_no, id, price, ea
+            pro_no, id, basket_no, ea
         ) values (
-                     #{pro_no},#{id},#{price},#{ea}
+                     #{pro_no},#{id}, basket_seq.nextval ,#{ea}
                  )
     </insert>
 
 <!-- 01 장바구니 리스트 -->
-    <select id="basketList" parameterType="int" resultType="com.project.withpet.model.Basket">
+    <select id="basketList" parameterType="String" resultType="com.project.withpet.model.Basket">
         select
-            product.pro_no as pro_no,
-            product.pro_name as pro_name,
-            member.id as id,
-            product.price as price,
-            basket.ea as ea,
-            product.PRO_NAME,
-            product.PRO_IMG,
-            product.STOCK,
-            (price * ea ) money
+            pro.pro_no as pro_no,
+            pro.pro_name as pro_name,
+            mem.id as id,
+            pro.price as price,
+            bas.ea as ea,
+            pro.PRO_NAME,
+            pro.PRO_IMG,
+            pro.STOCK,
+            bas.BASKET_NO,
+            (price * ea ) order_price
         from
-            Product product, MEMBER member, BASKET basket
-        where product.pro_no = basket.pro_no
-          and member.id = basket.id
-        order by product.pro_no
+            Product pro, MEMBER mem, BASKET bas
+        where pro.pro_no = bas.pro_no
+          and mem.id = bas.id
+        and bas.ID = #{id}
     </select>
 
     <!-- 01-1 장바구니 값 합산-->
     <select id="sumMoney" resultType="int">
-        SELECT NVL(SUM(product.price * STOCK), 0) money
+        SELECT NVL(SUM(pro.price * ea), 0) money
         FROM
-            basket basket, product product
+            basket bas, product pro
         WHERE
-            product.pro_no = basket.pro_no AND basket.id = #{Id}
+            pro.pro_no = bas.pro_no AND bas.id = #{id}
+    </select>
+
+    <!--01-3 장바구니 상품 유무 확인-->
+    <select id="countBasket" resultType="int">
+        select count(*) from BASKET
+        where id = #{id} and PRO_NO = #{pro_no}
     </select>
 
 

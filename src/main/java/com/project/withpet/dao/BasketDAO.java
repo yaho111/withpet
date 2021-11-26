@@ -1,6 +1,7 @@
 package com.project.withpet.dao;
 
 import com.project.withpet.model.Basket;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -17,12 +18,11 @@ public class BasketDAO {
 
     //01 장바구니 리스트
     public List<Basket> basketList(String id) {
-        return sqlSession.selectList("basket.basketList");
+        return sqlSession.selectList("basket.basketList", id);
     }
 
     //01-1 장바구니 금액 불러오기
     public int sumMoney(String id) {
-        sqlSession.selectOne("basket.sumMoney", id);
         return sqlSession.selectOne("basket.sumMoney", id);
     }
 

@@ -11,19 +11,51 @@ public class Basket {
 
     private int pro_no;
     private String id;
-    private String price;
+    private int basket_no;
     private int ea;
     private String pro_name;
     private String pro_img;
     private int stock;
-    private int money;
+    private int order_price;
 
-    public int getMoney() {
-        return money;
+    public int getOrder_price() {
+        return order_price;
     }
 
-    public void setMoney(int money) {
-        this.money = money;
+    public void setOrder_price(int order_price) {
+        this.order_price = order_price;
+    }
+
+    public int getPro_no() {
+        return pro_no;
+    }
+
+    public void setPro_no(int pro_no) {
+        this.pro_no = pro_no;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public int getBasket_no() {
+        return basket_no;
+    }
+
+    public void setBasket_no(int basket_no) {
+        this.basket_no = basket_no;
+    }
+
+    public int getEa() {
+        return ea;
+    }
+
+    public void setEa(int ea) {
+        this.ea = ea;
     }
 
     public String getPro_name() {
@@ -50,58 +82,19 @@ public class Basket {
         this.stock = stock;
     }
 
-    public int getPro_no() {
-        return pro_no;
-    }
-
-    public void setPro_no(int pro_no) {
-        this.pro_no = pro_no;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
-    public int getEa() {
-        return ea;
-    }
-
-    public void setEa(int ea) {
-        this.ea = ea;
-    }
-
-    private List<Basket> BasketList;
-
-    public List<Basket> getBasketList() {
-        return BasketList;
-    }
-
-    public void setBasketList(List<Basket> BasketVOList) {
-        this.BasketList = BasketVOList;
-    }
+    private int price;
 
     @Override
-    public String toString(){
-        return "Basket [pro_no="+pro_no + ", id="+id +", price="+price+",ea="+ea+", pro_name="+pro_name+", pro_img="+pro_img+",stock="+stock+",money="+money+"]";
+    public String toString() {
+        return "Basket [pro_no=" + pro_no + ", id=" + id + ", basket_no=" + basket_no + ",ea=" + ea + ", pro_name=" + pro_name + ", pro_img=" + pro_img + ",stock=" + stock + ",price=" + price + "]";
     }
-//    private int pro_no;
-//    private String id;
-//    private String price;
-//    private int ea;
-//    private String pro_name;
-//    private String pro_img;
-//    private int stock;
-//    private int money;
+
 }
