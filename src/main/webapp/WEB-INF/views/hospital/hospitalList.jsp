@@ -5,7 +5,7 @@
 	a {text-decoration:none}
 </style>
 
-<%@ include file="../sort.jsp" %>
+<%--@ include file="../sort.jsp" --%>
 
 	<table border="1" width=900 align="center">
 		
@@ -39,7 +39,7 @@
 					</c:if>
 						</td>
 					<td><a
-						href="hospitalView?hos_no=${hospital.hos_no}&page=${pp.currentPage}">
+						href="hospitalView?hos_no=${hospital.hos_no}&page=${paging.currentPage}">
 							${hospital.hos_name}</a></td>
 					<td>${hospital.hos_loc}</td>
 					<td>${hospital.hos_writer}</td>
@@ -74,29 +74,29 @@
 	<c:if test="${not empty keyword}">
 	
 		<!-- 1 페이지로 이동 -->
-		<c:if test="${pp.startPage > 10}">
+		<c:if test="${paging.startPage > 10}">
 			<a href="hospitalList?page=1&search=${search}&keyword=${keyword}"> << </a>
 		</c:if>
 		
 		<!-- 이전 블럭으로 이동 -->
-		<c:if test="${pp.startPage > pp.pagePerBlk}">
-			<a href="hospitalList?page=${pp.startPage - 1}&search=${search}&keyword=${keyword}"> < </a>
+		<c:if test="${paging.startPage > paging.pagePerBlk}">
+			<a href="hospitalList?page=${paging.startPage - 1}&search=${search}&keyword=${keyword}"> < </a>
 		</c:if>
 		
 		<!-- 페이지 번호 -->
-		<c:forEach var="i" begin="${pp.startPage}" end="${pp.endPage}">
-			<c:if test="${pp.currentPage==i}">${i}</c:if>
-			<c:if test="${pp.currentPage!=i}"><a href="hospitalList?page=${i}&search=${search}&keyword=${keyword}">${i}</a></c:if>		
+		<c:forEach var="i" begin="${paging.startPage}" end="${paging.endPage}">
+			<c:if test="${paging.currentPage==i}">${i}</c:if>
+			<c:if test="${paging.currentPage!=i}"><a href="hospitalList?page=${i}&search=${search}&keyword=${keyword}">${i}</a></c:if>		
 		</c:forEach>
 		
 		<!-- 다음 블럭으로 이동 -->
-		<c:if test="${pp.endPage < pp.totalPage}">
-			<a href="hospitalList?page=${pp.endPage + 1}&search=${search}&keyword=${keyword}"> > </a>
+		<c:if test="${paging.endPage < paging.totalPage}">
+			<a href="hospitalList?page=${paging.endPage + 1}&search=${search}&keyword=${keyword}"> > </a>
 		</c:if>
 		
 		<!-- 마지막 페이지로 이동 -->
-		<c:if test="${pp.endPage < pp.totalPage}">
-			<a href="hospitalList?page=${pp.totalPage}&search=${search}&keyword=${keyword}"> >> </a>
+		<c:if test="${paging.endPage < paging.totalPage}">
+			<a href="hospitalList?page=${paging.totalPage}&search=${search}&keyword=${keyword}"> >> </a>
 		</c:if>
 	</c:if>
 
@@ -104,29 +104,29 @@
 	<c:if test="${empty keyword}">
 		
 		<!-- 1 페이지로 이동 -->
-		<c:if test="${pp.startPage > 10}">
+		<c:if test="${paging.startPage > 10}">
 			<a href="hospitalList?page=1"> << </a>
 		</c:if>
 		
 		<!-- 이전 블럭으로 이동 -->
-		<c:if test="${pp.startPage > pp.pagePerBlk}">
-			<a href="hospitalList?page=${pp.startPage - 1}"> < </a>
+		<c:if test="${paging.startPage > paging.pagePerBlk}">
+			<a href="hospitalList?page=${paging.startPage - 1}"> < </a>
 		</c:if>
 		
 		<!-- 페이지 번호 -->
-		<c:forEach var="i" begin="${pp.startPage}" end="${pp.endPage}">
-			<c:if test="${pp.currentPage==i}">${i}</c:if>
-			<c:if test="${pp.currentPage!=i}"><a href="hospitalList?page=${i}">${i}</a></c:if>
+		<c:forEach var="i" begin="${paging.startPage}" end="${paging.endPage}">
+			<c:if test="${paging.currentPage==i}">${i}</c:if>
+			<c:if test="${paging.currentPage!=i}"><a href="hospitalList?page=${i}">${i}</a></c:if>
 		</c:forEach>
 		
 		<!-- 다음 블럭으로 이동 -->
-		<c:if test="${pp.endPage < pp.totalPage}">
-			<a href="hospitalList?page=${pp.endPage + 1}"> > </a>
+		<c:if test="${paging.endPage < paging.totalPage}">
+			<a href="hospitalList?page=${paging.endPage + 1}"> > </a>
 		</c:if>
 		
 		<!-- 마지막 페이지로 이동 -->
-		<c:if test="${pp.endPage < pp.totalPage}">
-			<a href="hospitalList?page=${pp.totalPage}"> >> </a>
+		<c:if test="${paging.endPage < paging.totalPage}">
+			<a href="hospitalList?page=${paging.totalPage}"> >> </a>
 		</c:if>
 	</c:if>
 	</div>
