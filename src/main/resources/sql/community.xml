@@ -45,15 +45,16 @@
 	   select * from community where com_no = #{com_no}
 	</select>
 	
-	<!-- 글수정
-	<update id="updateBoard" parameterType="community">
+	<!-- 글수정 --> 
+	
+	<update id="update" parameterType="community">
 		update community set com_writer=#{com_writer}, com_title=#{com_title}
 		,com_content=#{com_content}, com_reg=sysdate where com_no=#{com_no}
-	</update>-->
+	</update>
 	
-	<!-- 글삭제   
-	<delete id="deleteBoard" parameterType="int">
-
+	
+	  <!-- 글삭제     
+	<delete id="delete" parameterType="int">
 	delete from community where com_no = #{com_no}
-	</delete>	-->
+	</delete>	--> 
 	</mapper>

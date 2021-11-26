@@ -1,22 +1,31 @@
 package com.project.withpet.controller;
 
-//import java.io.File;
+import static org.springframework.test.web.client.response.MockRestResponseCreators.withUnauthorizedRequest;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
+
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
-//import java.util.StringTokenizer;
-//import java.util.UUID;
+import java.util.StringTokenizer;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.project.withpet.dao.CommunityDAO;
 import com.project.withpet.model.Community;
 import com.project.withpet.service.CommunityService;
-import com.project.withpet.service.Paging;
+import com.project.withpet.service.PagingPgm;
 
 
 @Controller
@@ -31,7 +40,19 @@ public class CommunityController {
 		return "community/boardForm";
 	}
 
-//	// 글작성
+	// 글작성
+		@RequestMapping("/boardWrite")
+		public String boardwrite(@ModelAttribute Community community, Model model) {
+			System.out.println("com_writer:" + community.getCom_writer());
+
+			int result = service.insert(community);
+			System.out.println("result:" + result);
+
+			model.addAttribute("result", result);
+
+			return "community/insertResult";
+		}
+
 //	@RequestMapping("/boardWrite")
 //	public String boardwrite(@RequestParam("com_file1") MultipartFile multiFile, Community community, HttpServletRequest request, Model model) throws Exception {
 //		System.out.println("com_writer:" + community.getCom_writer());
@@ -73,22 +94,17 @@ public class CommunityController {
 //
 //			} else if (!communityFile[1].equals("jpg") && !communityFile[1].equals("gif") && !communityFile[1].equals("png")) {
 //				// 확장자 비교, ! : 아니면
-//
 //				upResult = 2;
 //				model.addAttribute("upResult", upResult);
 //
 //				return "community/uploadResult";
 //			}
 //		}
-//
 //		if (size > 0) { // 첨부파일이 전송된 경우
 //
 //			multiFile.transferTo(new File(path + "/" + newFileName));
-//
 //		}
-//
 //		community.setCom_file(newFileName);
-//		
 //		
 //		int result = service.insert(community);
 //		System.out.println("result:" + result);
@@ -115,8 +131,8 @@ public class CommunityController {
 		int startRow = (currentPage - 1) * rowPerPage + 1;
 		int endRow = startRow + rowPerPage - 1;
 		
-		Paging paging = new Paging(total, rowPerPage, currentPage);
-		
+		PagingPgm paging = new PagingPgm(total, rowPerPage, currentPage);
+
 		community.setStartRow(startRow);
 		community.setEndRow(endRow);
 		
@@ -138,6 +154,7 @@ public class CommunityController {
 		model.addAttribute("totalPage", totalPage);
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("endPage", endPage);
+     	model.addAttribute("currentPage", currentPage);
 		
 		// 검색
 		model.addAttribute("search", community.getSearch());
@@ -147,65 +164,64 @@ public class CommunityController {
 	}
 	
 	// 상세 페이지 : 조회수 1증가 + 상세정보 구하기
+	
 	@RequestMapping("/boardContent")
 	public String boardContent(int com_no, String page, Model model) {
-
+	
 		service.updatecount(com_no); // 조회수 1증가
-		Community board = service.getBoard(com_no); // 상세 정보 구하기
-		String Content = board.getCom_content().replace("\n", "<br>");
+		Community community = service.getBoard(com_no); // 상세 정보 구하기
+		String Content = community.getCom_content().replace("\n", "<br>");
 
-		model.addAttribute("board", board);
+		model.addAttribute("community", community);
 		model.addAttribute("Content", Content);
 		model.addAttribute("page", page);
 
 		return "community/boardContent";
 	}
+
+	
+	// 수정 폼
+		@RequestMapping("/boardUpdateForm")
+		public String boardUpDateForm(int com_no, String page, Model model) {
+			
+			Community community = service.getBoard(com_no);		// 상세 정보 구하기
+			
+			model.addAttribute("community", community);
+			model.addAttribute("page", page);
+			
+			return "community/boardUpdateForm";
+		}
+
+		// 글수정
+	@RequestMapping("/boardUpdate")
+	public String boardupdate(@ModelAttribute Community community,HttpServletRequest request, Model model) { 
+		
+		int result = service.update(community);
+		String page = request.getParameter("page");
+		int com_no = Integer.parseInt(request.getParameter("com_no"));
+		
+			model.addAttribute("result",result);
+			model.addAttribute("page", page);
+			model.addAttribute("com_no",com_no);
+			System.out.println(page);
+			return "community/updateResult";
+		}
 }
-//	// 수정 폼
-//		@RequestMapping("/boardUpDateForm")
-//		public String boardUpDateForm(int com_no, String page, Model model) {
-//			
-//			Community board = service.getBoard(com_no);		// 상세 정보 구하기
-//			
-//			model.addAttribute("board", board);
-//			model.addAttribute("page", page);
-//			
-//			return "community/boardUpDateForm";
-//		}
-//		// 글수정
-//	@RequestMapping("/boardupdate")
-//	public String boardupdate(@ModelAttribute Community community, String page, Model model) {
-//		int result = 0;
-//		Community old = service.getBoard(community.getCom_no());
-//		if (old.getCom_paswd().equals(community.getCom_paswd())) { // 비번 일치시
-//			result = service.update(community);
-//		} else { // 비번 불일치시
-//			result = -1;
-//		}
-//			model.addAttribute("result", result);
-//			model.addAttribute("Community", community);
-//			model.addAttribute("page", page);
-//			
-//			return "community/upDateResult";
-//		}
-//	    // 삭제 폼
-//		@RequestMapping("/boardDeleteForm")
-//		public String boardDeleteForm() {
-//			return "board/boardDeleteForm";
-//		}
+
 //		// 글삭제
-//		@RequestMapping("/boarddelete")
-//		public String boarddelete(@ModelAttribute Community community, String page, Model model) {
-//			int result = 0;
-//			Community old = service.getBoard(community.getCom_no());
-//			if(old.getCom_paswd().equals(community.getCom_paswd())) { //비번 일치시
-//				result = service.delete(community.getCom_no());
-//			}else {		// 비번 불일치시
-//				result = -1;
-//			}
-//			model.addAttribute("result", result);
-//			model.addAttribute("page", page);
-//			
-//			return "community/deleteResult";
-//		}
+//	
+//	@RequestMapping("/delete")
+//	public String delete(int com_no, String page, Model model) {
+//
+//		service.delete(com_no);
+//		Community community = service.getBoard(com_no); 
+//		int result = service.delete(com_no);
+//		
+//		model.addAttribute("result",result);
+//		model.addAttribute("community", community);
+//		model.addAttribute("page", page);
+//		
+//		return "community/deleteResult";
+//	}
 //}
+//	

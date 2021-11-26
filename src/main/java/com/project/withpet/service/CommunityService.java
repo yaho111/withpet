@@ -33,14 +33,14 @@ public class CommunityService {
 		// TODO Auto-generated method stub
 		return dao.getBoard(com_no);
 	}
-//	public int update(Community community) {
-//		// TODO Auto-generated method stub
-//		return dao.update(community);
-//	}
-//	public int delete(int com_no) {
-//		// TODO Auto-generated method stub
-//		return dao.delete(com_no);
-//	}
+	public int update(Community community) {
+		// TODO Auto-generated method stub
+		return dao.update(community);
+	}
+	public int delete(int com_no) {
+		// TODO Auto-generated method stub
+		return dao.delete(com_no);
+	}
 	public int getTotal(Community community) {
 		// TODO Auto-generated method stub
 		return dao.getTotal(community);

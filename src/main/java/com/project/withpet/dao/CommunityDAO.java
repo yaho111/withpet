@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.ibatis.sqlmap.engine.mapping.sql.Sql;
 import com.project.withpet.model.Community;
 
 
@@ -34,15 +35,15 @@ public class CommunityDAO {
 		// TODO Auto-generated method stub
 		return session.selectOne("Content", com_no);
 	}
-//	public int update(Community community) {
-//		// TODO Auto-generated method stub
-//		return session.update("upDateBoard", community);
-//	}
-//	public int delete(int com_no) {
-//		// TODO Auto-generated method stub
-//		return session.delete("deleteBoard", com_no);
-//	}
-//	
+	public int update(Community community) {
+		// TODO Auto-generated method stub
+		return session.update("update", community);
+	}
+    public int delete(int com_no) {
+		// TODO Auto-generated method stub
+		return session.delete("delete", com_no);
+	}
+	
 	public int getTotal(Community community) {
 		// TODO Auto-generated method stub
 		return session.selectOne("getTotal", community);
@@ -51,4 +52,5 @@ public class CommunityDAO {
 		// TODO Auto-generated method stub
 		return session.selectList("list", community); 
 	}
+
 }
