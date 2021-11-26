@@ -28,4 +28,9 @@
                             BUS_ACCEPT = 3
         where BUS_NO = #{bus_no}
     </update>
+
+    <!-- 사업 정보 삭제 -->
+    <delete id="delete_business" parameterType="int">
+        delete from BUSINESS where BUS_NO = #{bus_no}
+    </delete>
 </mapper>

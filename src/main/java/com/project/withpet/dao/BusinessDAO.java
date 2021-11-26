@@ -34,4 +34,7 @@ public class BusinessDAO {
     }
 
     // 사업 삭제
+    public void deleteBusiness(int bus_no) throws Exception {
+        sqlSession.delete("delete_business", bus_no);
+    }
 }

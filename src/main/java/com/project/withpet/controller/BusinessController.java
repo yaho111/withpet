@@ -27,7 +27,7 @@ public class BusinessController {
 
     // 사업자 등록 신청
     @RequestMapping(value = "/enrollBusiness", method = RequestMethod.POST)
-    public String enrollBusiness (@ModelAttribute Business business, HttpServletRequest request, Model model) throws Exception{
+    public String enrollBusiness(@ModelAttribute Business business, HttpServletRequest request, Model model) throws Exception {
 
         String bus_addr = request.getParameter("post") + "-" + request.getParameter("addr")
                 + "-" + request.getParameter("specificAddress");
@@ -47,7 +47,7 @@ public class BusinessController {
 
     // 사업 관리 페이지
     @RequestMapping(value = "/businessList")
-    public String forwardBusinessList(HttpSession session, Model model) throws Exception{
+    public String forwardBusinessList(HttpSession session, Model model) throws Exception {
         String id = (String) session.getAttribute("id");
 
         List<Business> businessList = businessService.selectBusinessList(id);
@@ -59,7 +59,7 @@ public class BusinessController {
 
     // 사업자 변경 신청 페이지
     @RequestMapping(value = "/businessUpdateForm")
-    public String forwardBusinessUpdateForm(HttpServletRequest request, Model model) throws Exception{
+    public String forwardBusinessUpdateForm(HttpServletRequest request, Model model) throws Exception {
         int bus_no = Integer.parseInt(request.getParameter("bus_no"));
 
         Business selectedBusiness = businessService.selectBusiness(bus_no);
@@ -106,14 +106,21 @@ public class BusinessController {
         // 쿼리가 진행되었을 시 1, 아닐 시 0 이 리턴
         int result = businessService.updateBusiness(business);
 
-        model.addAttribute("result",result);
+        model.addAttribute("result", result);
 
         return "business/updateResult";
     }
 
-    // 사업 삭제 페이지
-
     // 사업 삭제
+    @RequestMapping(value = "/deleteBusiness")
+    public String deleteBusiness(HttpServletRequest request, Model model) throws Exception {
+
+        int bus_no = Integer.parseInt(request.getParameter("bus_no"));
+
+        businessService.deleteBusiness(bus_no);
+
+        return "redirect:businessList";
+    }
 
 
 }

@@ -34,7 +34,17 @@
               <input type="button" class="btn btn-outline-secondary" value="수정"
                      onclick="location.href='businessUpdateForm?bus_no=${business.bus_no}'">
               <input type="button" class="btn btn-outline-secondary" value="삭제"
-                     onclick="location.href=''">
+                     onclick="deleteCheck()">
+              <script>
+                function deleteCheck(){
+                  if(confirm("정말로 삭제하시겠습니까?") == true){	// 확인
+                    location.href="deleteBusiness?bus_no=${business.bus_no}"
+                  }else{										// 취소
+                    alert("취소되었습니다.");
+                    return false;
+                  }
+                }
+              </script>
             </div>
           </td>
         </tr>
@@ -43,5 +53,6 @@
     </table>
   </div>
 </section>
+
 
 <%@ include file="../layout/footer.jsp" %>

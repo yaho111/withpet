@@ -34,5 +34,8 @@ public class BusinessService {
     }
 
     // 사업 삭제
+    public void deleteBusiness(int bus_id) throws Exception {
+        businessDAO.deleteBusiness(bus_id);
+    }
 
 }
