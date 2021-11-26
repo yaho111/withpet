@@ -29,6 +29,9 @@ public class BusinessService {
     }
 
     // 사업자 변경 신청
+    public int updateBusiness(Business business) throws Exception {
+        return businessDAO.updateBusiness(business);
+    }
 
     // 사업 삭제
 

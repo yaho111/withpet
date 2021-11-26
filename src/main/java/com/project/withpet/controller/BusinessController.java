@@ -87,6 +87,29 @@ public class BusinessController {
     }
 
     // 사업자 변경 신청
+    @RequestMapping(value = "/updateBusiness")
+    public String updateBusiness(@ModelAttribute Business business, HttpServletRequest request, Model model) throws Exception {
+
+        // 클라이언트로 받은 값들을 DB 에 맞게 변형
+        String bus_addr = request.getParameter("post") + "-" + request.getParameter("addr")
+                + "-" + request.getParameter("specificAddress");
+        String bus_tel = request.getParameter("frontNum") + "-" + request.getParameter("middleNum")
+                + "-" + request.getParameter("backNum");
+
+        int bus_no = Integer.parseInt(request.getParameter("bus_no"));
+
+        // 변형된 데이터를 객체에 다시 세팅
+        business.setBus_addr(bus_addr);
+        business.setBus_tel(bus_tel);
+        business.setBus_no(bus_no);
+
+        // 쿼리가 진행되었을 시 1, 아닐 시 0 이 리턴
+        int result = businessService.updateBusiness(business);
+
+        model.addAttribute("result",result);
+
+        return "business/updateResult";
+    }
 
     // 사업 삭제 페이지
 

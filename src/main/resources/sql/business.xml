@@ -17,4 +17,15 @@
     <select id="select_business" parameterType="int" resultType="business">
         select * from BUSINESS where BUS_NO = #{bus_no}
     </select>
+
+    <!-- 사업 정보 변경 -->
+    <update id="update_business" parameterType="business">
+        update BUSINESS set BUS_ID = #{bus_id},
+                            BUS_NAME = #{bus_name},
+                            BUS_ADDR = #{bus_addr},
+                            BUS_TEL = #{bus_tel},
+                            BUS_SORT = #{bus_sort},
+                            BUS_ACCEPT = 3
+        where BUS_NO = #{bus_no}
+    </update>
 </mapper>

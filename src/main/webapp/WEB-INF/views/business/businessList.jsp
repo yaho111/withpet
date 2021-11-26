@@ -23,7 +23,7 @@
           <td>${business.bus_name}</td>
           <td>${business.bus_tel}</td>
           <td>${business.bus_sort}</td>
-          <c:if test="${business.bus_accept == 0}">
+          <c:if test="${business.bus_accept != 1}">
             <td>심사중입니다.</td>
           </c:if>
           <c:if test="${business.bus_accept == 1}">

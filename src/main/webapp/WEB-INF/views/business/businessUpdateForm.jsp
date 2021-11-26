@@ -11,6 +11,7 @@
     <div id="enroll_wrap" class="container-body">
         <h2 class="body-title">사업자 정보 변경</h2>
         <form name="form" method="post" action="updateBusiness" onsubmit="return check()">
+            <input type="hidden" name="bus_no" id="bus_no" value="${selectedBusiness.bus_no}"/>
             <table id="business_enroll_table" class="table">
                 <tr>
                     <th>등록할 아이디</th>

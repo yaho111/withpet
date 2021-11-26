@@ -27,7 +27,11 @@ public class BusinessDAO {
     public Business selectBusiness(int bus_no) throws Exception {
         return sqlSession.selectOne("select_business", bus_no);
     }
+
     // 사업자 변경 신청
+    public int updateBusiness(Business business) throws  Exception {
+        return sqlSession.update("update_business", business);
+    }
 
     // 사업 삭제
 }
