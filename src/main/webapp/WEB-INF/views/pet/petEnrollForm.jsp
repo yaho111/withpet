@@ -9,7 +9,8 @@
 <%@ include file="../layout/header.jsp" %>
 <section class="py-5">
     <div class="container-body">
-        <form name="form" method="post" action="enrollPet" onsubmit="return check()">
+        <form name="form" method="post" action="enrollPet" onsubmit="return check()"
+              enctype="multipart/form-data">
         <table class="table">
             <tr>
                 <th>이름</th>
@@ -58,7 +59,7 @@
             <tr>
                 <th>프로필 사진</th>
                 <td>
-                    <input type="file" name="profilePic" class="form-control"/>
+                    <input type="file" name="petProfile" class="form-control"/>
                 </td>
             </tr>
             <tr>
@@ -77,5 +78,5 @@
         </form>
     </div>
 </section>
-
+<script src="${path}/js/pet.js"></script>
 <%@ include file="../layout/footer.jsp" %>

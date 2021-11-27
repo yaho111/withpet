@@ -1,9 +1,19 @@
 package com.project.withpet.controller;
 
+import com.project.withpet.model.Pet;
 import com.project.withpet.service.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.util.UUID;
 
 @Controller
 public class PetController {
@@ -16,7 +26,62 @@ public class PetController {
     public String forwardPetEnrollForm() {
         return "pet/petEnrollForm";
     }
+
     // 펫 등록
+    @RequestMapping(value = "/enrollPet", method = RequestMethod.POST)
+    public String enrollPet(@RequestParam("petProfile") MultipartFile multipartFile,
+                            @ModelAttribute Pet pet,
+                            HttpServletRequest request,
+                            Model model) throws Exception {
+        String fileName = multipartFile.getOriginalFilename();
+        int size = (int) multipartFile.getSize();
+        int result = 0;
+
+        String path = request.getRealPath("upload");
+        System.out.println("path" + path);
+        System.out.println(pet.getPet_birth());
+        String[] file;
+        String newFileName = "";
+
+        // 파일이 전송된 경우
+        if (fileName != "") {
+
+            file = fileName.split("\\.");
+
+            String extension = "." + file[1];
+
+            UUID uuid = UUID.randomUUID();
+
+            newFileName = uuid + extension;
+            System.out.println(newFileName);
+
+            if (size > 100000) { // 파일크기가 지정 한도를 초과하는 경우
+                result = 1;
+                model.addAttribute("result", result);
+
+                return "pet/uploadResult";
+            } else if (!file[1].equals("jpg") &&
+                    !file[1].equals("gif") &&
+                    !file[1].equals("png")) { // 파일의 확장자가 가능한 확장자가 아닌 경우
+
+                result = 2;
+                model.addAttribute("result", result);
+
+                return "pet/uploadResult";
+            }
+
+
+        }
+
+        if (size > 0) {
+            multipartFile.transferTo(new File(path + "/" + newFileName));
+            pet.setPet_photo(newFileName);
+        }
+
+        petService.enrollPet(pet);
+
+        return "redirect:myPage";
+    }
 
     // 펫 조회
 

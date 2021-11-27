@@ -2,4 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="petns">
+    <insert id="enroll_pet" parameterType="pet">
+        insert into PET values (PET_SEQ.nextval, #{pet_sort}, #{pet_kind}, #{pet_name}, #{pet_gender}
+        , #{pet_birth}, #{pet_photo,jdbcType=VARCHAR}, #{pet_info}, #{pet_parent})
+    </insert>
 </mapper>
