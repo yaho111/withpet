@@ -5,6 +5,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class PetDAO {
 
@@ -16,6 +18,9 @@ public class PetDAO {
         sqlSession.insert("enroll_pet", pet);
     }
     // 펫 리스트
+    public List<Pet> selectPetList(String pet_parent) throws Exception {
+        return sqlSession.selectList("select_pet_list", pet_parent);
+    }
 
     // 펫 검색
 

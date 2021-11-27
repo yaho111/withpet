@@ -56,6 +56,47 @@
                    onclick="location.href='memberDeleteForm'">
         </div>
     </div>
+
+    <div class="container">
+        <h2 class="body-title">나의 펫 목록</h2>
+        <table class="table">
+            <tr>
+                <th>이름</th>
+                <th>종류</th>
+                <th>품종</th>
+                <th>성별</th>
+                <th>생일</th>
+                <th>프로필</th>
+                <th>특이사항</th>
+                <th>메뉴</th>
+            </tr>
+            <c:forEach var="pet" items="${petList}">
+                <tr>
+                    <td>${pet.pet_name}</td>
+                    <td>${pet.pet_sort}</td>
+                    <td>${pet.pet_kind}</td>
+                    <td>${pet.pet_gender}</td>
+                    <td>${pet.pet_birth}</td>
+                    <c:if test="${pet.pet_photo != null}">
+                        <td><img src="${path}/upload/${pet.pet_photo}" height="200" width="200"/></td>
+                    </c:if>
+                    <c:if test="${pet.pet_photo == null}">
+                        <td></td>
+                    </c:if>
+                    <td>${pet.pet_info}</td>
+                    <td>
+                        <div class="input-group">
+                            <input type="button" class="btn btn-outline-secondary" value="수정"
+                                   onclick="location.href ='${path}/petUpdateForm?pet_no=${pet.pet_no}'">
+                            <input type="button" class="btn btn-outline-secondary" value="삭제"
+                                   onclick="location.href ='${path}/petDeleteForm?pet_no=${pet.pet_no}'">
+                        </div>
+                    </td>
+                </tr>
+            </c:forEach>
+        </table>
+
+    </div>
 </section>
 
 <%@ include file="../layout/footer.jsp" %>

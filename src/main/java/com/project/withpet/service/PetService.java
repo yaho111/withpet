@@ -6,6 +6,8 @@ import com.project.withpet.model.Pet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PetService {
 
@@ -17,6 +19,9 @@ public class PetService {
         petDAO.enrollPet(pet);
     }
     // 펫 리스트
+    public List<Pet> selectPetList(String pet_parent) throws Exception {
+        return petDAO.selectPetList(pet_parent);
+    }
 
     // 펫 검색
 
