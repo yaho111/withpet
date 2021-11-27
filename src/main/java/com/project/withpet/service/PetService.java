@@ -24,8 +24,14 @@ public class PetService {
     }
 
     // 펫 검색
+    public Pet selectPet(int pet_no) throws Exception {
+        return petDAO.selectPet(pet_no);
+    }
 
     // 펫 정보 수정
+    public void updatePet(Pet pet) throws Exception {
+        petDAO.updatePet(pet);
+    }
 
     // 펫 정보 삭제
 }

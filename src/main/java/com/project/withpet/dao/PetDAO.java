@@ -23,8 +23,14 @@ public class PetDAO {
     }
 
     // 펫 검색
+    public Pet selectPet(int pet_no) throws Exception {
+        return sqlSession.selectOne("select_pet", pet_no);
+    }
 
     // 펫 정보 수정
+    public void updatePet(Pet pet) throws Exception {
+        sqlSession.update("update_pet", pet);
+    }
 
     // 펫 정보 삭제
 }

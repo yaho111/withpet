@@ -83,11 +83,79 @@ public class PetController {
         return "redirect:myPage";
     }
 
-    // 펫 조회
-
     // 펫 정보 수정 페이지
+    @RequestMapping(value = "/petUpdateForm")
+    public String forwardPetUpdateForm(HttpServletRequest request, Pet pet, Model model) throws Exception {
+        int pet_no = Integer.parseInt(request.getParameter("pet_no"));
+
+        Pet selectedPet = petService.selectPet(pet_no);
+
+        model.addAttribute("selectedPet", selectedPet);
+
+        return "pet/petUpdateForm";
+    }
 
     // 펫 정보 수정
+    @RequestMapping(value = "/updatePet")
+    public String updatePet(@ModelAttribute Pet pet,
+                            HttpServletRequest request,
+                            @RequestParam("petProfile") MultipartFile multipartFile,
+                            Model model) throws Exception {
+
+        String fileName = multipartFile.getOriginalFilename();
+        int size = (int) multipartFile.getSize();
+        int result = 0;
+
+        String path = request.getRealPath("upload");
+        System.out.println("path" + path);
+
+        int pet_no = Integer.parseInt(request.getParameter("pet_no"));
+
+        Pet selectedPet = petService.selectPet(pet_no);
+        String[] file;
+        String newFileName = "";
+
+        // 파일이 전송된 경우
+        if (fileName != "") {
+
+            file = fileName.split("\\.");
+
+            String extension = "." + file[1];
+
+            UUID uuid = UUID.randomUUID();
+
+            newFileName = uuid + extension;
+            System.out.println(newFileName);
+
+            if (size > 100000) { // 파일크기가 지정 한도를 초과하는 경우
+                result = 1;
+                model.addAttribute("result", result);
+
+                return "pet/uploadResult";
+            } else if (!file[1].equals("jpg") &&
+                    !file[1].equals("gif") &&
+                    !file[1].equals("png")) { // 파일의 확장자가 가능한 확장자가 아닌 경우
+
+                result = 2;
+                model.addAttribute("result", result);
+
+                return "pet/uploadResult";
+            }
+
+
+        }
+
+        if (size > 0) {
+            multipartFile.transferTo(new File(path + "/" + newFileName));
+            pet.setPet_photo(newFileName);
+        } else {
+            pet.setPet_photo(selectedPet.getPet_photo());
+        }
+
+        petService.updatePet(pet);
+
+        return "redirect:myPage";
+    }
 
     // 펫 삭제
 }

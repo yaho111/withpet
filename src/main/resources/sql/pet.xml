@@ -13,4 +13,21 @@
     <select id="select_pet_list" parameterType="string" resultType="pet">
         select * from PET where PET_PARENT = #{pet_parent}
     </select>
+
+    <!--  펫 선택 -->
+    <select id="select_pet" parameterType="int" resultType="pet">
+        select * from PET where PET_NO = #{pet_no}
+    </select>
+
+    <update id="update_pet" parameterType="pet">
+        update PET set PET_NAME = #{pet_name},
+                       PET_SORT = #{pet_sort},
+                       PET_KIND = #{pet_kind},
+                       PET_GENDER = #{pet_gender},
+                       PET_BIRTH = #{pet_birth},
+                       PET_PHOTO = #{pet_photo,jdbcType=VARCHAR},
+                       PET_INFO = #{pet_info}
+where PET_NO = #{pet_no}
+    </update>
+
 </mapper>
