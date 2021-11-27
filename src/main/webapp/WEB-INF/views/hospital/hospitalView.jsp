@@ -1,6 +1,27 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="../layout/header.jsp"%>
 
+<!-- 추천 버튼 클릭 시 -->
+<script>
+	function hosLikeButton(){
+		if(${empty sessionScope.id}) {
+			alert("로그인이 필요한 서비스입니다!");
+			return false;
+			
+		}else if("${sessionScope.id}" == "${hospital.hos_writer}"){
+			alert("자신의 글은 추천할 수 없습니다!");
+			return false;
+	
+		}else {
+			var hosLikeData = 'hos_no='+${hospital.hos_no}+'&id='+"${sessionScope.id}";		
+			$.post('${path}/hosLikeInsert', hosLikeData, function(message) {
+				alert(message);
+			});
+			return false;
+		}
+	}
+</script>
+
 <!-- 글 삭제 confirm 창 띄우기 -->
 <script>
 	function deleteCheck(){
@@ -11,29 +32,8 @@
 			return false;
 		}
 	}
-
 </script>
 
-<script type="text/javascript">
-	/* $('#reply').load('${path}/reply?hos_no=${hospital.hos_no}')
-
-	${'#repInsert'}.click(function(){
-		if(!frm.repText.value){
-			alert('댓글을 입력하세요!');
-			frm.repText.focus();
-			return false;
-		}
-	})
-	var frmData = $('form').serialize();
-	
-	$.post('${path}/repInsert', frmData, function(data)){
-		$('#reply').html(data);
-		frm.reptext.value='';
-	} */	
-</script>
-
-</head>
-<body>
 	<table border="1" width=600 align="center">
 		<tr align="center">
 			<td colspan=2><h2>${hospital.hos_name}</h2></td>
@@ -94,15 +94,6 @@
 					            yAnchor: 0 
 					        });
 
-					        // 인포윈도우로 장소에 대한 설명을 표시
-					        /* var infowindow = new kakao.maps.InfoWindow({
-					            content: '<a href="https://map.kakao.com/link/search/${addr}" target="_blank">' +
-					            	'<div style="width:150px;text-align:center;padding:6px 0;">${hospital.hos_name}</div>' +
-					            	'</a>'
-					        });
-					        infowindow.open(map, marker); */
-
-					        // 지도의 중심을 결과값으로 받은 위치로 이동
 					        map.setCenter(coords);
 					    } 
 					});    
@@ -138,16 +129,9 @@
 			</c:if>
 		</tr>
 			<tr>
-				<c:if test="${sessionScope.id == null}">
-					<td colspan=2 align="center">
-						<input type="button" value="추천" onClick="">
-					</td>
-				</c:if>
-				<c:if test="${sessionScope.id != null}">
-					<td colspan=2 align="center">
-						<input type="button" value="추천" onClick="">
-					</td>
-				</c:if>
+				<td colspan=2 align="center">
+					<input type="button" value="추천" onClick="hosLikeButton()" >
+				</td>
 			</tr>
 	</table>
 
@@ -161,24 +145,5 @@
 			<input type="button" value="목록"
 				onClick="location.href='hospitalList?page=${page}'">
 	</div>
-
-	<!-- Ajax 댓글 -->
-
-	<%-- <div id="reply"></div>
-
-	<form name="frm" id="frm">
-		<input type="hidden" name="id" value="${sessionScope.id}"> 
-		<input type="hidden" name="hos_no" value="${hospital.hos_no}">
-		<table border="1" align="center">
-			<tr>
-				<td colspan="2">작성자</td>
-			</tr>
-			<tr>
-				<td><textarea rows="3" cols="50" name="repText"
-						placeholder="댓글 내용을 입력하세요."></textarea></td>
-				<td><input type="button" value="등록" id="repInsert"></td>
-			</tr>
-		</table>
-	</form> --%>
 
 <%@ include file="../layout/footer.jsp"%>

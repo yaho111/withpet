@@ -18,6 +18,7 @@
 			<th>작성자</th>
 			<th>작성일</th>
 			<th>조회수</th>
+			<th>추천수</th>
 		</tr>
 		<c:if test="${empty list}">
 			<tr>
@@ -45,6 +46,7 @@
 					<td>${hospital.hos_writer}</td>
 					<td>${hospital.hos_reg}</td>
 					<td>${hospital.hos_readcnt}</td>
+					<td>${hospital.hos_likecnt}</td>
 				</tr>
 				<c:set var="no1" value="${no1 - 1}" />
 			</c:forEach>

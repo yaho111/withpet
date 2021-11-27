@@ -48,4 +48,9 @@ public class HospitalService {
 		return hospitalDAO.delete(hos_no);
 	}
 
+	// 병원 게시판 게시글 추천수 업데이트
+	public void updateLike(int hos_no) {
+		hospitalDAO.updateLike(hos_no);
+	}
+
 }

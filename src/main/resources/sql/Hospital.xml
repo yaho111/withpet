@@ -59,4 +59,9 @@
 		delete from hospital where hos_no=#{hos_no}
 	</delete>
 	
+	<!-- 병원 게시판 게시글 추천수 업데이트 -->
+	<update id="updateLike" parameterType="int">
+		update hospital set hos_likecnt = hos_likecnt+1 where hos_no=#{hos_no}
+	</update>
+	
 </mapper>

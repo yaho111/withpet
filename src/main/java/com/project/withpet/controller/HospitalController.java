@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.project.withpet.model.Hospital;
 import com.project.withpet.service.HospitalService;
+import com.project.withpet.service.LikesService;
 import com.project.withpet.service.PagingPgm;
 
 @Controller
@@ -27,6 +28,7 @@ public class HospitalController {
 
 	@Autowired
 	private HospitalService hospitalService;
+	private LikesService likesService;
 
 	// 글 작성 폼
 	@RequestMapping("insertForm")
@@ -183,7 +185,7 @@ public class HospitalController {
         }
         
         // appKey 변수 선언
-        String appKey = properties.getProperty("daumpost.appKey");		
+        String appKey = properties.getProperty("daumpost.appKey");	
 		
         // 공유 설정
 		model.addAttribute("hospital", hospital);
