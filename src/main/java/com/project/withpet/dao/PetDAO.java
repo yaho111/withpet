@@ -33,4 +33,7 @@ public class PetDAO {
     }
 
     // 펫 정보 삭제
+    public void deletePet(int pet_no) throws Exception {
+        sqlSession.delete("delete_pet", pet_no);
+    }
 }

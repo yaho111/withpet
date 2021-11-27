@@ -19,6 +19,7 @@
         select * from PET where PET_NO = #{pet_no}
     </select>
 
+    <!-- 펫 정보 수정 -->
     <update id="update_pet" parameterType="pet">
         update PET set PET_NAME = #{pet_name},
                        PET_SORT = #{pet_sort},
@@ -30,4 +31,8 @@
 where PET_NO = #{pet_no}
     </update>
 
+    <!-- 펫 정보 삭제 -->
+    <delete id="delete_pet" parameterType="int">
+        delete from PET where PET_NO = #{pet_no}
+    </delete>
 </mapper>

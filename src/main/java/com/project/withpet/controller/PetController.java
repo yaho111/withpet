@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.util.UUID;
 
@@ -158,4 +159,23 @@ public class PetController {
     }
 
     // 펫 삭제
+    @RequestMapping(value = "/deletePet")
+    public String deletePet(HttpServletRequest request, HttpSession session) throws Exception{
+
+        int pet_no = Integer.parseInt(request.getParameter("pet_no"));
+        String path = session.getServletContext().getRealPath("upload");
+
+        Pet selectPet = petService.selectPet(pet_no);
+
+        String petProfile = selectPet.getPet_photo();
+
+        if(petProfile != null) {
+            File needToDelete = new File(path + "/" + petProfile);
+            needToDelete.delete();
+        }
+
+        petService.deletePet(pet_no);
+
+        return "redirect:myPage";
+    }
 }

@@ -34,4 +34,7 @@ public class PetService {
     }
 
     // 펫 정보 삭제
+    public void deletePet(int pet_no) throws Exception {
+        petDAO.deletePet(pet_no);
+    }
 }

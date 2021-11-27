@@ -89,7 +89,17 @@
                             <input type="button" class="btn btn-outline-secondary" value="수정"
                                    onclick="location.href ='${path}/petUpdateForm?pet_no=${pet.pet_no}'">
                             <input type="button" class="btn btn-outline-secondary" value="삭제"
-                                   onclick="location.href ='${path}/petDeleteForm?pet_no=${pet.pet_no}'">
+                                   onclick="deleteCheck()">
+                            <script>
+                                function deleteCheck(){
+                                    if(confirm("정말로 삭제하시겠습니까?") == true){	// 확인
+                                        location.href="deletePet?pet_no=${pet.pet_no}"
+                                    }else{										// 취소
+                                        alert("취소되었습니다.");
+                                        return false;
+                                    }
+                                }
+                            </script>
                         </div>
                     </td>
                 </tr>
