@@ -23,6 +23,48 @@
 	
 	<!-- 데이터(게시글) 10개 구하기 -->
 	<select id="list" parameterType="hospital" resultType="hospital">
+	
+		<!-- 최신순 -->			
+		<if test="sortValue.equals('recent')">
+			select * from (select rowNum rnum, hospital.* from (
+				select * from hospital
+			<where>
+				<if test="keyword != null">
+					${search} like '%'||#{keyword}||'%'
+				</if>
+			</where>
+				order by hos_no desc) hospital )
+				  where rnum between #{startRow} and #{endRow}
+		</if>
+		
+		<!-- 조회순 -->
+		<if test="sortValue.equals('readcnt')">
+			select * from (select rowNum rnum, hospital.* from (
+				select * from hospital
+			<where>
+				<if test="keyword != null">
+					${search} like '%'||#{keyword}||'%'
+				</if>
+			</where>
+				order by hos_readcnt desc, hos_no desc) hospital )
+				  where rnum between #{startRow} and #{endRow}
+		</if>
+		
+		<!-- 최신순 -->
+		<if test="sortValue.equals('likecnt')">
+			select * from (select rowNum rnum, hospital.* from (
+				select * from hospital
+			<where>
+				<if test="keyword != null">
+					${search} like '%'||#{keyword}||'%'
+				</if>
+			</where>
+				order by hos_likecnt desc, hos_no desc) hospital )
+				  where rnum between #{startRow} and #{endRow}
+		</if>
+	</select>
+	
+	<!-- <select id="list" parameterType="hospital" resultType="hospital">
 		select * from (select rowNum rnum, hospital.* from (
 			select * from hospital
 		<where>
@@ -32,7 +74,7 @@
 		</where>
 			order by hos_no desc) hospital )
 			  where rnum between #{startRow} and #{endRow}
-	</select>
+	</select> -->
 	
 	<!-- 상세 페이지 : 조회수 증가 -->
 	<update id="updateReadcnt" parameterType="int">

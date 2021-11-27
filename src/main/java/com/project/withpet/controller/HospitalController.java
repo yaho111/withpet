@@ -119,7 +119,15 @@ public class HospitalController {
 	// 게시판 목록 검색 (전체 목록, 검색 목록)
 	@RequestMapping("/hospitalList")
 	public String hospitalList(String page, Hospital hospital, Model model) {
+
+		// 정렬 값(sortValue)이 없는 경우(초기 실행)
+		if(hospital.getSortValue() == null) {
+			hospital.setSortValue("recent");
+		}
 		
+		String sortValue = hospital.getSortValue();
+		
+		// 페이징 처리
 		final int rowPerPage = 10; // 화면에 출력할 데이터 갯수
 		
 		if (page == null || page.equals("")) {
@@ -142,6 +150,10 @@ public class HospitalController {
 		int no = total - startRow + 1;							// 출력할 글 번호
 		List<Hospital> list = hospitalService.list(hospital);	// 10개 데이터 구하기
 		
+		// 정렬
+		model.addAttribute("sortValue", sortValue);
+		
+		// 페이징 처리
 		model.addAttribute("list", list);
 		model.addAttribute("no", no);
 		model.addAttribute("paging", paging);
