@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -15,6 +15,8 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
+
+
 
 	<a href="boardForm">글작성</a> 글갯수 : ${paging.total}
 	<table border=1 align="center" width=800 class="table table-striped">
@@ -115,6 +117,15 @@
 
 		
 </body>
-</html>
+  </html>
 
-<%-- 	<%@ include file="../layout/footer.jsp"%> --%>
+	<%@ include file="../layout/footer.jsp"%>
+	
+		<!-- jquery -->
+<script type="text/javascript" src="jquery-3.4.1.min.js" ></script>
+<!-- ckeditor 4 -->
+<link rel="stylesheet" href="${path}//ckeditor/contents.css"> <%--content에 ckeditro 걸어두기--%>
+<!-- <script src="https://cdn.ckeditor.com/4.12.1/standard-all/ckeditor.js"></script> -->
+
+<script type="text/javascript" src="${path}/ckeditor/ckeditor.js" ></script>
+	

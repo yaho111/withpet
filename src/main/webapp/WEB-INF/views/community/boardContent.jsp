@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html;charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
 <%@ include file="../layout/header.jsp"%>
+
 <!--   글 삭제 confirm 창 띄우기 -->
 <script>
 	function deleteCheck(){
@@ -61,3 +61,11 @@
 	</div>
 
 	<%@ include file="../layout/footer.jsp"%> 
+	
+	<!-- jquery -->
+<script type="text/javascript" src="jquery-3.4.1.min.js" ></script>
+<!-- ckeditor 4 -->
+<link rel="stylesheet" href="${path}//ckeditor/contents.css"> <%--content에 ckeditro 걸어두기--%>
+<!-- <script src="https://cdn.ckeditor.com/4.12.1/standard-all/ckeditor.js"></script> -->
+
+<script type="text/javascript" src="${path}/ckeditor/ckeditor.js" ></script>
