@@ -7,7 +7,10 @@
 
 <%@ include file="../sort.jsp" %>
 
-	<table border="1" width=900 align="center">
+<section class="py-5">
+    <div class="container">
+
+	<table class="table table-hover">
 		
 			<h3 align="center">동물병원 게시판</h3>
 		
@@ -53,22 +56,36 @@
 		</c:if>
 	</table>
 	<p></p>
+	
+	</div>
+</section>
+	
+	<!-- 검색 -->
+<section class="py-5">
+    <div class="container-body">
+    
 	<form action="hospitalList" align=center>
 		<input type="hidden" name="page" value="1">
 		<input type="hidden" name="sortValue" id="sortValue" value="${sortValue}">
-		<select name="search">
-			<option value="hos_name"
-				<c:if test="${search=='hos_name'}">selected="selected" </c:if>>병원 이름</option>
-			<option value="hos_loc"
-				<c:if test="${search=='hos_loc'}">selected="selected" </c:if>>위치</option>
-			<option value="hos_content"
-				<c:if test="${search=='hos_content'}">selected="selected" </c:if>>내용</option>
-			<option value="hos_writer"
-				<c:if test="${search=='hos_writer'}">selected="selected" </c:if>>작성자</option>
-		</select> 
-			
-		<input type="text" name="keyword" value="${keyword}"> <input type="submit" value="확인">
+		<div class="input-group">
+			<select name="search" class="form-select">
+				<option value="hos_name"
+					<c:if test="${search=='hos_name'}">selected="selected" </c:if>>병원 이름</option>
+				<option value="hos_loc"
+					<c:if test="${search=='hos_loc'}">selected="selected" </c:if>>위치</option>
+				<option value="hos_content"
+					<c:if test="${search=='hos_content'}">selected="selected" </c:if>>내용</option>
+				<option value="hos_writer"
+					<c:if test="${search=='hos_writer'}">selected="selected" </c:if>>작성자</option>
+			</select> 
+			 	
+			<input type="text" name="keyword" value="${keyword}" class="form-control">
+			<input type="submit" value="확인" class="btn btn-outline-secondary">
+		</div>
 	</form>
+	
+	</div>
+</section>	
 	<br>
 	<a href="insertForm">글쓰기</a><br>
 

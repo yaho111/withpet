@@ -34,7 +34,10 @@
 	}
 </script>
 
-	<table border="1" width=600 align="center">
+<section class="py-5">
+ <div class="container-body">
+    
+	<table class="table">
 		<tr align="center">
 			<td colspan=2><h2>${hospital.hos_name}</h2></td>
 		</tr>
@@ -130,20 +133,23 @@
 		</tr>
 			<tr>
 				<td colspan=2 align="center">
-					<input type="button" value="추천" onClick="hosLikeButton()" >
+					<input type="button" value="추천" class="btn btn-outline-secondary" onClick="hosLikeButton()" >
 				</td>
 			</tr>
 	</table>
 
 	<div align="center">
 		<c:if test="${sessionScope.id == hospital.hos_writer}">
-			<input type="button" value="수정"
+			<input type="button" value="수정" class="btn btn-outline-secondary"
 				onClick="location.href='updateForm?hos_no=${hospital.hos_no}&page=${page}'">
-			<input type="button" value="삭제"
+			<input type="button" value="삭제" class="btn btn-outline-secondary"
 				onClick="deleteCheck()">
 		</c:if>
-			<input type="button" value="목록"
+			<input type="button" value="목록" class="btn btn-outline-secondary"
 				onClick="location.href='hospitalList?page=${page}'">
 	</div>
+	
+ </div>
+</section>
 
 <%@ include file="../layout/footer.jsp"%>
