@@ -25,7 +25,7 @@
               고양이
             </label>
             <input class="form-check-input" type="radio" name="pet_sort" id="cat" value="고양이"
-                   <c:if test="${selectedPet.pet_sort == '고양이'}"> checked </c:if>
+                   <c:if test="${selectedPet.pet_sort == '고양이'}"> checked </c:if>>
             <label class="form-check-label" for="dog">
               강아지
             </label>
