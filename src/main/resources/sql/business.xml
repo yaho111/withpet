@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="businessns">
+    <!-- 사업자 등록 -->
+    <insert id="enroll_business" parameterType="business">
+        insert into BUSINESS
+        values (#{bus_no}, #{bus_name}, #{bus_addr}, #{bus_tel}, #{bus_sort}, #{bus_id}, 0)
+    </insert>
+
+    <!-- 사업자 등록 요청 리스트 -->
+    <select id="select_businessList" parameterType="String" resultType="business">
+        select * from BUSINESS where BUS_ID = #{bus_id}
+    </select>
+
+    <!-- 사업자 등록 요청 상세 조회 -->
+    <select id="select_business" parameterType="String" resultType="business">
+        select * from BUSINESS where BUS_NO = #{bus_no}
+    </select>
+
+    <!-- 사업 정보 변경 -->
+    <update id="update_business" parameterType="business">
+        update BUSINESS set BUS_ID = #{bus_id},
+                            BUS_NAME = #{bus_name},
+                            BUS_ADDR = #{bus_addr},
+                            BUS_TEL = #{bus_tel},
+                            BUS_SORT = #{bus_sort},
+                            BUS_ACCEPT = 3
+        where BUS_NO = #{bus_no}
+    </update>
+
+    <!-- 사업 정보 삭제 -->
+    <delete id="delete_business" parameterType="String">
+        delete from BUSINESS where BUS_NO = #{bus_no}
+    </delete>
+</mapper>

@@ -8,7 +8,9 @@
 </head>
 <body>
 <script type="text/javascript">
-location.href="boardList";
+
+ location.href = "main.do";
+
 </script>
 
 </body>
