@@ -39,7 +39,7 @@ public class BusinessController {
 
         businessService.enrollBusiness(business);
 
-        return "redirect:myPage";
+        return "redirect:businessList";
     }
 
     // 사업 관리 페이지

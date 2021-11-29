@@ -9,10 +9,11 @@
 <%@ include file="../layout/header.jsp" %>
 <section class="py-5">
     <div class="container-body">
+
+        <h2 class="body-title">
+            <strong>${member.name}</strong> 님 페이지
+        </h2>
         <table class="table">
-            <tr>
-                <strong>${member.name}</strong> 님 페이지
-            </tr>
             <tr>
                 <th>프로필</th>
                 <td>
@@ -20,7 +21,7 @@
 
                     </c:if>
                     <c:if test="${member.profile != null}">
-                        <img src="${path}/upload/${member.profile}" width="100" height="100"/>
+                        <img class="profile" src="${path}/upload/${member.profile}" width="100" height="100"/>
                     </c:if>
                 </td>
             </tr>
@@ -44,21 +45,23 @@
             </tr>
         </table>
         <div class="body-menu">
-            <input class="btn btn-outline-secondary" type="button" value="펫 등록"
-                   onclick="location.href='petEnrollForm'">
-            <input class="btn btn-outline-secondary" type="button" value="사업자 등록"
-                   onclick="location.href='businessEnrollForm'">
-            <input class="btn btn-outline-secondary" type="button" value="내 사업"
-                   onclick="location.href='businessList'">
+
+
             <input class="btn btn-outline-secondary" type="button" value="정보 수정"
                    onclick="location.href='infoUpdateForm'">
             <input class="btn btn-outline-secondary" type="button" value="회원 탈퇴"
                    onclick="location.href='memberDeleteForm'">
+
         </div>
     </div>
-
+</section>
+<section class="py-5">
     <div class="container">
         <h2 class="body-title">나의 펫 목록</h2>
+        <div class="body-menu">
+            <input class="btn btn-outline-secondary" type="button" value="펫 등록"
+                   onclick="location.href='petEnrollForm'">
+        </div>
         <table class="table">
             <tr>
                 <th>이름</th>
@@ -78,7 +81,7 @@
                     <td>${pet.pet_gender}</td>
                     <td>${pet.pet_birth}</td>
                     <c:if test="${pet.pet_photo != null}">
-                        <td><img src="${path}/upload/${pet.pet_photo}" height="200" width="200"/></td>
+                        <td><img class="profile" src="${path}/upload/${pet.pet_photo}" height="200" width="200"/></td>
                     </c:if>
                     <c:if test="${pet.pet_photo == null}">
                         <td></td>
@@ -91,10 +94,10 @@
                             <input type="button" class="btn btn-outline-secondary" value="삭제"
                                    onclick="deleteCheck()">
                             <script>
-                                function deleteCheck(){
-                                    if(confirm("정말로 삭제하시겠습니까?") == true){	// 확인
-                                        location.href="deletePet?pet_no=${pet.pet_no}"
-                                    }else{										// 취소
+                                function deleteCheck() {
+                                    if (confirm("정말로 삭제하시겠습니까?") == true) {	// 확인
+                                        location.href = "deletePet?pet_no=${pet.pet_no}"
+                                    } else {										// 취소
                                         alert("취소되었습니다.");
                                         return false;
                                     }

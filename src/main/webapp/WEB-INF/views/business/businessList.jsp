@@ -8,8 +8,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="../layout/header.jsp" %>
 <section class="py-5">
-  <div class="container-body">
+  <div class="container">
     <h2 class="body-title">사업자 등록 요청</h2>
+    <div class="body-menu">
+      <input class="btn btn-outline-secondary" type="button" value="사업자 등록"
+             onclick="location.href='businessEnrollForm'">
+    </div>
     <table class="table table-hover">
       <tr>
         <th>회사명</th>
