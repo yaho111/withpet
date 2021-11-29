@@ -92,11 +92,12 @@ function check() {
 		alert("주차 가능 여부를 선택하세요!");
 		return false;
 	}
-	if ($("#hos_content").val() == "") {
-		alert("병원 소개를 입력하세요!");
-		$("#hos_content").focus();
-		return false;
-	}
+	if(CKEDITOR.instances.hos_content.getData() =='' 
+        || CKEDITOR.instances.hos_content.getData().length ==0){
+    alert("병원 소개 내용을 입력하세요!");
+    $("#hos_content").focus();
+    return false;
+}
 	if ($("#hos_content").val().length > 150) {
 		alert("병원 소개를 150자 이하로 입력하세요!");
 		$("#hos_content").focus();

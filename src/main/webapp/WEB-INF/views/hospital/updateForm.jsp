@@ -1,8 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="../layout/header.jsp"%>
 
-<!-- jquery 라이브러리 -->
-<script src="http://code.jquery.com/jquery-latest.js"></script>
+<!-- ckeditor 4 -->
+<link rel="stylesheet" href="${path}//ckeditor/contents.css"> <%--content에 ckeditro 걸어두기--%>
+
+<!-- <script src="https://cdn.ckeditor.com/4.12.1/standard-all/ckeditor.js"></script> -->
+<script type="text/javascript" src="${path}/ckeditor/ckeditor.js" ></script>
 
 <!-- 외부 자바스크립트 파일(유효성 검사) 불러오기 -->
 <script src="${path}/js/hospitalCheck.js"></script>
@@ -167,7 +170,13 @@
 				</tr>
 				<tr>
 					<th>병원 소개</th>
-					<td><textarea rows="5" cols="30" name="hos_content" id="hos_content" class="form-control">${hospital.hos_content}</textarea></td>
+					<td><textarea rows="5" cols="30" name="hos_content" id="hos_content" class="form-control">${hospital.hos_content}</textarea>
+						<script type="text/javascript">
+                    		CKEDITOR.replace('hos_content',{
+                        	filebrowserUploadUrl: '${pageContext.request.contextPath }/adm/fileUpload'
+                   			 }); // 에디터로 생성
+                		</script >
+					</td>
 				</tr>
 				<tr>
 					<th>병원 홈페이지/블로그 링크 <font size="1" color="gray">*선택</font></th>
