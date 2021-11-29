@@ -1,7 +1,9 @@
 package com.project.withpet.controller;
 
 import com.project.withpet.model.Member;
+import com.project.withpet.model.Pet;
 import com.project.withpet.service.MemberService;
+import com.project.withpet.service.PetService;
 import org.apache.commons.mail.HtmlEmail;
 import org.apache.ibatis.io.Resources;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,7 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
+import java.util.List;
 import java.util.Properties;
 import java.util.UUID;
 
@@ -26,6 +29,9 @@ public class MemberController {
 
     @Autowired
     private MemberService memberService;
+
+    @Autowired
+    private PetService petService;
 
     // 로그인 폼
     @RequestMapping(value = "/loginForm")
@@ -225,8 +231,11 @@ public class MemberController {
 
         Member member = memberService.selectMember(id);
 
+        List<Pet> petList = petService.selectPetList(id);
+
 
         model.addAttribute(member);
+        model.addAttribute("petList", petList);
 
         return "member/myPage";
     }
@@ -299,7 +308,7 @@ public class MemberController {
             newFileName = uuid + extension;
             System.out.println(newFileName);
 
-            if (size > 100000) { // 파일크기가 지정 한도를 초과하는 경우
+            if (size > 1000000) { // 파일크기가 지정 한도를 초과하는 경우
                 result = 1;
                 model.addAttribute("result", result);
 

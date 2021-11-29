@@ -19,7 +19,8 @@
                     <th>아이디</th>
                     <td>
                         <div class="input-group">
-                            <input name="id" id="id" size="14" class="form-control"/>
+                            <input name="id" id="id" size="14" class="form-control"
+                            placeholder="4-12자 영문 소문자, 숫자, _ 만 사용"/>
                             <input type="button" value="아이디 중복체크" class="btn btn-outline-secondary"
                                    onclick="id_check()"/>
                         </div>
@@ -30,15 +31,15 @@
                 <tr>
                     <th>비밀번호</th>
                     <td>
-                        <input type="password" name="pwd" id="pwd" size="14"
-                               class="form-control"/>
+                        <input type="password" name="pwd" id="pwd" size="21" class="form-control"
+                        placeholder="8-20자 영문, 숫자, 특수문자 혼합"/>
                     </td>
                 </tr>
 
                 <tr>
                     <th>비밀번호 확인</th>
                     <td>
-                        <input type="password" name="pwd_check" id="pwd_check" size="14"
+                        <input type="password" name="pwd_check" id="pwd_check" size="21"
                                class="form-control"/>
                     </td>
                 </tr>

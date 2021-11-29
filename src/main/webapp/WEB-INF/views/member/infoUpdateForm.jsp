@@ -25,8 +25,8 @@
                 <tr>
                     <th>비밀번호</th>
                     <td>
-                        <input type="password" name="pwd" id="pwd" size="14"
-                               class="form-control"/>
+                        <input type="password" name="pwd" id="pwd" size="14" class="form-control"
+                               placeholder="8-20자 영문, 숫자, 특수문자 혼합"/>
                     </td>
                 </tr>
 
