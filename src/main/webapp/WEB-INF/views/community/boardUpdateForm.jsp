@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html;charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../layout/header.jsp"%>
+
+<!-- ckeditor 4 -->
+<link rel="stylesheet" href="${path}//ckeditor/contents.css"> <%--content에 ckeditro 걸어두기--%>
+<!-- <script src="https://cdn.ckeditor.com/4.12.1/standard-all/ckeditor.js"></script> -->
+
+<script type="text/javascript" src="${path}/ckeditor/ckeditor.js" ></script>
+
 <section class="py-5">
     <div class="container-body">
 <form method=post action="boardUpdate">
@@ -21,15 +28,24 @@
 		</tr>
 		<tr>
 			<th>내용</th>
-			<td><textarea cols=40 rows=5 name="com_content" class="form-control">${community.com_content}</textarea></td>
+			<td><textarea cols=40 rows=5 name="com_content" id="com_content" class="form-control">${community.com_content}</textarea>
+						<script
+							type="text/javascript">
+								CKEDITOR
+										.replace(
+												'com_content',
+												{
+													filebrowserUploadUrl : '${pageContext.request.contextPath }/adm/fileUpload'
+												}); // 에디터로 생성
+							</script></td>
 		</tr>
 		<tr>
-			<th>첨부파일</th>
-				<td><input type="file" name="com_file1" class="form-control"></td>
+			  <th>첨부파일</th> 
+				<td><input type="file" name="com_file1" class="form-control">${community.com_file}</td>
 				
 			</tr>
 			<!-- <td><textarea cols=40 rows=5 name="com_file">${community.com_file}</textarea></td> -->
-		</tr>
+	
 		<div id="boardUpdateForm_menu" class="body-menu">
 		<tr>
 			<td colspan=2 align=center>
@@ -44,10 +60,3 @@
 </section>
 <%@ include file="../layout/footer.jsp"%>
 
-<!-- jquery -->
-<script type="text/javascript" src="jquery-3.4.1.min.js" ></script>
-<!-- ckeditor 4 -->
-<link rel="stylesheet" href="${path}//ckeditor/contents.css"> <%--content에 ckeditro 걸어두기--%>
-<!-- <script src="https://cdn.ckeditor.com/4.12.1/standard-all/ckeditor.js"></script> -->
-
-<script type="text/javascript" src="${path}/ckeditor/ckeditor.js" ></script>

@@ -2,6 +2,13 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../layout/header.jsp"%>
 
+<!-- ckeditor 4 -->
+<link rel="stylesheet" href="${path}//ckeditor/contents.css">
+<%--content에 ckeditro 걸어두기--%>
+<!-- <script src="https://cdn.ckeditor.com/4.12.1/standard-all/ckeditor.js"></script> -->
+
+<script type="text/javascript" src="${path}/ckeditor/ckeditor.js"></script>
+
 <!--   글 삭제 confirm 창 띄우기 -->
 <script>
 	function deleteCheck(){
@@ -34,74 +41,61 @@
 </script>
 <section class="py-5">
 	<div class="container-body">
-<form method=post action="delete">
-	<input type="hidden" name="com_no" value="${community.com_no}">
-	<input type="hidden" name="page" value="${page}">
-	<!--  <table class="table">-->
-			<table id="boardContent_table" border=1 width=500 align=center >
-		<h2 class="body-title" align="center">상세페이지</h2>
+		<form method=post action="delete">
+			<input type="hidden" name="com_no" value="${community.com_no}">
+			<input type="hidden" name="page" value="${page}">
+			<!--  <table class="table">-->
+			<table id="boardContent_table" class="table" border=1 width=500 align=center>
+				<h2 class="body-title" align="center">상세페이지</h2>
 
-		<tr>
-			<td>작성자</td>
-			<td>${community.com_writer}</td>
-		</tr>
-		<tr>
-			<td>날짜</td>
-			<td><fmt:formatDate value="${community.com_reg }"
-					pattern="yyyy-MM-dd EE요일 " /></td>
-		</tr>
-		<tr>
-			<td>조회수</td>
-			<td>${community.com_readcnt }</td>
-		</tr>
-		<tr>
-			<td>추천수</td>
-			<td>${community.com_likecnt }</td>
-			</td>
-		</tr>
-		<tr>
-			<td>제목</td>
-			<td>${community.com_title }</td>
-		</tr>
-		<tr>
-			<td>내용</td>
-			<td><pre>
-					<img src="/webapp/uplode/${community.com_file}" width="300" align="left"/></pre>
-			 ${community.com_content }</td>
-			
-		</tr>
-		
-	</table>
-	<div id="boardContent_menu" class="body-menu" align="center">
-		<c:if test="${sessionScope.id == community.com_writer}">
-			<input type="button" value="수정" class="btn btn-outline-secondary"
-				onClick="location.href='boardUpdateForm?com_no=${community.com_no}&page=${page}'">
-			<input type="button" value="삭제" class="btn btn-outline-secondary" onClick="deleteCheck()">
-			<!--  	<input type="button" value="♥like" 
+				<tr>
+					<td>작성자</td>
+					<td>${community.com_writer}</td>
+				</tr>
+				<tr>
+					<td>날짜</td>
+					<td><fmt:formatDate value="${community.com_reg }"
+							pattern="yyyy-MM-dd EE요일 " /></td>
+				</tr>
+				<tr>
+					<td>조회수</td>
+					<td>${community.com_readcnt }</td>
+				</tr>
+				<tr>
+					<td>추천수</td>
+					<td>${community.com_likecnt }</td>
+					</td>
+				</tr>
+				<tr>
+					<td>제목</td>
+					<td>${community.com_title }</td>
+				</tr>
+				<tr>
+					<td>내용</td>
+					 <td> ${community.com_content }</td>
+				</tr>
+			</table>
+			<div id="boardContent_menu" class="body-menu" align="center">
+				<c:if test="${sessionScope.id == community.com_writer}">
+					<input type="button" value="수정" class="btn btn-outline-secondary"
+						onClick="location.href='boardUpdateForm?com_no=${community.com_no}&page=${page}'">
+					<input type="button" value="삭제" class="btn btn-outline-secondary"
+						onClick="deleteCheck()">
+					<!--  	<input type="button" value="♥like" 
                 onClick="location.href='./boardList?page=${page}' ">  	-->
-		</c:if>
-		<tr>
-		<td colspan=2 align="center">
-			<input type="button" value="추천" class="btn btn-outline-secondary" onClick="ComLikeButton()" >
-		</td>
-	</tr>
-		<input type="button" value="목록" class="btn btn-outline-secondary"
-			onClick="location.href='boardList?page=${page}'">
+				</c:if>
+				<tr>
+					<td colspan=2 align="center"><input type="button" value="추천"
+						class="btn btn-outline-secondary" onClick="ComLikeButton()">
+					</td>
+				</tr>
+				<input type="button" value="목록" class="btn btn-outline-secondary"
+					onClick="location.href='boardList?page=${page}'">
+			</div>
+		</form>
 	</div>
-	</form>
-	        	</div>
 </section>
 
-<<<<<<< Updated upstream
-	<%@ include file="../layout/footer.jsp"%> 
-	
-	<!-- jquery -->
-<script type="text/javascript" src="jquery-3.4.1.min.js" ></script>
-<!-- ckeditor 4 -->
-<link rel="stylesheet" href="${path}//ckeditor/contents.css"> <%--content에 ckeditro 걸어두기--%>
-<!-- <script src="https://cdn.ckeditor.com/4.12.1/standard-all/ckeditor.js"></script> -->
+<%@ include file="../layout/footer.jsp"%>
 
-<script type="text/javascript" src="${path}/ckeditor/ckeditor.js" ></script>
-=======
-	<%@ include file="../layout/footer.jsp"%>
->>>>>>> Stashed changes
+

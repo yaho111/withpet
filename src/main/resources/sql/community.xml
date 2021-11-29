@@ -13,7 +13,7 @@
 	
 	<!-- 글갯수 -->
 	<select id="getTotal" parameterType="community" resultType="int">
-		select count(*) from community 
+		select count(*) from community
 		<where>
 			<if test="keyword != null and search !='subcon'">
 				${search} like '%'||#{keyword}||'%'
@@ -21,7 +21,7 @@
 			<if test="keyword != null and search=='subcon'">
 				com_title like '%'||#{keyword}||'%' or
 				com_content like '%'||#{keyword}||'%'
-			</if>			
+			</if>
 		</where>
 	</select>
 	
