@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 
 @Repository
@@ -43,8 +44,8 @@ public class MemberDAO {
     }
 
     // 아이디 검색
-    public Member findId(Member member) {
-        return sqlSession.selectOne("id_find", member);
+    public List<String> findId(Member member) {
+        return sqlSession.selectList("id_find", member);
     }
 
     // 내 정보, 내 정보 수정 폼
