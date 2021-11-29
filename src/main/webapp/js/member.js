@@ -62,6 +62,10 @@ function check() {
         $("#domain").val("").focus();
         return false;
     }
+
+    if(validate_userpwd() == false) {
+        return false;
+    }
 }
 
 function post_search() {
@@ -130,7 +134,34 @@ function validate_userid(id) {
     var pattern = new RegExp(/^[a-z0-9_]+$/);
     //영문 소문자,숫자 ,_가능,정규표현식
     return pattern.test(id);
-};
+}
+
+function validate_userpwd() {
+    var pwd = $("#pwd").val();
+    var num = pwd.search(/[0-9]/g);
+    var eng = pwd.search(/[a-z]/ig);
+    var spe = pwd.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
+
+    if(pwd.length < 8 || pwd.length > 20){
+
+        alert("8자리 ~ 20자리 이내로 입력해주세요.");
+        $("#pwd_check").val("");
+        $("#pwd").val("").focus();
+        return false;
+    }else if(pwd.search(/\s/) != -1){
+        alert("비밀번호는 공백 없이 입력해주세요.");
+        $("#pwd_check").val("");
+        $("#pwd").val("").focus();
+        return false;
+    }else if(num < 0 || eng < 0 || spe < 0 ){
+        alert("영문,숫자, 특수문자를 혼합하여 입력해주세요.");
+        $("#pwd_check").val("");
+        $("#pwd").val("").focus();
+        return false;
+    }else {
+        return true;
+    }
+}
 
 function domain_list() {
     var num = form.mail_list.selectedIndex;
