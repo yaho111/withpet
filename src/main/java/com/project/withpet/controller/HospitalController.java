@@ -44,8 +44,8 @@ public class HospitalController {
 		
 		// 1) 주소 처리
 		// 우편번호 + 주소 + 상세 주소
-		String hos_addr = request.getParameter("post") + "-" + request.getParameter("addr")
-        + "-" + request.getParameter("specificAddress");
+		String hos_addr = request.getParameter("post") + "+" + request.getParameter("addr")
+        + "+" + request.getParameter("specificAddress");
 		
 		hospital.setHos_addr(hos_addr);	
 		
@@ -176,7 +176,7 @@ public class HospitalController {
 		
 		// 1) 주소 처리
 		// 지도 출력을 위한 '주소'만 얻기 위해 우편번호 + 주소 + 상세 주소로 나누기
-		StringTokenizer st = new StringTokenizer(hospital.getHos_addr(), "-");
+		StringTokenizer st = new StringTokenizer(hospital.getHos_addr(), "+");
 		
 		String post = st.nextToken();
 		String addr = st.nextToken();
@@ -218,7 +218,7 @@ public class HospitalController {
 		Hospital hospital = hospitalService.select(hos_no);
 		
 		// 1) 주소 처리
-		StringTokenizer st01 = new StringTokenizer(hospital.getHos_addr(), "-");
+		StringTokenizer st01 = new StringTokenizer(hospital.getHos_addr(), "+");
 		
 		String post = st01.nextToken();
 		String addr = st01.nextToken();
@@ -257,8 +257,8 @@ public class HospitalController {
 		
 		// 1) 주소 처리		
 		// 우편번호 + 주소 + 상세 주소
-		String hos_addr = request.getParameter("post") + "-" + request.getParameter("addr")
-        + "-" + request.getParameter("specificAddress");
+		String hos_addr = request.getParameter("post") + "+" + request.getParameter("addr")
+        + "+" + request.getParameter("specificAddress");
 		
 		hospital.setHos_addr(hos_addr);				
 		System.out.println("hos_addr:"+hos_addr);
