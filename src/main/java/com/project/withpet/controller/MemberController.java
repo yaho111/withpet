@@ -308,7 +308,7 @@ public class MemberController {
             newFileName = uuid + extension;
             System.out.println(newFileName);
 
-            if (size > 100000) { // 파일크기가 지정 한도를 초과하는 경우
+            if (size > 1000000) { // 파일크기가 지정 한도를 초과하는 경우
                 result = 1;
                 model.addAttribute("result", result);
 

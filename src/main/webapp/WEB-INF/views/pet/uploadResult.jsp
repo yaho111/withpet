@@ -5,7 +5,7 @@
 
 <c:if test="${result == 1 }">
     <script>
-        alert("파일은 100KB까지 업로드 가능합니다.");
+        alert("파일은 1MB까지 업로드 가능합니다.");
         history.go(-1);
     </script>
 </c:if>
