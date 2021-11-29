@@ -48,6 +48,7 @@
 					<img src="${path}/upload/hospital/${hospital.hos_file}" height="300" width="300" />
 				</c:if></td>
 			<td>
+			<!-- 지도 출력 -->
 				<div id="map" style="width: 400px; height: 300px;"></div> <script
 					type="text/javascript"
 					src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${appKey}&libraries=services,clusterer,drawing"></script>
@@ -79,17 +80,17 @@
 					            position: coords
 					        });
 					        
-					     	// 커스텀 오버레이에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+					     	// 커스텀 오버레이에 표출될 내용으로 HTML 문자열이나 document element가 가능
 					        var content = '<div class="customoverlay">' +
 					            '  <a href="https://map.kakao.com/link/search/${addr}" target="_blank">' +
 					            '    <span class="title">${hospital.hos_name}</span>' +
 					            '  </a>' +
 					            '</div>';
 
-					        // 커스텀 오버레이가 표시될 위치입니다 
+					        // 커스텀 오버레이가 표시될 위치
 					        var position = new kakao.maps.LatLng(result[0].y, result[0].x);  
 
-					        // 커스텀 오버레이를 생성합니다
+					        // 커스텀 오버레이를 생성
 					        var customOverlay = new kakao.maps.CustomOverlay({
 					            map: map,
 					            position: position,
@@ -99,33 +100,36 @@
 
 					        map.setCenter(coords);
 					    } 
-					});    
-
-					
+					});    					
 				</script>
 			</td>
 		</tr>
 		<tr>
-			<td colspan=2>${hospital.hos_addr}</td>
+			<td>주소</td>
+			<td>${addr} ${specificAddress}</td>
 		</tr>
 		<tr>
-			<td colspan=2>${hospital.hos_tel}</td>
+			<td>전화번호</td>
+			<td>${hospital.hos_tel}</td>
 		</tr>
 		<tr>
-			<td colspan=2>${hos_time}</td>
+			<td>운영 시간</td>
+			<td>${hos_time}</td>
 		</tr>
 		<tr>
-			<td colspan=2>${hos_content}</td>
+			<td>병원 소개</td>
+			<td>${hos_content}</td>
 		</tr>
 		<tr>
 			<c:if test="${not empty hospital.hos_link}">
-				<td colspan=2><a href="http://${hospital.hos_link}" target="_blank"
+				<td>병원 홈페이지/블로그 링크</td>
+				<td><a href="http://${hospital.hos_link}" target="_blank"
 					style="text-decoration: none">${hospital.hos_link}</a></td>
 			</c:if>
 		</tr>
 		<tr>
 			<c:if test="${hospital.hos_24 == 'Y' || hospital.hos_holiday == 'Y' || hospital.hos_parking == 'Y'}">
-				<td colspan=2><c:if test="${not empty hospital.hos_24 && hospital.hos_24 == 'Y'}">24시&nbsp;</c:if>
+				<td colspan=2 align="center"><c:if test="${not empty hospital.hos_24 && hospital.hos_24 == 'Y'}">24시&nbsp;</c:if>
 					<c:if test="${not empty hospital.hos_holiday && hospital.hos_holiday == 'Y'}">연중무휴&nbsp;&nbsp;</c:if>
 					<c:if test="${not empty hospital.hos_parking && hospital.hos_parking == 'Y'}">주차 가능</c:if>
 				</td>

@@ -203,6 +203,7 @@ public class HospitalController {
         // 공유 설정
 		model.addAttribute("hospital", hospital);
 		model.addAttribute("addr", addr);
+		model.addAttribute("specificAddress", specificAddress);
 		model.addAttribute("hos_content", hos_content);
 		model.addAttribute("hos_time", hos_time);
 		model.addAttribute("appKey", appKey);
