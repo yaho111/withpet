@@ -9,6 +9,7 @@ import java.util.StringTokenizer;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.io.Resources;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -250,6 +251,7 @@ public class HospitalController {
 						Hospital hospital, 
 						String page,
 						HttpServletRequest request,
+						HttpSession session,
 						Model model) throws Exception {				
 		
 		// 1) 주소 처리		
@@ -279,6 +281,15 @@ public class HospitalController {
 		String newfilename = "";
 		
 		if(filename != "") {	// 첨부파일이 전송된 경우
+			
+			// 기존 첨부파일 데이터 삭제
+			Hospital tarketHospital = hospitalService.select(hospital.getHos_no());	// 삭제할 게시글 정보 불러오기
+			String hos_file = tarketHospital.getHos_file();					// 삭제할 첨부파일
+			
+			if(hos_file != null) {
+				File needToDelete = new File(path + "/" + hos_file);
+				needToDelete.delete();
+			}
 			
 			// 파일 중복 문제 해결
 			String extension = filename.substring(filename.lastIndexOf("."), filename.length());
@@ -337,8 +348,19 @@ public class HospitalController {
 	
 	// 글 삭제(delete)
 	@RequestMapping("delete")
-	public String delete(int hos_no, String page, Model model) {
+	public String delete(int hos_no, String page, HttpSession session, Model model) {
 		
+		// 글 정보를 가져와서 첨부판 파일이 있는 경우 삭제
+		String path = session.getServletContext().getRealPath("upload/hospital"); // 첨부파일 경로
+		Hospital targetHospital = hospitalService.select(hos_no);		// 삭제할 게시글 정보 불러오기
+		String hos_file = targetHospital.getHos_file();					// 삭제할 첨부파일
+		
+		if(hos_file != null) {
+			File needToDelete = new File(path + "/" + hos_file);
+			needToDelete.delete();
+		}
+		
+		// 글 삭제 메소드 호출 및 삭제 후 메세지 전달
 		int deleteResult = hospitalService.delete(hos_no);
 		
 		model.addAttribute("deleteResult", deleteResult);
