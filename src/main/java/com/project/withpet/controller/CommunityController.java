@@ -40,79 +40,67 @@ public class CommunityController {
 		return "community/boardForm";
 	}
 
-	// 글작성
-		@RequestMapping("/boardWrite")
-		public String boardwrite(@ModelAttribute Community community, Model model) {
-			System.out.println("com_writer:" + community.getCom_writer());
 
-			int result = service.insert(community);
-			System.out.println("result:" + result);
+	@RequestMapping("/boardWrite")
+	public String boardwrite(@RequestParam("com_file1") MultipartFile multiFile, Community community, HttpServletRequest request, Model model) throws Exception {
+		System.out.println("com_writer:" + community.getCom_writer());
 
-			model.addAttribute("result", result);
+	    String communityFileName = multiFile.getOriginalFilename(); // 파일명 저장
+		int size = (int) multiFile.getSize(); // 첨부파일 크기 불러옴(단위 : byte), getSize()는 long형 - in 형으로 다운 케스팅(명시적 형 변환) 해야함
+		
+		String path = request.getRealPath("upload"); // upload/notice를 불러와라
+		System.out.println("mutiFile=" + multiFile);
+		System.out.println("filename=" + communityFileName);
+		System.out.println("size=" + size);
+		System.out.println("Path=" + path);
+		int upResult = 0;
 
-			return "community/insertResult";
+		String newFileName = "";
+
+		if (communityFileName != "") { // 첨부파일이 전송된 경우
+
+			// 파일 중복문제 해결
+			String extension = communityFileName.substring(communityFileName.lastIndexOf("."), communityFileName.length());
+			System.out.println("extension:" + extension);
+
+			UUID uuid = UUID.randomUUID(); // 난수 발생
+
+			newFileName = uuid.toString() + extension;
+			System.out.println("newFileName:" + newFileName);
+
+			String communityFile[] = new String[2];
+
+			StringTokenizer st = new StringTokenizer(communityFileName, ".");
+			communityFile[0] = st.nextToken(); // 파일명 저장
+			communityFile[1] = st.nextToken(); // 확장자 저장 (jpg)
+
+			if (size > 10000000) { // 100000 = 100kb, 10000000 = 10mb
+				upResult = 1;
+				model.addAttribute("upResult", upResult);
+
+				return "community/uploadResult"; // 여기서 메세지 뿌림
+
+			} else if (!communityFile[1].equals("jpg") && !communityFile[1].equals("gif") && !communityFile[1].equals("png")) {
+				// 확장자 비교, ! : 아니면
+				upResult = 2;
+				model.addAttribute("upResult", upResult);
+
+				return "community/uploadResult";
+			}
 		}
+		if (size > 0) { // 첨부파일이 전송된 경우
 
-//	@RequestMapping("/boardWrite")
-//	public String boardwrite(@RequestParam("com_file1") MultipartFile multiFile, Community community, HttpServletRequest request, Model model) throws Exception {
-//		System.out.println("com_writer:" + community.getCom_writer());
-//
-//	String communityFileName = multiFile.getOriginalFilename(); // 파일명 저장
-//		int size = (int) multiFile.getSize(); // 첨부파일 크기 불러옴(단위 : byte), getSize()는 long형 - in 형으로 다운 케스팅(명시적 형 변환) 해야함
-//
-//		String path = request.getRealPath("upload/notice"); // upload/notice를 불러와라
-//		System.out.println("mutiFile=" + multiFile);
-//		System.out.println("filename=" + communityFileName);
-//		System.out.println("size=" + size);
-//		System.out.println("Path=" + path);
-//		int upResult = 0;
-//
-//		String newFileName = "";
-//
-//		if (communityFileName != "") { // 첨부파일이 전송된 경우
-//
-//			// 파일 중복문제 해결
-//			String extension = communityFileName.substring(communityFileName.lastIndexOf("."), communityFileName.length());
-//			System.out.println("extension:" + extension);
-//
-//			UUID uuid = UUID.randomUUID(); // 난수 발생
-//
-//			newFileName = uuid.toString() + extension;
-//			System.out.println("newFileName:" + newFileName);
-//
-//			String communityFile[] = new String[2];
-//
-//			StringTokenizer st = new StringTokenizer(communityFileName, ".");
-//			communityFile[0] = st.nextToken(); // 파일명 저장
-//			communityFile[1] = st.nextToken(); // 확장자 저장 (jpg)
-//
-//			if (size > 10000000) { // 100000 = 100kb, 10000000 = 10mb
-//				upResult = 1;
-//				model.addAttribute("upResult", upResult);
-//
-//				return "community/uploadResult"; // 여기서 메세지 뿌림
-//
-//			} else if (!communityFile[1].equals("jpg") && !communityFile[1].equals("gif") && !communityFile[1].equals("png")) {
-//				// 확장자 비교, ! : 아니면
-//				upResult = 2;
-//				model.addAttribute("upResult", upResult);
-//
-//				return "community/uploadResult";
-//			}
-//		}
-//		if (size > 0) { // 첨부파일이 전송된 경우
-//
-//			multiFile.transferTo(new File(path + "/" + newFileName));
-//		}
-//		community.setCom_file(newFileName);
-//		
-//		int result = service.insert(community);
-//		System.out.println("result:" + result);
-//
-//		model.addAttribute("result", result);
-//
-//		return "community/insertResult";
-//	}
+			multiFile.transferTo(new File(path + "/" + newFileName));
+		}
+		community.setCom_file(newFileName);
+		
+		int result = service.insert(community);
+		System.out.println("result:" + result);
+
+		model.addAttribute("result", result);
+
+		return "community/insertResult";
+	}
 
 	// 글목록
 	@RequestMapping("/boardList")

@@ -13,12 +13,33 @@
 		}
 	}
 </script>
-
+<script>
+	function ComLikeButton(){
+		if(${empty sessionScope.id}) {
+			alert("로그인이 필요한 서비스입니다!");
+			return false;
+			
+		}else if("${sessionScope.id}" == "${community.com_writer}"){
+			alert("자신의 글은 추천할 수 없습니다!");
+			return false;
+	
+		}else {
+			var ComLikeData = 'com_no='+${community.com_no}+'&id='+"${sessionScope.id}";		
+			$.post('${path}/hosLikeInsert', ComLikeData, function(message) {
+				alert(message);
+			});
+			return false;
+		}
+	}
+</script>
+<section class="py-5">
+	<div class="container-body">
 <form method=post action="delete">
 	<input type="hidden" name="com_no" value="${community.com_no}">
 	<input type="hidden" name="page" value="${page}">
-	<table class="table">
-		<h2 class="body-title">상세페이지</h2>
+	<!--  <table class="table">-->
+			<table id="boardContent_table" border=1 width=500 align=center >
+		<h2 class="body-title" align="center">상세페이지</h2>
 
 		<tr>
 			<td>작성자</td>
@@ -34,32 +55,44 @@
 			<td>${community.com_readcnt }</td>
 		</tr>
 		<tr>
+			<td>추천수</td>
+			<td>${community.com_likecnt }</td>
+			</td>
+		</tr>
+		<tr>
 			<td>제목</td>
 			<td>${community.com_title }</td>
 		</tr>
 		<tr>
 			<td>내용</td>
-			<td><pre>${community.com_content }</pre></td>
+			<td><pre>
+					<img src="/webapp/uplode/${community.com_file}" width="300" align="left"/></pre>
+			 ${community.com_content }</td>
+			
 		</tr>
-		<tr>
-			<td>첨부파일</td>
-			<td><pre>${community.com_file }</pre></td>
-		</tr>
-	
-</table>
-<div align="center">
+		
+	</table>
+	<div id="boardContent_menu" class="body-menu" align="center">
 		<c:if test="${sessionScope.id == community.com_writer}">
-			<input type="button" value="수정"
+			<input type="button" value="수정" class="btn btn-outline-secondary"
 				onClick="location.href='boardUpdateForm?com_no=${community.com_no}&page=${page}'">
-		  	<input type="button" value="삭제"
-				onClick="deleteCheck()">
+			<input type="button" value="삭제" class="btn btn-outline-secondary" onClick="deleteCheck()">
 			<!--  	<input type="button" value="♥like" 
-                onClick="location.href='./boardList?page=${page}' ">  	-->			
+                onClick="location.href='./boardList?page=${page}' ">  	-->
 		</c:if>
-			<input type="button" value="목록"
-				onClick="location.href='boardList?page=${page}'">
+		<tr>
+		<td colspan=2 align="center">
+			<input type="button" value="추천" class="btn btn-outline-secondary" onClick="ComLikeButton()" >
+		</td>
+	</tr>
+		<input type="button" value="목록" class="btn btn-outline-secondary"
+			onClick="location.href='boardList?page=${page}'">
 	</div>
+	</form>
+	        	</div>
+</section>
 
+<<<<<<< Updated upstream
 	<%@ include file="../layout/footer.jsp"%> 
 	
 	<!-- jquery -->
@@ -69,3 +102,6 @@
 <!-- <script src="https://cdn.ckeditor.com/4.12.1/standard-all/ckeditor.js"></script> -->
 
 <script type="text/javascript" src="${path}/ckeditor/ckeditor.js" ></script>
+=======
+	<%@ include file="../layout/footer.jsp"%>
+>>>>>>> Stashed changes

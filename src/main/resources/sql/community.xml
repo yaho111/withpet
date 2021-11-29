@@ -6,7 +6,7 @@
 
 	<!-- 글작성 -->
 	<insert id="insertBoard" parameterType="community">
-		insert into community
+		 insert into community
 		values(community_seq.nextval,#{com_title},#{com_writer},
 		0,sysdate,#{com_content},#{com_file},0)
 	</insert>
@@ -15,10 +15,13 @@
 	<select id="getTotal" parameterType="community" resultType="int">
 		select count(*) from community 
 		<where>
-			<if test="keyword != null">
+			<if test="keyword != null and search !='subcon'">
 				${search} like '%'||#{keyword}||'%'
 			</if>
-			
+			<if test="keyword != null and search=='subcon'">
+				com_title like '%'||#{keyword}||'%' or
+				com_content like '%'||#{keyword}||'%'
+			</if>			
 		</where>
 	</select>
 	
@@ -29,6 +32,10 @@
 		<where>
 			<if test="keyword != null and search!='subcon'">
 				${search} like '%'||#{keyword}||'%'
+			</if>
+			<if test="keyword != null and search=='subcon'">
+				com_title like '%'||#{keyword}||'%' or
+				com_content like '%'||#{keyword}||'%'
 			</if>
 		</where>			
 			 order by com_no desc) a )
@@ -51,7 +58,6 @@
 		update community set com_writer=#{com_writer}, com_title=#{com_title}
 		,com_content=#{com_content}, com_reg=sysdate where com_no=#{com_no}
 	</update>
-	
 	
 	  <!-- 글삭제     -->
 	<delete id="delete" parameterType="int">

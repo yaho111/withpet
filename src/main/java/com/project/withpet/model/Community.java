@@ -14,7 +14,8 @@ public class Community {
 	    private String com_file;	// 첨부파일
 	    private int com_likecnt;
 	    private int startRow;
-	    private int endRow;	    
+	    private int endRow;	  
+	    
 	    
 	 // 검색
 		private String search;
@@ -92,7 +93,5 @@ public class Community {
 		public void setEndRow(int endRow) {
 			this.endRow = endRow;
 		}
-		
-	    	
-	}
 
+	}

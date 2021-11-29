@@ -1,6 +1,6 @@
 package com.project.withpet.service;
 
-public class Paging {
+public class PagingPgm {
 	private int total;				// 데이터 갯수
 	private int rowPerPage;			// 화면에 출력할 데이터 갯수
 	private int pagePerBlk = 10;    // 블럭당 페이지 갯수 (1개의 블럭당 10개의 페이지)
@@ -9,7 +9,7 @@ public class Paging {
 	private int endPage;            // 각 블럭의 끝 페이지
 	private int totalPage;			// 총 페이지 수
 
-	public Paging(int total, int rowPerPage, int currentPage) {
+	public PagingPgm(int total, int rowPerPage, int currentPage) {
 		this.total = total;
 		this.rowPerPage = rowPerPage;
 		this.currentPage = currentPage;

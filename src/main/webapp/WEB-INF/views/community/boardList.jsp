@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html;charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<<<<<<< Updated upstream
  <!DOCTYPE html>
 <html>
 <head>
@@ -21,6 +21,18 @@
 	<a href="boardForm">글작성</a> 글갯수 : ${paging.total}
 	<table border=1 align="center" width=800 class="table table-striped">
 		<caption>커뮤니티 게시판 목록</caption>
+=======
+<%@ include file="../layout/header.jsp"%>
+
+<div id="boardWrite" class="body-menu">
+     <c:if test="${sessionScope.id != community.com_writer}">
+	 <a href="boardForm"><input type="button" value="글작성" class="btn btn-outline-secondary"></a>
+	 </c:if>	 
+	 글갯수 : ${paging.total} 
+	  </div>
+	<table border=1 align="center" width=500 class="table table-scccess table-striped">
+		<h3 align="center">커뮤니티 게시판 목록</h3>
+>>>>>>> Stashed changes
 		<tr>
 			<th>번호</th>
 			<th>제목</th>
@@ -54,7 +66,7 @@
 					<c:set var="com_no1" value="${com_no1-1}"/>	
 					</th>
 					<th>					
-						<div align="center">
+						<div align="left">
 							<a href="boardContent?com_no=${community.com_no}&page=${currentPage}">
 								${community.com_title} </a>
 						</div>
@@ -78,42 +90,49 @@
 				<c:if test="${search=='com_content'}">selected="selected" </c:if>>내용</option>
 			<option value="com_writer"
 				<c:if test="${search=='com_writer'}">selected="selected" </c:if>>작성자</option>
-
+            <option value="subcon"
+					<c:if test="${search=='subcon'}">selected="selected" </c:if>>제목+내용</option>
 		</select> <input type="text" name="keyword"> 
 		<input type="submit" value="확인">
 	</form>
-
+	<nav>
 	<ul class="pagination" style="text-align:center">
+	<li class="page-item">
 			<!-- 검색 했을 경우의 페이징 처리 -->
 			<c:if test="${not empty keyword}">
 				<c:if test="${startPage > 10 }">
-					<li><a
+					<li><a class="page-link" 
 						href="boardList?pageNum=${startPage - 1}&search=${search}&keyword=${keyword}">이전</a></li>
 				</c:if>
 				<c:forEach var="i" begin="${startPage}" end="${endPage}">
-					<li <c:if test="${currentPage==i}">class="active"</c:if>><a
-						href="boardList?pageNum=${i}&search=${search}&keyword=${keyword}">${i}</a></li>
+					<li <c:if test="${currentPage==i}">class="active"</c:if>>
+					<a class="page-link"  href="boardList?pageNum=${i}&search=${search}&keyword=${keyword}">${i}</a></li>
 				</c:forEach>
 				<c:if test="${endPage < totalPage}">
-					<li><a
+					<li><a class="page-link" 
 						href="boardList?pageNum=${endPage + 1}&search=${search}&keyword=${keyword}">다음</a></li>
 				</c:if>
 			</c:if>
 			
 			<!-- 전체 목록의 페이징 처리 -->
+			
 			<c:if test="${empty keyword}">
 				<c:if test="${startPage > 10 }">
-					<li><a href="boardList?pageNum=${startPage - 1}">이전</a></li>
-				</c:if>
+				
+			
+					<li><a class="page-link"  href="boardList?pageNum=${startPage - 1}">이전</a></li>
+				</c:if>,
 				<c:forEach var="i" begin="${startPage}" end="${endPage}">
 					<li <c:if test="${currentPage==i}">class="active"</c:if>>
-						<a href="boardList?pageNum=${i}">${i}</a></li>
+						<a class="page-link"  href="boardList?pageNum=${i}">${i}</a></li>
 				</c:forEach>
 				<c:if test="${endPage < totalPage}">
-					<li><a href="boardList?pageNum=${endPage + 1}">다음</a></li>
+					<li><a class="page-link"  href="boardList?pageNum=${endPage + 1}">다음</a></li>
 				</c:if>
 			</c:if>
+			</li>
 	</ul>
+<<<<<<< Updated upstream
 
 		
 </body>
@@ -129,3 +148,7 @@
 
 <script type="text/javascript" src="${path}/ckeditor/ckeditor.js" ></script>
 	
+=======
+</nav>
+	<%@ include file="../layout/footer.jsp"%> 
+>>>>>>> Stashed changes
