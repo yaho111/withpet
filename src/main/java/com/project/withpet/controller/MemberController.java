@@ -296,6 +296,7 @@ public class MemberController {
         String loginId = session.getAttribute("id").toString();
         Member loginMember = memberService.selectMember(loginId);
 
+
         // 파일이 전송된 경우
         if (filename != "") {
 
@@ -327,6 +328,11 @@ public class MemberController {
         }
 
         if (size > 0) {
+            String originalProfile = loginMember.getProfile();
+            if(originalProfile != null){
+                File needToDelete = new File(path + "/" + originalProfile);
+                needToDelete.delete();
+            }
             multipartFile.transferTo(new File(path + "/" + newFileName));
             member.setProfile(newFileName);
         } else {
