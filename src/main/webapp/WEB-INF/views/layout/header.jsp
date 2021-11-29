@@ -29,6 +29,15 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
     <script src="${path}/js/scripts.js"></script>
+    
+    <!-- 병원 상세 페이지 지도 API 라이브러리 적용 -->
+    <style>
+    	.customoverlay {position:relative;bottom:85px;border-radius:6px;border: 1px solid #ccc;border-bottom:2px solid #ddd;float:left;}
+		.customoverlay:nth-of-type(n) {border:0; box-shadow:0px 1px 2px #888;}
+		.customoverlay a {display:block;text-decoration:none;color:#000;text-align:center;border-radius:6px;font-size:14px;font-weight:bold;overflow:hidden;background: #238CFA;background: #238CFA url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png) no-repeat right 14px center;}
+		.customoverlay .title {display:block;text-align:center;background:#fff;margin-right:35px;padding:10px 15px;font-size:14px;font-weight:bold;}
+		.customoverlay:after {content:'';position:absolute;margin-left:-12px;left:50%;bottom:-12px;width:22px;height:12px;background:url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
+    </style>
 </head>
 
 <body>
@@ -53,10 +62,9 @@
             </c:if>
             <c:if test="${sessionScope.id == null}">
                 <form class="d-flex">
-                    <input type="button" class="btn btn-outline-success" value="회원 가입"
-                           onclick="location.href='joinForm'">
-                    <input type="button" class="btn btn-outline-success" value="로그인"
-                           onclick="location.href='loginForm'">
+
+                    <input type="button" class="btn btn-outline-success" value="회원 가입" onclick="location.href='joinForm'">
+                    <input type="button" class="btn btn-outline-success" value="로그인" onclick="location.href='loginForm'">
                 </form>
             </c:if>
         </div>
@@ -73,11 +81,11 @@
                 aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                <li class="nav-item"><a class="nav-link active" aria-current="page" href="boardList">커뮤니티</a></li>
-                <li class="nav-item"><a class="nav-link" href="productList">스토어</a></li>
-                <li class="nav-item"><a class="nav-link" href="hospitalList">병원</a></li>
-                <li class="nav-item"><a class="nav-link" href="qnaList">Q&A</a></li>
-                <li class="nav-item"><a class="nav-link" href="notList">공지사항</a></li>
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="${path}/boardList">커뮤니티</a></li>
+                <li class="nav-item"><a class="nav-link" href="${path}/productList">스토어</a></li>
+                <li class="nav-item"><a class="nav-link" href="${path}/hospitalList">병원</a></li>
+                <li class="nav-item"><a class="nav-link" href="${path}/qnaList">Q&A</a></li>
+                <li class="nav-item"><a class="nav-link" href="${path}/notList">공지사항</a></li>
                 <!-- <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
