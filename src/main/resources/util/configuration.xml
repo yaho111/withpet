@@ -4,8 +4,12 @@
 
 <configuration>
 
-    <typeAliases>
+	<typeAliases>
+		<typeAlias alias="hospital" type="com.project.withpet.model.Hospital" />
         <typeAlias alias="member" type="com.project.withpet.model.Member"/>
+        <typeAlias alias="hoslike" type="com.project.withpet.model.Hoslike"/>
+        <typeAlias alias="comlike" type="com.project.withpet.model.Comlike"/>
+        <typeAlias alias="prolike" type="com.project.withpet.model.Prolike"/>
     </typeAliases>
 
 </configuration>
