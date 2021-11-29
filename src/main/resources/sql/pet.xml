@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="petns">
+
+    <!-- 펫 등록 -->
+    <insert id="enroll_pet" parameterType="pet">
+        insert into PET values (PET_SEQ.nextval, #{pet_sort}, #{pet_kind}, #{pet_name}, #{pet_gender}
+        , #{pet_birth}, #{pet_photo,jdbcType=VARCHAR}, #{pet_info}, #{pet_parent})
+    </insert>
+
+    <!--  펫 리스트 -->
+    <select id="select_pet_list" parameterType="string" resultType="pet">
+        select * from PET where PET_PARENT = #{pet_parent}
+    </select>
+
+    <!--  펫 선택 -->
+    <select id="select_pet" parameterType="int" resultType="pet">
+        select * from PET where PET_NO = #{pet_no}
+    </select>
+
+    <!-- 펫 정보 수정 -->
+    <update id="update_pet" parameterType="pet">
+        update PET set PET_NAME = #{pet_name},
+                       PET_SORT = #{pet_sort},
+                       PET_KIND = #{pet_kind},
+                       PET_GENDER = #{pet_gender},
+                       PET_BIRTH = #{pet_birth},
+                       PET_PHOTO = #{pet_photo,jdbcType=VARCHAR},
+                       PET_INFO = #{pet_info}
+where PET_NO = #{pet_no}
+    </update>
+
+    <!-- 펫 정보 삭제 -->
+    <delete id="delete_pet" parameterType="int">
+        delete from PET where PET_NO = #{pet_no}
+    </delete>
+</mapper>

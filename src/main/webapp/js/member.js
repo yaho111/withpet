@@ -27,7 +27,11 @@ function check() {
         $("#name").val("").focus();
         return false;
     }
-
+    if($("input[name=gender]:radio:checked").length < 1) {
+        alert("성별을 선택하세요");
+        $("#male").focus();
+        return false;
+    }
     if ($.trim($("#addr").val()) == "") {
         alert("주소를 입력하세요!");
         $("#addr").val("").focus();
@@ -56,6 +60,10 @@ function check() {
     if ($.trim($("#domain").val()) == "") {
         alert("메일 주소를 입력하세요!");
         $("#domain").val("").focus();
+        return false;
+    }
+
+    if(validate_userpwd() == false) {
         return false;
     }
 }
@@ -98,14 +106,16 @@ function id_check() {
         url: "idCheck",
         data: {"id": id},
         success: function (data) {
-            alert("return success=" + data);
+
             if (data == 1) {	//중복 ID
+                alert("중복 아이디입니다");
                 var idText = '<font color="red">중복 아이디입니다.</font>';
                 $("#id_check").text('').show().append(idText);
                 $("#id").val('').focus();
                 return false;
 
             } else {	//사용 가능한 ID
+                alert("사용 가능한 아이디입니다");
                 var idText = '<font color="blue">사용가능한 아이디입니다.</font>';
                 $("#id_check").text('').show().append(idText);
                 $("#pwd").focus();
@@ -124,10 +134,37 @@ function validate_userid(id) {
     var pattern = new RegExp(/^[a-z0-9_]+$/);
     //영문 소문자,숫자 ,_가능,정규표현식
     return pattern.test(id);
-};
+}
+
+function validate_userpwd() {
+    var pwd = $("#pwd").val();
+    var num = pwd.search(/[0-9]/g);
+    var eng = pwd.search(/[a-z]/ig);
+    var spe = pwd.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
+
+    if(pwd.length < 8 || pwd.length > 20){
+
+        alert("8자리 ~ 20자리 이내로 입력해주세요.");
+        $("#pwd_check").val("");
+        $("#pwd").val("").focus();
+        return false;
+    }else if(pwd.search(/\s/) != -1){
+        alert("비밀번호는 공백 없이 입력해주세요.");
+        $("#pwd_check").val("");
+        $("#pwd").val("").focus();
+        return false;
+    }else if(num < 0 || eng < 0 || spe < 0 ){
+        alert("영문,숫자, 특수문자를 혼합하여 입력해주세요.");
+        $("#pwd_check").val("");
+        $("#pwd").val("").focus();
+        return false;
+    }else {
+        return true;
+    }
+}
 
 function domain_list() {
-    var num = f.mail_list.selectedIndex;
+    var num = form.mail_list.selectedIndex;
 
     /*selectedIndex속성은 select객체하위의 속성으로서 해당리스트 목록번호를 반환
     */
@@ -135,22 +172,21 @@ function domain_list() {
         //num==-1은 해당 리스트목록이 없다
         return true;
     }
-    if (f.mail_list.value == "0") // 직접입력
+    if (form.mail_list.value == "0") // 직접입력
     {
         /*리스트에서 직접입력을 선택했을때*/
-        f.domain.value = "";
+        form.domain.value = "";
         //@뒤의 도메인입력란을 빈공간시켜라.
-        f.domain.readOnly = false;
+        form.domain.readOnly = false;
         //@뒤의 도메인입력란을 쓰기 가능
-        f.domain.focus();
+        form.domain.focus();
         //도메인입력란으로 입력대기상태
     } else {
         //리스트목록을 선택했을때
-        var value
-        f.domain.value = f.mail_list.options[num].value;
+        form.domain.value = form.mail_list.options[num].value;
         /*num변수에는 해당리스트 목록번호가 저장되어있다.해당리스트 번호의 option value값이 도메인입력란에 선택된다.options속성은 select객체의 속성으로서 해당리스트번호의 value값을 가져온다
         */
-        f.domain.readOnly = true;
+        form.domain.readOnly = true;
     }
 }
 
@@ -201,9 +237,9 @@ function edit_check() {
         $("#backNum").val("").focus();
         return false;
     }
-    if ($.trim($("#join_mailid").val()) == "") {
+    if ($.trim($("#mailId").val()) == "") {
         alert("메일 아이디를 입력하세요!");
-        $("#join_mailid").val("").focus();
+        $("#mailId").val("").focus();
         return false;
     }
     if ($.trim($("#domain").val()) == "") {
