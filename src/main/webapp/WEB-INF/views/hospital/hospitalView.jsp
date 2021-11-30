@@ -1,6 +1,32 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="../layout/header.jsp"%>
 
+<!-- 댓글 처리 -->
+<script type="text/javascript">
+	/* 	window.onload=function() {
+	
+	 } */
+	 $(function() {
+			$('#hosReList').load('${path}/hosReList?hos_no=${hospital.hos_no}') // 리스트를 불러온다., 
+			
+			// 댓글창 유효성 검사
+			$('#hosReInsert').click(function() {
+				if (!hos_form.hosReply_content.value) {
+					alert('댓글 입력 후에 클릭하세요.');
+					hos_form.hosReply_content.focus();
+					return false;
+				}
+			
+			// 댓글 입력, 입력후 
+			var frmData = $('form').serialize();	// serialize() : 아래의 form태그를 읽는함수. 			  
+			$.post('${path}/hosReInsert ', frmData, function(data) {
+				$('#hosReList').html(data);
+				hos_form.hosReply_content.value = '';
+			});
+		});
+	});
+</script>
+
 <!-- 추천 버튼 클릭 시 -->
 <script>
 	function hosLikeButton(){
@@ -152,8 +178,20 @@
 			<input type="button" value="목록" class="btn btn-outline-secondary"
 				onClick="location.href='hospitalList?page=${page}'">
 	</div>
-	
+		<!-- 댓글 처리 -->
+<p>		<!-- 위의 자바스크립에 값을 전달해줘야함 -->
+		<form name="hos_form" id="hos_form" >
+			<input type="hidden" name="hosReply_writer" value="${sessionScope.id}">
+			<input type="hidden" name="hos_no" value="${hospital.hos_no}"> 
+			<c:if test="${sessionScope.id != null}">
+			<input type="text" value="댓글" class="form-control" readonly="readonly" style="text-align:center;" >
+			<textarea name="hosReply_content" rows="2" style="width:100%; border: 0; resize: none;"></textarea>
+			<input type="button" value="확인" id="hosReInsert" class="form-control">
+			</c:if>
+		</form>
  </div>
 </section>
+
+<div id="hosReList"></div>
 
 <%@ include file="../layout/footer.jsp"%>

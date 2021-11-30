@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hosReplyns">
+
+<!-- 댓글 목록을 구해옴 -->
+<select id="hosRelist" parameterType="int" resultType="replyHospital">
+	select * from replyHospital where hos_no=#{hos_no} order by hosReply_no <!-- 부모가 같은 댓글 정렬 댓글 번호  -->
+</select>
+
+<!-- 총데이터 갯수 -->
+<select id="getCount" parameterType="replyHospital" resultType="int">
+	select count(*) from replyHospital
+</select>
+
+<!-- 댓글 작성 -->
+<insert id="hosReInsert" parameterType="replyHospital">	
+	insert into replyHospital values (hosReply_seq.nextval,#{hos_no},#{hosReply_writer},#{hosReply_content},
+	sysdate)
+</insert>
+
+<!-- 댓글 수정 -->
+<update id="hosReUpdate" parameterType="replyHospital">
+	update replyHospital set hosReply_content=#{hosReply_content}, regdate=sysdate where hosReply_no=#{hosReply_no}
+</update>
+
+<!-- 댓글 삭제 -->
+<delete id="hosReDelete" parameterType="int">
+	delete from replyHospital where hosReply_no=#{hosReply_no}
+</delete>
+
+
+</mapper>

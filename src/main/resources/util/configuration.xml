@@ -10,6 +10,7 @@
         <typeAlias alias="hoslike" type="com.project.withpet.model.Hoslike"/>
         <typeAlias alias="comlike" type="com.project.withpet.model.Comlike"/>
         <typeAlias alias="prolike" type="com.project.withpet.model.Prolike"/>
+        <typeAlias alias="replyHospital" type="com.project.withpet.model.ReplyHospital"/>
     </typeAliases>
 
 </configuration>
