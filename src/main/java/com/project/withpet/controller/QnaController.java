@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.project.withpet.model.Member;
 import com.project.withpet.model.Qna;
+import com.project.withpet.service.ManagerService;
 import com.project.withpet.service.PagingPgm;
 import com.project.withpet.service.QnaService;
 
@@ -49,6 +51,9 @@ public class QnaController {
 
 	@Autowired
 	private QnaService qnaService;
+	
+	@Autowired
+	private ManagerService managerService;
 
 	// 글작성 파트
 	// 글작성 폼
@@ -158,6 +163,7 @@ public class QnaController {
 		List<Qna> list = qnaService.list(qna);
 		System.out.println("list : " + list);
 
+		
 		model.addAttribute("list", list);
 		model.addAttribute("no", no);
 		model.addAttribute("paging", paging);
@@ -173,10 +179,28 @@ public class QnaController {
 	// 글 상세(관리자 : 답변, 삭제 / 사용자(작성자) : 수정, 삭제 / 사용자(작성자 외) : X)
 	@RequestMapping(value = "qnaView", method = RequestMethod.GET)
 	public String view(int qna_no, String pageNum, Model model) throws Exception {// 매개변수 : 세션 객체 필요
+		
+//		int odd = 0;	// 홀수
+//		int even = 0;	// 짝수
+//		
+//		for(int i=0; i<11; ++i) {
+//			if(i%2 == 0) {
+//				i = even;
+//			}else {
+//				i = odd;
+//			}
+//		}
+		
+		List<Member> list = managerService.memberBoardList();
+		System.out.println("list:" + list);
+				
 		qnaService.qnaReadcnt(qna_no);	// 조회수 증가
 		Qna qna = qnaService.qnaSelect(qna_no);	// 상세 정보 구하기
+		model.addAttribute("list", list);
 		model.addAttribute("qna", qna);
 		model.addAttribute("pageNum", pageNum);
+//		model.addAttribute("even", even);
+//		model.addAttribute("odd", odd);
 		
 		return "qna/qnaView";
 	}

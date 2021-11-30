@@ -3,7 +3,6 @@ package com.project.withpet.service;
 // 글목록 파트
 public class PagingPgm {
 
-
 	// 기본 변수
 	private int total; 			// 총 데이터 개수
 	private int rowPerPage; 	// 화면에 출력할 데이터 개수

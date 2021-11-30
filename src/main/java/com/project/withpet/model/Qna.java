@@ -8,6 +8,8 @@ public class Qna {
 	private String qna_writer;	/* 작성자 */
 	private int qna_readcnt;	/* 조회수 */
 	private Date qna_reg;		/* 작성일 */
+	private String qna_secret;		/* 비밀글 */	
+	private String qna_secret2;		/* 비밀글 */	
 	private String qna_content;	/* 내용 */
 	private String qna_file;	/* 첨부파일 */ 
 	private int qna_ref;		/* 댓글 그룹 */
@@ -21,7 +23,13 @@ public class Qna {
 	// 검색
 	private String search;
 	private String keyword;
+
+	// 짝수 홀수
+	private int even;
+	private int odd;
 		
+	
+	
 	public int getQna_no() {
 		return qna_no;
 	}
@@ -67,6 +75,18 @@ public class Qna {
 	public void setQna_reg(Date qna_reg) {
 		this.qna_reg = qna_reg;
 	}
+	public String getQna_secret() {
+		return qna_secret;
+	}
+	public void setQna_secret(String qna_secret) {
+		this.qna_secret = qna_secret;
+	}
+	public String getQna_secret2() {
+		return qna_secret2;
+	}
+	public void setQna_secret2(String qna_secret2) {
+		this.qna_secret2 = qna_secret2;
+	}
 	public void setQna_content(String qna_content) {
 		this.qna_content = qna_content;
 	}
@@ -105,5 +125,19 @@ public class Qna {
 	}
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
-	} 
+	}
+	public int getEven() {
+		return even;
+	}
+	public void setEven(int even) {
+		this.even = even;
+	}
+	public int getOdd() {
+		return odd;
+	}
+	public void setOdd(int odd) {
+		this.odd = odd;
+	}
+	
+
 }

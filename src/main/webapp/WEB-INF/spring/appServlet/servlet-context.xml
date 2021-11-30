@@ -24,7 +24,7 @@
         <beans:property name="suffix" value=".jsp"/>
     </beans:bean>
 
-    <context:component-scan base-package="com.project.withpet"/>
+    <context:component-scan base-package="com.project.withpet" />
 
     <!-- 인터셉터 설정 -->
     <beans:bean id="sessionChk" class="com.project.withpet.controller.SessionCheckInter"/>

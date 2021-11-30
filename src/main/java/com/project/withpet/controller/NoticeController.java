@@ -20,6 +20,7 @@ import com.project.withpet.model.Notice;
 import com.project.withpet.model.Qna;
 import com.project.withpet.service.NoticeService;
 import com.project.withpet.service.PagingPgm;
+import com.project.withpet.service.ReplyNoticeService;
 
 //참고 예제 : spring(전체적인 기본), sboard(아작스 댓글), springmember(첨부파일), board1(검색 처리, 답글-글작성 한번에 처리)
 
@@ -42,6 +43,8 @@ public class NoticeController {
 	
 	@Autowired
 	private NoticeService noticeService;
+	@Autowired
+	private ReplyNoticeService replyNoticeService;
 	
 	
 	//글작성 폼
@@ -171,6 +174,7 @@ public class NoticeController {
 		
 		noticeService.noticeReadcnt(not_no);
 		Notice notice = noticeService.noticeSelect(not_no);
+		
 		model.addAttribute("notice", notice);
 		model.addAttribute("pageNum", pageNum);
 		

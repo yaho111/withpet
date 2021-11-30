@@ -7,7 +7,7 @@
 		insert into qna values (qna_seq.nextval, #{qna_title},
 		#{qna_writer},
 		0, sysdate, #{qna_content},
-		#{qna_file,jdbcType=VARCHAR},qna_seq.nextval,0,0)
+		#{qna_file,jdbcType=VARCHAR}, #{qna_secret}, qna_seq.nextval,0,0)
 	</insert>
 
 	<!-- 총데이터 구하기 -->
@@ -64,13 +64,13 @@
 		insert into qna values (qna_seq.nextval, #{qna_title},
 		#{qna_writer},
 		0, sysdate, #{qna_content},
-		#{qna_file,jdbcType=VARCHAR}, #{qna_ref}, #{qna_lev}, #{qna_seq})
+		#{qna_file,jdbcType=VARCHAR}, #{qna_secret}, #{qna_ref}, #{qna_lev}, #{qna_seq})
 	</insert>
 	
 	<!-- 수정 -->
 	<update id="qnaUpdate" parameterType="qna">
-	update qna set qna_title = #{qna_title}, qna_content = #{qna_content}, qna_reg = sysdate, qna_file = #{qna_file,jdbcType=VARCHAR} 
-	where qna_no = #{qna_no}
+	update qna set qna_title = #{qna_title}, qna_content = #{qna_content}, qna_reg = sysdate, qna_file = #{qna_file,jdbcType=VARCHAR}, 
+	qna_secret = #{qna_secret} where qna_no = #{qna_no}
 	</update>
 	
 	<!-- 삭제 -->

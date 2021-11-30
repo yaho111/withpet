@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.project.withpet.dao.QnaDAO;
+import com.project.withpet.model.Member;
 import com.project.withpet.model.Qna;
 
 @Repository
@@ -73,6 +74,12 @@ public class QnaService{
 	public int qnaDelete(int qna_no) {
 		System.out.println("삭제 service");
 		return qnaDao.qnaDelete(qna_no);
+	}
+
+	// 회원 정보 가져오기
+	public List<Member> memberList1() {
+		System.out.println("삭제 service");
+		return null;
 	}
 	
 	

@@ -1,56 +1,70 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html;charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../layout/header.jsp"%>
 <script src="${path}/js/qna.js"></script>
 
-  <form method="post" enctype="multipart/form-data" action="qnaInsert"  onSubmit="return qna_check()"> 
-   <table>
+<!-- jquery -->
+<script type="text/javascript" src="jquery-3.4.1.min.js" ></script>
+<!-- ckeditor 4 -->
+<link rel="stylesheet" href="${path}//ckeditor/contents.css"> <%--content에 ckeditro 걸어두기--%>
+<!-- <script src="https://cdn.ckeditor.com/4.12.1/standard-all/ckeditor.js"></script> -->
+
+<script type="text/javascript" src="${path}/ckeditor/ckeditor.js" ></script>
+
+<section class="py-5">
+    <div class="container-body">
+<form method="post" enctype="multipart/form-data" action="qnaInsert"
+	onSubmit="return qna_check()">
+	<h2>Q/A 작성</h2>
+	<table class="table">
+		<tr>
+			<th>글쓴이</th>
+			<td><input name="qna_writer" id="qna_writer" class="form-control" value="${sessionScope.id}" readonly="readonly"/>
+			</td>
+		</tr>
+
+	<tr>
+			<th>질문 제목</th>
+			<td><input name="qna_title" id="qna_title" class="form-control" /></td>
+	</tr>
+	
     <tr>
-     <th>글쓴이</th>
-     <td>
-     <input name="qna_writer" id="qna_writer" /><!-- 나중에 관리자 아이디 세션을 통해서 받음 -->
-     </td>
-    </tr>
-    
-<!--     <tr>
-     <th>질문 게시판</th>
-     <th>
-     <select id="qna_select" name="qna_select">
-     	<option value="">게시판 선택</option>                                  
-     	<option value="병원">병원</option>
-     	<option value="커뮤니티">커뮤니티</option>
-     	<option value="쇼핑몰">쇼핑몰</option>
-     	<option value="회원">회원</option>
-     </select>
-     </th>
-    </tr> -->
-    
-    <tr>
-     <th>질문 제목</th>
-     <td>
-      <input name="qna_title" id="qna_title" />
-     </td>
+    	<th>공개 여부</th>
+		<td>
+		<label class="form-check-label" for="Y">공개</label>
+		<input type="radio" name="qna_secret" id="qna_secret1" value="Y" class="radio" />&nbsp;&nbsp;&nbsp;&nbsp;
+		<label class="form-check-label" for="N">비공개</label>		
+    	<input type="radio" name="qna_secret" id="qna_secret1" value="N" class="radio" />&nbsp;
+		</td>
     </tr>
     
     <tr>
      <th>사진 첨부</th>
      <td>
-      <input type="file" name="qna_file1" />
+      <input type="file" name="qna_file1" class="btn btn-outline-secondary" class="form-control"/>
      </td>
     </tr>
     
     <tr>
      <th>질문 내용</th>
      <td>
-      <textarea name="qna_content"  id="qna_content"></textarea>
+      <textarea class="" name="qna_content" id="qna_content" cols=40 rows=5 width="600px"></textarea>
+      			<script type="text/javascript">
+                    CKEDITOR.replace('qna_content',{
+                        filebrowserUploadUrl: '${path}/adm/fileUpload'
+                        		// path = pageContext.request.contextPath
+                    }); // 에디터로 생성
+                </script >
      </td>
     </tr> 
     
    </table>
    
-
-    <input type="submit" value="등록"/>
-    <input type="reset" value="취소" onClick="history.back()"/>
-  
+	<div id="login_menu" class="body-menu">
+    <input type="submit" value="등록" class="btn btn-primary" />
+    <input type="reset" value="취소" onClick="history.back()" class="btn btn-danger" />
+  	</div>
   </form>
+</div>
+</section>
 <%@ include file="../layout/footer.jsp"%>
