@@ -60,14 +60,17 @@ public class MemberController {
         } else {
             // 로그인 성공할 경우
             if (member.getPwd().equals(pwd)) {
-                session.setAttribute("id", id);
+
 
                 String name = member.getName();
                 String profile = member.getProfile();
+                String role = member.getRole();
 
                 model.addAttribute("name", name);
                 model.addAttribute("profile", profile);
 
+                session.setAttribute("id", id);
+                session.setAttribute("role", role);
                 return "home";
             } else {
                 // 비밀번호가 일치하지 않을 경우
