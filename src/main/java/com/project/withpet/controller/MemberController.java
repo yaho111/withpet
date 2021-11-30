@@ -125,7 +125,7 @@ public class MemberController {
 
         memberService.insertMember(member);
 
-        return "redirect:loginForm";
+        return "member/joinResult";
 
     }
 
