@@ -15,38 +15,42 @@ public class CommunityService {
 	@Autowired
 	private CommunityDAO dao;
 	
-	public int insert(Community community) {
-		return dao.insert(community);
+	public int insertBoard(Community community) {
+		return dao.insertBoard(community);
 	}
 	public int getCount() {
 		// TODO Auto-generated method stub
 		return dao.getCount();
 	}
-	public List<Community> getBoardList(int page) {		
-		return dao.getBoardList(page);
-    }
-	public void updatecount(int com_no) {
+//	public List<Community> getBoardList(int page) {		
+//		return dao.getBoardList(page);
+//    }
+	public void updateCount(int com_no) {
 		// TODO Auto-generated method stub
-		dao.updatecount(com_no);
+		dao.updateCount(com_no);
 	}
 	public Community getBoard(int com_no) {
 		// TODO Auto-generated method stub
 		return dao.getBoard(com_no);
 	}
-	public int update(Community community) {
+	public int boardUpdate(Community community) {
 		// TODO Auto-generated method stub
-		return dao.update(community);
+		return dao.boardUpdate(community);
 	}
-	public int delete(int com_no) {
+	public int boardDelete(int com_no) {
 		// TODO Auto-generated method stub
-		return dao.delete(com_no);
+		return dao.boardDelete(com_no);
 	}
-	public int getTotal(Community community) {
+	public int Total(Community community) {
 		// TODO Auto-generated method stub
-		return dao.getTotal(community);
+		return dao.Total(community);
 	}
-	public List<Community> list(Community community) {
+	public List<Community> List(Community community) {
 		// TODO Auto-generated method stub
-		return dao.list(community);
+		return dao.List(community);
+	}
+	public void updateLike(int com_no) {
+		// TODO Auto-generated method stub
+		 dao.updateLike(com_no);
 	}
 }

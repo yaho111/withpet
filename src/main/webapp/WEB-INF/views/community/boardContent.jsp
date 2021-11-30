@@ -32,7 +32,7 @@
 	
 		}else {
 			var ComLikeData = 'com_no='+${community.com_no}+'&id='+"${sessionScope.id}";		
-			$.post('${path}/hosLikeInsert', ComLikeData, function(message) {
+			$.post('${path}/ComLikeInsert', ComLikeData, function(message) {
 				alert(message);
 			});
 			return false;
@@ -74,7 +74,13 @@
 					<td>내용</td>
 					 <td> ${community.com_content }</td>
 				</tr>
+				<tr>
+					<td colspan=2 align="center"><input type="button" value="추천"
+						class="btn btn-outline-secondary" onClick="ComLikeButton()">
+					</td>
+				</tr>
 			</table>
+			
 			<div id="boardContent_menu" class="body-menu" align="center">
 				<c:if test="${sessionScope.id == community.com_writer}">
 					<input type="button" value="수정" class="btn btn-outline-secondary"
@@ -83,12 +89,7 @@
 						onClick="deleteCheck()">
 					<!--  	<input type="button" value="♥like" 
                 onClick="location.href='./boardList?page=${page}' ">  	-->
-				</c:if>
-				<tr>
-					<td colspan=2 align="center"><input type="button" value="추천"
-						class="btn btn-outline-secondary" onClick="ComLikeButton()">
-					</td>
-				</tr>
+				</c:if>				
 				<input type="button" value="목록" class="btn btn-outline-secondary"
 					onClick="location.href='boardList?page=${page}'">
 			</div>

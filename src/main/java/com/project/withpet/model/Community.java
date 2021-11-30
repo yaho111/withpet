@@ -16,8 +16,15 @@ public class Community {
 	    private int startRow;
 	    private int endRow;	  
 	    
-	    
-	 // 검색
+        private String sortValue;
+	  
+	    public String getSortValue() {
+			return sortValue;
+		}
+	    public void setSortValue(String sortValue) {
+			this.sortValue = sortValue;
+		}
+		// 검색
 		private String search;
 		private String keyword;
 		

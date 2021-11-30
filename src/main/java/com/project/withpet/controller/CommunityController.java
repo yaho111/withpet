@@ -39,8 +39,6 @@ public class CommunityController {
 	public String boardform() {
 		return "community/boardForm";
 	}
-
-
 	@RequestMapping("/boardWrite")
 	public String boardwrite(@RequestParam("com_file1") MultipartFile multiFile, Community community, HttpServletRequest request, Model model) throws Exception {
 		System.out.println("com_writer:" + community.getCom_writer());
@@ -94,17 +92,24 @@ public class CommunityController {
 		}
 		community.setCom_file(newFileName);
 		
-		int result = service.insert(community);
+		int result = service.insertBoard(community);
 		System.out.println("result:" + result);
 
 		model.addAttribute("result", result);
 
 		return "community/insertResult";
 	}
-
+	
 	// 글목록
 	@RequestMapping("/boardList")
 	public String boardList(String pageNum, Community community, Model model) {
+		
+		// 정렬 값(sortValue)이 없는 경우(초기 실행)
+	      if(community.getSortValue() == null ) {
+	    	  community.setSortValue("recent");
+	      }
+	      String sortValue = community.getSortValue();
+		
 		final int rowPerPage = 10;	// 화면에 출력할 데이터 갯수
 		if (pageNum == null || pageNum.equals("")) {
 			pageNum = "1";
@@ -113,7 +118,7 @@ public class CommunityController {
 		System.out.println("currentPage:"+currentPage);
 		
 		// int total = bs.getTotal();
-		int total = service.getTotal(community); // 검색 (데이터 갯수)
+		int total = service.Total(community); // 검색 (데이터 갯수)
 		System.out.println("total:"+total);
 		
 		int startRow = (currentPage - 1) * rowPerPage + 1;
@@ -127,7 +132,8 @@ public class CommunityController {
 		// List<Board> list = bs.list(startRow, endRow);
 //		int com_no = total - (currentPage - 1) + rowPerPage;		// 화면 출력 번호
 		int com_no = total - startRow + 1;		// 화면 출력 번호
-		List<Community> list = service.list(community);
+		List<Community> list = service.List(community);
+		System.out.println("com_no:"+com_no);
 		System.out.println("list:"+list);
 		
 		int totalPage = (int) Math.ceil((double) total / rowPerPage);
@@ -135,6 +141,8 @@ public class CommunityController {
 		int endPage = startPage + 10 - 1;						// 10, 20, 30...
 		if (endPage > totalPage)
 			endPage = totalPage; 		
+		
+		model.addAttribute("sortValue", sortValue);
 		
 		model.addAttribute("list", list);
 		model.addAttribute("com_no", com_no);
@@ -156,7 +164,7 @@ public class CommunityController {
 	@RequestMapping("/boardContent")
 	public String boardContent(int com_no, String page, Model model) {
 	
-		service.updatecount(com_no); // 조회수 1증가
+		service.updateCount(com_no); // 조회수 1증가
 		Community community = service.getBoard(com_no); // 상세 정보 구하기
 		String Content = community.getCom_content().replace("\n", "<br>");
 
@@ -170,7 +178,7 @@ public class CommunityController {
 	
 	// 수정 폼
 		@RequestMapping("/boardUpdateForm")
-		public String boardUpDateForm(int com_no, String page, Model model) {
+		public String boardUpdateForm(int com_no, String page, Model model) {
 			
 			Community community = service.getBoard(com_no);		// 상세 정보 구하기
 			
@@ -184,7 +192,7 @@ public class CommunityController {
 	@RequestMapping("/boardUpdate")
 	public String boardupdate(@ModelAttribute Community community,HttpServletRequest request, Model model) { 
 		
-		int result = service.update(community);
+		int result = service.boardUpdate(community);
 		String page = request.getParameter("page");
 		int com_no = Integer.parseInt(request.getParameter("com_no"));
 		
@@ -198,12 +206,12 @@ public class CommunityController {
 
 		// 글삭제
 	
-	@RequestMapping("/delete")
-	public String delete(int com_no, String page, Model model) {
+	@RequestMapping("/boardDelete")
+	public String boardDelete(int com_no, String page, Model model) {
 
-		service.delete(com_no);
+		service.boardDelete(com_no);
 		Community community = service.getBoard(com_no); 
-		int result = service.delete(com_no);
+		int result = service.boardDelete(com_no);
 		
 		model.addAttribute("result",result);
 		model.addAttribute("community", community);

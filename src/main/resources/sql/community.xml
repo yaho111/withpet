@@ -6,13 +6,13 @@
 
 	<!-- 글작성 -->
 	<insert id="insertBoard" parameterType="community">
-		 insert into community
+		insert into community
 		values(community_seq.nextval,#{com_title},#{com_writer},
 		0,sysdate,#{com_content},#{com_file},0)
 	</insert>
-	
+
 	<!-- 글갯수 -->
-	<select id="getTotal" parameterType="community" resultType="int">
+	<select id="Total" parameterType="community" resultType="int">
 		select count(*) from community
 		<where>
 			<if test="keyword != null and search !='subcon'">
@@ -20,47 +20,91 @@
 			</if>
 			<if test="keyword != null and search=='subcon'">
 				com_title like '%'||#{keyword}||'%' or
-				com_content like '%'||#{keyword}||'%'
+				com_content like
+				'%'||#{keyword}||'%'
 			</if>
 		</where>
 	</select>
+
+	<!-- 글목록  --> 
+	<select id="getBoardList" parameterType="community"	resultType="community">	
 	
-	<!-- 글목록 -->
-	<select id="list" parameterType="community" resultType="community">
-		select * from (select a.*,rowNum rn from (
-			select * from community
-		<where>
-			<if test="keyword != null and search!='subcon'">
-				${search} like '%'||#{keyword}||'%'
-			</if>
-			<if test="keyword != null and search=='subcon'">
-				com_title like '%'||#{keyword}||'%' or
-				com_content like '%'||#{keyword}||'%'
-			</if>
-		</where>			
-			 order by com_no desc) a )
-			where rn between #{startRow} and #{endRow}
+	<!-- 최신순 -->     
+	<if test="sortValue.equals('recent')">    
+     select * from (select a.*,rowNum rn from (
+         select * from community
+      <where>
+         <if test="keyword != null and search!='subcon'">
+            ${search} like '%'||#{keyword}||'%'
+         </if>
+         <if test="keyword != null and search=='subcon'">
+            com_title like '%'||#{keyword}||'%' or
+            com_content like '%'||#{keyword}||'%'
+         </if>
+      </where>         
+          order by com_no desc) a )
+         where rn between #{startRow} and #{endRow}
+    </if>
+    <!-- 조회순 -->
+    <if test="sortValue.equals('readcnt')">
+         select * from (select a.*,rowNum rn from (
+         select * from community
+      <where>
+         <if test="keyword != null and search!='subcon'">
+            ${search} like '%'||#{keyword}||'%'
+         </if>
+         <if test="keyword != null and search=='subcon'">
+            com_title like '%'||#{keyword}||'%' or
+            com_content like '%'||#{keyword}||'%'
+         </if>
+      </where>         
+          order by com_readcnt desc, com_no desc) a )
+         where rn between #{startRow} and #{endRow}
+       </if>
+      <!-- 추천순  -->
+      <if test="sortValue.equals('likecnt')">
+         select * from (select a.*,rowNum rn from (
+         select * from community
+      <where>
+         <if test="keyword != null and search!='subcon'">
+            ${search} like '%'||#{keyword}||'%'
+         </if>
+         <if test="keyword != null and search=='subcon'">
+            com_title like '%'||#{keyword}||'%' or
+            com_content like '%'||#{keyword}||'%'
+         </if>
+      </where>         
+          order by com_likecnt desc, com_no desc) a )
+         where rn between #{startRow} and #{endRow}
+	  </if>
 	</select>
-	
+    	
+
 	<!-- 조회수 증가 -->
-	<update id="read" parameterType="int">
-	   update community set com_readcnt=com_readcnt+1 where com_no=#{com_no}
+	<update id="updateCount" parameterType="int">
+		update community set com_readcnt=com_readcnt+1 where com_no=#{com_no}
 	</update>
-	
+
 	<!-- 상세정보 구하기 -->
-	<select id="Content" parameterType="int" resultType="community">
-	   select * from community where com_no = #{com_no}
+	<select id="getBoard" parameterType="int" resultType="community">
+		select * from community where com_no = #{com_no}
 	</select>
-	
-	<!-- 글수정 --> 
-	
-	<update id="update" parameterType="community">
-		update community set com_writer=#{com_writer}, com_title=#{com_title}
+
+	<!-- 글수정 -->
+
+	<update id="boardUpdate" parameterType="community">
+		update community set
+		com_writer=#{com_writer}, com_title=#{com_title}
 		,com_content=#{com_content}, com_reg=sysdate where com_no=#{com_no}
 	</update>
-	
-	  <!-- 글삭제     -->
-	<delete id="delete" parameterType="int">
-	delete from community where com_no = #{com_no}
-	</delete>	 
-	</mapper>
+
+	<!-- 글삭제 -->
+	<delete id="boardDelete" parameterType="int">
+		delete from community where com_no = #{com_no}
+	</delete>
+
+    <!-- 커뮤니티 게시판 게시글 추천수 업데이트 -->
+    <update id="updateLike" parameterType="int">
+	update community set com_likecnt = com_likecnt+1 where com_no=#{com_no}
+    </update>
+    </mapper>
