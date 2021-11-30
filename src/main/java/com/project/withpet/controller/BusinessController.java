@@ -29,8 +29,8 @@ public class BusinessController {
     @RequestMapping(value = "/enrollBusiness", method = RequestMethod.POST)
     public String enrollBusiness(@ModelAttribute Business business, HttpServletRequest request, Model model) throws Exception {
 
-        String bus_addr = request.getParameter("post") + "-" + request.getParameter("addr")
-                + "-" + request.getParameter("specificAddress");
+        String bus_addr = request.getParameter("post") + "+" + request.getParameter("addr")
+                + "+" + request.getParameter("specificAddress");
         String bus_tel = request.getParameter("frontNum") + "-" + request.getParameter("middleNum")
                 + "-" + request.getParameter("backNum");
 
@@ -61,7 +61,7 @@ public class BusinessController {
 
         Business selectedBusiness = businessService.selectBusiness(bus_no);
 
-        String[] addr = selectedBusiness.getBus_addr().split("-");
+        String[] addr = selectedBusiness.getBus_addr().split("\\+");
 
         String post = addr[0];
         String address = addr[1];
@@ -88,8 +88,8 @@ public class BusinessController {
     public String updateBusiness(@ModelAttribute Business business, HttpServletRequest request, Model model) throws Exception {
 
         // 클라이언트로 받은 값들을 DB 에 맞게 변형
-        String bus_addr = request.getParameter("post") + "-" + request.getParameter("addr")
-                + "-" + request.getParameter("specificAddress");
+        String bus_addr = request.getParameter("post") + "+" + request.getParameter("addr")
+                + "+" + request.getParameter("specificAddress");
         String bus_tel = request.getParameter("frontNum") + "-" + request.getParameter("middleNum")
                 + "-" + request.getParameter("backNum");
 
