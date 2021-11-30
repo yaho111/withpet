@@ -38,6 +38,12 @@
             $("#pwd").val("").focus();
             return false;
         }
+        if(confirm("탈퇴가 진행되면 정보들은 복구할 수 없습니다. 탈퇴하시겠습니까?") == true){
+            return true;
+        } else {
+            alert("취소되었습니다.");
+            return false;
+        }
     }
 </script>
 <%@ include file="../layout/footer.jsp" %>

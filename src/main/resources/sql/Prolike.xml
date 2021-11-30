@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="prolikens">
+
+	<!-- 상품 추천 테이블 조회 -->
+	<select id="select" parameterType="prolike" resultType="prolike">
+		select * from prolike where pro_no=#{pro_no} and id=#{id}
+	</select>
+
+	<!-- 추천 버튼 클릭 시 상품 추천 테이블에 정보 삽입(insert) -->
+	<insert id="insert" parameterType="prolike">
+		insert into prolike values (#{pro_no},#{id})
+	</insert>
+
+</mapper>

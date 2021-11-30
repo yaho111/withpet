@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hoslikens">
+
+	<!-- 병원 추천 테이블 조회 -->
+	<select id="select" parameterType="hoslike" resultType="hoslike">
+		select * from hoslike where hos_no=#{hos_no} and id=#{id}
+	</select>
+
+	<!-- 추천 버튼 클릭 시 병원 추천 테이블에 정보 삽입(insert) -->
+	<insert id="insert" parameterType="hoslike">
+		insert into hoslike values (#{hos_no},#{id})
+	</insert>
+
+</mapper>
