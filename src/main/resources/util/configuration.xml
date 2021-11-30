@@ -4,15 +4,15 @@
 
 <configuration>
 
-
 	<typeAliases>
-		<typeAlias alias="qna" type="com.project.withpet.model.Qna" />
-
-		<typeAlias alias="member"
-			type="com.project.withpet.model.Member" />
-		<typeAlias alias="notice"
-			type="com.project.withpet.model.Notice" />
-	</typeAliases>
+		<typeAlias alias="hospital" type="com.project.withpet.model.Hospital" />
+        <typeAlias alias="member" type="com.project.withpet.model.Member"/>
+        <typeAlias alias="business" type="com.project.withpet.model.Business"/>
+        <typeAlias alias="pet" type="com.project.withpet.model.Pet"/>
+        <typeAlias alias="hoslike" type="com.project.withpet.model.Hoslike"/>
+        <typeAlias alias="comlike" type="com.project.withpet.model.Comlike"/>
+        <typeAlias alias="prolike" type="com.project.withpet.model.Prolike"/>
+    </typeAliases>
 
 
 </configuration>

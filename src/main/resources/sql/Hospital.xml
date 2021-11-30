@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hospitalns">
+	
+	<!-- 글 작성(insert) -->
+	<insert id="insert" parameterType="hospital">
+		insert into hospital values (hospital_seq.nextval,#{hos_name},#{hos_writer},#{hos_loc},#{hos_addr},
+			#{hos_tel},#{hos_file,jdbcType=VARCHAR},#{hos_time},#{hos_24},#{hos_holiday},#{hos_parking},#{hos_content},
+			#{hos_link},0,0,sysdate)
+	</insert>
+	
+	<!-- 총 데이터 개수 구하기 -->
+	<select id="getTotal" parameterType="hospital" resultType="int">
+		select count(*) from hospital
+		<where>
+			<if test="keyword != null">
+				${search} like '%'||#{keyword}||'%'
+			</if>
+		</where>
+	</select>
+	
+	<!-- 데이터(게시글) 10개 구하기 -->
+	<select id="list" parameterType="hospital" resultType="hospital">
+	
+		<!-- 최신순 -->			
+		<if test="sortValue.equals('recent')">
+			select * from (select rowNum rnum, hospital.* from (
+				select * from hospital
+			<where>
+				<if test="keyword != null">
+					${search} like '%'||#{keyword}||'%'
+				</if>
+			</where>
+				order by hos_no desc) hospital )
+				  where rnum between #{startRow} and #{endRow}
+		</if>
+		
+		<!-- 조회순 -->
+		<if test="sortValue.equals('readcnt')">
+			select * from (select rowNum rnum, hospital.* from (
+				select * from hospital
+			<where>
+				<if test="keyword != null">
+					${search} like '%'||#{keyword}||'%'
+				</if>
+			</where>
+				order by hos_readcnt desc, hos_no desc) hospital )
+				  where rnum between #{startRow} and #{endRow}
+		</if>
+		
+		<!-- 추천순 -->
+		<if test="sortValue.equals('likecnt')">
+			select * from (select rowNum rnum, hospital.* from (
+				select * from hospital
+			<where>
+				<if test="keyword != null">
+					${search} like '%'||#{keyword}||'%'
+				</if>
+			</where>
+				order by hos_likecnt desc, hos_no desc) hospital )
+				  where rnum between #{startRow} and #{endRow}
+		</if>
+	</select>
+	
+	<!-- 상세 페이지 : 조회수 증가 -->
+	<update id="updateReadcnt" parameterType="int">
+		update hospital set hos_readcnt = hos_readcnt+1 where hos_no=#{hos_no}
+	</update>
+	
+	<!-- 상세 페이지 : 데이터 1개 구하기 -->
+	<select id="select" parameterType="int" resultType="hospital">
+		select * from hospital where hos_no=#{hos_no}
+	</select>
+	
+	<!-- 글 수정(update) -->
+	<update id="update" parameterType="hospital">
+		update hospital set hos_name=#{hos_name}, hos_writer=#{hos_writer},
+							hos_loc=#{hos_loc}, hos_addr=#{hos_addr}, hos_tel=#{hos_tel},
+							hos_file=#{hos_file,jdbcType=VARCHAR}, hos_time=#{hos_time}, hos_24=#{hos_24},
+							hos_holiday=#{hos_holiday}, hos_parking=#{hos_parking},
+							hos_content=#{hos_content}, hos_link=#{hos_link}
+							where hos_no=#{hos_no}
+	</update>
+	
+	<!-- 글 삭제(delete) -->
+	<delete id="delete" parameterType="int">
+		delete from hospital where hos_no=#{hos_no}
+	</delete>
+	
+	<!-- 병원 게시판 게시글 추천수 업데이트 -->
+	<update id="updateLike" parameterType="int">
+		update hospital set hos_likecnt = hos_likecnt+1 where hos_no=#{hos_no}
+	</update>
+	
+</mapper>

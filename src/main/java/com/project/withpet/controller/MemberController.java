@@ -1,7 +1,9 @@
 package com.project.withpet.controller;
 
 import com.project.withpet.model.Member;
+import com.project.withpet.model.Pet;
 import com.project.withpet.service.MemberService;
+import com.project.withpet.service.PetService;
 import org.apache.commons.mail.HtmlEmail;
 import org.apache.ibatis.io.Resources;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,7 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
+import java.util.List;
 import java.util.Properties;
 import java.util.UUID;
 
@@ -26,6 +29,9 @@ public class MemberController {
 
     @Autowired
     private MemberService memberService;
+
+    @Autowired
+    private PetService petService;
 
     // 로그인 폼
     @RequestMapping(value = "/loginForm")
@@ -54,14 +60,17 @@ public class MemberController {
         } else {
             // 로그인 성공할 경우
             if (member.getPwd().equals(pwd)) {
-                session.setAttribute("id", id);
+
 
                 String name = member.getName();
                 String profile = member.getProfile();
+                String role = member.getRole();
 
                 model.addAttribute("name", name);
                 model.addAttribute("profile", profile);
 
+                session.setAttribute("id", id);
+                session.setAttribute("role", role);
                 return "home";
             } else {
                 // 비밀번호가 일치하지 않을 경우
@@ -102,8 +111,8 @@ public class MemberController {
     @RequestMapping(value = "/join", method = RequestMethod.POST)
     public String join(Member member, HttpServletRequest request) throws Exception {
 
-        String addr = request.getParameter("post") + "-" + request.getParameter("addr")
-                + "-" + request.getParameter("specificAddress");
+        String addr = request.getParameter("post") + "+" + request.getParameter("addr")
+                + "+" + request.getParameter("specificAddress");
         String email = request.getParameter("mailId") + "@" + request.getParameter("domain");
         String phone = request.getParameter("frontNum") + "-" + request.getParameter("middleNum")
                 + "-" + request.getParameter("backNum");
@@ -119,7 +128,7 @@ public class MemberController {
 
         memberService.insertMember(member);
 
-        return "redirect:loginForm";
+        return "member/joinResult";
 
     }
 
@@ -225,8 +234,11 @@ public class MemberController {
 
         Member member = memberService.selectMember(id);
 
+        List<Pet> petList = petService.selectPetList(id);
+
 
         model.addAttribute(member);
+        model.addAttribute("petList", petList);
 
         return "member/myPage";
     }
@@ -239,7 +251,7 @@ public class MemberController {
 
         Member loginMember = memberService.selectMember(loginId);
 
-        String[] addr = loginMember.getAddr().split("-");
+        String[] addr = loginMember.getAddr().split("\\+");
         String post = addr[0];
         String address = addr[1];
         String specificAddress = addr[2];
@@ -287,6 +299,7 @@ public class MemberController {
         String loginId = session.getAttribute("id").toString();
         Member loginMember = memberService.selectMember(loginId);
 
+
         // 파일이 전송된 경우
         if (filename != "") {
 
@@ -299,7 +312,7 @@ public class MemberController {
             newFileName = uuid + extension;
             System.out.println(newFileName);
 
-            if (size > 100000) { // 파일크기가 지정 한도를 초과하는 경우
+            if (size > 1000000) { // 파일크기가 지정 한도를 초과하는 경우
                 result = 1;
                 model.addAttribute("result", result);
 
@@ -318,6 +331,11 @@ public class MemberController {
         }
 
         if (size > 0) {
+            String originalProfile = loginMember.getProfile();
+            if(originalProfile != null){
+                File needToDelete = new File(path + "/" + originalProfile);
+                needToDelete.delete();
+            }
             multipartFile.transferTo(new File(path + "/" + newFileName));
             member.setProfile(newFileName);
         } else {
@@ -325,8 +343,8 @@ public class MemberController {
         }
 
         // 정보 수정 입력폼에서 받은 데이터를 DB 형식에 맞게 변형
-        String addr = request.getParameter("post").trim() + "-" + request.getParameter("addr").trim()
-                + "-" + request.getParameter("specificAddress").trim();
+        String addr = request.getParameter("post").trim() + "+" + request.getParameter("addr").trim()
+                + "+" + request.getParameter("specificAddress").trim();
         String phone = request.getParameter("frontNum").trim() + "-" + request.getParameter("middleNum").trim()
                 + "-" + request.getParameter("backNum").trim();
         String email = request.getParameter("mailId").trim() + "@" + request.getParameter("domain").trim();
