@@ -65,7 +65,7 @@
 			</tr>
 			<c:forEach var="comReList" items="${comReList}">	<!-- 컨트롤에서 공유되는  -->
 				<tr>
-					<td>${sessionScope.id}</td>	<!-- 작성자 -->
+					<td>${comReList.comReply_writer}</td>	<!-- 작성자 -->
 					
 					<td id="td_${comReList.comReply_no}">${comReList.comReply_content}</td>	<!-- 내용 -->
 					<td><fmt:formatDate value="${comReList.regdate}" pattern="MM월 dd일 HH:mm EEE요일"/></td>	<!-- 수정일 -->
