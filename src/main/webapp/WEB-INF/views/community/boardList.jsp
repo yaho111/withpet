@@ -109,14 +109,14 @@
 			</c:forEach>
 			<c:if test="${endPage < totalPage}">
 				<li><a class="page-link"
-					href="boardList?pageNum=${endPage + 1}&search=${search}&keyword=${keyword}&sortValue=${sortValue}">
+					href="boardList?pageNum=${paging.endPage + 1}&search=${search}&keyword=${keyword}&sortValue=${sortValue}">
 						> </a></li>
 			</c:if>
 			<!-- 마지막 페이지 이동 -->
 			<c:if test="${paging.currentPage!=totalPage}">
 				<li><a class="page-link"
 					href="boardList?pageNum=${paging.totalPage}&search=${search}&keyword=${keyword}&sortValue=${sortValue}">
-						<< </a></li>
+						>> </a></li>
 			</c:if>
 		</c:if> <!-- 전체 목록의 페이징 처리 --> <c:if test="${empty keyword}">
 
