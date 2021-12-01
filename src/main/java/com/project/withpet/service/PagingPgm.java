@@ -26,6 +26,7 @@ public class PagingPgm {
 		startPage = currentPage - (currentPage - 1) % pagePerBlk; // 1, 11, 21...
 		endPage = startPage + pagePerBlk - 1; // 10, 20, 30...
 		if (endPage > totalPage) // 실제 존재하는 페이지만 존재하게 한다.
+
 			endPage = totalPage;
 	}
 
@@ -33,56 +34,58 @@ public class PagingPgm {
 		return total;
 	}
 
-	public void setTotal(int total) {
-		this.total = total;
-	}
-
 	public int getRowPerPage() {
 		return rowPerPage;
-	}
-
-	public void setRowPerPage(int rowPerPage) {
-		this.rowPerPage = rowPerPage;
 	}
 
 	public int getCurrentPage() {
 		return currentPage;
 	}
 
-	public void setCurrentPage(int currentPage) {
-		this.currentPage = currentPage;
-	}
-
 	public int getPagePerBlk() {
 		return pagePerBlk;
-	}
-
-	public void setPagePerBlk(int pagePerBlk) {
-		this.pagePerBlk = pagePerBlk;
 	}
 
 	public int getStartPage() {
 		return startPage;
 	}
 
-	public void setStartPage(int startPage) {
-		this.startPage = startPage;
-	}
-
 	public int getEndPage() {
 		return endPage;
-	}
-
-	public void setEndPage(int endPage) {
-		this.endPage = endPage;
 	}
 
 	public int getTotalPage() {
 		return totalPage;
 	}
 
+	public void setTotal(int total) {
+		this.total = total;
+	}
+
+	public void setRowPerPage(int rowPerPage) {
+		this.rowPerPage = rowPerPage;
+	}
+
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
+	}
+
+	public void setPagePerBlk(int pagePerBlk) {
+		this.pagePerBlk = pagePerBlk;
+	}
+
+	public void setStartPage(int startPage) {
+		this.startPage = startPage;
+	}
+
+	public void setEndPage(int endPage) {
+		this.endPage = endPage;
+	}
+
 	public void setTotalPage(int totalPage) {
 		this.totalPage = totalPage;
 	}
-
+	
 }
+
+

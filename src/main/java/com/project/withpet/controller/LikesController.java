@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.project.withpet.model.Comlike;
 import com.project.withpet.model.Hoslike;
 import com.project.withpet.model.Prolike;
+import com.project.withpet.service.CommunityService;
 import com.project.withpet.service.HospitalService;
 import com.project.withpet.service.LikesService;
 
@@ -20,8 +21,8 @@ public class LikesController {
 	@Autowired
 	private HospitalService hospitalService;
 	
-//	@Autowired
-//	private CommunityService communityService;
+	@Autowired
+	private CommunityService communityService;
 	
 //	@Autowired
 //	private ProductService productService;
@@ -67,7 +68,7 @@ public class LikesController {
 					likesService.insert(comlike);
 					
 					// 커뮤니티 게시판 게시글 추천수 업데이트
-					//communityService.updateLike(comlike.getCom_no());
+					communityService.updateLike(comlike.getCom_no());
 				}
 						
 				model.addAttribute("message", message);
