@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -46,36 +47,75 @@ public class ImportController {
 
     @ResponseBody
     @RequestMapping(value="/verifyIamport/{imp_uid}")
-    public IamportResponse<Payment> paymentByImpUid(@RequestParam(required = false, value = "o_no")int o_no, Model model , Locale locale , HttpSession session , @PathVariable(value= "imp_uid") String imp_uid) throws IamportResponseException, IOException, Exception
+    public HashMap<String, Object> paymentByImpUid(@RequestParam(required = false, value = "o_no")int o_no, Model model , Locale locale , HttpSession session , @PathVariable(value= "imp_uid") String imp_uid) throws IamportResponseException, IOException, Exception
     {
+        HashMap<String, Object> resMap = new HashMap<>();
+        int code = -1;
+        String msg = "";
+
         String id = (String) session.getAttribute("id");
         Order order = new Order();
-        order.setId(id);
         order.setO_no(o_no);
+        order.setId(id);
         int ord_price = orderService.sumMoney(order); //장바구니 전체 금액 호출
         int shippingFee = 2500;
 
         int pay_price = ord_price + shippingFee;
 
-        IamportResponse<Payment> resp = api.paymentByImpUid(imp_uid);
+        IamportResponse<Payment> resp = new IamportResponse<>();
 
-        if (String.valueOf(pay_price).equals(resp.getResponse().getAmount().toString()) ) {
-            order.setOrd_step(resp.getResponse().getPaidAt().toString());
-            order.setAddr(resp.getResponse().getBuyerAddr());
-            order.setOrd_price(pay_price);
-            order.setOrd_info(resp.getResponse().getImpUid() + "|" + resp.getResponse().getMerchantUid() );
+        try {
+            resp = api.paymentByImpUid(imp_uid);
+            code = resp.getCode();
+            msg = resp.getMessage();
 
-            List<OrderProduct> list = orderService.getOrderProductList(order);
+            if (String.valueOf(pay_price).equals(resp.getResponse().getAmount().toString())) {
+                order.setOrd_step(resp.getResponse().getPaidAt().toString());
+                order.setAddr(resp.getResponse().getBuyerAddr());
+                order.setOrd_price(pay_price);
+                order.setOrd_info(resp.getResponse().getImpUid() + "|" + resp.getResponse().getMerchantUid() );
 
-            for (OrderProduct orderProduct : list){
-                orderService.productUpdateStock(orderProduct);
+                // ORDERS 테이블에 업데이트하는 로직 필요
+                // ex)
+                // orderService.updateOrder(order);
+
+                List<OrderProduct> list = orderService.getOrderProductList(order);
+
+                for (OrderProduct orderProduct : list) {
+                    orderService.productUpdateStock(orderProduct);
+                }
+
+
+            } else {
+                code = 8000;
+                msg = "결제 금액 불일치";
+
+            }
+        } catch (IamportResponseException ie) {
+            switch(ie.getHttpStatusCode()) {
+                case 401:
+                    code = 401;
+                    msg = "가맹점 미등록";
+                    break;
+                case 404:
+                    code = 404;
+                    msg = "거래내역을 찾을 수 없습니다.";
+                    break;
+                case 500:
+                    code = 500;
+                    msg = "결제를 완료할 수 없습니다. 잠시후에 다시 시도해주세요.";
+                    break;
+            }
+        } catch (Exception e){
+            code = 9999;
+            msg = "검증에 실패하였습니다.";
         }
 
-        }else{
+        resMap.put("imp", resp);
+        resMap.put("code", code);
+        resMap.put("msg", msg);
 
-        }
-
-        return resp;
+        return resMap;
 
     }
 

@@ -150,18 +150,22 @@
                 }).done(function(data) {
                     console.log(data);
 
+                    if(data.code !== 0) {
+                        alert(data.msg);
+                        return false;
+                    }
+
                     // 위의 rsp.paid_amount 와 data.response.amount를 비교한후 로직 실행 (import 서버검증)
-                    if (rsp.paid_amount == data.response.amount) {
-                        alert("결제 및 결제검증완료");
+                    if (rsp.paid_amount == data.imp.response.amount) {
+                        alert("결제가 완료되었습니다.");
+                        location.href = "${path}/productList";
+                    } else {
+                        alert("금액이 일치하지 않습니다. 다시 한번 시도해주세요.");
                     }
                 });
-            } else {
-                var msg = '결제에 실패하였습니다.';
-                msg += '에러내용 : ' + rsp.error_msg;
-            }
             alert(msg);
-        location.href = "${path}/productList"      });
-    });
+      }
+    });})
 </script>
 
 
