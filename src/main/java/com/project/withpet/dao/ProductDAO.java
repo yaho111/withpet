@@ -15,9 +15,7 @@ public class ProductDAO {
    @Autowired
     private SqlSession sqlSession;
 
-
-
-        // 01. 상품목록
+   // 01. 상품목록
     public List<Product> getProductList(int page) {
 
         return sqlSession.selectList("product.productList", page);
@@ -30,13 +28,11 @@ public class ProductDAO {
 
     // 02 -1 상세페이지 조회수 증가
     public void updatepro_readcnt(int pro_no) {
-        // TODO Auto-generated method stub
         sqlSession.update("hit", pro_no);
     }
 
     // 02  상세페이지 정보
     public Product getProductDetail(int pro_no) {
-        // TODO Auto-generated method stub
         return sqlSession.selectOne("pro_content", pro_no);
     }
 
@@ -47,11 +43,12 @@ public class ProductDAO {
 
     // 04. 글수정
     public int productUpdate(Product product) {
-        return sqlSession.update("product.productUpdate", product); }
+        return sqlSession.update("product.productUpdate", product);
+    }
 
-//    // 05. 글 삭제
-//    public int productDelete(int pro_no) throws Exception{
-//        sqlSession.delete("product.productDelete,pro_no");
-//    }
+    // 05. 글 삭제
+    public int productDelete(int pro_no) {
+       return sqlSession.update("product.productDelete", pro_no);
+    }
 
 }

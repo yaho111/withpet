@@ -13,7 +13,7 @@
 
 <a href="${path}/productWrite/">글작성</a>
 글갯수 : ${listcount }
-<table border="1" align="center" width=800>
+<table class="table table-hover">
     <tr>
         <th>상품번호</th>
         <th>이미지</th>

@@ -23,7 +23,7 @@ public class Product {
     private String pro_img;
     private int pro_readcnt;
     private int pro_likecnt;
-    private String price;
+    private int price;
     private String pro_del; // 삭제 쿼리 Y or N
     private MultipartFile pro_photo; // 상품이미지파일
 
@@ -76,9 +76,9 @@ public class Product {
         this.pro_img = pro_img;
     }
 
-    public String getPrice() {return price;}
+    public int getPrice() {return price;}
 
-    public void setPrice(String price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 

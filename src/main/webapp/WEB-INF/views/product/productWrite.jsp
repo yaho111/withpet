@@ -8,9 +8,11 @@
 <!-- ckeditor 4 -->
 <link rel="stylesheet" href="${path}//ckeditor/contents.css"> <%--content에 ckeditro 걸어두기--%>
 <!-- <script src="https://cdn.ckeditor.com/4.12.1/standard-all/ckeditor.js"></script> -->
+
 <script type="text/javascript" src="${path}/ckeditor/ckeditor.js" ></script>
 
-<head></head>
+<head>
+</head>
 <body>
 
 
@@ -33,12 +35,12 @@
 
         <tr>
             <th>재고</th>
-            <td><input type="number" name="stock" value = "${product.stock }"></td>
+            <td><input type="number" name="stock" class="form-control"  value = "${product.stock }"></td>
         </tr>
 
         <tr>
             <th>가격</th>
-            <td><input type ="number" name="price" value = "${product.price }"/></td>
+            <td><input type ="number" name="price" class="form-control"  value = "${product.price }"/></td>
         </tr>
 
         <tr>
