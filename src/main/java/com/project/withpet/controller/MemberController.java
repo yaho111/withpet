@@ -212,13 +212,13 @@ public class MemberController {
         member.setName(member.getName().trim());
         member.setEmail(member.getEmail().trim());
 
-        Member foundMember = memberService.findId(member);
+        List<String> foundId = memberService.findId(member);
 
 
-        if (foundMember == null) {
+        if (foundId == null) {
             return "member/idResult";
         } else {
-            String foundId = foundMember.getId();
+
             model.addAttribute("idResult", foundId);
             return "member/idFindForm";
         }
