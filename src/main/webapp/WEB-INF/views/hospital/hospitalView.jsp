@@ -144,7 +144,7 @@
 		</tr>
 		<tr>
 			<td>병원 소개</td>
-			<td>${hos_content}</td>
+			<td>${hospital.hos_content}</td>
 		</tr>
 		<tr>
 			<c:if test="${not empty hospital.hos_link}">
