@@ -60,6 +60,7 @@ public class ProductController {
         return "product/productList";
     }
 
+
     // 02. 02-1 상세 페이지 : 조회수 1증가 + 상세정보 구하기
     @RequestMapping("/productDetail")
     public String productDetail(@RequestParam("no") int pro_no, String page, Model model) {
