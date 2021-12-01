@@ -73,5 +73,14 @@ public class BasketController {
 
         return "redirect:/basketList";
     }
+    // 03 장바구니 삭제
+    @RequestMapping("/basketDelete")
+    public String delete(@ModelAttribute Basket basket, HttpSession session){
+        // session의 id
+        String id = (String) session.getAttribute("id");
+        basket.setId(id);
+        basketService.delete(basket);
+        return "redirect:/basketList";
     }
+}
 

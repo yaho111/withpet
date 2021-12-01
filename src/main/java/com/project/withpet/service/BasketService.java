@@ -44,4 +44,10 @@ public class BasketService {
     public void modifyBasket(Basket basket) {
         basketDao.modifyBasket(basket);
     }
+
+    // 03 장바구니 상품 삭제
+    public void delete(Basket basket) {
+        basketDao.delete(basket);
+    }
+
 }

@@ -49,4 +49,9 @@ public class BasketDAO {
     public void modifyBasket(Basket basket) {
         sqlSession.update("basket.modifyBasket", basket);
     }
+
+    // 03 장바구니 삭제
+    public void delete(Basket basket) {
+        sqlSession.delete("basket.deleteBasket", basket);
+    }
 }
