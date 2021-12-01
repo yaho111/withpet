@@ -64,7 +64,7 @@
 			</tr>
 			<c:forEach var="hosReList" items="${hosReList}">	<!-- 컨트롤에서 공유되는  -->
 				<tr>
-					<td>${sessionScope.id}</td>	<!-- 작성자 -->
+					<td>${hosReList.hosReply_writer}</td>	<!-- 작성자 -->
 					<!-- 전부 바꿔줘야함 -->
 					<td id="td_${hosReList.hosReply_no}">${hosReList.hosReply_content}</td>	<!-- 내용 -->
 					<td>
