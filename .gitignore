@@ -15,3 +15,6 @@
 
 ### config ###
 src/main/resources/*.properties
+
+### Upload File ###
+src/main/webapp/upload/
