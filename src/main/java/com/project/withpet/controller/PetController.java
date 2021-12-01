@@ -147,6 +147,11 @@ public class PetController {
         }
 
         if (size > 0) {
+            String originalProfile = selectedPet.getPet_photo();
+            if(originalProfile != null){
+                File needToDelete = new File(path + "/" + originalProfile);
+                needToDelete.delete();
+            }
             multipartFile.transferTo(new File(path + "/" + newFileName));
             pet.setPet_photo(newFileName);
         } else {

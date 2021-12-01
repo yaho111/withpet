@@ -125,21 +125,21 @@
 							<label class="form-check-label" for="hos_holiday_Y">
 								연중무휴
 							</label>
-								<input type="radio" name= "hos_holiday" id= "hos_holiday_Y" value="Y" checked>
+								<input class="form-check-input" type="radio" name= "hos_holiday" id= "hos_holiday_Y" value="Y" checked>
 							<label class="form-check-label" for="hos_holiday_N">
 								연중무휴 아님
 							</label>
-								<input type="radio" name= "hos_holiday" id= "hos_holiday_N"  value="N">
+								<input class="form-check-input" type="radio" name= "hos_holiday" id= "hos_holiday_N"  value="N">
 						</c:if>
 						<c:if test="${hospital.hos_holiday == 'N'}">
 							<label class="form-check-label" for="hos_holiday_Y">
 								연중무휴
 							</label>
-								<input type="radio" name= "hos_holiday" id= "hos_holiday_Y" value="Y">
+								<input class="form-check-input" type="radio" name= "hos_holiday" id= "hos_holiday_Y" value="Y">
 							<label class="form-check-label" for="hos_holiday_N">
 								연중무휴 아님
 							</label>
-								<input type="radio" name= "hos_holiday" id= "hos_holiday_N"  value="N" checked>
+								<input class="form-check-input" type="radio" name= "hos_holiday" id= "hos_holiday_N"  value="N" checked>
 						</c:if>
 					</td>
 				</tr>
@@ -150,21 +150,21 @@
 							<label class="form-check-label" for="hos_parking_Y">
 								주차 가능
 							</label>
-								<input type="radio" name= "hos_parking" id= "hos_parking_Y" value="Y" checked>
+								<input class="form-check-input" type="radio" name= "hos_parking" id= "hos_parking_Y" value="Y" checked>
 							<label class="form-check-label" for="hos_parking_N">	
 								주차 불가
 							</label>	
-							<input type="radio" name= "hos_parking" id= "hos_parking_N" value="N">
+							<input class="form-check-input" type="radio" name= "hos_parking" id= "hos_parking_N" value="N">
 						</c:if>
 						<c:if test="${hospital.hos_parking == 'N'}">
 							<label class="form-check-label" for="hos_parking_Y">
 								주차 가능
 							</label>
-								<input type="radio" name= "hos_parking" id= "hos_parking_Y" value="Y">
+								<input class="form-check-input" type="radio" name= "hos_parking" id= "hos_parking_Y" value="Y">
 							<label class="form-check-label" for="hos_parking_N">	
 								주차 불가
 							</label>	
-							<input type="radio" name= "hos_parking" id= "hos_parking_N" value="N" checked>
+							<input class="form-check-input" type="radio" name= "hos_parking" id= "hos_parking_N" value="N" checked>
 						</c:if>
 					</td>
 				</tr>

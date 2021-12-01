@@ -81,24 +81,24 @@
                 aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                <li class="nav-item"><a class="nav-link active" aria-current="page" href="${path}/boardList">커뮤니티</a></li>
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="${path}/boardList">커뮤니티</a>
+                </li>
                 <li class="nav-item"><a class="nav-link" href="${path}/productList">스토어</a></li>
                 <li class="nav-item"><a class="nav-link" href="${path}/hospitalList">병원</a></li>
                 <li class="nav-item"><a class="nav-link" href="${path}/qnaList">Q&A</a></li>
                 <li class="nav-item"><a class="nav-link" href="${path}/notList">공지사항</a></li>
                 <li class="nav-item"><a class="nav-link" href="${path}/businessList">사업 제휴</a></li>
-                <!-- <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#!">All Products</a></li>
-                            <li><hr class="dropdown-divider" /></li>
-                            <li><a class="dropdown-item" href="#!">Popular Items</a></li>
-                            <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
-                        </ul>
-                    </li> -->
+                <c:if test="${sessionScope.id != null}">
+                    <li class="nav-item">
+                        <form class="d-flex" action="${path}/basket/basketList">
+                            <button class="btn btn-outline-dark" type="submit">
+                                <i class="bi-cart-fill me-1"></i>
+                                Cart
+                            </button>
+                        </form>
+                    </li>
+                </c:if>
             </ul>
-
-
         </div>
     </div>
 </nav>
