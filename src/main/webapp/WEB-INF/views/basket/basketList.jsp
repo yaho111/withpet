@@ -15,7 +15,7 @@
 
 <c:choose>
     <c:when test="${count == 0}">
-        장바구니가 비어있습니다.
+<a style="font-size: larger; text-align: center;color : red;"> 장바구니가 비어있습니다 </a>
     </c:when>
     <c:otherwise>
         <table class="table">
