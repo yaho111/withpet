@@ -87,6 +87,7 @@
                 <li class="nav-item"><a class="nav-link" href="${path}/hospitalList">병원</a></li>
                 <li class="nav-item"><a class="nav-link" href="${path}/qnaList">Q&A</a></li>
                 <li class="nav-item"><a class="nav-link" href="${path}/notList">공지사항</a></li>
+                <li class="nav-item"><a class="nav-link" href="${path}/businessList">사업 제휴</a></li>
                 <c:if test="${sessionScope.id != null}">
                     <li class="nav-item">
                         <form class="d-flex" action="${path}/basket/basketList">
@@ -98,8 +99,6 @@
                     </li>
                 </c:if>
             </ul>
-
-
         </div>
     </div>
 </nav>

@@ -11937,3 +11937,7 @@ textarea.form-control-lg {
     text-align: center;
     padding-bottom: 30px;
 }
+
+.profile {
+    border-radius: 70%;
+}
