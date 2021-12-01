@@ -87,6 +87,7 @@ public class ImportController {
 
 
             } else {
+
                 code = 8000;
                 msg = "결제 금액 불일치";
 
@@ -107,6 +108,7 @@ public class ImportController {
                     break;
             }
         } catch (Exception e){
+            e.printStackTrace();
             code = 9999;
             msg = "검증에 실패하였습니다.";
         }

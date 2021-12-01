@@ -38,7 +38,7 @@ public class OrderDAO {
     }
 
     public int productUpdateStock(OrderProduct orderProduct) throws Exception{
-        return sqlSession.update("order.productUpdateStock", orderProduct);
+        return sqlSession.update("orders.productUpdateStock", orderProduct);
     }
 
 }

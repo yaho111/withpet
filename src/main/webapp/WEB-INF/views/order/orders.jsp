@@ -142,7 +142,7 @@
                 msg += '결제 금액 : ' + rsp.paid_amount;
                 msg += '카드 승인번호 : ' + rsp.apply_num;
 
-                // jQuery로 HTTP 요청
+// jQuery로 HTTP 요청
                 $.ajax({
                     type : "POST",
                     async : false,
@@ -153,17 +153,14 @@
                     if(data.code !== 0) {
                         alert(data.msg);
                         return false;
-                    }
-
-                    // 위의 rsp.paid_amount 와 data.response.amount를 비교한후 로직 실행 (import 서버검증)
-                    if (rsp.paid_amount == data.imp.response.amount) {
+                    } else if (rsp.paid_amount == data.imp.response.amount) {
+                        // 위의 rsp.paid_amount 와 data.response.amount를 비교한후 로직 실행 (import 서버검증)
                         alert("결제가 완료되었습니다.");
                         location.href = "${path}/productList";
                     } else {
                         alert("금액이 일치하지 않습니다. 다시 한번 시도해주세요.");
                     }
                 });
-            alert(msg);
       }
     });})
 </script>

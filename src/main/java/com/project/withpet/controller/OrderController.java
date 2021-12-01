@@ -71,7 +71,7 @@ public class OrderController {
 
         order = orderService.getOrders(order);
 
-        String[] addr = order.getAddr().split("-");
+        String[] addr = order.getAddr().split("\\+");
         String post = addr[0];
         String address = addr[1];
         String specificAddress = addr[2];

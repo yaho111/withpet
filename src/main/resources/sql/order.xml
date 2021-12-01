@@ -55,7 +55,7 @@
     where o_no = #{o_no}
     </select>
 
-    <update id="productUpdateStock" parameterType="com.project.withpet.model.Order">
+    <update id="productUpdateStock" parameterType="com.project.withpet.model.OrderProduct">
         UPDATE PRODUCT
         SET STOCK = STOCK - #{ea}
         WHERE PRO_NO = #{pro_no}
