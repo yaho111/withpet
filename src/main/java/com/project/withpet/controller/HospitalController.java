@@ -184,7 +184,7 @@ public class HospitalController {
 		//System.out.println("addr:"+addr);
 		
 		// 2) 내용과 운영시간 줄바꿈 처리
-		String hos_content = hospital.getHos_content().replace("\n", "<br>");
+//		String hos_content = hospital.getHos_content().replace("\n", "<br>"); -- 에디터 적용해서 필요 없게 됨
 		String hos_time = hospital.getHos_time().replace("\n", "<br>");
 		
 		// 3) 앱 키 보안 처리(변수화)		
@@ -204,7 +204,7 @@ public class HospitalController {
 		model.addAttribute("hospital", hospital);
 		model.addAttribute("addr", addr);
 		model.addAttribute("specificAddress", specificAddress);
-		model.addAttribute("hos_content", hos_content);
+//		model.addAttribute("hos_content", hos_content);	-- 에디터 적용해서 필요 없게 됨
 		model.addAttribute("hos_time", hos_time);
 		model.addAttribute("appKey", appKey);
 		model.addAttribute("page", page);
