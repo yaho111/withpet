@@ -31,6 +31,7 @@
         where pro.pro_no = bas.pro_no
           and mem.id = bas.id
         and bas.ID = #{id}
+        order by bas.BASKET_NO
     </select>
 
     <!-- 01-1 장바구니 값 합산-->
@@ -56,10 +57,14 @@
 
     <!--02 장바구니 수정-->
     <update id="modifyBasket"  >
-        select count(*) from BASKET
+        update basket Set ea = #{ea}
         where id = #{id} and PRO_NO = ${pro_no}
     </update>
 
+    <!-- 03 장바구니 삭제-->
+    <delete id="deleteBasket">
+        DELETE FROM basket WHERE id = #{id} and BASKET_NO = #{basket_no}
+    </delete>
 
 
 </mapper>
