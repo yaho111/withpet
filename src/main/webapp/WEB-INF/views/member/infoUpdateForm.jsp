@@ -26,7 +26,7 @@
                     <th>비밀번호</th>
                     <td>
                         <input type="password" name="pwd" id="pwd" size="14" class="form-control"
-                               placeholder="8-20자 영문, 숫자, 특수문자 혼합"/>
+                               placeholder="8-20자 영문, 숫자, 특수문자 혼합" value="${member.pwd}"/>
                     </td>
                 </tr>
 
@@ -34,7 +34,7 @@
                     <th>비밀번호 확인</th>
                     <td>
                         <input type="password" name="pwd_check" id="pwd_check" size="14"
-                               class="form-control"/>
+                               class="form-control" value="${member.pwd}"/>
                     </td>
                 </tr>
                 <tr>

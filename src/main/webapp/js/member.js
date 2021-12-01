@@ -247,6 +247,10 @@ function edit_check() {
         $("#domain").val("").focus();
         return false;
     }
+
+    if(validate_userpwd() == false) {
+        return false;
+    }
 }
 
 
