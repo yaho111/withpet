@@ -9,11 +9,6 @@
 </head>
 <body>
 <script>
-$(document).ready(function (){
-    $("#btnList").click(function (){
-        location.href="${path}/product/productList";
-    });
-});
 </script>
 
 </body>
@@ -46,7 +41,7 @@ $(document).ready(function (){
 <%--"/>--%>
                     </td>
                     <td>
-                        <input type="number" name="ea" value="${row.ea}" min="1" />
+                       ${row.ea}
                         <input type="hidden" name="pro_no" value="${row.pro_no}" />
                     </td>
                     <td>
@@ -55,13 +50,13 @@ $(document).ready(function (){
 <%--"/>--%>
                     </td>
                     <td>
-                        <a href="${path}/basket/basketDelete/?id=${row.id}">삭제</a>
+                        <input type="button" class="btn btn-danger" onclick="location.href='${path}/basketDelete/?basket_no=${row.basket_no}'"value="상품 삭제"/>
                     </td>
                 </tr>
             </c:forEach>
             <tr>
                 <td colspan="2">
-
+                    <input type="button" class="btn btn-primary" onclick="location.href='${path}/productList'" value="추가 구매하기"/>
                 </td>
                 <td>
                     장바구니 금액 합계 : ${totalOrderPrice}
@@ -73,7 +68,7 @@ $(document).ready(function (){
                     전체 주문금액 : ${allSum}
                 </td>
                 <td>
-                    <a href=""> 결제 하기 </a>
+                    <input type="button" onclick="location.href='${path}/orderInsert'" class="btn btn-primary" value="결제하기"/>
                 </td>
             </tr>
         </table>

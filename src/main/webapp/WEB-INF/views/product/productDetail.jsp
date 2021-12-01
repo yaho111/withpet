@@ -7,7 +7,7 @@
 <head></head>
 
 
-    <table border=1 width=400 align="center">
+    <table class="table" border=1 width=400 align="center">
         <tr>
             <td>상품명</td>
             <td>${product.pro_name }</td>
@@ -36,7 +36,7 @@
                             <option value="${i}">${i}</option>
                         </c:forEach>
                     </select>&nbsp;개
-                    <input type="submit" value="장바구니에 담기">
+                    <input type="submit" value="장바구니에 담기" class="btn btn-primary">
                 </form>
 <%--            <td colspan="2" align="center">--%>
 <%--                <input type="number" value="basket.ea">--%>
@@ -53,12 +53,12 @@
         </tr>
         <tr>
             <td colspan=2 align=center>
-                <input type="button" value="목록"
+                <input type="button" value="목록" class="btn btn-primary"
                        onClick="javascript:history.back(-1)">
 
-                <input type="button" value="수정"
+                <input type="button" value="수정" class="btn btn-primary"
                        onClick="location.href='${path}/productWrite/?no=${product.pro_no}&page=${page}' ">
-                <input type="button" value="삭제"
+                <input type="button" value="삭제" class="btn btn-danger"
                        onClick="location.href='${path}/productDelete/?no=${product.pro_no}&page=${page}' ">
             </td>
         </tr>
@@ -68,3 +68,4 @@
 
     </body>
 </html>
+<%@ include file="../layout/footer.jsp"%>
