@@ -41,7 +41,7 @@ public class CommunityDAO {
 	}
     public int boardDelete(int com_no) {
 		// TODO Auto-generated method stub
-		return session.delete("boardDelete", com_no);
+		return session.delete("communityns.boardDelete", com_no);
 	}
 	public int Total(Community community) {
 		// TODO Auto-generated method stub

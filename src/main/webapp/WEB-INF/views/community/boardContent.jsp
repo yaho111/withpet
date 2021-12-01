@@ -2,6 +2,33 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../layout/header.jsp"%>
 
+<!-- 댓글 처리 -->
+<script type="text/javascript">
+	/* 	window.onload=function() {
+	
+	 } */
+	$(function() {
+		$('#comReList').load('${path}/comReList?com_no=${community.com_no}') // 리스트를 불러온다., 바꿔워야함
+		
+		// 댓글창 유효성 검사
+		$('#comReInsert').click(function() {
+			if (!com_form.comReply_content.value) {
+				alert('댓글 입력 후에 클릭하세요');
+				com_form.comReply_content.focus();
+				return false;
+			}
+			
+			// 댓글 입력, 입력후 
+			var frmData = $('form').serialize();	// serialize() : 아래의 form태그를 읽는함수. 			  
+			$.post('${path}/comReInsert', frmData, function(data) {
+				$('#comReList').html(data);
+				com_form.comReply_content.value = '';
+			});
+		});
+	});
+</script>
+<!-- 댓글 처리 끝 --> 
+
 <!-- ckeditor 4 -->
 <link rel="stylesheet" href="${path}//ckeditor/contents.css">
 <%--content에 ckeditro 걸어두기--%>
@@ -13,7 +40,7 @@
 <script>
 	function deleteCheck(){
 		if(confirm("정말로 삭제하시겠습니까?") == true){	// 확인
-			location.href="delete?com_no=${community.com_no}&page=${page}"
+			location.href="boardDelete?com_no=${community.com_no}&page=${page}"
 		}else{										// 취소
 			alert("취소되었습니다.");
 			return false;
@@ -41,11 +68,12 @@
 </script>
 <section class="py-5">
 	<div class="container-body">
-		<form method=post action="delete">
+		<form method=post action="boardDelete">
 			<input type="hidden" name="com_no" value="${community.com_no}">
 			<input type="hidden" name="page" value="${page}">
 			<!--  <table class="table">-->
-			<table id="boardContent_table" class="table" border=1 width=500 align=center>
+			<table id="boardContent_table" class="table" border=1 width=500
+				align=center>
 				<h2 class="body-title" align="center">상세페이지</h2>
 
 				<tr>
@@ -72,7 +100,7 @@
 				</tr>
 				<tr>
 					<td>내용</td>
-					 <td> ${community.com_content }</td>
+					<td>${community.com_content }</td>
 				</tr>
 				<tr>
 					<td colspan=2 align="center"><input type="button" value="추천"
@@ -80,23 +108,39 @@
 					</td>
 				</tr>
 			</table>
-			
+
 			<div id="boardContent_menu" class="body-menu" align="center">
 				<c:if test="${sessionScope.id == community.com_writer}">
 					<input type="button" value="수정" class="btn btn-outline-secondary"
 						onClick="location.href='boardUpdateForm?com_no=${community.com_no}&page=${page}'">
 					<input type="button" value="삭제" class="btn btn-outline-secondary"
 						onClick="deleteCheck()">
-					<!--  	<input type="button" value="♥like" 
-                onClick="location.href='./boardList?page=${page}' ">  	-->
-				</c:if>				
+				</c:if>
 				<input type="button" value="목록" class="btn btn-outline-secondary"
 					onClick="location.href='boardList?page=${page}'">
 			</div>
+
 		</form>
+
+		<p>
+			<!-- 위의 자바스크립에 값을 전달해줘야함 -->
+		<form name="com_form" id="com_form">
+			<input type="hidden" name="comReply_writer"
+				value="${sessionScope.id}"> <input type="hidden"
+				name="com_no" value="${community.com_no}">
+			<c:if test="${sessionScope.id != null}">
+				  <input type="text" value="댓글" class="form-control"
+					readonly="readonly" style="text-align: center;">
+				<textarea name="comReply_content" rows="2"
+					style="width: 100%; border: 0; resize: none;"></textarea>
+				<input type="button" value="확인" id="comReInsert"
+					class="form-control">
+			</c:if>
+		</form>
+
 	</div>
 </section>
 
+<div id="comReList"></div>
+
 <%@ include file="../layout/footer.jsp"%>
-
-

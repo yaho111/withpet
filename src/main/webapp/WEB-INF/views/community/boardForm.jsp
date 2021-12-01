@@ -28,19 +28,15 @@
 				</tr>
 				<tr>
 					<th>내용</th>
-					<td><textarea cols=40 rows=5 name="com_content"
-							id="com_content" class="form-control"></textarea> <script
-							type="text/javascript">
-								CKEDITOR
-										.replace(
-												'com_content',
+					<td><textarea cols=40 rows=5 name="com_content" id="com_content" class="form-control"></textarea> 
+							<br><br> <script type="text/javascript">
+								CKEDITOR.replace(
+								   'com_content',
 												{
-													filebrowserUploadUrl : '${pageContext.request.contextPath }/adm/fileUpload'
+						      filebrowserUploadUrl : '${pageContext.request.contextPath }/adm/fileUpload'
 												}); // 에디터로 생성
 							</script></td>
 				</tr>
-				   
-				
 					<td colspan=2 align=center><input type=submit value="글작성"
 						class="btn btn-primary"> <input type="button" value="취소"
 						class="btn btn-danger" onclick="history.back(-1)"></td>
