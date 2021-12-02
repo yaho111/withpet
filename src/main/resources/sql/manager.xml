@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="managerns">
+
+	<!-- 총 회원수 가져오기 -->
+	<select id="managerGetCount" parameterType="member"
+		resultType="int">
+		select count(*) from member
+		<where>
+
+			<if test="keyword != null and search == 'id'">
+				id like '%'||#{keyword}||'%'
+			</if>
+			<if test="keyword != null and search == 'name'">
+				name like '%'||#{keyword}||'%'
+			</if>
+
+		</where>
+	</select>
+
+
+	<!-- 목록 구해오기 -->
+	<select id="managerList" parameterType="member" resultType="member">
+		select * from member
+		<where>
+			<if test="keyword != null and search == 'id'">
+				id like '%'||#{keyword}||'%'
+			</if>
+			<if test="keyword != null and search == 'name'">
+				name like '%'||#{keyword}||'%'
+			</if>
+		</where>
+		order by regdate desc
+	</select>
+	
+	<!-- 회원 상세 페이지 -->
+	<select id="memberSelect" resultType="member">
+		select * from  member where id = #{id}
+	</select>
+
+	<!-- 회원 삭제 -->
+	<delete id="memberDelete" parameterType="String">
+		delete from MEMBER where id = #{id}
+	</delete>
+	
+	<!-- 회원 관리자 등록 -->
+	<update id="managerInsert" parameterType="String">
+		update member set role=#{role} where id=#{id}
+	</update>
+	
+	<!-- 관리자 등록 승인 -->
+	<update id="businessAccept" parameterType="String">
+		update Business set bus_accept=1 where bus_no=#{bus_no}
+	</update>
+	
+	<!-- 판매자 롤 부여 -->
+	<!-- <update id="busRoleChange" parameterType="member">
+		update member set (select * from 
+		<if test="bus_sort == '쇼핑몰 사업자'">
+			where table name = 'business')role = 'product_bus'
+		</if>
+		<if test="bus_sort == '병원 사업자'">
+			)role = 'hospital_bus'
+		</if>
+		where id=#{id}
+		
+	</update> -->
+	
+</mapper>
