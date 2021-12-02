@@ -5,12 +5,7 @@
 	<section class="py-5">
     <div class="container">
     <h2>Notice</h2>
-    
-		<!-- 글작성 버튼 -->
-		<br>
-		<a href="noticeInsertForm">글작성</a>
-		<br>
-
+ 
 		<!-- 목록 -->
 		<table class="table table-hover">
 			<tr>
@@ -52,6 +47,12 @@
 			</c:if>
 		</table>
 		<!-- 목록 끝 -->
+	
+	<!-- 글작성 버튼 -->
+	<c:if test="${sessionScope.role == 'master' || sessionScope.role == 'notice'}">
+	<input type="submit" value="글작성" onclick="location.href='noticeInsertForm'" class="btn btn-outline-secondary">
+	</c:if>
+	
 	</div>
 	</section>
 	

@@ -12,7 +12,7 @@
 		// 댓글창 유효성 검사
 		$('#notReInsert').click(function() {
 			if (!not_form.notReply_content.value) {
-				alert('댓글 입력후에 클릭하시오');
+				alert('댓글 입력 후에 클릭하세요');
 				not_form.notReply_content.focus();
 				return false;
 			}
@@ -44,28 +44,29 @@
 			<td>조회수</td>
 			<td>${notice.not_readcnt}</td>
 		</tr>
-		<%-- <tr>
+		<tr>
+			<td>첨부 파일</td>
 			<td>
 			<c:if test="${empty notice.not_file}">
        			&nbsp;
        			</c:if> 
        			<c:if test="${!empty notice.not_file}">
-				<img src="${path}/upload/notice/${notice.not_file}"
-						height="100" width="100" />
+				<a href='${path}/upload/notice/${notice.not_file}' download>${notice.not_file}</a>
 				</c:if>
 			</td>
-		</tr> --%>
+		</tr>
 		<tr>
 			<td colspan="2"><pre>${notice.not_content}</pre></td>
 		</tr>
 	</table>
 <div id="login_menu" class="body-menu">
 <!-- 관리자 -->
-<input type="submit" class="form-control" value="수정" onClick="location.href='noticeUpdateForm?not_no=${notice.not_no}&pageNum=${paging.currentPage}' ">
-<input type="submit" class="form-control" value="삭제" onClick="location.href='noticeDelete?not_no=${notice.not_no}&pageNum=${paging.currentPage}' ">
-
+<c:if test="${sessionScope.role == 'master' || sessionScope.role == 'notice'}">
+<input type="submit" class="btn btn-outline-secondary" value="수정" onClick="location.href='noticeUpdateForm?not_no=${notice.not_no}&pageNum=${paging.currentPage}' ">
+<input type="submit" class="btn btn-outline-secondary" value="삭제" onClick="location.href='noticeDelete?not_no=${notice.not_no}&pageNum=${paging.currentPage}' ">
+</c:if>
 <!-- 사용자 + 관리자 -->
-<input type="submit" class="form-control" value="목록" onClick="location.href='notList?not_no=${notice.not_no}&pageNum=${paging.currentPage}' ">
+<input type="submit" class="btn btn-outline-secondary" value="목록" onClick="location.href='notList?not_no=${notice.not_no}&pageNum=${paging.currentPage}' ">
 </div>
 
 <p>

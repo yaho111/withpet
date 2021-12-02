@@ -68,18 +68,18 @@ public class NoticeController {
 		System.out.println("Path=" + path);
 		int upResult = 0;
 
-		String newFileName = "";
+//		String newFileName = "";
 
 		if (noticeFileName != "") { // 첨부파일이 전송된 경우
 
 			// 파일 중복문제 해결
-			String extension = noticeFileName.substring(noticeFileName.lastIndexOf("."), noticeFileName.length());
-			System.out.println("extension:" + extension);
-
-			UUID uuid = UUID.randomUUID(); // 난수 발생
-
-			newFileName = uuid.toString() + extension;
-			System.out.println("newFileName:" + newFileName);
+//			String extension = noticeFileName.substring(noticeFileName.lastIndexOf("."), noticeFileName.length());
+//			System.out.println("extension:" + extension);
+//
+//			UUID uuid = UUID.randomUUID(); // 난수 발생
+//
+//			newFileName = uuid.toString() + extension;
+//			System.out.println("newFileName:" + newFileName);
 
 			String noticeFile[] = new String[2];
 
@@ -93,7 +93,9 @@ public class NoticeController {
 
 				return "notice/uploadResult"; // 여기서 메세지 뿌림
 
-			} else if (!noticeFile[1].equals("jpg") && !noticeFile[1].equals("gif") && !noticeFile[1].equals("png")) {
+			} else if (!noticeFile[1].equals("txt") && !noticeFile[1].equals("pdf") && !noticeFile[1].equals("png") &&
+					   !noticeFile[1].equals("Hwp") && !noticeFile[1].equals("XLSX") && !noticeFile[1].equals("ppt") &&
+					   !noticeFile[1].equals("Dos") && !noticeFile[1].equals("jpg") && !noticeFile[1].equals("gif") && !noticeFile[1].equals("png")) {
 				// 확장자 비교, ! : 아니면
 
 				upResult = 2;
@@ -105,11 +107,11 @@ public class NoticeController {
 
 		if (size > 0) { // 첨부파일이 전송된 경우
 
-			mutiFile.transferTo(new File(path + "/" + newFileName));
+			mutiFile.transferTo(new File(path + "/" + noticeFileName));
 
 		}
 
-		notice.setNot_file(newFileName);
+		notice.setNot_file(noticeFileName);
 
 		int result = noticeService.noticeInsert(notice);
 		if (result == 1)
@@ -211,18 +213,18 @@ public class NoticeController {
 		System.out.println("Path=" + path);
 		int upResult = 0;
 
-		String newFileName = "";
+//		String newFileName = "";
 
 		if (noticeFileName != "") { // 첨부파일이 전송된 경우
 
 			// 파일 중복문제 해결
-			String extension = noticeFileName.substring(noticeFileName.lastIndexOf("."), noticeFileName.length());
-			System.out.println("extension:" + extension);
-
-			UUID uuid = UUID.randomUUID(); // 난수 발생
-
-			newFileName = uuid.toString() + extension;
-			System.out.println("newFileName:" + newFileName);
+//			String extension = noticeFileName.substring(noticeFileName.lastIndexOf("."), noticeFileName.length());
+//			System.out.println("extension:" + extension);
+//
+//			UUID uuid = UUID.randomUUID(); // 난수 발생
+//
+//			newFileName = uuid.toString() + extension;
+//			System.out.println("newFileName:" + newFileName);
 
 			String noticeFile[] = new String[2];
 
@@ -236,7 +238,9 @@ public class NoticeController {
 
 				return "notice/uploadResult"; // 여기서 메세지 뿌림
 
-			} else if (!noticeFile[1].equals("jpg") && !noticeFile[1].equals("gif") && !noticeFile[1].equals("png")) {
+			} else if (!noticeFile[1].equals("txt") && !noticeFile[1].equals("pdf") && !noticeFile[1].equals("png") &&
+					   !noticeFile[1].equals("Hwp") && !noticeFile[1].equals("XLSX") && !noticeFile[1].equals("ppt") &&
+					   !noticeFile[1].equals("Dos") && !noticeFile[1].equals("jpg") && !noticeFile[1].equals("gif") && !noticeFile[1].equals("png")) {
 				// 확장자 비교, ! : 아니면
 
 				upResult = 2;
@@ -248,14 +252,14 @@ public class NoticeController {
 
 		if (size > 0) { // 첨부파일이 전송된 경우
 
-			mutiFile.transferTo(new File(path + "/" + newFileName));
+			mutiFile.transferTo(new File(path + "/" + noticeFileName));
 
 		}
 
 		Notice updateFile = noticeService.noticeSelect(notice.getNot_no());
 		
 		if (size > 0) { // 첨부 파일이 수정되면
-			notice.setNot_file(newFileName);
+			notice.setNot_file(noticeFileName);
 		} else { // 첨부파일이 수정되지 않으면
 			notice.setNot_file(updateFile.getNot_file());
 		}
