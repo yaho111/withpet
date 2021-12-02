@@ -53,7 +53,6 @@
 
 <section class="py-5">
 <div class="container">
-<h2 class="text-primary">댓글</h2>
 		<form>
 		<input type="hidden" value="">
 		<table class="table table-hover">
