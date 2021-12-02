@@ -36,6 +36,7 @@
             <mapping path="/updateInfo"/>
             <mapping path="/memberDeleteForm"/>
             <mapping path="/deleteMember"/>
+            <mapping path="/businessList"/>
             <beans:ref bean="sessionChk"/>
         </interceptor>
     </interceptors>
