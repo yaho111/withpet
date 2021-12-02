@@ -169,7 +169,8 @@
 	</table>
 
 	<div align="center">
-		<c:if test="${sessionScope.id == hospital.hos_writer || sessionScope.role == 'master'}">
+		<c:if test="${sessionScope.id == hospital.hos_writer || sessionScope.role == 'hospital'||
+			          sessionScope.role == 'master'}">
 			<input type="button" value="수정" class="btn btn-outline-secondary"
 				onClick="location.href='updateForm?hos_no=${hospital.hos_no}&page=${page}'">
 			<input type="button" value="삭제" class="btn btn-outline-secondary"

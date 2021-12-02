@@ -95,7 +95,9 @@
 	</div>
 </section>	
 	<br>
-	<a href="insertForm">글쓰기</a><br>
+	<c:if test="${sessionScope.role == 'hospital' || sessionScope.role == 'hospital_bus'|| sessionScope.role == 'master'}">
+		<a href="insertForm">글쓰기</a><br>
+	</c:if>
 
 <nav>
 <ul class="pagination" style="text-align: center">
