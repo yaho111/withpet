@@ -3,11 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="path" value="${pageContext.request.contextPath }"/>
+<
 <!DOCTYPE html>
 <html>
 <head>
-</head>
-<body>
+
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
@@ -28,32 +28,31 @@
 	// up함수 : 수정 
 	function up(uid) {
 		alert("댓글이 수정되었습니다.")
-		var hosReply_content = $('#tt_'+uid).val();
-		var formData = "hosReply_no="+uid+"&hosReply_content="+hosReply_content+"&hos_no=${hospital.hos_no}";// 바꿔줘야함
+		var comReply_content = $('#tt_'+uid).val();
+		var formData = "comReply_no="+uid+"&comReply_content="+comReply_content+"&com_no=${community.com_no}";// 바꿔줘야함
 		console.log(formData);
 		// 수정후 댓글 목록 출력 : post 함수를 사용 
-		$.post('${path}/hosReUpdate', formData, function(data) {	// post함수로 컨트롤러에 요청
-			$('#hosReList').html(data);	// 결과를 돌려받음, 출력
+		$.post('${path}/comReUpdate', formData, function(data) {	// post함수로 컨트롤러에 요청
+			$('#comReList').html(data);	// 결과를 돌려받음, 출력
 		});
 	}
 	
 	// lst() 함수
 	function lst() {
-		$('#hosReList').load('${path}/hosReList?hos_no=${hospital.hos_no}');// 바꿔줘야함
+		$('#comReList').load('${path}/comReList?com_no=${community.com_no}');// 바꿔줘야함
 	}
 	
 	// 삭제
-	function del(hosReply_no,hos_no) {
-		var formData="hosReply_no="+hosReply_no+"&hos_no="+hos_no;// 바꿔줘야함
-		$.post("${path}/hosReDelete",formData, function(data) {	// post함수로 컨트롤러에 요청
-			$('#hosReList').html(data);	// 결과를 돌려받음, 출력
+	function del(comReply_no,com_no) {
+		var formData="comReply_no="+comReply_no+"&com_no="+com_no;// 바꿔줘야함
+		$.post("${path}/comReDelete",formData, function(data) {	// post함수로 컨트롤러에 요청
+			$('#comReList').html(data);	// 결과를 돌려받음, 출력
 		});
 	}
 </script>
 
 <section class="py-5">
 <div class="container">
-
 		<form>
 		<input type="hidden" value="">
 		<table class="table table-hover">
@@ -63,18 +62,16 @@
 				<th>수정일</th>
 				<th></th>
 			</tr>
-			<c:forEach var="hosReList" items="${hosReList}">	<!-- 컨트롤에서 공유되는  -->
+			<c:forEach var="comReList" items="${comReList}">	<!-- 컨트롤에서 공유되는  -->
 				<tr>
-					<td>${hosReList.hosReply_writer}</td>	<!-- 작성자 -->
-					<!-- 전부 바꿔줘야함 -->
-					<td id="td_${hosReList.hosReply_no}">${hosReList.hosReply_content}</td>	<!-- 내용 -->
-					<td>
-					<fmt:formatDate value="${hosReList.regdate}" pattern="MM월 dd일 HH:mm EEE요일"/>
-					</td>	<!-- 수정일 -->
-					<td id="btn_${hosReList.hosReply_no}">	<!-- 버튼 -->
-						<c:if test="${hosReList.hosReply_writer == sessionScope.id || sessionScope.role == 'great_manager'}">
-							<input type="button" value="수정" class="edit" id="${hosReList.hosReply_no}"><!-- 수정하기 위해서는 id값이 달라야 한다.  -->
-							<input type="button" value="삭제" onclick="del(${hosReList.hosReply_no},${hosReList.hos_no})">
+					<td>${comReList.comReply_writer}</td>	<!-- 작성자 -->
+					
+					<td id="td_${comReList.comReply_no}">${comReList.comReply_content}</td>	<!-- 내용 -->
+					<td><fmt:formatDate value="${comReList.regdate}" pattern="MM월 dd일 HH:mm EEE요일"/></td>	<!-- 수정일 -->
+					<td id="btn_${comReList.comReply_no}">	<!-- 버튼 -->
+						<c:if test="${comReList.comReply_writer == sessionScope.id || sessionScope.role == 'great_manager'}">
+							<input type="button" value="수정" class="edit" id="${comReList.comReply_no}"><!-- 수정하기 위해서는 id값이 달라야 한다.  -->
+							<input type="button" value="삭제" onclick="del(${comReList.comReply_no},${comReList.com_no})">
 						</c:if>
 					</td>
 				</tr>

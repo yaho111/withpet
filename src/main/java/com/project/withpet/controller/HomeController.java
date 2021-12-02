@@ -25,6 +25,7 @@ public class HomeController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
+
 	@RequestMapping(value = "/main.do", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
@@ -36,6 +37,7 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
+		//viewResolver -> /WEB-INF/views/+home +.jsp
 		return "home";
 	}
 	

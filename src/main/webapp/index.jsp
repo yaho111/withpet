@@ -7,10 +7,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-<<<<<<< Updated upstream
+
 
 <script type="text/javascript">
-location.href = "main.do";
+
+ location.href = "main.do";
+
 </script>
 
 </body>
