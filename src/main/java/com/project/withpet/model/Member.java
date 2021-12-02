@@ -16,6 +16,15 @@ public class Member {
     private String profile;
     private Timestamp regdate;
 
+    // 페이지
+    private int startRow;
+	private int endRow;
+    
+    // 검색
+	private String search;
+	private String keyword;
+    
+    
     public String getId() {
         return id;
     }
@@ -103,4 +112,40 @@ public class Member {
     public void setRegdate(Timestamp regdate) {
         this.regdate = regdate;
     }
+
+    // 페이지
+	public int getStartRow() {
+		return startRow;
+	}
+
+	public void setStartRow(int startRow) {
+		this.startRow = startRow;
+	}
+
+	public int getEndRow() {
+		return endRow;
+	}
+
+	public void setEndRow(int endRow) {
+		this.endRow = endRow;
+	}
+    
+	// 검색
+    public String getSearch() {
+		return search;
+	}
+
+	public void setSearch(String search) {
+		this.search = search;
+	}
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
+
 }
