@@ -12,7 +12,9 @@
                     <option value="readcnt"<c:if test="${sortValue == 'readcnt'}">${'selected'}</c:if> >조회순</option>
                     <option value="likecnt"<c:if test="${sortValue == 'likecnt'}">${'selected'}</c:if> >추천순</option>
                 </select>
-                <input type="button" class="btn btn-outline-secondary" value="글쓰기" onclick="location.href='insertForm'"/>
+                <c:if test="${sessionScope.role == 'hospital' || sessionScope.role == 'hospital_bus'|| sessionScope.role == 'master'}">
+                   <input type="button" class="btn btn-outline-secondary" value="글쓰기" onclick="location.href='insertForm'"/>
+                </c:if>  
             </div>
 
             <tr>
@@ -64,7 +66,6 @@
 <!-- 검색 -->
 <section class="py-5">
     <div class="container-body">
-
         <form action="hospitalList" align=center>
             <input type="hidden" name="page" value="1">
             <input type="hidden" name="sortValue" id="sortValue" value="${sortValue}">
@@ -91,7 +92,6 @@
 
     </div>
 </section>
-<br>
 
 <nav>
     <ul class="pagination" >
