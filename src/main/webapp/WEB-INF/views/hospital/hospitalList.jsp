@@ -12,6 +12,7 @@
                     <option value="readcnt"<c:if test="${sortValue == 'readcnt'}">${'selected'}</c:if> >조회순</option>
                     <option value="likecnt"<c:if test="${sortValue == 'likecnt'}">${'selected'}</c:if> >추천순</option>
                 </select>
+
                 <c:if test="${sessionScope.role == 'hospital' || sessionScope.role == 'hospital_bus'|| sessionScope.role == 'master'}">
                    <input type="button" class="btn btn-outline-secondary" value="글쓰기" onclick="location.href='insertForm'"/>
                 </c:if>  
@@ -92,6 +93,7 @@
 
     </div>
 </section>
+
 
 <nav>
     <ul class="pagination" >
