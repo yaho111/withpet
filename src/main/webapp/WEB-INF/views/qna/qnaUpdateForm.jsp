@@ -17,7 +17,6 @@
   <form method="post" enctype="multipart/form-data" action="qnaUpdate"  onSubmit="return qna_check()"> 
   <input type="hidden" name="qna_no" value="${qna.qna_no}">
   <input type="hidden" name="pageNum" value="${pageNum}">
-  <input type="hidden" name="qna_secret" value="${qna.qna_secret}">
    <table class="table">
     <tr>
      <th>글쓴이</th>
@@ -34,10 +33,21 @@
     </tr>
     
     <tr>
-     <th>사진 첨부</th>
-     <td>
-      <input type="file" name="qna_file1" class="btn btn-outline-secondary"/>
-     </td>
+    	<th>공개 여부</th>
+		<td>
+		<c:if test="${qna.qna_secret == 'Y'}">
+		<label class="form-check-label" for="Y">공개</label>
+		<input type="radio" name="qna_secret" id="qna_secret" value="Y" class="radio" checked="checked" />&nbsp;&nbsp;&nbsp;&nbsp;
+		<label class="form-check-label" for="N">비공개</label>		
+    	<input type="radio" name="qna_secret" id="qna_secret" value="N" class="radio"/>&nbsp;
+		</c:if>
+		<c:if test="${qna.qna_secret == 'N'}">
+		<label class="form-check-label" for="Y">공개</label>
+		<input type="radio" name="qna_secret" id="qna_secret" value="Y" class="radio" />&nbsp;&nbsp;&nbsp;&nbsp;
+		<label class="form-check-label" for="N">비공개</label>		
+    	<input type="radio" name="qna_secret" id="qna_secret" value="N" class="radio" checked="checked"/>&nbsp;
+		</c:if>
+		</td>
     </tr>
     
     <tr>
@@ -55,10 +65,10 @@
     
    </table>
    
-
-    <input type="submit" value="등록" class="form-control"/>
-    <input type="reset" value="취소" class="form-control" onClick="history.back()"/>
-  
+<div id="login_menu" class="body-menu">
+    <input type="submit" value="등록" class="btn btn-primary"/>
+    <input type="reset" value="취소" class="btn btn-danger" onClick="history.back()"/>
+</div>
   </form>
 
 </div>

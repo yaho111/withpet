@@ -74,8 +74,8 @@
 	</update>
 	
 	<!-- 삭제 -->
-	<delete id="qnaDelete" parameterType="int">
-	delete from qna where qna_no = #{qna_no}
+	<delete id="qnaDelete" parameterType="qna">
+	delete from qna where qna_no=#{qna_no}
 	</delete>
 	
 	

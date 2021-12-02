@@ -10,8 +10,10 @@
 	<a href="qnaInsertForm">글작성</a>
 	</c:if>
 	
-	<!-- <input type="submit" value="관리자 페이지" align="right" onClick="location.href='managerPage' ">
-	<br> -->
+	<c:if test="${sessionScope.id != null && sessionScope.role != 'user' || sessionScope.role != 'product_bus' || sessionScope.role != 'hospital_bus'}">
+	<input type="submit" value="관리자 페이지" align="right" onClick="location.href='manager' ">
+	</c:if>
+	<br>
 
 
 	<!-- 목록 -->
@@ -49,16 +51,31 @@
 				<tr>
 					<th>${no}</th>
 					
-					<!-- 비공개 : 제목,  -->
+					<!-- 비공개 -->
 					<c:if test="${qna.qna_secret == 'N'}">
 						<th>
-						<c:if test="${qna.qna_writer != sessionScope.id}">
+						
+						<!-- 일반 회원 -->
+						<c:if test="${sessionScope.id == null || qna.qna_writer != sessionScope.id && sessionScope.role == 'user'}">
 							<img width="16px" height="16px" src="./images/locked.png">비밀글입니다.
 						</c:if>
-						<c:if test="${qna.qna_writer == sessionScope.id}">
+						
+						<!-- 작성자, 관리자 -->
+						<c:if test="${qna.qna_writer == sessionScope.id || sessionScope.role == 'notice' || sessionScope.role == 'master'}">
+							<!-- 답글처리 -->
+							<div align="left">
+								<c:if test="${qna.qna_lev != 0}">
+									<c:forEach var="k" begin="1" end="${qna.qna_lev}">
+									&nbsp;&nbsp;			
+								</c:forEach>
+									<img src="./images/AnswerLine.gif">
+								</c:if>
+							<!-- 답글처리 끝 -->
+							
 							<a href="qnaView?qna_no=${qna.qna_no}&pageNum=${paging.currentPage}">
 								<img width="16px" height="16px" src="./images/locked.png">${qna.qna_title}
 							</a>
+							</div>
 						</c:if>
 						
 						</th>

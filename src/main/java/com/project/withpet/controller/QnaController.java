@@ -64,61 +64,63 @@ public class QnaController {
 
 	// 글작성
 	@RequestMapping(value = "qnaInsert", method = RequestMethod.POST)
-	public String qnaInsert(@RequestParam("qna_file1") MultipartFile mutiFile, Qna qna, HttpServletRequest request,
+	public String qnaInsert(Qna qna, HttpServletRequest request,
 			Model model) throws Exception {// 매개변수 : 세션 객체 필요
 
-		String qnaFileName = mutiFile.getOriginalFilename(); // 파일명 저장
-		int size = (int) mutiFile.getSize(); // 첨부파일 크기 불러옴(단위 : byte), getSize()는 long형 - in 형으로 다운 케스팅(명시적 형 변환) 해야함
-
-		String path = request.getRealPath("upload/qna"); // qnaupload를 불러와라
-		System.out.println("mutiFile=" + mutiFile);
-		System.out.println("filename=" + qnaFileName);
-		System.out.println("size=" + size);
-		System.out.println("Path=" + path);
-		int upResult = 0;
-
-		String newFileName = "";
-
-		if (qnaFileName != "") { // 첨부파일이 전송된 경우
-
-			// 파일 중복문제 해결
-			String extension = qnaFileName.substring(qnaFileName.lastIndexOf("."), qnaFileName.length());
-			System.out.println("extension:" + extension);
-
-			UUID uuid = UUID.randomUUID(); // 난수 발생
-
-			newFileName = uuid.toString() + extension;
-			System.out.println("newFileName:" + newFileName);
-
-			String qnaFile[] = new String[2];
-
-			StringTokenizer st = new StringTokenizer(qnaFileName, ".");
-			qnaFile[0] = st.nextToken(); // 파일명 저장
-			qnaFile[1] = st.nextToken(); // 확장자 저장 (jpg)
-
-			if (size > 10000000) { // 100000 = 100kb, 10000000 = 10mb
-				upResult = 1;
-				model.addAttribute("upResult", upResult);
-
-				return "qna/uploadResult"; // 여기서 메세지 뿌림
-
-			} else if (!qnaFile[1].equals("jpg") && !qnaFile[1].equals("gif") && !qnaFile[1].equals("png")) {
-				// 확장자 비교, ! : 아니면
-
-				upResult = 2;
-				model.addAttribute("upResult", upResult);
-
-				return "qna/uploadResult";
-			}
-		}
-
-		if (size > 0) { // 첨부파일이 전송된 경우
-
-			mutiFile.transferTo(new File(path + "/" + newFileName));
-
-		}
-
-		qna.setQna_file(newFileName);
+//		@RequestParam("qna_file1") MultipartFile mutiFile,
+		
+//		String qnaFileName = mutiFile.getOriginalFilename(); // 파일명 저장
+//		int size = (int) mutiFile.getSize(); // 첨부파일 크기 불러옴(단위 : byte), getSize()는 long형 - in 형으로 다운 케스팅(명시적 형 변환) 해야함
+//
+//		String path = request.getRealPath("upload/qna"); // qnaupload를 불러와라
+//		System.out.println("mutiFile=" + mutiFile);
+//		System.out.println("filename=" + qnaFileName);
+//		System.out.println("size=" + size);
+//		System.out.println("Path=" + path);
+//		int upResult = 0;
+//
+//		String newFileName = "";
+//
+//		if (qnaFileName != "") { // 첨부파일이 전송된 경우
+//
+//			// 파일 중복문제 해결
+//			String extension = qnaFileName.substring(qnaFileName.lastIndexOf("."), qnaFileName.length());
+//			System.out.println("extension:" + extension);
+//
+//			UUID uuid = UUID.randomUUID(); // 난수 발생
+//
+//			newFileName = uuid.toString() + extension;
+//			System.out.println("newFileName:" + newFileName);
+//
+//			String qnaFile[] = new String[2];
+//
+//			StringTokenizer st = new StringTokenizer(qnaFileName, ".");
+//			qnaFile[0] = st.nextToken(); // 파일명 저장
+//			qnaFile[1] = st.nextToken(); // 확장자 저장 (jpg)
+//
+//			if (size > 10000000) { // 100000 = 100kb, 10000000 = 10mb
+//				upResult = 1;
+//				model.addAttribute("upResult", upResult);
+//
+//				return "qna/uploadResult"; // 여기서 메세지 뿌림
+//
+//			} else if (!qnaFile[1].equals("jpg") && !qnaFile[1].equals("gif") && !qnaFile[1].equals("png")) {
+//				// 확장자 비교, ! : 아니면
+//
+//				upResult = 2;
+//				model.addAttribute("upResult", upResult);
+//
+//				return "qna/uploadResult";
+//			}
+//		}
+//
+//		if (size > 0) { // 첨부파일이 전송된 경우
+//
+//			mutiFile.transferTo(new File(path + "/" + newFileName));
+//
+//		}
+//
+//		qna.setQna_file(newFileName);
 
 		int result = qnaService.insertQna(qna);
 		if (result == 1)
@@ -180,23 +182,9 @@ public class QnaController {
 	@RequestMapping(value = "qnaView", method = RequestMethod.GET)
 	public String view(int qna_no, String pageNum, Model model) throws Exception {// 매개변수 : 세션 객체 필요
 		
-//		int odd = 0;	// 홀수
-//		int even = 0;	// 짝수
-//		
-//		for(int i=0; i<11; ++i) {
-//			if(i%2 == 0) {
-//				i = even;
-//			}else {
-//				i = odd;
-//			}
-//		}
-		
-		List<Member> list = managerService.memberBoardList();
-		System.out.println("list:" + list);
-				
+
 		qnaService.qnaReadcnt(qna_no);	// 조회수 증가
 		Qna qna = qnaService.qnaSelect(qna_no);	// 상세 정보 구하기
-		model.addAttribute("list", list);
 		model.addAttribute("qna", qna);
 		model.addAttribute("pageNum", pageNum);
 //		model.addAttribute("even", even);
@@ -222,61 +210,63 @@ public class QnaController {
 	// 답글
 	// 댓글 오류 
 	@RequestMapping(value = "qnaReply", method = RequestMethod.POST)
-	public String qnaReply(@RequestParam("qna_file1") MultipartFile mutiFile, Qna qna, HttpServletRequest request, String pageNum,
+	public String qnaReply(Qna qna, HttpServletRequest request, String pageNum,
 			Model model) throws Exception {
 
-		String qnaFileName = mutiFile.getOriginalFilename(); // 파일명 저장
-		int size = (int) mutiFile.getSize(); // 첨부파일 크기 불러옴(단위 : byte), getSize()는 long형 - in 형으로 다운 케스팅(명시적 형 변환) 해야함
-
-		String path = request.getRealPath("upload/qna"); // qnaupload를 불러와라
-		System.out.println("mutiFile=" + mutiFile);
-		System.out.println("filename=" + qnaFileName);
-		System.out.println("size=" + size);
-		System.out.println("Path=" + path);
-		int upResult = 0;
-
-		String newFileName = "";
-
-		if (qnaFileName != "") { // 첨부파일이 전송된 경우
-
-			// 파일 중복문제 해결
-			String extension = qnaFileName.substring(qnaFileName.lastIndexOf("."), qnaFileName.length());
-			System.out.println("extension:" + extension);
-
-			UUID uuid = UUID.randomUUID(); // 난수 발생
-
-			newFileName = uuid.toString() + extension;
-			System.out.println("newFileName:" + newFileName);
-
-			String qnaFile[] = new String[2];
-
-			StringTokenizer st = new StringTokenizer(qnaFileName, ".");
-			qnaFile[0] = st.nextToken(); // 파일명 저장
-			qnaFile[1] = st.nextToken(); // 확장자 저장 (jpg)
-
-			if (size > 10000000) { // 100000 = 100kb, 10000000 = 10mb
-				upResult = 1;
-				model.addAttribute("upResult", upResult);
-
-				return "qna/uploadResult"; // 여기서 메세지 뿌림
-
-			} else if (!qnaFile[1].equals("jpg") && !qnaFile[1].equals("gif") && !qnaFile[1].equals("png")) {
-				// 확장자 비교, ! : 아니면
-
-				upResult = 2;
-				model.addAttribute("upResult", upResult);
-
-				return "qna/uploadResult";
-			}
-		}
-
-		if (size > 0) { // 첨부파일이 전송된 경우
-
-			mutiFile.transferTo(new File(path + "/" + newFileName));
-
-		}
-
-		qna.setQna_file(newFileName);
+//		@RequestParam("qna_file1") MultipartFile mutiFile,
+//		
+//		String qnaFileName = mutiFile.getOriginalFilename(); // 파일명 저장
+//		int size = (int) mutiFile.getSize(); // 첨부파일 크기 불러옴(단위 : byte), getSize()는 long형 - in 형으로 다운 케스팅(명시적 형 변환) 해야함
+//
+//		String path = request.getRealPath("upload/qna"); // qnaupload를 불러와라
+//		System.out.println("mutiFile=" + mutiFile);
+//		System.out.println("filename=" + qnaFileName);
+//		System.out.println("size=" + size);
+//		System.out.println("Path=" + path);
+//		int upResult = 0;
+//
+//		String newFileName = "";
+//
+//		if (qnaFileName != "") { // 첨부파일이 전송된 경우
+//
+//			// 파일 중복문제 해결
+//			String extension = qnaFileName.substring(qnaFileName.lastIndexOf("."), qnaFileName.length());
+//			System.out.println("extension:" + extension);
+//
+//			UUID uuid = UUID.randomUUID(); // 난수 발생
+//
+//			newFileName = uuid.toString() + extension;
+//			System.out.println("newFileName:" + newFileName);
+//
+//			String qnaFile[] = new String[2];
+//
+//			StringTokenizer st = new StringTokenizer(qnaFileName, ".");
+//			qnaFile[0] = st.nextToken(); // 파일명 저장
+//			qnaFile[1] = st.nextToken(); // 확장자 저장 (jpg)
+//
+//			if (size > 10000000) { // 100000 = 100kb, 10000000 = 10mb
+//				upResult = 1;
+//				model.addAttribute("upResult", upResult);
+//
+//				return "qna/uploadResult"; // 여기서 메세지 뿌림
+//
+//			} else if (!qnaFile[1].equals("jpg") && !qnaFile[1].equals("gif") && !qnaFile[1].equals("png")) {
+//				// 확장자 비교, ! : 아니면
+//
+//				upResult = 2;
+//				model.addAttribute("upResult", upResult);
+//
+//				return "qna/uploadResult";
+//			}
+//		}
+//
+//		if (size > 0) { // 첨부파일이 전송된 경우
+//
+//			mutiFile.transferTo(new File(path + "/" + newFileName));
+//
+//		}
+//
+//		qna.setQna_file(newFileName);
 
 		int result = qnaService.reInsertQna(qna);
 		if (result == 1)
@@ -300,70 +290,72 @@ public class QnaController {
 	
 	// 글 수정
 	@RequestMapping(value = "qnaUpdate", method = RequestMethod.POST)
-	public String update(@RequestParam("qna_file1") MultipartFile mutiFile, Qna qna, HttpServletRequest request,
+	public String update(Qna qna, HttpServletRequest request,
 			Model model) throws Exception {	// 매개변수 : 세션 객체 필요
 		
-		String qnaFileName = mutiFile.getOriginalFilename(); // 파일명 저장
-		int size = (int) mutiFile.getSize(); // 첨부파일 크기 불러옴(단위 : byte), getSize()는 long형 - in 형으로 다운 케스팅(명시적 형 변환) 해야함
-
-		String path = request.getRealPath("upload/qna"); // qnaupload를 불러와라
-//		System.out.println("mutiFile=" + mutiFile);
-//		System.out.println("filename=" + qnaFileName);
-//		System.out.println("size=" + size);
-//		System.out.println("Path=" + path);
-		int upResult = 0;
-
-		String newFileName = "";
-
-		if (qnaFileName != "") { // 첨부파일이 전송된 경우
-
-			// 파일 중복문제 해결
-			String extension = qnaFileName.substring(qnaFileName.lastIndexOf("."), qnaFileName.length());
-			System.out.println("extension:" + extension);
-
-			UUID uuid = UUID.randomUUID(); // 난수 발생
-
-			newFileName = uuid.toString() + extension;
-			System.out.println("newFileName:" + newFileName);
-
-			String qnaFile[] = new String[2];
-
-			StringTokenizer st = new StringTokenizer(qnaFileName, ".");
-			qnaFile[0] = st.nextToken(); // 파일명 저장
-			qnaFile[1] = st.nextToken(); // 확장자 저장 (jpg)
-
-			if (size > 10000000) { // 100000 = 100kb, 10000000 = 10mb
-				upResult = 1;
-				model.addAttribute("upResult", upResult);
-
-				return "qna/uploadResult"; // 여기서 메세지 뿌림
-
-			} else if (!qnaFile[1].equals("jpg") && !qnaFile[1].equals("gif") && !qnaFile[1].equals("png")) {
-				// 확장자 비교, ! : 아니면
-
-				upResult = 2;
-				model.addAttribute("upResult", upResult);
-
-				return "qna/uploadResult";
-			}
-		}
-
-		if (size > 0) { // 첨부파일이 전송된 경우
-
-			mutiFile.transferTo(new File(path + "/" + newFileName));
-
-		}
-
-		// 오류 발생 : 첨부파일을 수정하면 이미지 출력이 안되고 첨부파일을 수정하지 않으면 이미지 안 뜸
-		// 아래와 같이 해결
-		// 기존 데이터를 조회하기
-		Qna updateFile = qnaService.qnaSelect(qna.getQna_no());
-		
-		if (size > 0) { // 첨부 파일이 수정되면
-			qna.setQna_file(newFileName);
-		} else { // 첨부파일이 수정되지 않으면
-			qna.setQna_file(updateFile.getQna_file());
-		}
+//		@RequestParam("qna_file1") MultipartFile mutiFile,
+//		
+//		String qnaFileName = mutiFile.getOriginalFilename(); // 파일명 저장
+//		int size = (int) mutiFile.getSize(); // 첨부파일 크기 불러옴(단위 : byte), getSize()는 long형 - in 형으로 다운 케스팅(명시적 형 변환) 해야함
+//
+//		String path = request.getRealPath("upload/qna"); // qnaupload를 불러와라
+////		System.out.println("mutiFile=" + mutiFile);
+////		System.out.println("filename=" + qnaFileName);
+////		System.out.println("size=" + size);
+////		System.out.println("Path=" + path);
+//		int upResult = 0;
+//
+//		String newFileName = "";
+//
+//		if (qnaFileName != "") { // 첨부파일이 전송된 경우
+//
+//			// 파일 중복문제 해결
+//			String extension = qnaFileName.substring(qnaFileName.lastIndexOf("."), qnaFileName.length());
+//			System.out.println("extension:" + extension);
+//
+//			UUID uuid = UUID.randomUUID(); // 난수 발생
+//
+//			newFileName = uuid.toString() + extension;
+//			System.out.println("newFileName:" + newFileName);
+//
+//			String qnaFile[] = new String[2];
+//
+//			StringTokenizer st = new StringTokenizer(qnaFileName, ".");
+//			qnaFile[0] = st.nextToken(); // 파일명 저장
+//			qnaFile[1] = st.nextToken(); // 확장자 저장 (jpg)
+//
+//			if (size > 10000000) { // 100000 = 100kb, 10000000 = 10mb
+//				upResult = 1;
+//				model.addAttribute("upResult", upResult);
+//
+//				return "qna/uploadResult"; // 여기서 메세지 뿌림
+//
+//			} else if (!qnaFile[1].equals("jpg") && !qnaFile[1].equals("gif") && !qnaFile[1].equals("png")) {
+//				// 확장자 비교, ! : 아니면
+//
+//				upResult = 2;
+//				model.addAttribute("upResult", upResult);
+//
+//				return "qna/uploadResult";
+//			}
+//		}
+//
+//		if (size > 0) { // 첨부파일이 전송된 경우
+//
+//			mutiFile.transferTo(new File(path + "/" + newFileName));
+//
+//		}
+//
+//		// 오류 발생 : 첨부파일을 수정하면 이미지 출력이 안되고 첨부파일을 수정하지 않으면 이미지 안 뜸
+//		// 아래와 같이 해결
+//		// 기존 데이터를 조회하기
+//		Qna updateFile = qnaService.qnaSelect(qna.getQna_no());
+//		
+//		if (size > 0) { // 첨부 파일이 수정되면
+//			qna.setQna_file(newFileName);
+//		} else { // 첨부파일이 수정되지 않으면
+//			qna.setQna_file(updateFile.getQna_file());
+//		}
 		
 		int result = qnaService.qnaUpdate(qna);
 		if (result == 1)
@@ -374,9 +366,9 @@ public class QnaController {
 
 	// 글 삭제 (관리자 : alert / 사용자 : 회원 세션 확인)
 	@RequestMapping(value = "qnaDelete", method = RequestMethod.GET)
-	public String qnaDelete(int qna_no, String pageNum, Model model) {	// 매개변수 : 세션 객체 필요
+	public String qnaDelete(Qna qna, String pageNum, Model model) {	// 매개변수 : 세션 객체 필요
 		
-		int result = qnaService.qnaDelete(qna_no);
+		int result = qnaService.qnaDelete(qna);
 		if (result == 1)
 			model.addAttribute("result", result);
 		

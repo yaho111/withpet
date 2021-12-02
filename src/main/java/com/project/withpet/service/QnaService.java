@@ -71,9 +71,9 @@ public class QnaService{
 	}
 
 	// 글삭제
-	public int qnaDelete(int qna_no) {
+	public int qnaDelete(Qna qna) {
 		System.out.println("삭제 service");
-		return qnaDao.qnaDelete(qna_no);
+		return qnaDao.qnaDelete(qna);
 	}
 
 	// 회원 정보 가져오기

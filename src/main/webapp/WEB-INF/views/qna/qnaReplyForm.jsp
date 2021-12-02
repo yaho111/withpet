@@ -15,25 +15,20 @@
     <div class="container-body">
 
   <h2>게시판 입력폼</h2>
-  <form method="post" enctype="multipart/form-data" action="qnaReply"  onSubmit="return qna_check()"> 
+  <form method="post" enctype="multipart/form-data" action="qnaReply"  onSubmit="return qnaRe_check()"> 
   <input type="hidden" name="qna_no" value="${qna.qna_no}" />
   <input type="hidden" name="qna_ref" value="${qna.qna_ref}" />
   <input type="hidden" name="qna_lev" value="${qna.qna_lev}" />
   <input type="hidden" name="qna_seq" value="${qna.qna_seq}" />
   <input type="hidden" name="pageNum" value="${pageNum}" />
   <input type="hidden" name="qna_secret" value="${qna.qna_secret}">
+  <input type="hidden" name="qna_writer" value="${qna.qna_writer}">
   
-  <!-- if : 관리자 -->
-  <!-- <input type="hidden" name="qna_title" id="qna_title" value="Answer"/> -->
-  <!-- if : 질문자 -->
-  <!-- <input type="hidden" name="qna_title" id="qna_title" value="Question Again"/> -->
   
    <table class="table">
     <tr>
+     <th>작성자</th>
      <th>관리자</th>
-     <td>
-     <input class="form-control" name="qna_writer" id="qna_writer" /><!-- 나중에 관리자 아이디 세션을 통해서 받음 -->
-     </td>
     </tr>
     
 	<tr>
@@ -43,15 +38,6 @@
      </td>
     </tr>
     <tr>
-    
-
-	<tr>     
-     <th>사진 첨부</th>
-     <td>
-      <input class="btn btn-outline-secondary" type="file" name="qna_file1" />
-     </td>
-    </tr>
-    
    
     <tr>
      <th>답글 내용</th>

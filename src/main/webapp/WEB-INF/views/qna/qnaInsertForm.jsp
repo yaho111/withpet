@@ -32,19 +32,12 @@
     	<th>공개 여부</th>
 		<td>
 		<label class="form-check-label" for="Y">공개</label>
-		<input type="radio" name="qna_secret" id="qna_secret1" value="Y" class="radio" />&nbsp;&nbsp;&nbsp;&nbsp;
+		<input type="radio" name="qna_secret" id="qna_secret" value="Y" class="radio" />&nbsp;&nbsp;&nbsp;&nbsp;
 		<label class="form-check-label" for="N">비공개</label>		
-    	<input type="radio" name="qna_secret" id="qna_secret1" value="N" class="radio" />&nbsp;
+    	<input type="radio" name="qna_secret" id="qna_secret" value="N" class="radio" />&nbsp;
 		</td>
     </tr>
-    
-    <tr>
-     <th>사진 첨부</th>
-     <td>
-      <input type="file" name="qna_file1" class="btn btn-outline-secondary" class="form-control"/>
-     </td>
-    </tr>
-    
+        
     <tr>
      <th>질문 내용</th>
      <td>

@@ -68,9 +68,9 @@ public class QnaDAO{
 	}
 
 	// 글삭제
-	public int qnaDelete(int qna_no) {
+	public int qnaDelete(Qna qna) {
 		System.out.println("삭제 DAO");
-		return qnaSession.delete("qnans.qnaDelete", qna_no);
+		return qnaSession.delete("qnans.qnaDelete", qna);
 	}
 
 	
