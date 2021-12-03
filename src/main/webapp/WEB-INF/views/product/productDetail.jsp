@@ -6,9 +6,8 @@
 <html>
 <head></head>
 
-    <table border=1 width=400 align="center">
-        <caption>상세 페이지</caption>
 
+    <table class="table" border=1 width=400 align="center">
         <tr>
             <td>상품명</td>
             <td>${product.pro_name }</td>
@@ -30,14 +29,14 @@
 
 
             <td>
-                <form name="form1" method="post" action="${path}/basket/basketList">
+                <form name="form1" method="post" action="${path}/basketInsert">
                     <input type="hidden" name="pro_no" value="${product.pro_no}">
-                    <select name="stock">
+                    <select name="ea">
                         <c:forEach begin="1" end="10" var="i">
                             <option value="${i}">${i}</option>
                         </c:forEach>
                     </select>&nbsp;개
-                    <input type="submit" value="장바구니에 담기">
+                    <input type="submit" value="장바구니에 담기" class="btn btn-primary">
                 </form>
 <%--            <td colspan="2" align="center">--%>
 <%--                <input type="number" value="basket.ea">--%>
@@ -54,13 +53,12 @@
         </tr>
         <tr>
             <td colspan=2 align=center>
-                <input type="button" value="목록"
+                <input type="button" value="목록" class="btn btn-primary"
                        onClick="javascript:history.back(-1)">
 
-                <input type="button" value="수정"
+                <input type="button" value="수정" class="btn btn-primary"
                        onClick="location.href='${path}/productWrite/?no=${product.pro_no}&page=${page}' ">
-
-                <input type="button" value="삭제"
+                <input type="button" value="삭제" class="btn btn-danger"
                        onClick="location.href='${path}/productDelete/?no=${product.pro_no}&page=${page}' ">
             </td>
         </tr>
@@ -70,3 +68,4 @@
 
     </body>
 </html>
+<%@ include file="../layout/footer.jsp"%>

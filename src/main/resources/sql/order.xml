@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="orders">
+    <insert id="orderInsert" parameterType="com.project.withpet.model.Order">
+        <selectKey keyProperty="o_no" resultType="int" order="BEFORE">
+            select ORDERS_SEQ.nextval from dual
+        </selectKey>
+        insert into ORDERS (
+        o_no, ord_regdate, ord_info, id, addr, ord_price, ord_step, ord_canceldate
+        )values(
+        #{o_no}, sysdate, '', #{id}, '', '', '', null         )
+    </insert>
+
+    <insert id="orderProductInsert" parameterType="com.project.withpet.model.OrderProduct">
+        insert into ORDER_PRODUCT (
+        o_no, op_no, pro_no, pro_name, ea, price
+        )values(
+        #{o_no}, ORDER_PRODUCT_SEQ.nextval, #{pro_no}, #{pro_name}, #{ea}, #{price}
+        )
+    </insert>
+
+    <select id="orders" parameterType="String" resultType="com.project.withpet.model.Order">
+        select
+            ord.o_no as o_no,
+            ord.ord_regdate as ord_regdate,
+            ord.ord_info as ord_info,
+            mem.id as id,
+            mem.addr as addr,
+            ord.ord_step as ord_step,
+            ord.ord_canceldate as ord_canceldate
+            , mem.name, mem.phone
+        from
+            MEMBER mem, Orders ord
+        where mem.id = ord.id
+          and ord.ID = #{id}
+          and ord.o_no = #{o_no}
+
+    </select>
+
+    <select id="orderProductList" parameterType="com.project.withpet.model.Order" resultType="com.project.withpet.model.OrderProduct">
+        select
+            op.o_no, op.op_no, op.pro_no, op.pro_name, op.ea, op.price, pro.pro_img, mem.id
+        from ORDER_PRODUCT op, Product pro, MEMBER mem
+        where O_NO = #{o_no}
+        and op.PRO_NO = pro.PRO_NO
+        and mem.id = #{id}
+    </select>
+
+    <select id="sumMoney"
+            parameterType="com.project.withpet.model.Order" resultType="int">
+    SELECT NVL(SUM(price * ea), 0) money
+    FROM ORDER_PRODUCT
+    where o_no = #{o_no}
+    </select>
+
+    <update id="productUpdateStock" parameterType="com.project.withpet.model.OrderProduct">
+        UPDATE PRODUCT
+        SET STOCK = STOCK - #{ea}
+        WHERE PRO_NO = #{pro_no}
+    </update>
+
+    <update id="updateOrder" parameterType="com.project.withpet.model.Order">
+        update ORDERS
+        set ORD_STEP = #{ord_step},
+            ORD_PRICE = #{ord_price},
+            ORD_INFO = #{ord_info},
+            ADDR = #{addr}
+        where O_NO = #{o_no}
+        and ID = #{id}
+    </update>
+
+    <select id="getOrderList" parameterType="String" resultType="com.project.withpet.model.Order">
+        Select
+        O_NO, ORD_REGDATE, ORD_INFO, ORD_PRICE, ORD_STEP, ORD_CANCELDATE
+        , (SELECT MAX(PRO_NAME) FROM ORDER_PRODUCT OP WHERE OP.O_NO = O.O_NO) PRO_NAME
+        from ORDERS O
+        where id = #{id}
+        and ord_step is not null
+    </select>
+
+    <select id="getOrderProductDetail" parameterType="com.project.withpet.model.Order" resultType="com.project.withpet.model.OrderProduct">
+        Select
+        o_no, op_no, pro_no, pro_name, ea, price
+        from ORDER_PRODUCT
+        where o_no = #{o_no}
+    </select>
+
+</mapper>

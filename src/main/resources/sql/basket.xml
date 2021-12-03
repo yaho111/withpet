@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="basket">
+
+    <!--01-3 장바구니 추가-->
+    <insert id="basketInsert">
+        insert into basket(
+            pro_no, id, basket_no, ea
+        ) values (
+                     #{pro_no},#{id}, basket_seq.nextval ,#{ea}
+                 )
+    </insert>
+
+<!-- 01 장바구니 리스트 -->
+    <select id="basketList" parameterType="String" resultType="com.project.withpet.model.Basket">
+        select
+            pro.pro_no as pro_no,
+            pro.pro_name as pro_name,
+            mem.id as id,
+            pro.price as price,
+            bas.ea as ea,
+            pro.PRO_NAME,
+            pro.PRO_IMG,
+            pro.STOCK,
+            bas.BASKET_NO,
+            (price * ea ) order_price
+        from
+            Product pro, MEMBER mem, BASKET bas
+        where pro.pro_no = bas.pro_no
+          and mem.id = bas.id
+        and bas.ID = #{id}
+        order by bas.BASKET_NO
+    </select>
+
+    <!-- 01-1 장바구니 값 합산-->
+    <select id="sumMoney" resultType="int">
+        SELECT NVL(SUM(pro.price * bas.ea), 0) money
+        FROM
+            basket bas, product pro
+        WHERE
+            pro.pro_no = bas.pro_no AND bas.id = #{id}
+    </select>
+
+    <!--01-3 장바구니 상품 유무 확인-->
+    <select id="countBasket" resultType="int">
+        select count(*) from BASKET
+        where id = #{id} and PRO_NO = #{pro_no}
+    </select>
+
+    <!--01-4 장바구니 상품 수량 수정 -->
+    <update id="updateBasket">
+        update basket Set ea = #{ea}
+        where id = #{id} and PRO_NO = ${pro_no}
+    </update>
+
+    <!--02 장바구니 수정-->
+    <update id="modifyBasket"  >
+        update basket Set ea = #{ea}
+        where id = #{id} and PRO_NO = ${pro_no}
+    </update>
+
+    <!-- 03 장바구니 삭제-->
+    <delete id="deleteBasket">
+        DELETE FROM basket WHERE id = #{id} and BASKET_NO = #{basket_no}
+    </delete>
+
+
+</mapper>
