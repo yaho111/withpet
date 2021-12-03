@@ -17,7 +17,7 @@
 			var id  = $(this).attr('id');  // 댓글 번호 : id 값을 불러온다. 
 //			alert('id:'+id);
 			var txt = $('#td_'+id).text(); // 댓글 내용을 불러옴
-			$('#td_'+id).html("<textarea rows='1' cols='30' id='tt_"+id+"'>"+txt+"</textarea>");	// text 박스를 id마다 다르게 구분함
+			$('#td_'+id).html("<textarea class='form-control' rows='1' cols='30' id='tt_"+id+"'>"+txt+"</textarea>");	// text 박스를 id마다 다르게 구분함
 															/* 'tt'를 붙여서id 값을 다르게 하기 위해서 */
 			$('#btn_'+id).html(		// 버튼
 			   "<input type='button' value='확인' class='btn btn-primary' onclick='up("+id+")'> "// 수정을 확인으로 바꿔주는 작업 : up 함수 사용
@@ -55,7 +55,6 @@
 <body>
 <section class="py-5">
 <div class="container">
-<h2 class="text-primary">댓글</h2>
 		<form>
 		<input type="hidden" value="">
 		<table class="table table-hover">

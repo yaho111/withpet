@@ -54,8 +54,10 @@
             <c:if test="${sessionScope.id == null}">
                 <form class="d-flex">
 
-                    <input type="button" class="btn btn-outline-success" value="회원 가입" onclick="location.href='joinForm'">
-                    <input type="button" class="btn btn-outline-success" value="로그인" onclick="location.href='loginForm'">
+                    <input type="button" class="btn btn-outline-success" value="회원 가입"
+                           onclick="location.href='joinForm'">
+                    <input type="button" class="btn btn-outline-success" value="로그인"
+                           onclick="location.href='loginForm'">
                 </form>
             </c:if>
         </div>
@@ -79,6 +81,9 @@
                 <li class="nav-item"><a class="nav-link" href="${path}/qnaList">Q&A</a></li>
                 <li class="nav-item"><a class="nav-link" href="${path}/notList">공지사항</a></li>
                 <li class="nav-item"><a class="nav-link" href="${path}/businessList">사업 제휴</a></li>
+                <c:if test="${sessionScope.id != null && sessionScope.role != 'user' || sessionScope.role != 'product_bus' || sessionScope.role != 'hospital_bus'}">
+                    <li class="nav-item"><a class="nav-link" href="${path}/manager">관리자</a></li>
+                </c:if>
                 <c:if test="${sessionScope.id != null}">
                     <li class="nav-item">
                         <form class="d-flex" action="${path}/basket/basketList">
