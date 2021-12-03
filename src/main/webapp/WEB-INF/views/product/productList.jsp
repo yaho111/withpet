@@ -11,8 +11,8 @@
 </head>
 <body>
 
-<a href="${path}/productWrite/">글작성</a>
-글갯수 : ${listcount }
+<a href="${path}/productWrite/">상품 등록</a>
+상품 수량 : ${listcount }
 <table class="table table-hover">
     <tr>
         <th>상품번호</th>
@@ -34,11 +34,11 @@
                         ${pl.pro_no}
                     </td>
                     <td>
-                        <a href="${path}/productDetail/?no=${pl.pro_no}&page=${page}">
+                        <a href="${path}/productDetail?no=${pl.pro_no}&page=${page}">
                             <img src="${path}/upload/${pl.pro_img}" width="120px" height="110px"></a>
                     </td>
                     <td>
-                        <a href="${path}/productDetail/?no=${pl.pro_no}&page=${page}">
+                        <a href="${path}/productDetail?no=${pl.pro_no}&page=${page}">
                                 ${pl.pro_name}
                         </a>
                     </td>

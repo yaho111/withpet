@@ -113,11 +113,7 @@
             */
             merchant_uid: '${order.o_no}' + new Date().getTime(),
             /*
-                merchant_uid에 경우
-                https://docs.iamport.kr/implementation/payment
-                위에 url에 따라가시면 넣을 수 있는 방법이 있습니다.
-                참고하세요.
-                나중에 포스팅 해볼게요.
+                m
              */
             name: '${pro_name}',
             //결제창에서 보여질 이름
@@ -125,7 +121,7 @@
             //가격
             buyer_name: '${order.name}',
             buyer_tel: '${order.phone}',
-            buyer_addr: '${address},${specificAddress}',
+            buyer_addr: '${address}+${specificAddress}',
             buyer_postcode: "${post}",
             m_redirect_url: 'https://example.com/mobile/complete'
             /*
@@ -156,7 +152,7 @@
                     } else if (rsp.paid_amount == data.imp.response.amount) {
                         // 위의 rsp.paid_amount 와 data.response.amount를 비교한후 로직 실행 (import 서버검증)
                         alert("결제가 완료되었습니다.");
-                        location.href = "${path}/productList";
+                        location.href = "${path}/orderComplete?o_no=${order.o_no}";
                     } else {
                         alert("금액이 일치하지 않습니다. 다시 한번 시도해주세요.");
                     }

@@ -40,4 +40,17 @@ public class OrderService {
         return orderDAO.productUpdateStock(orderProduct);
     }
 
+    public int updateOrder(Order order) throws Exception{
+        return orderDAO.updateOrder(order);
+    }
+
+    public List<Order> getOrderList(String id) throws Exception{
+        return orderDAO.getOrderList(id);
+    }
+
+    public List<OrderProduct> getOrderProductDetail(Order order) throws Exception{
+        return  orderDAO.getOrderProductDetail(order);
+    }
+
+
 }

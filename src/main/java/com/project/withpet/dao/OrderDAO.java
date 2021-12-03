@@ -41,4 +41,17 @@ public class OrderDAO {
         return sqlSession.update("orders.productUpdateStock", orderProduct);
     }
 
+    public int updateOrder(Order order) throws Exception{
+        return sqlSession.update("orders.updateOrder", order);
+    }
+
+    public List<Order> getOrderList(String id) throws Exception{
+        return sqlSession.selectList("orders.getOrderList", id);
+    }
+
+    public List<OrderProduct> getOrderProductDetail(Order order) throws Exception{
+        return sqlSession.selectList("orders.getOrderProductDetail", order);
+    }
+
+
 }

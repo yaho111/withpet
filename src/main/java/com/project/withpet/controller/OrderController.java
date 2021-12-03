@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class OrderController {
@@ -30,6 +32,7 @@ public class OrderController {
     @Autowired
     private BasketService basketService;
 
+    // 01 - 1 결제 할 상품값을 basket에서 불러오기
     @RequestMapping("/orderInsert")
     public String orderInsert(HttpSession session, Model model) throws Exception {
         // session의 id
@@ -58,6 +61,7 @@ public class OrderController {
         return "redirect:/orders";
     }
 
+    // 01 -1 결제할 상품을 리스트로 올리기
     @RequestMapping("/orders")
     public String orders(int o_no, HttpSession session, Model model ) throws Exception {
 
@@ -100,6 +104,111 @@ public class OrderController {
         model.addAttribute("list", list);
 
         return "order/orders";
+    }
+
+    // 02 주문완료 페이지
+    @RequestMapping("/orderComplete")
+    public String orderComplete(@RequestParam("o_no") int o_no, HttpSession session, Model model) throws Exception{
+        // session의 id
+        String id = (String) session.getAttribute("id");
+
+        Order order = new Order();
+
+        order.setId(id);
+        order.setO_no(o_no);
+
+        order = orderService.getOrders(order);
+
+        String[] addr = order.getAddr().split("\\+");
+        String post = addr[0];
+        String address = addr[1];
+        String specificAddress = addr[2];
+
+        String[] ord_step = order.getOrd_step().split("\\|");
+        String impuid = ord_step[0];
+        String merchantUid = ord_step[1];
+
+        List<OrderProduct> list = orderService.getOrderProductList(order);
+
+        model.addAttribute("list", list);				// 장바구니 정보를 map에 저장
+        model.addAttribute("count", list.size());		// 장바구니 상품의 유무
+
+        model.addAttribute("post", post);               // 우편번호
+        model.addAttribute("address", address);         // 주소
+        model.addAttribute("specificAddress", specificAddress);     //상세주소
+
+        model.addAttribute("impuid",impuid);            //아임포트 uid
+        model.addAttribute("merchantUid",merchantUid);  //상품번호
+
+        model.addAttribute("order",order );             //order
+        model.addAttribute("list", list);
+
+        return "order/orderComplete";
+    }
+
+
+    // 3 주문 상품 리스트
+    @RequestMapping("/orderList")
+    public String orderList(HttpSession session, Model model) throws Exception{
+        // session의 id
+        String id = (String) session.getAttribute("id");
+
+        List<Order> list = orderService.getOrderList(id);
+
+        model.addAttribute("list", list);
+
+        return "order/orderList";
+    }
+
+    // 3-1, 3-2 주문상품 상세 , 주문취소
+    @RequestMapping("/orderDetail")
+    public String orderDetail(@RequestParam("o_no") int o_no,HttpSession session, Model model) throws Exception {
+
+        String id = (String) session.getAttribute("id");
+
+        Order order = new Order();
+
+        order.setId(id);
+        order.setO_no(o_no);
+
+        order = orderService.getOrders(order);
+//        order = orderService.getOrderComplete(order);
+
+        String[] addr = order.getAddr().split("\\+");
+        String post = addr[0];
+        String address = addr[1];
+        String specificAddress = addr[2];
+
+        String[] ord_step = order.getOrd_step().split("\\|");
+        String impuid = ord_step[0];
+        String merchantUid = ord_step[1];
+
+        int ord_price = orderService.sumMoney(order); //장바구니 전체 금액 호출
+        int shippingFee = 2500;
+
+        List<OrderProduct> list = orderService.getOrderProductDetail(order);
+
+        model.addAttribute("list", list);				// 장바구니 정보를 map에 저장
+        model.addAttribute("count", list.size());		// 장바구니 상품의 유무
+
+        model.addAttribute("post", post);               // 우편번호
+        model.addAttribute("address", address);         // 주소
+        model.addAttribute("specificAddress", specificAddress);     //상세주소
+
+        model.addAttribute("impuid",impuid);            //아임포트 uid
+        model.addAttribute("merchantUid",merchantUid);  //상품번호
+
+        model.addAttribute("order",order );             //order
+        model.addAttribute("list", list);
+
+        model.addAttribute("totalOrderPrice", ord_price);		// 장바구니 전체 금액
+        model.addAttribute("shippingFee", shippingFee); 				// 배송금액
+        model.addAttribute("allSum", ord_price+shippingFee);	// 주문 상품 전체 금액
+
+
+
+
+        return "order/orderDetail";
     }
 
 
