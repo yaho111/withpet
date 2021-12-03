@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="qnans">
+
+	<!-- 글작성 -->
+	<insert id="qnaInsert" parameterType="qna">
+		insert into qna values (qna_seq.nextval, #{qna_title},
+		#{qna_writer},
+		0, sysdate, #{qna_content},
+		#{qna_file,jdbcType=VARCHAR}, #{qna_secret}, qna_seq.nextval,0,0)
+	</insert>
+
+	<!-- 총데이터 구하기 -->
+	<select id="getCount" parameterType="qna" resultType="int">
+		select count(*) from qna
+		<where>		
+				
+				<if test="keyword != null and search != 'subcon'">
+					${search} like '%'||#{keyword}||'%'
+				</if>
+				<if test="keyword != null and search == 'subcon'">
+					qna_title like '%'||#{keyword}||'%' or qna_content '%'||#{keyword}||'%'
+				</if>
+		
+		</where>
+	</select>
+
+<!-- '%'||#{keyword}||'%'에서 || : +의미 -->
+
+
+	<!-- 목록 구해오기 --><!-- 여기서 오류 발생 : ORA-00923: FROM keyword not found where expected -->
+	<select id="qnaList" parameterType="qna" resultType="qna">
+	select * from (select rowNum rn, qnaBoard.* from 
+				  (select * from qna
+		<where>				
+				<if test="keyword != null and search !='subcon'">
+					${search} like '%'||#{keyword}||'%'
+				</if>
+				<if test="keyword != null and search == 'subcon'">
+					qna_title like '%'||#{keyword}||'%' or qna_content '%'||#{keyword}||'%'								
+				</if>
+		</where>
+			order by qna_ref desc, qna_seq asc) qnaBoard)
+			where rn between #{startRow} and #{endRow}	
+	</select>
+	
+	<!-- 조회수 증가 -->
+	<update id="qnaReadcnt" parameterType="int">
+		update qna set qna_readcnt = qna_readcnt+1 where qna_no = #{qna_no}
+	</update>
+	
+	<!-- 상세 정보 구하기 -->
+	<select id="qnaSelect" parameterType="int" resultType="qna">
+		select * from qna where qna_no=#{qna_no}
+	</select>
+	
+	<!-- 답글 레벨 +1 -->
+	<update id="qnaReplyUp" parameterType="qna">
+		update qna set qna_seq = qna_seq+1 where qna_ref=#{qna_ref} and qna_seq &gt; #{qna_seq}
+	</update>
+	
+	<!-- 답글 -->
+	<insert id="qnaReply" parameterType="qna" >
+		insert into qna values (qna_seq.nextval, #{qna_title},
+		#{qna_writer},
+		0, sysdate, #{qna_content},
+		#{qna_file,jdbcType=VARCHAR}, #{qna_secret}, #{qna_ref}, #{qna_lev}, #{qna_seq})
+	</insert>
+	
+	<!-- 수정 -->
+	<update id="qnaUpdate" parameterType="qna">
+	update qna set qna_title = #{qna_title}, qna_content = #{qna_content}, qna_reg = sysdate, qna_file = #{qna_file,jdbcType=VARCHAR}, 
+	qna_secret = #{qna_secret} where qna_no = #{qna_no}
+	</update>
+	
+	<!-- 삭제 -->
+	<delete id="qnaDelete" parameterType="qna">
+	delete from qna where qna_no=#{qna_no}
+	</delete>
+	
+	
+</mapper>

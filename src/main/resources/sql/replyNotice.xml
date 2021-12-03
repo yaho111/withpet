@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="notReplyns">
+
+<!-- 댓글 목록을 구해옴 -->
+<select id="notRelist" parameterType="int" resultType="replyNotice">
+	select * from replyNotice where not_no=#{not_no} order by notReply_no <!-- 부모가 같은 댓글 정렬 댓글 번호  -->
+</select>
+
+<!-- 총데이터 갯수 -->
+<!-- <select id="getCount" parameterType="replyNotice" resultType="int">
+	select count(*) from replyNotice
+</select> -->
+
+<!-- 댓글 작성 -->
+<insert id="notReInsert" parameterType="replyNotice">	
+	insert into replyNotice values (notReply_seq.nextval,#{not_no},#{notReply_writer},#{notReply_content},
+	sysdate)
+</insert>
+
+<!-- 댓글 수정 -->
+<update id="notReUpdate" parameterType="replyNotice">
+	update replyNotice set notReply_content=#{notReply_content}, regdate=sysdate where notReply_no=#{notReply_no}
+</update>
+
+<!-- 댓글 삭제 -->
+<delete id="notReDelete" parameterType="int">
+	delete from replyNotice where notReply_no=#{notReply_no}
+</delete>
+
+
+</mapper>

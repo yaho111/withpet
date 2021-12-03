@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="noticens">
+
+	<!-- 글작성 -->
+	<insert id="noticeInsert" parameterType="notice">
+		insert into notice values (notice_seq.nextval, #{not_title}, #{not_writer}, 
+		0, sysdate, #{not_content}, #{not_file,jdbcType=VARCHAR})	
+	</insert>
+	
+	<!-- 총 데이터 갯수-->
+	<select id="noticeGetCount" parameterType="notice" resultType="int">
+		select count(*) from notice
+		<where>		
+				
+				<if test="keyword != null and search != 'subcon'">
+					${search} like '%'||#{keyword}||'%'
+				</if>
+				<if test="keyword != null and search == 'subcon'">
+					not_title like '%'||#{keyword}||'%' or not_content '%'||#{keyword}||'%'
+				</if>
+		
+		</where>
+	</select>
+		
+		<!-- '%'||#{keyword}||'%'에서 || : +의미 -->
+		
+		
+	<!-- 목록 구하기 --><!-- list = null 여기서 sql 문제인듯 -->
+	<select id="noticeList" parameterType="notice" resultType="notice">
+		select * from (select rowNum rn, noticeBoard.* from 
+				  	  (select * from notice
+		<where>				
+				<if test="keyword != null and search !='subcon'">
+					${search} like '%'||#{keyword}||'%'
+				</if>
+				<if test="keyword != null and search == 'subcon'">
+					not_title like '%'||#{keyword}||'%' or not_content '%'||#{keyword}||'%'
+				</if>
+		</where>
+			order by not_no desc) noticeBoard) 
+			where rn between #{startRow} and #{endRow}	
+	</select>
+
+	<!-- 조회수 증가 -->
+	<update id="noticeReadcnt" parameterType="int">
+		update notice set not_readcnt = not_readcnt+1 where not_no = #{not_no}
+	</update>
+	
+	<!-- 상세정보 -->
+	<select id="noticeSelect" parameterType="int" resultType="notice">
+		select * from notice where not_no=#{not_no}
+	</select>
+
+	<!-- 수정 -->
+	<update id="noticeUpdate" parameterType="notice">
+		update notice set not_title = #{not_title}, not_content = #{not_content}, not_reg = sysdate, not_file = #{not_file,jdbcType=VARCHAR} 
+		where not_no = #{not_no}
+	</update>
+	
+	<!-- 삭제 -->
+	<delete id="noticeDelete" parameterType="int">
+		delete from notice where not_no = #{not_no}
+	</delete>
+	
+	
+</mapper>
