@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.activation.CommandMap;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.util.List;
 import java.util.UUID;
@@ -85,6 +86,8 @@ public class ProductController {
     @RequestMapping("/productDetail")
     public String productDetail(@RequestParam("no") int pro_no, String page, Model model) {
 
+
+
         productService.updatepro_readcnt(pro_no);				// 조회수 1증가
         Product product = productService.getProductDetail(pro_no);	    // 상세 정보 구하기
         String pro_content = product.getPro_content().replace("\n", "<br>");
@@ -97,11 +100,16 @@ public class ProductController {
     }
     // 03. 글작성 폼 04.수정페이지 폼
     @RequestMapping("productWrite")
-    public String productForm(@RequestParam(value = "no", required = false, defaultValue = "0") String pro_no_str, Model model){
-//        Product product = new Product();
+    public String productForm(@RequestParam(value = "no", required = false, defaultValue = "0") String pro_no_str, Model model, HttpSession session){
+
+        String id = (String) session.getAttribute("id");
+        Product product = new Product();
+
+        product.setBus_id(id);
+
         int pro_no = Integer.parseInt(pro_no_str);
         if(pro_no > 0){
-            Product product = productService.getProductDetail(pro_no);	    // 상세 정보 구하기
+            product = productService.getProductDetail(pro_no);	    // 상세 정보 구하기
             String pro_content = product.getPro_content().replace("\n", "<br>");
 
             model.addAttribute("product", product);
@@ -112,7 +120,7 @@ public class ProductController {
 
     // 03-1 글작성 결과
     // 04-1 수정시 이미지 변경사항 확인
-    @RequestMapping("productResult")  // 이름 변경
+    @RequestMapping("productResult")
     public String producteWrite(HttpServletRequest req, Product product, Model model) throws Exception {
         System.out.println("bus_id:"+ product.getBus_id());
         int result = 0;

@@ -15,6 +15,7 @@
 <section class="py-5">
     <div class="container-body">
 <table class="table">
+    <h2 class="body-title">장바구니</h2>
     <tr>
         <th width="140px">이미지</th>
         <th>상품명</th>
@@ -46,9 +47,13 @@
         </tr>
     </c:forEach>
 </table>
+    </div>
+</section>
 
-<table class="table">
-    <thead>배송지 정보</thead>
+<section class="py-5">
+    <div class="container-body">
+        <table class="table">
+    <h2 class="body-title">배송지 정보</h2>
 
     <tr>
         <th>결제자</th>
@@ -77,12 +82,10 @@
         <th>결제금액</th>
         <td>${allSum}</td>
     </tr>
-    <tr>
-        <th>결제</th>
-        <td><button id="check_module" type="button" class="btn btn-primary">결제하기</button></td>
-    </tr>
-
 </table>
+        <div class="body-menu">
+            <button id="check_module" type="button" class="btn btn-primary">결제하기</button>
+        </div>
     </div>
 </section>
 

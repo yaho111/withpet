@@ -93,7 +93,7 @@
              pro_img, price, pro_readcnt, pro_likecnt, pro_del
              ) values (
              product_seq.NEXTVAL,#{bus_id},#{pro_name},#{stock},#{pro_content},
-             #{pro_img},#{price},0,0,'n')
+             #{pro_img, jdbcType=VARCHAR},#{price},0,0,'n')
 
     </insert>
     <!-- 04. 글 수정-->

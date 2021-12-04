@@ -54,14 +54,13 @@
 <html>
 <head></head>
 <body>
+
 <section class="py-5">
 <div class="container">
 
-
     <table class="table">
         <tr>
-            <th>상품명</th>
-            <td>${product.pro_name }</td>
+            <td colspan="2"><h2 class="body-title">${product.pro_name }</h2></td>
         </tr>
         <tr>
             <th>상품사</th>
@@ -83,58 +82,64 @@
             <td><fmt:formatNumber pattern="###,###,###" value = "${product.price }"/> </td>
         </tr>
         <tr>
+<c:if test="${sessionScope.role == 'user' || sessionScope.role == 'product_pro'|| sessionScope.role == 'master'}">
             <th> 구매 수량</th>
             <td>
                 <form name="form1" method="post" action="${path}/basketInsert">
+                    <div class="input-group" width="500px">
                     <input type="hidden" name="pro_no" value="${product.pro_no}">
                     <select name="ea" class="form-select">
                         <c:forEach begin="1" end="10" var="i">
                             <option value="${i}">${i}</option>
                         </c:forEach>
+
                     </select><input type="submit" value="장바구니에 담기" class="btn btn-primary">
+
+                    </div>
                 </form>
             </td>
         </tr>
-
+        </c:if>
         <tr>
             <th>상품 소개 </th>
             <td>
-                <li size="600px">${pro_content}</li>
+                <li size="600px" style="list-style: none">${pro_content}</li>
             </td>
         </tr>
-        <tr>
-            <td colspan=2 align=center>
-
-                <input type="button" value="추천"  class="btn btn-outline-secondary"
-                       onClick="ProLikeButton()" >
-
-                <input type="button" value="목록" class="btn btn-primary"
-                       onClick="javascript:history.back(-1)">
-
-                <input type="button" value="수정" class="btn btn-primary"
-                       onClick="location.href='${path}/productWrite/?no=${product.pro_no}&page=${page}' ">
-
-                <input type="button" value="삭제" class="btn btn-danger"
-                       onClick="location.href='${path}/productDelete/?no=${product.pro_no}&page=${page}' ">
-            </td>
-        </tr>
-
     </table>
 
+    <div class="body-menu">
+        <c:if test="${sessionScope.id != null}">
+            <input type="button" value="추천"  class="btn btn-outline-secondary"
+                   onClick="ProLikeButton()" >
+        </c:if>
+        <c:if test="${sessionScope.id == product.bus_id || sessionScope.role == 'product_pro'||
+			          sessionScope.role == 'master'}">
 
+            <input type="button" value="수정" class="btn btn-primary"
+                   onClick="location.href='${path}/productWrite/?no=${product.pro_no}&page=${page}' ">
+
+            <input type="button" value="삭제" class="btn btn-danger"
+                   onClick="location.href='${path}/productDelete/?no=${product.pro_no}&page=${page}' ">
+        </c:if>
+        <input type="button" value="목록" class="btn btn-primary"
+               onClick="${path}/productList">
+    </div>
 
     <!-- 댓글 처리 -->
-    <p>		<!-- 위의 자바스크립에 값을 전달해줘야함 -->
+    <h2 class="text-primary">댓글</h2>
     <form name="pro_form" id="pro_form" >
         <input type="hidden" name="proReply_writer" value="${sessionScope.id}">
         <input type="hidden" name="pro_no" value="${product.pro_no}">
         <c:if test="${sessionScope.id != null}">
-            <input type="text" value="댓글" class="form-control" readonly="readonly" style="text-align:center;" >
-            <textarea name="proReply_content" rows="2" style="width:100%; border: 0; resize: none;"></textarea>
-            <input type="button" value="확인" id="proReInsert" class="form-control">
+            <textarea name="proReply_content" rows="2"
+                       class="form-control"></textarea>
+        <div class="body-menu" align="right">
+            <input type="button" value="확인" id="proReInsert"  class="btn btn-outline-secondary">
+        </div>
+
         </c:if>
     </form>
-
 </div><!-- css -->
 </section><!-- css -->
 
