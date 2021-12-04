@@ -56,9 +56,6 @@
 		</table>
 		
 		<div id="login_menu" class="body-menu">
-		<c:if test="${sessionScope.role == 'master'}">
-		<input type="submit" value="관리자 삭제" onclick="location.href='memberDelete'" class="btn btn-danger">
-		</c:if>
 		<input type="submit" value="관리자 목록" onclick="location.href='managerList'" class="btn btn-outline-secondary">
 		</div>
 		

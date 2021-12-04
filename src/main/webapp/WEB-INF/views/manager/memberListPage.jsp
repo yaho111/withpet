@@ -52,7 +52,7 @@ function del(id) {
 
 
 <!-- 검색 기능 -->
-<form action="businessListPage">
+<form action="memberListPage">
 	<!-- 검색 리스트 요청 -->
 	<input type="hidden" name="pageNum" value="1">
 	<!-- pageNum, search, keyword 값전달 -->

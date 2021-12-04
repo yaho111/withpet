@@ -44,26 +44,51 @@
 	</delete>
 	
 	<!-- 회원 관리자 등록 -->
-	<update id="managerInsert" parameterType="String">
+	<update id="managerInsert" parameterType="member">
 		update member set role=#{role} where id=#{id}
 	</update>
 	
-	<!-- 관리자 등록 승인 -->
-	<update id="businessAccept" parameterType="String">
-		update Business set bus_accept=1 where bus_no=#{bus_no}
+	<!-- 관리자 다운 -->
+	<update id="managerDown" parameterType="member">
+		update member set role='user' where id=#{id}
+	</update>
+	
+	<!-- 사업자 1명 구해오기 -->
+	<select id="selectOneBusiness" parameterType="business" resultType="business">
+		select * from business where bus_id = #{bus_id}
+	</select>
+	
+	<!-- 사업자 요청 목록 출력 -->
+	<select id="selectBusinessList" parameterType="business" resultType="business">
+		select * from business
+	</select>
+		
+	<!-- 사업자 등록 승인 -->
+ <update id="businessAccept" parameterType="business">
+		update business 
+		  <set>
+			<if test="bus_sort == '병원 사업자'">
+				bus_accept=1 
+			</if>
+			<if test="bus_sort == '쇼핑몰 사업자'">
+				bus_accept=2 
+			</if>
+		  </set>  
+		 where bus_no=#{bus_no}
 	</update>
 	
 	<!-- 판매자 롤 부여 -->
-	<!-- <update id="busRoleChange" parameterType="member">
-		update member set (select * from 
-		<if test="bus_sort == '쇼핑몰 사업자'">
-			where table name = 'business')role = 'product_bus'
-		</if>
-		<if test="bus_sort == '병원 사업자'">
-			)role = 'hospital_bus'
-		</if>
-		where id=#{id}
-		
-	</update> -->
+	<update id="roleChange" parameterType="business">
+		update member 
+		   <set>
+			<if test="bus_accept == 1">
+				role = 'hospital_pro'
+			</if>
+			<if test="bus_accept == 2">
+				role = 'product_pro'
+			</if>
+		  </set>  
+		where id = #{bus_id}
+	</update>
 	
 </mapper>

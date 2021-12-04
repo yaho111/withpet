@@ -45,18 +45,26 @@ public class ManagerService {
 		return managerDAO.managerInsert(member);
 	}
 
-	// 사업체 요청 승인
-	public int businessAccept(String bus_no) {
-		System.out.println("사업체 요청 서비스");
-		return managerDAO.businessAccept(bus_no);
+	//	관리자 다운
+	public int managerDown(Member member) {
+		System.out.println("관리자 다운 서비스");
+		return managerDAO.managerDown(member);
+	}
+	
+	// 사업자 목록 출력
+	public List<Business> selectBusinessList(Business business) {
+		System.out.println("사업체 목록 출력 서비스");
+		return managerDAO.selectBusinessList(business);
 	}
 
-	// 사업체 롤 부여
-	public int roleChange(Member member) {
-		System.out.println("사업체 롤 부여 서비스");
-		return managerDAO.roleChange(member);
+	// 사업체 등록
+	public int businessAccept(Business business) {
+		System.out.println("사업체 등록 서비스");
+		return managerDAO.businessAccept(business);
 	}
+
 	
-	
+
+		
 	
 }

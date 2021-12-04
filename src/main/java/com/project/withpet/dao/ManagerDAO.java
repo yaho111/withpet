@@ -8,12 +8,14 @@ import org.springframework.stereotype.Repository;
 
 import com.project.withpet.model.Business;
 import com.project.withpet.model.Member;
+import com.project.withpet.service.BusinessService;
 
 @Repository
 public class ManagerDAO {
 	
 	@Autowired
 	private SqlSessionTemplate managerSession;
+	
 
 	// 회원 총인원 가져오기
 	public int getCount(Member member) {
@@ -45,17 +47,58 @@ public class ManagerDAO {
 		return managerSession.update("managerns.managerInsert", member);
 	}
 
-	// 사업체 등록 승인 
-	public int businessAccept(String bus_no) {
-		System.out.println("사업체 등록 승인 DAO");
-		return managerSession.update("managerns.businessAccept", bus_no);
+	// 관리자 다운
+	public int managerDown(Member member) {
+		System.out.println("관리자 다운 DAO");
+		return managerSession.update("managerns.managerDown", member);
 	}
 
-	// 사업체 롤 부여
-	public int roleChange(Member member) {
-		// TODO Auto-generated method stub
-		return managerSession.update("managerns.busRoleChange", member);
+	// 사업자 목록
+	public List<Business> selectBusinessList(Business business) {
+		System.out.println("사업자 목록 DAO");
+		return managerSession.selectList("managerns.selectBusinessList", business);
 	}
+	
+	//사업자 등록
+	public int businessAccept(Business business) {
+		System.out.println("사업체 등록 DAO");
 		
+		// 승인 요청 버튼 클릭하여 bus_sort 값 바꾸기
+		int acceptResult = managerSession.update("managerns.businessAccept", business);
+		System.out.println("acceptResult: "+acceptResult);
+		
+		// member 테이블에서 role 값 수정하기
+		int roleChangeResult = 0;
+		
+		if(acceptResult == 1) {		// 승인 요청 수락에 따라 bus_sort 값이 변경되면
+			
+			// 승인 요청이 완료된(bus_sort 값이 업데이트된) member 객체 구해오기
+			Business selectOneBusiness = managerSession.selectOne("managerns.selectOneBusiness", business);
+			System.out.println("selectOneBusiness: "+selectOneBusiness);
+			System.out.println("role 변경할 id: "+selectOneBusiness.getBus_id());
+			
+			// member의 role 값 업데이트하기
+			roleChangeResult = managerSession.update("managerns.roleChange", selectOneBusiness);
+			System.out.println("roleChangeResult :"+roleChangeResult);
+		}
+		
+		return roleChangeResult;
+	}
+
+	
+	
+	// 사업체 등록 승인 
+//	public int businessAccept(String bus_no) {
+//		System.out.println("사업체 등록 승인 DAO");
+//		return managerSession.update("managerns.businessAccept", bus_no);
+//	}
+
+	// 사업체 롤 부여
+//	public int roleChange(Member member) {
+//		// TODO Auto-generated method stub
+//		return managerSession.update("managerns.busRoleChange", member);
+//	}
+
+
 	
 }

@@ -11,6 +11,7 @@ $(function() {
 <section class="py-5">
 	<div class="container">
 
+	<!-- 검색 기능 -->
 		
 	<div id="managerListPage"></div>
 		
