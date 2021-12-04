@@ -13,7 +13,7 @@
                     <option value="likecnt"<c:if test="${sortValue == 'likecnt'}">${'selected'}</c:if> >추천순</option>
                 </select>
 
-                <c:if test="${sessionScope.role == 'hospital' || sessionScope.role == 'hospital_bus'|| sessionScope.role == 'master'}">
+                <c:if test="${sessionScope.role == 'hospital' || sessionScope.role == 'hospital_pro'|| sessionScope.role == 'master'}">
                     <input type="button" class="btn btn-outline-secondary" value="글쓰기"
                            onclick="location.href='insertForm'"/>
                 </c:if>
@@ -30,7 +30,7 @@
             </tr>
             <c:if test="${empty list}">
                 <tr>
-                    <td colspan="6">데이터가 없습니다.</td>
+                    <td colspan="8">데이터가 없습니다.</td>
                 </tr>
             </c:if>
             <c:if test="${not empty list}">
@@ -41,7 +41,7 @@
 
                         <td align="center">
                             <c:if test="${empty hospital.hos_file}">
-                                <img src="${path}/upload/hospital/hospitalimg.jpg" height="130" width="130"/>
+                                <img src="${path}/images/basic_hospital.jpg" height="130" width="130"/>
                             </c:if>
                             <c:if test="${not empty hospital.hos_file}">
                                 <img src="${path}/upload/hospital/${hospital.hos_file}" height="130" width="130"/>

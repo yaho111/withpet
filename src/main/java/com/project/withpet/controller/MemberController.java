@@ -1,8 +1,10 @@
 package com.project.withpet.controller;
 
 import com.project.withpet.model.Member;
+import com.project.withpet.model.Order;
 import com.project.withpet.model.Pet;
 import com.project.withpet.service.MemberService;
+import com.project.withpet.service.OrderService;
 import com.project.withpet.service.PetService;
 import org.apache.commons.mail.HtmlEmail;
 import org.apache.ibatis.io.Resources;
@@ -32,6 +34,9 @@ public class MemberController {
 
     @Autowired
     private PetService petService;
+
+    @Autowired
+    private OrderService orderService;
 
     // 로그인 폼
     @RequestMapping(value = "/loginForm")
@@ -71,7 +76,7 @@ public class MemberController {
 
                 session.setAttribute("id", id);
                 session.setAttribute("role", role);
-                return "home";
+                return "redirect:main.do";
             } else {
                 // 비밀번호가 일치하지 않을 경우
                 result = 2;
@@ -118,7 +123,7 @@ public class MemberController {
                 + "-" + request.getParameter("backNum");
 
         member.setId(request.getParameter("id").trim());
-        member.setNick(request.getParameter("nick").trim());
+        member.setBirth(request.getParameter("birth"));
         member.setPwd(request.getParameter("pwd").trim());
         member.setAddr(addr);
         member.setName(request.getParameter("name").trim());
@@ -236,9 +241,11 @@ public class MemberController {
 
         List<Pet> petList = petService.selectPetList(id);
 
+        List<Order> orderList = orderService.getOrderList(id);
 
         model.addAttribute(member);
         model.addAttribute("petList", petList);
+        model.addAttribute("orderList", orderList);
 
         return "member/myPage";
     }
@@ -291,7 +298,7 @@ public class MemberController {
         int size = (int) multipartFile.getSize();
         int result = 0;
 
-        String path = request.getRealPath("upload");
+        String path = request.getRealPath("upload/member");
         System.out.println("path: " + path);
         String[] file;
         String newFileName = "";
@@ -376,7 +383,7 @@ public class MemberController {
         Member loginMember = memberService.selectMember(loginId);
 
         if (loginMember.getPwd().equals(pwd)) {
-            String path = session.getServletContext().getRealPath("upload");
+            String path = session.getServletContext().getRealPath("upload/member");
             String profile = loginMember.getProfile();
 
             if(profile != null){
@@ -392,15 +399,6 @@ public class MemberController {
             return "member/memberDeleteResult";
         }
     }
-
-
-    // 펫 등록 폼
-
-    // 펫 등록
-
-    // 사업자 등록 폼
-
-    // 사업자 등록
 
 
 }

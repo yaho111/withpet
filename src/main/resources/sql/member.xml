@@ -13,7 +13,7 @@
     <!-- 회원가입 -->
     <insert id="join" parameterType="member">
         insert into MEMBER
-        values (#{id}, #{nick}, #{pwd}, #{addr}, #{name}, #{email}, #{phone}, #{gender}, sysdate, '', 'user')
+        values (#{id}, #{pwd}, #{addr}, #{name}, #{birth}, #{email}, #{phone}, #{gender}, sysdate, '', 'user')
     </insert>
 
     <!-- 비밀번호 찾기 -->

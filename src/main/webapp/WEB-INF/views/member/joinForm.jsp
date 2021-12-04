@@ -51,9 +51,9 @@
                     </td>
                 </tr>
                 <tr>
-                    <th>닉네임</th>
+                    <th>생년월일</th>
                     <td>
-                        <input name="nick" id="nick" size="16" class="form-control"/>
+                        <input name="birth" id="birth" type="date" class="form-control"/>
                     </td>
                 </tr>
                 <tr>

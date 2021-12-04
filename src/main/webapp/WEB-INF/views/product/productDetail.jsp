@@ -68,7 +68,14 @@
         </tr>
         <tr>
             <th> 상품 이미지 </th>
-            <td><img src = "${path}/upload/${product.pro_img}" width="400px"/></td>
+            <td>
+                <c:if test="${product.pro_img != null}">
+                    <img src = "${path}/upload/${product.pro_img}" width="400px"/>
+                </c:if>
+                <c:if test="${product.pro_img == null}">
+                    <img src = "${path}/images/basic_product.jpg" width="400px"/>
+                </c:if>
+            </td>
         </tr>
         <tr>
             <th>상품 가격</th>
