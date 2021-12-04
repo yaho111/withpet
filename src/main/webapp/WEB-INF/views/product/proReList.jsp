@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html;charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="path" value="${pageContext.request.contextPath }"/>
 <!DOCTYPE html>
 <html>
@@ -66,7 +67,7 @@
                             <td>${sessionScope.id}</td>	<!-- 작성자 -->
                             <!-- 전부 바꿔줘야함 -->
                             <td id="td_${proReList.proReply_no}">${proReList.proReply_content}</td>	<!-- 내용 -->
-                            <td>${proReList.regdate}</td>	<!-- 수정일 -->
+                            <td><fmt:formatDate value="${proReList.regdate}" pattern="MM월 dd일 HH:mm EEE요일" /> </td>	<!-- 수정일 -->
                             <td id="btn_${proReList.proReply_no}">	<!-- 버튼 -->
                                 <c:if test="${proReList.proReply_writer == sessionScope.id || sessionScope.role == 'master' || sessionScope.role == product}">
                                     <input type="button" value="수정" class="edit" id="${proReList.proReply_no}"><!-- 수정하기 위해서는 id값이 달라야 한다.  -->

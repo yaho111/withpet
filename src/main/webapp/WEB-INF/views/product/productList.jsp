@@ -1,30 +1,22 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="path" value="${pageContext.request.contextPath}"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@ include file="../layout/header.jsp"%>
 <%@ include file="../sort.jsp"%>
-<!DOCTYPE html>
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>상품 리스트</title>
-</head>
-<body>
 
+<section id="section_product_List" class="py-5">
 <div class="container">
+    <h2 class="body-title">반려동물 용품</h2>
 <table class="table table-hover">
         <div class="table-menu">
-
             <select name="sort" id="sort" class="form-select" onchange="sortPro()">
                 <option value="recent" <c:if test="${sortValue == 'recent'}">${'selected'}</c:if> >최신순</option>
                 <option value="readcnt"<c:if test="${sortValue == 'readcnt'}">${'selected'}</c:if> >조회순</option>
                 <option value="likecnt"<c:if test="${sortValue == 'likecnt'}">${'selected'}</c:if> >추천순</option>
             </select>
-
+            <c:if test="${sessionScope.role == 'product_pro' || sessionScope.role == 'product'|| sessionScope.role == 'master'}">
             <input type="button" class="btn btn-outline-secondary" value="상품 등록" onclick="location.href='${path}/productWrite'"/>
+            </c:if>
         </div>
-
     <tr>
         <th>상품번호</th>
         <th>이미지</th>
