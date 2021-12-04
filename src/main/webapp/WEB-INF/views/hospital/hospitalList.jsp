@@ -30,7 +30,7 @@
             </tr>
             <c:if test="${empty list}">
                 <tr>
-                    <td colspan="6">데이터가 없습니다.</td>
+                    <td colspan="8">데이터가 없습니다.</td>
                 </tr>
             </c:if>
             <c:if test="${not empty list}">
