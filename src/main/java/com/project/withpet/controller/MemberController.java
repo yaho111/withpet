@@ -76,7 +76,7 @@ public class MemberController {
 
                 session.setAttribute("id", id);
                 session.setAttribute("role", role);
-                return "home";
+                return "redirect:main.do";
             } else {
                 // 비밀번호가 일치하지 않을 경우
                 result = 2;

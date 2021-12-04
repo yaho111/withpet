@@ -87,7 +87,7 @@
                 </c:if>
                 <c:if test="${sessionScope.id != null}">
                     <li class="nav-item">
-                        <form class="d-flex" action="${path}/basket/basketList">
+                        <form class="d-flex" action="${path}/basketList">
                             <button class="btn btn-outline-dark" type="submit">
                                 <i class="bi-cart-fill me-1"></i>
                                 Cart
