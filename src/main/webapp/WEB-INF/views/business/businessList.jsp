@@ -29,10 +29,10 @@
           <td>${business.bus_no}</td>
           <td>${business.bus_tel}</td>
           <td>${business.bus_sort}</td>
-          <c:if test="${business.bus_accept != 1}">
+          <c:if test="${business.bus_accept != 1 || business.bus_accept != 2}">
             <td>심사중입니다.</td>
           </c:if>
-          <c:if test="${business.bus_accept == 1}">
+          <c:if test="${business.bus_accept == 1 || business.bus_accept == 2}">
             <td>승인 완료되었습니다.</td>
           </c:if>
           <td>
