@@ -34,7 +34,7 @@
 	<tr>
      <th>답글 제목</th>
      <td>
-      	<input class="form-control" type="text" name="qna_title" id="qna_title" value="Answer ${qna.qna_title}" readonly="readonly"/>
+      	<input class="form-control" type="text" name="qna_title" id="qna_title" value=" ${qna.qna_writer}님 문의 답변입니다." readonly="readonly"/>
      </td>
     </tr>
     <tr>

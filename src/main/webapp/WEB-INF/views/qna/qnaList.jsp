@@ -29,19 +29,21 @@
                 <!-- 반복문 시작 -->
                 <c:forEach var="qna" items="${list}">
                     <!-- 비밀글 처리 -->
-                    <%-- <c:if test="${qna.qna_secret2 == (sessionScope.id == qna.qna_writer)? 'YY':'NN'}"> --%>
                     <tr>
                         <td>${no}</td>
                         <!-- 비공개 -->
                         <c:if test="${qna.qna_secret == 'N'}">
                             <td>
                                 <!-- 일반 회원 -->
-                                <c:if test="${sessionScope.id == null || qna.qna_writer != sessionScope.id && sessionScope.role == 'user'}">
+                                <c:if test="${sessionScope.id == null || qna.qna_writer != sessionScope.id && 
+                                			  sessionScope.role == 'user' || sessionScope.role == 'product_pro'|| sessionScope.role == 'hospital_pro'}">
                                     <img width="16px" height="16px" src="./images/locked.png">비밀글입니다.
                                 </c:if>
 
                                 <!-- 작성자, 관리자 -->
-                                <c:if test="${qna.qna_writer == sessionScope.id || sessionScope.role == 'notice' || sessionScope.role == 'master'}">
+                                <c:if test="${qna.qna_writer == sessionScope.id || sessionScope.role == 'qna' || 
+                                			  sessionScope.role == 'master' || sessionScope.role == 'notice' || 
+                                			  sessionScope.role == 'community' || sessionScope.role == 'hospital' || sessionScope.role == 'product'}">
                                     <!-- 답글처리 -->
                                     <div align="left">
                                         <c:if test="${qna.qna_lev != 0}">
@@ -59,9 +61,24 @@
                                 </c:if>
 
                             </td>
-                            <td>익명</td>
-                            <td><fmt:formatDate value="${qna.qna_reg}"
-                                                pattern="YYYY/MM/dd EEE요일"/></td>
+                            <td>
+                            	<c:if test="${sessionScope.id == null || qna.qna_writer != sessionScope.id && 
+                                			  sessionScope.role == 'user' || sessionScope.role == 'product_pro'|| 
+                                			  sessionScope.role == 'hospital_pro'}">
+                                			    익명
+                       			</c:if>
+                       			<c:if test="${qna.qna_writer == sessionScope.id || sessionScope.role == 'qna' || 
+                                			  sessionScope.role == 'master' || sessionScope.role == 'notice' || 
+                                			  sessionScope.role == 'community' || sessionScope.role == 'hospital' || sessionScope.role == 'product'}">
+                                	 <c:if test="${qna.qna_lev == 0}"><!-- 고객글 -->
+                                			  ${qna.qna_writer}
+                                	 </c:if>
+                                	 <c:if test="${qna.qna_lev != 0}"><!-- 답변글 -->
+                                	 		    관리자
+                                	 </c:if>
+                                </c:if>
+                       		</td>
+                            <td><fmt:formatDate value="${qna.qna_reg}" pattern="YYYY/MM/dd EEE요일"/></td>
                             <td>미공개</td>
 
                         </c:if>
@@ -85,28 +102,9 @@
                                                 pattern="YYYY/MM/dd EEE요일"/></td>
                             <td>${qna.qna_readcnt}</td>
                         </c:if>
-
-                            <%-- 					<c:if test="${sessionScope.id == qna.qna_writer && qna.qna_secret == 'N'}">
-                            <td>
-                                <div align="left">
-                                    <c:if test="${qna.qna_lev != 0}">
-                                        <c:forEach var="k" begin="1" end="${qna.qna_lev}">
-                                            &nbsp;&nbsp;
-                                        </c:forEach>
-                                        <img src="./images/AnswerLine.gif">
-                                    </c:if>
-
-                                    <a href="qnaView?qna_no=${qna.qna_no}&pageNum=${paging.currentPage}">
-                                        ${qna.qna_title} </a>
-                                </div>
-                            </td>
-                            <td>${qna.qna_writer}</td>
-                            <td><fmt:formatDate value="${qna.qna_reg}" pattern="YYYY/MM/dd EEE요일"/></td>
-                            <td>${qna.qna_readcnt}</td>
-                            </c:if> --%>
                     </tr>
                     <c:set var="no" value="${no-1}"/>
-                    <%-- </c:if> --%>
+
                 </c:forEach>
             </c:if>
         </table>
@@ -117,7 +115,6 @@
         <form action="qnaList">
             <!-- 검색 리스트 요청 -->
             <input type="hidden" name="pageNum" value="1">
-            <!-- pageNum, search, keyword 값전달 -->
             <div class="search">
                 <select name="search" class="form-select">
                     <option value="qna_title"
@@ -132,7 +129,6 @@
                     </option>
                 </select>
                 <input type="text" name="keyword" class="form-control">
-                <!-- dto -->
                 <input type="submit" value="확인" class="btn btn-outline-secondary">
             </div>
         </form>

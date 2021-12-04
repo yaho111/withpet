@@ -73,7 +73,7 @@
 	
 	<!-- 삭제 -->
 	<delete id="qnaDelete" parameterType="qna">
-	delete from qna where qna_no=#{qna_no}
+	delete from qna where qna_no=#{qna_no} <!-- and qna_ref = #{qna_ref} -->
 	</delete>
 	
 	
