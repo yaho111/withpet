@@ -3,22 +3,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <%@ include file="../layout/header.jsp"%>
-<html>
-<head>
-    <title>Title</title>
-</head>
-<body>
-<script>
-</script>
-
-</body>
 
 <c:choose>
     <c:when test="${count == 0}">
-<a style="font-size: larger; text-align: center;color : red;"> 장바구니가 비어있습니다 </a>
+        <a style="font-size: larger; text-align: center;color : red;"> <h2>장바구니가 비어있습니다</h2> </a>
     </c:when>
     <c:otherwise>
 <div class="container">
+    <h2 class="body-title">장바구니 목록</h2>
         <table class="table">
             <tr>
                 <th width="140px">이미지</th>
@@ -56,8 +48,8 @@
                 </tr>
             </c:forEach>
             <tr>
-                <td colspan="2">
-                    <input type="button" class="btn btn-primary" onclick="location.href='${path}/productList'" value="추가 구매하기"/>
+                <td colspan="3">
+
                 </td>
                 <td>
                     장바구니 금액 합계 : ${totalOrderPrice}
@@ -68,13 +60,14 @@
                 <td>
                     전체 주문금액 : ${allSum}
                 </td>
-                <td>
-                    <input type="button" onclick="location.href='${path}/orderInsert'" class="btn btn-primary" value="결제하기"/>
-                </td>
             </tr>
         </table>
+    <div class="body-menu" align="right">
+        <input type="button" class="btn btn-primary" onclick="location.href='${path}/productList'" value="추가 구매하기"/>
+        <input type="button" onclick="location.href='${path}/orderInsert'" class="btn btn-primary" value="결제하기"/>
+    </div>
 </div>
     </c:otherwise>
 </c:choose>
-</html>
+
 <%@ include file="../layout/footer.jsp"%>

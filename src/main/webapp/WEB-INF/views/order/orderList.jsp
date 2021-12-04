@@ -3,19 +3,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <%@ include file="../layout/header.jsp"%>
-<html>
-<head>
-    <title>Title</title>
-</head>
-<body>
 
 <c:choose>
   <c:when test="${empty list}">
-    결제가 완료된 상품이 없습니다.
+    <h2 class="body-title"> 결제가 완료된 상품이 없습니다.</h2>
   </c:when>
   <c:otherwise>
 <div class="container">
     <table class="table table-hover">
+        <h2 class="body-title">주문 내역</h2>
         <tr>
             <th>주문번호</th>
             <th>상품명</th>
@@ -45,6 +41,4 @@
   </c:otherwise>
 </c:choose>
 
-
-</body>
-</html>
+<%@ include file="../layout/footer.jsp"%>
