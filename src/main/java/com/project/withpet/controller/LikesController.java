@@ -11,6 +11,7 @@ import com.project.withpet.model.Prolike;
 import com.project.withpet.service.CommunityService;
 import com.project.withpet.service.HospitalService;
 import com.project.withpet.service.LikesService;
+import com.project.withpet.service.ProductService;
 
 @Controller
 public class LikesController {
@@ -24,8 +25,8 @@ public class LikesController {
 	@Autowired
 	private CommunityService communityService;
 	
-//	@Autowired
-//	private ProductService productService;
+	@Autowired
+	private ProductService productService;
 	
 	// 1. 추천 버튼 클릭 시(병원)
 	@RequestMapping("/hosLikeInsert")
@@ -92,10 +93,10 @@ public class LikesController {
 			likesService.insert(prolike);
 			
 			// 상품 게시판 게시글 추천수 업데이트
-			//productService.updateLike(prolike.getPro_no());
+			productService.updateLike(prolike.getPro_no());
 		}
 				
 		model.addAttribute("message", message);
 		return "likeResult";
-	}	
+	}
 }

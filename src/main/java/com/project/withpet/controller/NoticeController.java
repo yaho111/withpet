@@ -81,7 +81,7 @@ public class NoticeController {
 //			newFileName = uuid.toString() + extension;
 //			System.out.println("newFileName:" + newFileName);
 
-			String noticeFile[] = new String[2];
+			String[] noticeFile = new String[2];
 
 			StringTokenizer st = new StringTokenizer(noticeFileName, ".");
 			noticeFile[0] = st.nextToken(); // 파일명 저장
@@ -226,7 +226,7 @@ public class NoticeController {
 //			newFileName = uuid.toString() + extension;
 //			System.out.println("newFileName:" + newFileName);
 
-			String noticeFile[] = new String[2];
+			String[] noticeFile = new String[2];
 
 			StringTokenizer st = new StringTokenizer(noticeFileName, ".");
 			noticeFile[0] = st.nextToken(); // 파일명 저장

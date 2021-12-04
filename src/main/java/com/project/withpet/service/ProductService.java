@@ -18,14 +18,13 @@ public class ProductService {
 
 
     // 01. 상품목록
-
-    public List<Product> getProductList(int page) {
-        return productDAO.getProductList(page);
+    public List<Product> list(Product product) {
+        return productDAO.list(product);
     }
 
     // 01 -1. 리스트 데이터 카운트
-    public int getCount() {
-        return productDAO.getCount();
+    public int getCount(Product product) {
+        return productDAO.getCount(product);
     }
 
     // 02 -1 상세페이지 조회수 증가
@@ -51,6 +50,11 @@ public class ProductService {
     // 05. 글 삭제
     public int productDelete(int pro_no){
         return productDAO.productDelete(pro_no);
+    }
+
+    // 06 상품 게시판 게시글 추천수 업데이트
+    public void updateLike(int pro_no){
+        productDAO.updateLike(pro_no);
     }
 }
 

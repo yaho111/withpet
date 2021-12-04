@@ -27,9 +27,16 @@ public class Product {
     private String pro_del; // 삭제 쿼리 Y or N
     private MultipartFile pro_photo; // 상품이미지파일
 
+    // page
+    private int startRow;
+    private int endRow;
 
+    // 검색
+    private String search;
+    private String keyword;
 
-
+    // 정렬
+    private String sortValue;
 
 
     public int getPro_no() {
@@ -113,6 +120,54 @@ public class Product {
     }
     public void setPro_photo(MultipartFile productPhoto) {
         this.pro_photo = productPhoto;
+    }
+
+    public int getStartRow() {
+        return startRow;
+    }
+
+    public void setStartRow(int startRow) {
+        this.startRow = startRow;
+    }
+
+    public int getEndRow() {
+        return endRow;
+    }
+
+    public void setEndRow(int endRow) {
+        this.endRow = endRow;
+    }
+
+    public String getSearch() {
+        return search;
+    }
+
+    public void setSearch(String search) {
+        this.search = search;
+    }
+
+    public String getKeyword() {
+        return keyword;
+    }
+
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
+    }
+
+    public List<Product> getProductList() {
+        return productList;
+    }
+
+    public void setProductList(List<Product> productList) {
+        this.productList = productList;
+    }
+
+    public String getSortValue() {
+        return sortValue;
+    }
+
+    public void setSortValue(String sortValue) {
+        this.sortValue = sortValue;
     }
 
     @Override

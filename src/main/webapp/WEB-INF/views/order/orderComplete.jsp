@@ -9,7 +9,7 @@
     <title>Title</title>
 </head>
 <body>
-
+<div class="container">
 <table class="table">
 
         <thead> 주문이 완료되었습니다! </thead>
@@ -51,7 +51,7 @@
 </tfoot>
 
 </table>
-
+</div>
 
 
 </body>

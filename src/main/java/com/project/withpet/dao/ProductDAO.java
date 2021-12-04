@@ -16,14 +16,13 @@ public class ProductDAO {
     private SqlSession sqlSession;
 
    // 01. 상품목록
-    public List<Product> getProductList(int page) {
-
-        return sqlSession.selectList("product.productList", page);
+    public List<Product> list(Product product) {
+        return sqlSession.selectList("product.productList", product);
     }
 
     // 01 -1. 리스트 데이터 카운트
-    public int getCount() {
-        return sqlSession.selectOne("countProduct");
+    public int getCount(Product product) {
+        return sqlSession.selectOne("product.getCount", product);
     }
 
     // 02 -1 상세페이지 조회수 증가
@@ -49,6 +48,11 @@ public class ProductDAO {
     // 05. 글 삭제
     public int productDelete(int pro_no) {
        return sqlSession.update("product.productDelete", pro_no);
+    }
+
+    // 06. 좋아요
+    public void updateLike(int pro_no) {
+        sqlSession.update("product.updateLike", pro_no);
     }
 
 }
