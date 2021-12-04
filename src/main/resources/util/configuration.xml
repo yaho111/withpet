@@ -11,6 +11,7 @@
         <typeAlias alias="pet" type="com.project.withpet.model.Pet"/>
         <typeAlias alias="community" type="com.project.withpet.model.Community" />
         <typeAlias alias="qna" type="com.project.withpet.model.Qna" />
+        <typeAlias alias="product" type="com.project.withpet.model.Product"/>
         <typeAlias alias="notice" type="com.project.withpet.model.Notice" />
         <typeAlias alias="hoslike" type="com.project.withpet.model.Hoslike"/>
         <typeAlias alias="comlike" type="com.project.withpet.model.Comlike"/>

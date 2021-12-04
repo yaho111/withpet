@@ -124,9 +124,9 @@ public class OrderController {
         String address = addr[1];
         String specificAddress = addr[2];
 
-        String[] ord_step = order.getOrd_step().split("\\|");
-        String impuid = ord_step[0];
-        String merchantUid = ord_step[1];
+        String[] ord_info = order.getOrd_info().split("\\|");
+        String impuid = ord_info[0];
+        String merchantUid = ord_info[1];
 
         List<OrderProduct> list = orderService.getOrderProductList(order);
 
@@ -179,9 +179,9 @@ public class OrderController {
         String address = addr[1];
         String specificAddress = addr[2];
 
-        String[] ord_step = order.getOrd_step().split("\\|");
-        String impuid = ord_step[0];
-        String merchantUid = ord_step[1];
+        String[] ord_info = order.getOrd_info().split("\\|");
+        String impuid = ord_info[0];
+        String merchantUid = ord_info[1];
 
         int ord_price = orderService.sumMoney(order); //장바구니 전체 금액 호출
         int shippingFee = 2500;

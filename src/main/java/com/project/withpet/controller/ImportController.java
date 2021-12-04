@@ -40,7 +40,7 @@ public class ImportController {
     @Autowired
     private ProductService productService;
 
-    private IamportClient api;
+    private final IamportClient api;
 
 
     public ImportController() {
@@ -52,7 +52,7 @@ public class ImportController {
     // 결제
     @ResponseBody
     @RequestMapping(value="/verifyIamport/{imp_uid}")
-    public HashMap<String, Object> paymentByImpUid(@RequestParam(required = false, value = "o_no")int o_no, Model model , Locale locale , HttpSession session , @PathVariable(value= "imp_uid") String imp_uid) throws IamportResponseException, IOException, Exception
+    public HashMap<String, Object> paymentByImpUid(@RequestParam(required = false, value = "o_no")int o_no, Model model , Locale locale , HttpSession session , @PathVariable(value= "imp_uid") String imp_uid) throws Exception
     {
         HashMap<String, Object> resMap = new HashMap<>();
         int code = -1;
@@ -130,7 +130,7 @@ public class ImportController {
     //결제 취소
     @ResponseBody
     @RequestMapping(value="/canceliamport/{imp_uid}")
-    public HashMap<String, Object> canceliamport(@RequestParam(required = false, value = "o_no")int o_no, Model model , Locale locale , HttpSession session , @PathVariable(value= "imp_uid") String imp_uid) throws IamportResponseException, IOException, Exception {
+    public HashMap<String, Object> canceliamport(@RequestParam(required = false, value = "o_no")int o_no, Model model , Locale locale , HttpSession session , @PathVariable(value= "imp_uid") String imp_uid) throws Exception {
         HashMap<String, Object> resMap = new HashMap<>();
         int code = -1;
         String msg = "";

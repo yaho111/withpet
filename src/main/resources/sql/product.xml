@@ -6,16 +6,74 @@
 
 
     <!-- 01. 상품 전체 리스트 -->
-    <select id="productList" parameterType="int" resultType="com.project.withpet.model.Product">
-        select * from (select rownum rnum, product.* from (
-        select * from product order by pro_no desc)product)
-        where rnum &gt;= ((#{page}-1) * 10+1)  and
-            rnum &lt;= (#{page}*10)
+    <select id="productList" parameterType="com.project.withpet.model.Product" resultType="com.project.withpet.model.Product">
+
+        <!-- 최신순 -->
+        <if test="sortValue.equals('recent')">
+        select * from ( select rownum rn, product.* from (
+        select * from product
+        <where>
+            <if test="keyword != null and search != 'subcon'">
+                ${search} like '%'||#{keyword}||'%'
+            </if>
+            <if test="keyword != null and search == 'subcon'">
+                pro_name like '%'||#{keyword}||'%' or
+                pro_content like '%'||#{keyword}||'%'
+            </if>
+        </where>
+        order by pro_no desc ) product )
+        where rn between #{startRow} and #{endRow}
+        </if>
+        <!-- 조회순 -->
+        <if test="sortValue.equals('readcnt')">
+            select * from (select rownum rn, product.* from (
+            select * from product
+            <where>
+                <if test="keyword != null and search != 'subcon'">
+                    ${search} like '%'||#{keyword}||'%'
+                </if>
+                <if test="keyword != null and search == 'subcon'">
+                    pro_name like '%'||#{keyword}||'%' or pro_content like '%'||#{keyword}||'%'
+                </if>
+
+            </where>
+            order by pro_readcnt desc, pro_no desc ) product )
+            where rn between #{startRow} and #{endRow}
+        </if>
+
+        <!-- 추천순  -->
+        <if test="sortValue.equals('likecnt')">
+            select * from (select rownum rn, product.* from (
+            select * from product
+            <where>
+                <if test="keyword != null and search != 'subcon'">
+                    ${search} like '%'||#{keyword}||'%'
+                </if>
+                <if test="keyword != null and search == 'subcon'">
+                    pro_name like '%'||#{keyword}||'%' or pro_content like '%'||#{keyword}||'%'
+                </if>
+
+            </where>
+            order by pro_likecnt desc, pro_no desc ) product )
+            where rn between #{startRow} and #{endRow}
+        </if>
+
     </select>
 
     <!-- 01-1 글 갯수 -->
-    <select id="countProduct" resultType="int">
+    <select id="getCount" parameterType="com.project.withpet.model.Product" resultType="int">
         select count(*) from product
+        <where>
+
+            <if test="keyword != null and search != 'subcon'">
+                ${search} like '%'||#{keyword}||'%'
+            </if>
+            <if test="keyword != null and search == 'subcon'">
+                pro_name like '%'||#{keyword}||'%' or
+                pro_content like '%'||#{keyword}||'%'
+            </if>
+
+        </where>
     </select>
 
     <!-- 02-1 조회수 증가 -->
@@ -58,6 +116,11 @@
             pro_del = 'y'
         WHERE
             pro_no = #{pro_no}
+    </update>
+
+    <!-- 병원 게시판 게시글 추천수 업데이트 -->
+    <update id="updateLike" parameterType="int">
+        update product set pro_likecnt = pro_likecnt+1 where pro_no=#{pro_no}
     </update>
 
 

@@ -46,7 +46,7 @@ public class CommunityController {
 	    String communityFileName = multiFile.getOriginalFilename(); // 파일명 저장
 		int size = (int) multiFile.getSize(); // 첨부파일 크기 불러옴(단위 : byte), getSize()는 long형 - in 형으로 다운 케스팅(명시적 형 변환) 해야함
 		
-		String path = request.getRealPath("upload"); // upload/notice를 불러와라
+		String path = request.getRealPath("upload/community");
 		System.out.println("mutiFile=" + multiFile);
 		System.out.println("filename=" + communityFileName);
 		System.out.println("size=" + size);
@@ -58,15 +58,15 @@ public class CommunityController {
 		if (communityFileName != "") { // 첨부파일이 전송된 경우
 
 			// 파일 중복문제 해결
-			String extension = communityFileName.substring(communityFileName.lastIndexOf("."), communityFileName.length());
+			String extension = communityFileName.substring(communityFileName.lastIndexOf("."));
 			System.out.println("extension:" + extension);
 
 			UUID uuid = UUID.randomUUID(); // 난수 발생
 
-			newFileName = uuid.toString() + extension;
+			newFileName = uuid + extension;
 			System.out.println("newFileName:" + newFileName);
 
-			String communityFile[] = new String[2];
+			String[] communityFile = new String[2];
 
 			StringTokenizer st = new StringTokenizer(communityFileName, ".");
 			communityFile[0] = st.nextToken(); // 파일명 저장

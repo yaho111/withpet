@@ -2,6 +2,8 @@ package com.project.withpet.controller;
 
 
 import com.project.withpet.model.Product;
+import com.project.withpet.model.Qna;
+import com.project.withpet.service.PagingPgm;
 import com.project.withpet.service.ProductService;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -26,36 +29,53 @@ public class ProductController {
     private ProductService productService;
 
     // 01. 01-1 상품 전체 목록
-    @RequestMapping("/productList")
-    public String productList(HttpServletRequest request, Model model){
-        int page = 1;
-        int limit = 10;
+    @RequestMapping(value = "productList", method = RequestMethod.GET)
+    public String productList(HttpServletRequest request, String pageNum, Product product, Model model){
 
-        if(request.getParameter("page")!= null)
-            page = Integer.parseInt(request.getParameter("page"));
+        // 정렬 값(sortValue)이 없는 경우(초기 실행)
+        if(product.getSortValue() == null) {
+            product.setSortValue("recent");
+        }
 
-        // 데이터 갯수
-        int listcount = productService.getCount();
-        System.out.println("listcount:"+listcount);
+        String sortValue = product.getSortValue();
 
-        List<Product> productList = productService.getProductList(page);
-        System.out.println("productList:"+productList);
+        final int rowPerPage = 10;
 
-        // 총 페이지
-        int pageCount = listcount/limit+((listcount%limit==0) ? 0 : 1);
+        if (pageNum == null || pageNum.equals("")) {
+            pageNum = "1";
+        }
 
-        int startPage = ((page-1)/10 * limit + 1);  // 1,  11, 21...
-        int endPage = startPage + 10 - 1;			// 10, 20, 30..
+        // 현제 페이지 (pageNum 변환)
+        int currentPage = Integer.parseInt(pageNum);
 
-        if(endPage > pageCount)
-            endPage = pageCount;
+        // 총 데이터 구해오기
+        int total = productService.getCount(product);
+        System.out.println("totalData:"+total);
 
-        model.addAttribute("page", page);
-        model.addAttribute("listcount", listcount);
-        model.addAttribute("productList", productList);
-        model.addAttribute("pageCount", pageCount);
-        model.addAttribute("startPage", startPage);
-        model.addAttribute("endPage", endPage);
+        // 한페이지에 데이터 시작 값, 끝값
+        int startRow = (currentPage - 1) * rowPerPage + 1; // 1, 11, 21, 31 , DTO에 저장
+        int endRow = startRow + rowPerPage - 1; // 10, 20, 30, 40 , DTO에 저장
+
+        PagingPgm paging = new PagingPgm(total, rowPerPage, currentPage);
+
+        product.setStartRow(startRow);
+        product.setEndRow(endRow);
+
+        int no = total - startRow + 1; // 화면 출력 번호
+
+        List<Product> list = productService.list(product);
+        System.out.println("list : " + list);
+
+        // 정렬
+        model.addAttribute("sortValue", sortValue);
+
+        model.addAttribute("list", list);
+        model.addAttribute("no", no);
+        model.addAttribute("paging", paging);
+
+        // 검색
+        model.addAttribute("search", product.getSearch());
+        model.addAttribute("keyword", product.getKeyword());
 
         return "product/productList";
     }
@@ -116,7 +136,7 @@ public class ProductController {
                         if(!uploadFile.exists()){
                             uploadFile.mkdirs();
                         }
-                        fileName = UUID.randomUUID().toString() + "." + ext;
+                        fileName = UUID.randomUUID() + "." + ext;
                         uploadPath = uploadPath + "/" + fileName;
                         out = new FileOutputStream(new File(uploadPath));
 //						out.write(bytes);

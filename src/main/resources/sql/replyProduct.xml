@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="proReplyns">
+
+<!-- 댓글 목록을 구해옴 -->
+<select id="proRelist" parameterType="int" resultType="com.project.withpet.model.ReplyProduct">
+	select * from replyProduct where pro_no=#{pro_no} order by proReply_no <!-- 부모가 같은 댓글 정렬 댓글 번호  -->
+</select>
+
+<!-- 댓글 작성 -->
+<insert id="proReInsert" parameterType="com.project.withpet.model.ReplyProduct">
+	insert into replyProduct values (proReply_seq.nextval,#{pro_no},#{proReply_writer},#{proReply_content},
+	sysdate)
+</insert>
+
+<!-- 댓글 수정 -->
+<update id="proReUpdate" parameterType="com.project.withpet.model.ReplyProduct">
+	update replyProduct set proReply_content=#{proReply_content}, regdate=sysdate where proReply_no=#{proReply_no}
+</update>
+
+<!-- 댓글 삭제 -->
+<delete id="proReDelete" parameterType="int">
+	delete from replyProduct where proReply_no=#{proReply_no}
+</delete>
+
+
+</mapper>
