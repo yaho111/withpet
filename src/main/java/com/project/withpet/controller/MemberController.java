@@ -1,8 +1,10 @@
 package com.project.withpet.controller;
 
 import com.project.withpet.model.Member;
+import com.project.withpet.model.Order;
 import com.project.withpet.model.Pet;
 import com.project.withpet.service.MemberService;
+import com.project.withpet.service.OrderService;
 import com.project.withpet.service.PetService;
 import org.apache.commons.mail.HtmlEmail;
 import org.apache.ibatis.io.Resources;
@@ -32,6 +34,9 @@ public class MemberController {
 
     @Autowired
     private PetService petService;
+
+    @Autowired
+    private OrderService orderService;
 
     // 로그인 폼
     @RequestMapping(value = "/loginForm")
@@ -236,9 +241,11 @@ public class MemberController {
 
         List<Pet> petList = petService.selectPetList(id);
 
+        List<Order> orderList = orderService.getOrderList(id);
 
         model.addAttribute(member);
         model.addAttribute("petList", petList);
+        model.addAttribute("orderList", orderList);
 
         return "member/myPage";
     }
