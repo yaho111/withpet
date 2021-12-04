@@ -38,7 +38,7 @@ public class PetController {
         int size = (int) multipartFile.getSize();
         int result = 0;
 
-        String path = request.getRealPath("upload");
+        String path = request.getRealPath("upload/pet");
         System.out.println("path" + path);
         System.out.println(pet.getPet_birth());
         String[] file;
@@ -107,7 +107,7 @@ public class PetController {
         int size = (int) multipartFile.getSize();
         int result = 0;
 
-        String path = request.getRealPath("upload");
+        String path = request.getRealPath("upload/pet");
         System.out.println("path" + path);
 
         int pet_no = Integer.parseInt(request.getParameter("pet_no"));
@@ -168,7 +168,7 @@ public class PetController {
     public String deletePet(HttpServletRequest request, HttpSession session) throws Exception{
 
         int pet_no = Integer.parseInt(request.getParameter("pet_no"));
-        String path = session.getServletContext().getRealPath("upload");
+        String path = session.getServletContext().getRealPath("upload/pet");
 
         Pet selectPet = petService.selectPet(pet_no);
 

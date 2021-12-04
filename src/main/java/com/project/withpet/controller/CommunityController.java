@@ -46,7 +46,7 @@ public class CommunityController {
 	    String communityFileName = multiFile.getOriginalFilename(); // 파일명 저장
 		int size = (int) multiFile.getSize(); // 첨부파일 크기 불러옴(단위 : byte), getSize()는 long형 - in 형으로 다운 케스팅(명시적 형 변환) 해야함
 		
-		String path = request.getRealPath("upload"); // upload/notice를 불러와라
+		String path = request.getRealPath("upload/community");
 		System.out.println("mutiFile=" + multiFile);
 		System.out.println("filename=" + communityFileName);
 		System.out.println("size=" + size);

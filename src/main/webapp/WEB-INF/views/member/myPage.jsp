@@ -21,7 +21,7 @@
                         <img class="profile" src="${path}/images/basic_profile.jpg" width="100" height="100"/>
                     </c:if>
                     <c:if test="${member.profile != null}">
-                        <img class="profile" src="${path}/upload/${member.profile}" width="100" height="100"/>
+                        <img class="profile" src="${path}/upload/member/${member.profile}" width="100" height="100"/>
                     </c:if>
                 </td>
             </tr>

@@ -298,7 +298,7 @@ public class MemberController {
         int size = (int) multipartFile.getSize();
         int result = 0;
 
-        String path = request.getRealPath("upload");
+        String path = request.getRealPath("upload/member");
         System.out.println("path: " + path);
         String[] file;
         String newFileName = "";
@@ -383,7 +383,7 @@ public class MemberController {
         Member loginMember = memberService.selectMember(loginId);
 
         if (loginMember.getPwd().equals(pwd)) {
-            String path = session.getServletContext().getRealPath("upload");
+            String path = session.getServletContext().getRealPath("upload/member");
             String profile = loginMember.getProfile();
 
             if(profile != null){
@@ -399,15 +399,6 @@ public class MemberController {
             return "member/memberDeleteResult";
         }
     }
-
-
-    // 펫 등록 폼
-
-    // 펫 등록
-
-    // 사업자 등록 폼
-
-    // 사업자 등록
 
 
 }
