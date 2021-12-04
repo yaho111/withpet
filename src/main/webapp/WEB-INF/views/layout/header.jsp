@@ -82,7 +82,7 @@
                 <li class="nav-item"><a class="nav-link" href="${path}/qnaList">Q&A</a></li>
                 <li class="nav-item"><a class="nav-link" href="${path}/notList">공지사항</a></li>
                 <li class="nav-item"><a class="nav-link" href="${path}/businessList">사업 제휴</a></li>
-                <c:if test="${sessionScope.id != null && sessionScope.role != 'user' && sessionScope.role != 'product_bus' && sessionScope.role != 'hospital_bus'}">
+                <c:if test="${sessionScope.role != 'user' && sessionScope.role != 'product_pro' && sessionScope.role != 'hospital_pro'}">
                     <li class="nav-item"><a class="nav-link" href="${path}/manager">관리자</a></li>
                 </c:if>
                 <c:if test="${sessionScope.id != null}">
