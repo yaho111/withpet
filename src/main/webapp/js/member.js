@@ -27,6 +27,11 @@ function check() {
         $("#name").val("").focus();
         return false;
     }
+    if ($.trim($("#birth").val()) == "") {
+        alert("생년월일을 입력하세요!");
+        $("#birth").val("").focus();
+        return false;
+    }
     if($("input[name=gender]:radio:checked").length < 1) {
         alert("성별을 선택하세요");
         $("#male").focus();

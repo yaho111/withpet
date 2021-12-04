@@ -123,7 +123,7 @@ public class MemberController {
                 + "-" + request.getParameter("backNum");
 
         member.setId(request.getParameter("id").trim());
-        member.setNick(request.getParameter("nick").trim());
+        member.setBirth(request.getParameter("birth"));
         member.setPwd(request.getParameter("pwd").trim());
         member.setAddr(addr);
         member.setName(request.getParameter("name").trim());

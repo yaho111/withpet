@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 public class Member {
 
     private String id;
-    private String nick;
+    private String birth;
     private String pwd;
     private String addr;
     private String name;
@@ -18,13 +18,13 @@ public class Member {
 
     // 페이지
     private int startRow;
-	private int endRow;
-    
+    private int endRow;
+
     // 검색
-	private String search;
-	private String keyword;
-    
-    
+    private String search;
+    private String keyword;
+
+
     public String getId() {
         return id;
     }
@@ -33,12 +33,12 @@ public class Member {
         this.id = id;
     }
 
-    public String getNick() {
-        return nick;
+    public String getBirth() {
+        return birth;
     }
 
-    public void setNick(String nick) {
-        this.nick = nick;
+    public void setBirth(String birth) {
+        this.birth = birth;
     }
 
     public String getPwd() {
@@ -114,38 +114,38 @@ public class Member {
     }
 
     // 페이지
-	public int getStartRow() {
-		return startRow;
-	}
+    public int getStartRow() {
+        return startRow;
+    }
 
-	public void setStartRow(int startRow) {
-		this.startRow = startRow;
-	}
+    public void setStartRow(int startRow) {
+        this.startRow = startRow;
+    }
 
-	public int getEndRow() {
-		return endRow;
-	}
+    public int getEndRow() {
+        return endRow;
+    }
 
-	public void setEndRow(int endRow) {
-		this.endRow = endRow;
-	}
-    
-	// 검색
+    public void setEndRow(int endRow) {
+        this.endRow = endRow;
+    }
+
+    // 검색
     public String getSearch() {
-		return search;
-	}
+        return search;
+    }
 
-	public void setSearch(String search) {
-		this.search = search;
-	}
+    public void setSearch(String search) {
+        this.search = search;
+    }
 
-	public String getKeyword() {
-		return keyword;
-	}
+    public String getKeyword() {
+        return keyword;
+    }
 
-	public void setKeyword(String keyword) {
-		this.keyword = keyword;
-	}
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
+    }
 
 
 }
