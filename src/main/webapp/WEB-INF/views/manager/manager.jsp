@@ -8,7 +8,7 @@
 <h3 align="center">${sessionScope.id}님 환영합니다.</h3>
 <input type="submit" value="회원 목록" onclick="location.href='memberList'" class="form-control">
 <input type="submit" value="관리자 목록" onclick="location.href='managerList'" class="form-control">
-<input type="submit" value="사업자 목록" onclick="location.href='businessListForm'" class="form-control">
+<input type="submit" value="사업자 목록" onclick="location.href='businessPeople'" class="form-control">
 
 
 

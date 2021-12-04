@@ -63,6 +63,13 @@ public class ManagerService {
 		return managerDAO.businessAccept(business);
 	}
 
+	// 사업자 승인 거절
+	public int businessNotAccept(String bus_no) {
+		System.out.println("bus_no service : "+bus_no);
+		System.out.println("사업자 승인 거절 서비스");
+		return managerDAO.businessNotAccept(bus_no);
+	}
+
 	
 
 		

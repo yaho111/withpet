@@ -17,14 +17,7 @@
 		<br>
 		<br>
 		<table class="table">
-			<thead>
-				<tr>
-					<!-- <th colspan="3">프로필</th> -->
-				</tr>
-			</thead>
-			<tbody>
-			
-				<tr>
+					<tr>
 					<th>아이디</th>
 					<th>${member.id}</th>
 				</tr>
@@ -35,6 +28,10 @@
 				<tr>
 					<td>이름</td>
 					<td>${member.name}</td>
+				</tr>
+				<tr>
+					<th>생일</th>
+					<td>${member.birth}</td>
 				</tr>
 				<tr>
 					<td>성별</td>
@@ -52,7 +49,6 @@
 					<td>주소</td>
 					<td>${member.addr}</td>
 				</tr>
-			</tbody>
 		</table>
 		
 		<div id="login_menu" class="body-menu">

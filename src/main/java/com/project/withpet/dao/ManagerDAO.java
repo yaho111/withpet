@@ -84,21 +84,15 @@ public class ManagerDAO {
 		
 		return roleChangeResult;
 	}
+	
+	// 사업자 승인 거절
+	public int businessNotAccept(String bus_no) {
+		System.out.println("bus_no DAO : " + bus_no);
+		System.out.println("사업자 승인 거절 DAO");	
+		return managerSession.delete("managerns.businessNotAccept", bus_no);
+	}
 
 	
-	
-	// 사업체 등록 승인 
-//	public int businessAccept(String bus_no) {
-//		System.out.println("사업체 등록 승인 DAO");
-//		return managerSession.update("managerns.businessAccept", bus_no);
-//	}
-
-	// 사업체 롤 부여
-//	public int roleChange(Member member) {
-//		// TODO Auto-generated method stub
-//		return managerSession.update("managerns.busRoleChange", member);
-//	}
-
 
 	
 }
