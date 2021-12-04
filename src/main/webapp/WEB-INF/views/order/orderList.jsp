@@ -14,7 +14,8 @@
     결제가 완료된 상품이 없습니다.
   </c:when>
   <c:otherwise>
-    <table class="table">
+<div class="container">
+    <table class="table table-hover">
         <tr>
             <th>주문번호</th>
             <th>상품명</th>
@@ -40,7 +41,7 @@
          </c:choose>
       </c:forEach>
 </table>
-
+</div>
   </c:otherwise>
 </c:choose>
 

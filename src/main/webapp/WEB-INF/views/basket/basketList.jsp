@@ -18,6 +18,7 @@
 <a style="font-size: larger; text-align: center;color : red;"> 장바구니가 비어있습니다 </a>
     </c:when>
     <c:otherwise>
+<div class="container">
         <table class="table">
             <tr>
                 <th width="140px">이미지</th>
@@ -72,7 +73,7 @@
                 </td>
             </tr>
         </table>
-
+</div>
     </c:otherwise>
 </c:choose>
 </html>

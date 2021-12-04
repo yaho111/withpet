@@ -12,7 +12,8 @@
 </head>
 <body>
 
-
+<section class="py-5">
+    <div class="container-body">
 <table class="table">
     <tr>
         <th width="140px">이미지</th>
@@ -82,6 +83,8 @@
     </tr>
 
 </table>
+    </div>
+</section>
 
 
 <script>

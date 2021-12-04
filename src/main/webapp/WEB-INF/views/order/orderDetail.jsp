@@ -10,6 +10,8 @@
     <title>Title</title>
 </head>
 <body>
+<section class="py-5">
+<div class="container-body">
 <table class="table">
   <tr>
     <th colspan="4"> 배송정보 </th>
@@ -48,10 +50,11 @@
     <td>상품 총 금액 : ${totalOrderPrice}</td>
     <td>배송료 : ${shippingFee}</td>
     <td>총 결제 금액${allSum}</td>
-    <td><input type="button" onclick="cancelPay()" value="주문 취소"/></td>
+    <td><input type="button" onclick="cancelPay()" value="주문 취소" class="btn-danger"/></td>
   </tr>
 </table>
-
+</div>
+</section>
 <script>
   function cancelPay() {
     $.ajax({

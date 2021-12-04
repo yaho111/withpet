@@ -58,15 +58,15 @@ public class CommunityController {
 		if (communityFileName != "") { // 첨부파일이 전송된 경우
 
 			// 파일 중복문제 해결
-			String extension = communityFileName.substring(communityFileName.lastIndexOf("."), communityFileName.length());
+			String extension = communityFileName.substring(communityFileName.lastIndexOf("."));
 			System.out.println("extension:" + extension);
 
 			UUID uuid = UUID.randomUUID(); // 난수 발생
 
-			newFileName = uuid.toString() + extension;
+			newFileName = uuid + extension;
 			System.out.println("newFileName:" + newFileName);
 
-			String communityFile[] = new String[2];
+			String[] communityFile = new String[2];
 
 			StringTokenizer st = new StringTokenizer(communityFileName, ".");
 			communityFile[0] = st.nextToken(); // 파일명 저장

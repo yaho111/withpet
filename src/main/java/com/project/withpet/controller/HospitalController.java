@@ -66,19 +66,19 @@ public class HospitalController {
 		System.out.println("Path=" + path);
 		int result = 0;
 
-		String file[] = new String[2];
+		String[] file = new String[2];
 
 		String newfilename = "";
 		
 		if (filename != "") { // 첨부파일이 첨부된 경우
 			
 			// 파일 중복문제 해결
-			String extension = filename.substring(filename.lastIndexOf("."), filename.length());
+			String extension = filename.substring(filename.lastIndexOf("."));
 			System.out.println("extension:" + extension);
 
 			UUID uuid = UUID.randomUUID();
 
-			newfilename = uuid.toString() + extension;
+			newfilename = uuid + extension;
 			System.out.println("newfilename:" + newfilename);
 
 			StringTokenizer st = new StringTokenizer(filename, ".");
@@ -275,7 +275,7 @@ public class HospitalController {
 		System.out.println("path:"+path);
 		
 		int result = 0;
-		String file[] = new String[2];
+		String[] file = new String[2];
 		
 		String newfilename = "";
 		
@@ -291,12 +291,12 @@ public class HospitalController {
 			}
 			
 			// 파일 중복 문제 해결
-			String extension = filename.substring(filename.lastIndexOf("."), filename.length());
+			String extension = filename.substring(filename.lastIndexOf("."));
 			System.out.println("extension:"+extension);
 			
 			UUID uuid = UUID.randomUUID();
 			
-			newfilename = uuid.toString() + extension;
+			newfilename = uuid + extension;
 			System.out.println("newfilename:"+newfilename);
 			
 			StringTokenizer st = new StringTokenizer(filename, ".");
