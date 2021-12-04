@@ -17,7 +17,7 @@
 					${search} like '%'||#{keyword}||'%'
 				</if>
 				<if test="keyword != null and search == 'subcon'">
-					not_title like '%'||#{keyword}||'%' or not_content '%'||#{keyword}||'%'
+					not_title like '%'||#{keyword}||'%' or not_content like '%'||#{keyword}||'%'
 				</if>
 		
 		</where>
@@ -35,7 +35,7 @@
 					${search} like '%'||#{keyword}||'%'
 				</if>
 				<if test="keyword != null and search == 'subcon'">
-					not_title like '%'||#{keyword}||'%' or not_content '%'||#{keyword}||'%'
+					not_title like '%'||#{keyword}||'%' or not_content like '%'||#{keyword}||'%'
 				</if>
 		</where>
 			order by not_no desc) noticeBoard) 

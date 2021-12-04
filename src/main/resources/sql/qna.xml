@@ -13,15 +13,13 @@
 	<!-- 총데이터 구하기 -->
 	<select id="getCount" parameterType="qna" resultType="int">
 		select count(*) from qna
-		<where>		
-				
-				<if test="keyword != null and search != 'subcon'">
+		<where>				
+				<if test="keyword != null and search!='subcon'">
 					${search} like '%'||#{keyword}||'%'
 				</if>
-				<if test="keyword != null and search == 'subcon'">
-					qna_title like '%'||#{keyword}||'%' or qna_content '%'||#{keyword}||'%'
-				</if>
-		
+				<if test="keyword != null and search=='subcon'">
+					qna_title like '%'||#{keyword}||'%' or qna_content like '%'||#{keyword}||'%'
+				</if>	
 		</where>
 	</select>
 
@@ -36,8 +34,8 @@
 				<if test="keyword != null and search !='subcon'">
 					${search} like '%'||#{keyword}||'%'
 				</if>
-				<if test="keyword != null and search == 'subcon'">
-					qna_title like '%'||#{keyword}||'%' or qna_content '%'||#{keyword}||'%'								
+				<if test="keyword != null and search =='subcon'">
+					qna_title like '%'||#{keyword}||'%' or qna_content like '%'||#{keyword}||'%'								
 				</if>
 		</where>
 			order by qna_ref desc, qna_seq asc) qnaBoard)
