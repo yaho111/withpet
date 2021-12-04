@@ -41,7 +41,7 @@
 
                         <td align="center">
                             <c:if test="${empty hospital.hos_file}">
-                                <img src="${path}/upload/hospital/hospitalimg.jpg" height="130" width="130"/>
+                                <img src="${path}/images/basic_hospital.jpg" height="130" width="130"/>
                             </c:if>
                             <c:if test="${not empty hospital.hos_file}">
                                 <img src="${path}/upload/hospital/${hospital.hos_file}" height="130" width="130"/>

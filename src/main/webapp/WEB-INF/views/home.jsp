@@ -8,7 +8,12 @@
                 <div class="col mb-5">
                     <div class="card h-100">
                         <!-- Product image-->
-                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..."/>
+                        <c:if test="${community.com_file == null}">
+                            <img class="car-img-top" src="${path}/images/basic_community.png"/>
+                        </c:if>
+                        <c:if test="${community.com_file != null}">
+                            <img class="car-img-top" src="${path}/upload/community/${community.com_file}"/>
+                        </c:if>
                         <!-- Product details-->
                         <div class="card-body p-4">
                             <div class="text-center">
@@ -39,10 +44,10 @@
                     <div class="card h-100">
                         <!-- Product image-->
                         <c:if test="${empty hospital.hos_file}">
-                            <img class="card-img-top" src="${path}/upload/hospital/hospitalimg.jpg" height="130" width="130"/>
+                            <img class="card-img-top" src="${path}/images/basic_hospital.jpg"/>
                         </c:if>
                         <c:if test="${not empty hospital.hos_file}">
-                            <img class="card-img-top" src="${path}/upload/hospital/${hospital.hos_file}" height="130" width="130"/>
+                            <img class="card-img-top" src="${path}/upload/hospital/${hospital.hos_file}"/>
                         </c:if>
                         <!-- Product details-->
                         <div class="card-body p-4">
@@ -74,10 +79,10 @@
                     <div class="card h-100">
                         <!-- Product image-->
                         <c:if test="${empty product.pro_img}">
-                            <img class="card-img-top" src="${path}/upload/product/product_basic.jpg" height="130" width="130"/>
+                            <img class="card-img-top" src="${path}/images/basic_product.jpg"/>
                         </c:if>
                         <c:if test="${not empty product.pro_img}">
-                            <img class="card-img-top" src="${path}/upload/product/${product.pro_img}" height="130" width="130"/>
+                            <img class="card-img-top" src="${path}/upload/product/${product.pro_img}"/>
                         </c:if>
                         <!-- Product details-->
                         <div class="card-body p-4">

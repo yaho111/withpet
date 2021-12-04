@@ -46,8 +46,14 @@
                         ${pl.pro_no}
                     </td>
                     <td>
-                        <a href="${path}/productDetail?no=${pl.pro_no}&page=${page}">
-                            <img src="${path}/upload/${pl.pro_img}" width="120px" height="110px"></a>
+                        <c:if test="${pl.pro_img != null}">
+                            <a href="${path}/productDetail?no=${pl.pro_no}&page=${page}">
+                                <img src="${path}/upload/${pl.pro_img}" width="120px" height="110px"></a>
+                        </c:if>
+                        <c:if test="${pl.pro_img == null}">
+                            <a href="${path}/productDetail?no=${pl.pro_no}&page=${page}">
+                                <img src="${path}/images/basic_product.jpg" width="120px" height="110px"></a>
+                        </c:if>
                     </td>
                     <td>
                         <a href="${path}/productDetail?no=${pl.pro_no}&page=${page}">

@@ -18,7 +18,7 @@
                 <th>프로필</th>
                 <td>
                     <c:if test="${member.profile == null}">
-
+                        <img class="profile" src="${path}/images/basic_profile.jpg" width="100" height="100"/>
                     </c:if>
                     <c:if test="${member.profile != null}">
                         <img class="profile" src="${path}/upload/${member.profile}" width="100" height="100"/>
@@ -78,8 +78,11 @@
                     <c:if test="${pet.pet_photo != null}">
                         <td><img class="profile" src="${path}/upload/${pet.pet_photo}" height="200" width="200"/></td>
                     </c:if>
-                    <c:if test="${pet.pet_photo == null}">
-                        <td></td>
+                    <c:if test="${pet.pet_photo == null  && pet.pet_sort == '고양이'}">
+                        <td><img class="profile" src="${path}/images/basic_cat.jpg" width="200" height="200"/></td>
+                    </c:if>
+                    <c:if test="${pet.pet_photo == null  && pet.pet_sort == '강아지'}">
+                        <td><img class="profile" src="${path}/images/basic_dog.jpg" width="200" height="200"/></td>
                     </c:if>
                     <td>${pet.pet_name}</td>
                     <td>${pet.pet_sort}</td>
