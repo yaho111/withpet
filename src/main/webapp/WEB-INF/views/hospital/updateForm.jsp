@@ -181,7 +181,7 @@
 				<tr>
 					<th>병원 홈페이지/블로그 링크 <font size="1" color="gray">*선택</font></th>
 					<td><input type="text" name="hos_link" id="hos_link" 
-						class="form-control" placeholder="www.naver.com의 형식으로 입력해주세요."
+						class="form-control" placeholder="https://www.naver.com의 형식으로 입력해주세요."
 						value="${hospital.hos_link}"></td>
 				</tr>
 				<tr>

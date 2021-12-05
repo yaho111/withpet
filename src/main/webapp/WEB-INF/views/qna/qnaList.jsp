@@ -6,7 +6,7 @@
         <h2 class="body-title">Q&A 게시판 목록</h2>
         <div style="text-align: right; padding-bottom: 20px;">
             <c:if test="${sessionScope.id != null}">
-                <input type="button" class="btn btn-outline-secondary" value="글 작성"
+                <input type="button" class="btn btn-outline-secondary" value="글작성"
                        onclick="location.href='qnaInsertForm'"/>
             </c:if>
         </div>

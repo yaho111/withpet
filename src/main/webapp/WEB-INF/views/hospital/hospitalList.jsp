@@ -14,7 +14,7 @@
                 </select>
 
                 <c:if test="${sessionScope.role == 'hospital' || sessionScope.role == 'hospital_pro'|| sessionScope.role == 'master'}">
-                    <input type="button" class="btn btn-outline-secondary" value="글쓰기"
+                    <input type="button" class="btn btn-outline-secondary" value="글작성"
                            onclick="location.href='insertForm'"/>
                 </c:if>
             </div>
@@ -145,7 +145,7 @@
 
                     <!-- 이전 블럭으로 이동 -->
                     <c:if test="${paging.startPage > paging.pagePerBlk}">
-                        <a href="hospitalList?page=${paging.startPage - 1}&sortValue=${sortValue}"> < </a>
+                        <a class="page-link" href="hospitalList?page=${paging.startPage - 1}&sortValue=${sortValue}"> < </a>
                     </c:if>
 
                     <!-- 페이지 번호 -->
