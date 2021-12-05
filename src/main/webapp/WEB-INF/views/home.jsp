@@ -9,10 +9,10 @@
                     <div class="card h-100">
                         <!-- Product image-->
                         <c:if test="${community.com_file == null}">
-                            <img class="car-img-top" src="${path}/images/basic_community.png"/>
+                            <img class="card-img-top" src="${path}/images/basic_community.png"/>
                         </c:if>
                         <c:if test="${community.com_file != null}">
-                            <img class="car-img-top" src="${path}/upload/community/${community.com_file}"/>
+                            <img class="card-img-top" src="${path}/upload/community/${community.com_file}"/>
                         </c:if>
                         <!-- Product details-->
                         <div class="card-body p-4">
