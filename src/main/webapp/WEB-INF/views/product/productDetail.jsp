@@ -79,7 +79,7 @@
         </tr>
         <tr>
             <th>상품 가격</th>
-            <td><fmt:formatNumber pattern="###,###,###" value = "${product.price }"/> </td>
+            <td><fmt:formatNumber pattern="###,###,###" value = "${product.price }"/>원</td>
         </tr>
         <tr>
 <c:if test="${sessionScope.role == 'user' || sessionScope.role == 'product_pro'|| sessionScope.role == 'master'}">

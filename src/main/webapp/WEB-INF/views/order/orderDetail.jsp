@@ -28,7 +28,7 @@
   </tr>
   <tr>
     <th> 총 결제금액 </th>
-    <td colspan="3"> ${order.ord_price}</td>
+    <td colspan="3"> <fmt:formatNumber pattern="###,###,###" value = "${order.ord_price}"/>원</td>
   </tr>
   <tr>
     <th>상품명</th>
@@ -40,17 +40,17 @@
 <c:forEach var="row" items="${list}" varStatus="i">
 
   <tr>
-    <td>${row.pro_name}</td>
-    <td>${row.price}</td>
-    <td>${row.ea}</td>
-    <td>${row.price * row.ea}</td>
+    <td> ${row.pro_name}</td>
+    <td> <fmt:formatNumber pattern="###,###,###" value = "${row.price}"/>원</td>
+    <td> ${row.ea}개</td>
+    <td> <fmt:formatNumber pattern="###,###,###" value = "${row.price * row.ea}"/>원</td>
   </tr>
 </c:forEach>
   <tr>
-    <td>상품 총 금액 : ${totalOrderPrice}</td>
-    <td>배송료 : ${shippingFee}</td>
-    <td>총 결제 금액${allSum}</td>
-    <td><input type="button" onclick="cancelPay()" value="주문 취소" class="btn-danger"/></td>
+    <td>상품 총 금액 : <fmt:formatNumber pattern="###,###,###" value = "${totalOrderPrice}"/>원</td>
+    <td>배송료 : <fmt:formatNumber pattern="###,###,###" value = "${shippingFee}"/>원</td>
+    <td>총 결제 금액 : <fmt:formatNumber pattern="###,###,###" value = "${allSum}"/>원</td>
+    <td><input type="button" onclick="cancelPay()" value="주문 취소" class="btn btn-danger"/></td>
   </tr>
 </table>
 </div>

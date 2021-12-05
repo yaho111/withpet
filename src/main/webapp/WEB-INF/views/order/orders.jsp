@@ -29,17 +29,17 @@
                 <img src="${path}/upload/${row.pro_img}" width="120px" height="110px">
             </td>
             <td>
-                    ${order.pro_name}
+                    ${row.pro_name}
             </td>
             <td>
-                    ${row.price}
+                <fmt:formatNumber pattern="###,###,###" value = "${row.price}"/>원
             </td>
             <td>
-               ${row.ea}
+               ${row.ea}개
                 <input type="hidden" name="pro_no" value="${row.pro_no}" />
             </td>
             <td>
-                    ${row.price * row.ea}
+        <fmt:formatNumber pattern="###,###,###" value = "${row.price * row.ea}"/> 원
             </td>
             <td>
 
@@ -72,15 +72,15 @@
 
     <tr>
         <th>상품 금액 합</th>
-        <td>${totalOrderPrice}</td>
+        <td><fmt:formatNumber pattern="###,###,###" value = "${totalOrderPrice}"/>원</td>
     </tr>
     <tr>
         <th>배송료</th>
-        <td> ${shippingFee} </td>
+        <td> <fmt:formatNumber pattern="###,###,###" value = "${shippingFee}"/> 원 </td>
     </tr>
     <tr>
         <th>결제금액</th>
-        <td>${allSum}</td>
+        <td> <fmt:formatNumber pattern="###,###,###" value = "${allSum}"/> 원</td>
     </tr>
 </table>
         <div class="body-menu">
