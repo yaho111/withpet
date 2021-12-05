@@ -121,13 +121,14 @@
 						<td>${business.bus_tel}</td>
 						<td>${business.bus_sort}</td>
 						<td>
+							<c:if test="${sessionScope.role == 'master' || sessionScope.role == 'hospital' || sessionScope.role == 'product'}">
 							<div class="input-group">
-
 								<input type="button" class="btn btn-outline-secondary"
 									value="승인" onclick="location.href = 'businessAccept?bus_no=${business.bus_no}'"> 
 									<input type="button" class="btn btn-outline-secondary" value="거부"
 									onclick="location.href = 'businessNotAccept?bus_no=${business.bus_no}'">
 							</div>
+							</c:if>
 						</td>
 					</tr>
 				</c:if>
