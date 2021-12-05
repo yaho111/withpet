@@ -4,11 +4,6 @@ function notice_check() {
 		$("#qna_title").val("").focus();
 		return false;
 	}
-	if ($.trim($("#not_content").val()) == "") {
-		alert("내용을 입력하세요!");
-		$("#qna_content").val("").focus();
-		return false;
-	}
 	if(CKEDITOR.instances.not_content.getData() =='' 
         || CKEDITOR.instances.not_content.getData().length ==0){
     alert("내용을 입력하세요!");

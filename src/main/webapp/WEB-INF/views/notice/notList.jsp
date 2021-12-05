@@ -94,7 +94,7 @@
 
                     <!-- 1페이지로 이동 -->
                     <c:if test="${paging.currentPage!=1}">
-                <li><a class="page-link" href="noticeList?pageNum=1&search=${search}&keyword=${keyword}">
+                <li><a class="page-link" href="notList?pageNum=1&search=${search}&keyword=${keyword}">
                     <<
                 </a></li>
                 </c:if>
@@ -102,7 +102,7 @@
                 <!-- 이전 블록이동 -->
                 <c:if test="${paging.startPage > paging.rowPerPage }">
                     <li><a class="page-link"
-                           href="noticeList?pageNum=${paging.startPage - 1}&search=${search}&keyword=${keyword}">
+                           href="notList?pageNum=${paging.startPage - 1}&search=${search}&keyword=${keyword}">
                         <
                     </a></li>
                 </c:if>
@@ -110,20 +110,20 @@
                 <!-- 번호 -->
                 <c:forEach var="i" begin="${paging.startPage}" end="${paging.endPage}">
                     <li<c:if test="${paging.currentPage==i}"> ${i} </c:if>>
-                        <a class="page-link" href="noticeList?pageNum=${i}&search=${search}&keyword=${keyword}">${i}</a></li>
+                        <a class="page-link" href="notList?pageNum=${i}&search=${search}&keyword=${keyword}">${i}</a></li>
                 </c:forEach>
 
                 <!-- 다음 블록으로 이동 -->
                 <c:if test="${paging.endPage < paging.totalPage}">
                     <li><a class="page-link"
-                           href="noticeList?pageNum=${paging.endPage + 1}&search=${search}&keyword=${keyword}">
+                           href="notList?pageNum=${paging.endPage + 1}&search=${search}&keyword=${keyword}">
                         >
                     </a></li>
                 </c:if>
 
                 <!-- 마지막 페이지 이동 -->
                 <c:if test="${paging.currentPage!=paging.totalPage}">
-                    <li><a class="page-link" href="noticeList?pageNum=${paging.totalPage}&search=${search}&keyword=${keyword}">
+                    <li><a class="page-link" href="notList?pageNum=${paging.totalPage}&search=${search}&keyword=${keyword}">
                         >>
                     </a></li>
                 </c:if>
@@ -133,28 +133,28 @@
                     <c:if test="${empty keyword}">
                     <!-- 1페이지로 이동 -->
                     <c:if test="${paging.currentPage!=1}">
-                <li><a class="page-link" href="noticeList?pageNum=1"> << </a></li>
+                <li><a class="page-link" href="notList?pageNum=1"> << </a></li>
                 </c:if>
 
                 <!-- 이전 블록이동 -->
                 <c:if test="${paging.startPage > paging.rowPerPage}">
-                    <li><a class="page-link" href="noticeList?pageNum=${paging.startPage - 1}"> < </a></li>
+                    <li><a class="page-link" href="notList?pageNum=${paging.startPage - 1}"> < </a></li>
                 </c:if>
 
                 <!-- 번호 -->
                 <c:forEach var="i" begin="${paging.startPage}" end="${paging.endPage}">
                     <li <c:if test="${paging.currentPage==i}">${paging.currentPage}</c:if>>
-                        <a class="page-link" href="noticeList?pageNum=${i}">${i}</a></li>
+                        <a class="page-link" href="notList?pageNum=${i}">${i}</a></li>
                 </c:forEach>
 
                 <!-- 다음 블록으로 이동 -->
                 <c:if test="${paging.endPage < paging.totalPage}">
-                    <li><a class="page-link" href="noticeList?pageNum=${paging.endPage + 1}"> > </a></li>
+                    <li><a class="page-link" href="notList?pageNum=${paging.endPage + 1}"> > </a></li>
                 </c:if>
 
                 <!-- 마지막 페이지 이동 -->
                 <c:if test="${paging.currentPage!=paging.totalPage}">
-                    <li><a class="page-link" href="noticeList?pageNum=${paging.totalPage}"> >> </a></li>
+                    <li><a class="page-link" href="notList?pageNum=${paging.totalPage}"> >> </a></li>
                 </c:if>
 
                 </c:if>

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html;charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../layout/header.jsp"%>
-<script src="${path}/js/qna.js"></script>
+<script src="${path}/js/qnaRe.js"></script>
 
 <!-- jquery -->
 <script type="text/javascript" src="jquery-3.4.1.min.js" ></script>

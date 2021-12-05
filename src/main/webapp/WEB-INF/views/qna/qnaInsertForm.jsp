@@ -31,10 +31,10 @@
     <tr>
     	<th>공개 여부</th>
 		<td>
-		<label class="form-check-label" for="Y">공개</label>
-		<input type="radio" name="qna_secret" id="qna_secret" value="Y" class="radio" />&nbsp;&nbsp;&nbsp;&nbsp;
-		<label class="form-check-label" for="N">비공개</label>		
-    	<input type="radio" name="qna_secret" id="qna_secret" value="N" class="radio" />&nbsp;
+		<label class="form-check-label" for="qna_secret_Y">공개</label>
+		<input type="radio" name="qna_secret" id="qna_secret_Y" value="Y" class="radio" checked="checked" />&nbsp;&nbsp;&nbsp;&nbsp;
+		<label class="form-check-label" for="qna_secret_N">비공개</label>		
+    	<input type="radio" name="qna_secret" id="qna_secret_N" value="N" class="radio" />&nbsp;
 		</td>
     </tr>
         

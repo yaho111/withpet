@@ -14,7 +14,7 @@ public class NoticeDAO {
 	@Autowired
 	private SqlSessionTemplate noticeSession;
 
-	// 글목록
+	// 글작성
 	public int noticeInsert(Notice notice) {
 		System.out.println("글작성 DAO");
 		return noticeSession.insert("noticens.noticeInsert", notice);
