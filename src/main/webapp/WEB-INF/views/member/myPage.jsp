@@ -76,7 +76,7 @@
             <c:forEach var="pet" items="${petList}">
                 <tr>
                     <c:if test="${pet.pet_photo != null}">
-                        <td><img class="profile" src="${path}/upload/${pet.pet_photo}" height="200" width="200"/></td>
+                        <td><img class="profile" src="${path}/upload/pet/${pet.pet_photo}" height="200" width="200"/></td>
                     </c:if>
                     <c:if test="${pet.pet_photo == null  && pet.pet_sort == '고양이'}">
                         <td><img class="profile" src="${path}/images/basic_cat.jpg" width="200" height="200"/></td>
