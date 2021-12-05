@@ -75,8 +75,8 @@ function check() {
 		$("#hos_time").focus();
 		return false;
 	}
-	if ($("#hos_time").val().length > 80) {
-		alert("운영 시간을 80자 이하로 입력하세요!");
+	if ($("#hos_time").val().length > 150) {
+		alert("운영 시간을 150자 이하로 입력하세요!");
 		$("#hos_time").focus();
 		return false;
 	}
@@ -97,12 +97,17 @@ function check() {
     alert("병원 소개 내용을 입력하세요!");
     $("#hos_content").focus();
     return false;
-}
-	if ($("#hos_content").val().length > 150) {
-		alert("병원 소개를 150자 이하로 입력하세요!");
-		$("#hos_content").focus();
-		return false;
 	}
+	if(CKEDITOR.instances.hos_content.getData().length > 500){
+    alert("병원 소개를 500자 이하로 입력하세요!");
+    $("#hos_content").focus();
+    return false;
+	}
+//	if ($("#hos_content").val().length > 300) {
+//		alert("병원 소개를 300자 이하로 입력하세요!");
+//		$("#hos_content").focus();
+//		return false;
+//	}
 	if ($("#hos_link").val().length >= 300) {
 		alert("링크를 300자 이하로 입력하세요");
 		$("#hos_link").focus();

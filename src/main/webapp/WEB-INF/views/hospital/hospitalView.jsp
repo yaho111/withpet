@@ -70,9 +70,9 @@
             </tr>
             <tr>
                 <td><c:if test="${empty hospital.hos_file}">
-                    <img src="${path}/images/basic_hospital.jpg" height="300" width="300"/>
+                    <img src="${path}/images/basic_hospital.jpg" height="300" width="400"/>
                 </c:if> <c:if test="${not empty hospital.hos_file}">
-                    <img src="${path}/upload/hospital/${hospital.hos_file}" height="300" width="300"/>
+                    <img src="${path}/upload/hospital/${hospital.hos_file}" height="300" width="400"/>
                 </c:if></td>
                 <td>
                     <!-- 지도 출력 -->
@@ -151,7 +151,7 @@
             <tr>
                 <c:if test="${not empty hospital.hos_link}">
                     <th>병원 홈페이지/블로그 링크</th>
-                    <td><a href="http://${hospital.hos_link}" target="_blank"
+                    <td><a href="${hospital.hos_link}" target="_blank"
                            style="text-decoration: none">${hospital.hos_link}</a></td>
                 </c:if>
             </tr>
