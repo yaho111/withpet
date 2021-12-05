@@ -9,7 +9,7 @@
 <section class="py-5">
     <div class="container-body">
         <h2 class="body-title">커뮤니티 게시글 수정</h2>
-        <form method=post action="boardUpdate">
+        <form method=post action="boardUpdate" enctype="multipart/form-data">
             <table id="boardForm_table" class="table">
                 <input type="hidden" name="com_no" value="${community.com_no}">
                 <input type="hidden" name="page" value="${page}">

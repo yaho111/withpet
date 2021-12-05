@@ -39,6 +39,8 @@ public class CommunityController {
 	public String boardform() {
 		return "community/boardForm";
 	}
+
+	// 글 작성
 	@RequestMapping("/boardWrite")
 	public String boardwrite(@RequestParam("com_file1") MultipartFile multiFile, Community community, HttpServletRequest request, Model model) throws Exception {
 		System.out.println("com_writer:" + community.getCom_writer());
@@ -190,17 +192,78 @@ public class CommunityController {
 
 		// 글수정
 	@RequestMapping("/boardUpdate")
-	public String boardupdate(@ModelAttribute Community community,HttpServletRequest request, Model model) { 
-		
-		int result = service.boardUpdate(community);
-		String page = request.getParameter("page");
+	public String boardupdate(@RequestParam("com_file1") MultipartFile multiFile,
+							  @ModelAttribute Community community
+			,HttpServletRequest request,
+							  Model model) throws Exception{
+
+		// 필요한 변수 생성
+		String filename = multiFile.getOriginalFilename();
+		int size = (int) multiFile.getSize();
+		int result = 0;
+
+		String path = request.getRealPath("upload/community");
+		System.out.println("path: " + path);
+		String[] file;
+		String newFileName = "";
+
+
 		int com_no = Integer.parseInt(request.getParameter("com_no"));
+
+		Community selectedBoard = service.getBoard(com_no);
+
+		// 파일이 전송된 경우
+		if (filename != "") {
+
+			file = filename.split("\\.");
+
+			String extension = "." + file[1];
+
+			UUID uuid = UUID.randomUUID();
+
+			newFileName = uuid + extension;
+			System.out.println(newFileName);
+
+			if (size > 10000000) { // 파일크기가 지정 한도를 초과하는 경우
+				result = 1;
+				model.addAttribute("result", result);
+
+				return "community/uploadResult";
+			} else if (!file[1].equals("jpg") &&
+					!file[1].equals("gif") &&
+					!file[1].equals("png")) { // 파일의 확장자가 가능한 확장자가 아닌 경우
+
+				result = 2;
+				model.addAttribute("result", result);
+
+				return "community/uploadResult";
+			}
+
+
+		}
+
+		if (size > 0) {
+			String originalProfile = selectedBoard.getCom_file();
+			if(originalProfile != null){
+				File needToDelete = new File(path + "/" + originalProfile);
+				needToDelete.delete();
+			}
+			multiFile.transferTo(new File(path + "/" + newFileName));
+			community.setCom_file(newFileName);
+		} else {
+			community.setCom_file(selectedBoard.getCom_file());
+		}
 		
+		int updateResult = service.boardUpdate(community);
+
+		String page = request.getParameter("page");
+
 			model.addAttribute("result",result);
 			model.addAttribute("page", page);
 			model.addAttribute("com_no",com_no);
+			model.addAttribute("updateResult", updateResult);
 			System.out.println(page);
-			return "community/updateResult";
+			return "community/uploadResult";
 		}
 
 
