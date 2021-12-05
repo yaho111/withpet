@@ -39,10 +39,10 @@
             <a class="navbar-brand" href="main.do"><img src="${path}/images/withpet_logo.png"></a>
         </div>
         <div class="col">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+
         </div>
         <div class="col">
-            <button class="btn btn-outline-primary" type="submit">Search</button>
+
         </div>
         <div class="col">
             <c:if test="${sessionScope.id != null}">
