@@ -21,7 +21,7 @@
     <tr>
      <th>관리자</th>
      <td>
-     ${sessionScope.id}
+    	<input type="hidden" name="not_writer" id="not_writer" value="${sessionScope.id}">${sessionScope.id}
      </td>
     </tr>
     
@@ -35,7 +35,7 @@
     <tr>
      <th>첨부파일</th>
      <td>
-      <input type="file" name="not_file1" class="form-control" />
+      <input type="file" name="not_file1" id="not_file1" class="form-control" />
      </td>
     </tr>
     

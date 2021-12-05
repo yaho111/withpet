@@ -11,6 +11,7 @@ public class Notice {
 	private Date not_reg;			/* 작성일 */
 	private String not_content;		/* 내용 */
 	private String not_file;		/* 첨부파일 */ 
+	private String noticeFileName;	/* 첨부파일이름 저장 */ 
 	
 	// page
 	private int startRow;
@@ -86,6 +87,14 @@ public class Notice {
 	}
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
+	}
+	
+	
+	public String getNoticeFileName() {
+		return noticeFileName;
+	}
+	public String setNoticeFileName(String noticeFileName) {
+		return this.noticeFileName = noticeFileName;
 	}
 	
 }
