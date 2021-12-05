@@ -9,10 +9,3 @@
 		history.go(-1);
 	</script>
 </c:if>
-
-<c:if test="${upResult == 2 }">
-	<script>
-		alert("첨부파일은 jpg, gif, png파일만 업로드 가능합니다.");
-		history.go(-1);
-	</script>
-</c:if>

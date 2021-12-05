@@ -21,7 +21,7 @@
     <tr>
      <th>관리자</th>
      <td>
-     <input name="not_writer" id="not_writer" class="form-control" /><!-- 나중에 관리자 아이디 세션을 통해서 받음 -->
+     ${sessionScope.id}
      </td>
     </tr>
     
@@ -31,10 +31,9 @@
       <input name="not_title" id="not_title" class="form-control" />
      </td>
     </tr>
-    
-    <!-- 공지 내용 API적용 예정 -->
+   
     <tr>
-     <th>사진 첨부</th>
+     <th>첨부파일</th>
      <td>
       <input type="file" name="not_file1" class="form-control" />
      </td>
