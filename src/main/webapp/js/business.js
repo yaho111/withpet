@@ -4,6 +4,11 @@ function check() {
         $("#bus_name").val("").focus();
         return false;
     }
+    if($.trim($("#bus_no").val()) == ""){
+        alert("사업자 등록번호를 입력하세요!");
+        $("#bus_no").val("").focus();
+        return false;
+    }
     if($.trim($("#addr").val()) == ""){
         alert("주소를 입력하세요!");
         $("#addr").val("").focus();

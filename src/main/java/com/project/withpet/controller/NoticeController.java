@@ -232,7 +232,7 @@ public class NoticeController {
 			noticeFile[0] = st.nextToken(); // 파일명 저장
 			noticeFile[1] = st.nextToken(); // 확장자 저장 (jpg)
 
-			if (size > 10000000) { // 100000 = 100kb, 10000000 = 10mb
+			if (size > 1000000000) { // 100000 = 100kb, 10000000 = 10mb
 				upResult = 1;
 				model.addAttribute("upResult", upResult);
 

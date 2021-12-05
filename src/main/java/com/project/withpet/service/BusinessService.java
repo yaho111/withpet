@@ -34,8 +34,8 @@ public class BusinessService {
     }
 
     // 사업 삭제
-    public void deleteBusiness(String bus_id) throws Exception {
-        businessDAO.deleteBusiness(bus_id);
+    public void deleteBusiness(String bus_no) throws Exception {
+        businessDAO.deleteBusiness(bus_no);
     }
 
 }

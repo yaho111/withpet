@@ -10,11 +10,11 @@
 
 	<table class="table">
 		<tr>
-			<td>제목</td>
+			<th>제목</th>
 			<td>${qna.qna_title}</td>
 		</tr>
 		<tr>
-			<td>작성자</td>
+			<th>작성자</th>
 			<td>
 			<c:if test="${qna.qna_lev == 0}">
 			${qna.qna_writer}
@@ -25,10 +25,11 @@
 			</td>
 		</tr>
 		<tr>
-			<td>조회수</td>
+			<th>조회수</th>
 			<td>${qna.qna_readcnt}</td>
 		</tr>
 		<tr>
+			<th></th>
 			<td><pre>${qna.qna_content}</pre></td>
 		</tr>
 	</table>
@@ -38,26 +39,35 @@
 	<!-- 질문 : 사용자 -->
 	
 	<div id="login_menu" class="body-menu">
-	
-
-		<c:if test="${sessionScope.role == 'master'}"><!-- and 관리자 -->
-		<!-- 답글 -->		 
-		<input type="submit" class="btn btn-outline-secondary" value="답글" onClick="location.href='qnaReplyForm?pageNum=${paging.currentPage}&qna_no=${qna.qna_no}' ">
-		<!-- 수정 -->
+	<c:if test="${qna.qna_lev == 0}"><!-- 원문 -->
+		<!-- 관리자 -->
+		<c:if test="${sessionScope.role == 'qna' || 
+                      sessionScope.role == 'master' || sessionScope.role == 'notice' || 
+                      sessionScope.role == 'community' || sessionScope.role == 'hospital' || sessionScope.role == 'product'}">
+	 	<input type="submit" class="btn btn-outline-secondary" value="답글" onClick="location.href='qnaReplyForm?pageNum=${paging.currentPage}&qna_no=${qna.qna_no}' ">
 		<input type="submit" class="btn btn-outline-secondary" value="수정" onClick="location.href='qnaUpdateForm?pageNum=${paging.currentPage}&qna_no=${qna.qna_no}' ">
 		<input type="submit" class="btn btn-outline-secondary" value="삭제" onClick="location.href='qnaDelete?pageNum=${paging.currentPage}&qna_no=${qna.qna_no}' ">
 		</c:if>
 
-		<c:if test="${sessionScope.role == 'user' && sessionScope.id == qna.qna_writer}"><!-- and 사용자 -->
-		<!-- 수정, 삭제 -->
+		<!-- 사용자 -->
+		<c:if test="${sessionScope.id == qna.qna_writer}">
 		<input type="submit" class="btn btn-outline-secondary" value="수정" onClick="location.href='qnaUpdateForm?pageNum=${paging.currentPage}&qna_no=${qna.qna_no}' ">
 		<input type="submit" class="btn btn-outline-secondary" value="삭제" onClick="location.href='qnaDelete?pageNum=${paging.currentPage}&qna_no=${qna.qna_no}' ">
 		</c:if>
-	
+	</c:if>
+	<c:if test="${qna.qna_lev != 0}"><!-- 답글 -->
+		<c:if test="${sessionScope.role == 'qna' || 
+                      sessionScope.role == 'master' || sessionScope.role == 'notice' || 
+                      sessionScope.role == 'community' || sessionScope.role == 'hospital' || sessionScope.role == 'product'}">
+        <input type="submit" class="btn btn-outline-secondary" value="수정" onClick="location.href='qnaUpdateForm?pageNum=${paging.currentPage}&qna_no=${qna.qna_no}' ">
+		<input type="submit" class="btn btn-outline-secondary" value="삭제" onClick="location.href='qnaDelete?pageNum=${paging.currentPage}&qna_no=${qna.qna_no}' ">
+        </c:if>
+	</c:if>
 		<!-- 전체 : 목록으로 -->
 		<input type="submit" class="btn btn-outline-secondary" value="목록" onClick="location.href='qnaList?pageNum=${paging.currentPage}&qna_no=${qna.qna_no}' ">
 	
 	</div>
+	
 	</div>
 </section>
 	
