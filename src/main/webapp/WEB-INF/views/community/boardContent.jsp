@@ -76,6 +76,19 @@
             <!--  <table class="table">-->
             <table id="boardContent_table" class="table">
                 <tr>
+                    <th>제목</th>
+                    <td>${community.com_title }</td>
+                </tr>
+                <tr>
+                    <th>대표 이미지</th>
+                    <c:if test="${community.com_file == null}">
+                        <td>대표 이미지가 없습니다.</td>
+                    </c:if>
+                    <c:if test="${community.com_file != null}">
+                        <td><img src="${path}/upload/community/${community.com_file}" width="200" height="200"/></td>
+                    </c:if>
+                </tr>
+                <tr>
                     <th>작성자</th>
                     <td>${community.com_writer}</td>
                 </tr>
@@ -93,10 +106,7 @@
                     <td>${community.com_likecnt }</td>
                     </td>
                 </tr>
-                <tr>
-                    <th>제목</th>
-                    <td>${community.com_title }</td>
-                </tr>
+
                 <tr>
                     <th>내용</th>
                     <td>${community.com_content }</td>

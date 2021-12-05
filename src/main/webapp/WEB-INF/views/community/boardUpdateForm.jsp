@@ -38,8 +38,8 @@
                     </td>
                 </tr>
                 <tr>
-                    <th>첨부파일</th>
-                    <td><input type="file" name="com_file1" class="form-control">${community.com_file}</td>
+                    <th>대표 이미지</th>
+                    <td><input type="file" name="com_file1" class="form-control"></td>
                 </tr>
             </table>
             <div id="boardUpdateForm_menu" class="body-menu">
