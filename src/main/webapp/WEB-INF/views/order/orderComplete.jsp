@@ -41,7 +41,7 @@
             <th>상품명</th>
             <td> <img src="${path}/upload/${row.pro_img}" width="120px" height="110px"> ${row.pro_name} </td>
             <th> 가격 및 수량</th>
-            <td> ${row.price}원 / ${row.ea}개 </td>
+            <td> <fmt:formatNumber pattern="###,###,###" value = "${row.price}"/> 원 / ${row.ea}개 </td>
         </tr>
     </c:forEach>
 </table>

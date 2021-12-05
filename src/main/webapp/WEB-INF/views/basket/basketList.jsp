@@ -29,18 +29,14 @@
                             ${row.pro_name}
                     </td>
                     <td>
-<%--                    <fmt:formatNumber pattern="###,###,###" value=" --%>
-                         ${row.price}
-<%--"/>--%>
+    <fmt:formatNumber pattern="###,###,###" value = "${row.price}"/>원
                     </td>
                     <td>
                        ${row.ea}
                         <input type="hidden" name="pro_no" value="${row.pro_no}" />
                     </td>
                     <td>
-<%--                        <fmt:formatNumber pattern="###,###,###" value="--%>
-                        ${row.order_price}
-<%--"/>--%>
+    <fmt:formatNumber pattern="###,###,###" value = "${row.order_price}"/>원
                     </td>
                     <td>
                         <input type="button" class="btn btn-danger" onclick="location.href='${path}/basketDelete/?basket_no=${row.basket_no}'"value="상품 삭제"/>
@@ -52,13 +48,13 @@
 
                 </td>
                 <td>
-                    장바구니 금액 합계 : ${totalOrderPrice}
+                    장바구니 금액 합계 : <fmt:formatNumber pattern="###,###,###" value = "${totalOrderPrice}"/>원
                 </td>
                 <td>
-                    배송료 : ${shippingFee}
+                    배송료 : <fmt:formatNumber pattern="###,###,###" value = "${shippingFee}"/>원
                 </td>
                 <td>
-                    전체 주문금액 : ${allSum}
+                    전체 주문금액 : <fmt:formatNumber pattern="###,###,###" value = "${allSum}"/>원
                 </td>
             </tr>
         </table>

@@ -90,7 +90,7 @@
                                 <!-- Product name-->
                                 <h5 class="fw-bolder">${product.pro_name}</h5>
                                 <!-- Product price-->
-                                가격 : ${product.price}
+                                가격 : <fmt:formatNumber pattern="###,###,###" value = "${product.price}"/>원
                             </div>
                         </div>
                         <!-- Product actions-->

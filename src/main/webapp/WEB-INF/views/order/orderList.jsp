@@ -31,7 +31,7 @@
           <td>
             <fmt:formatDate value="${row.ord_regdate}" pattern="yyyy-MM-dd HH:mm"/>
           </td>
-          <td>${row.ord_price}</td>
+          <td><fmt:formatNumber pattern="###,###,###" value = "${row.ord_price}"/>원</td>
         </tr>
           </c:otherwise>
          </c:choose>
