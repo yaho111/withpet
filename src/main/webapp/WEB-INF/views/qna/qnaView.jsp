@@ -46,13 +46,13 @@
                       sessionScope.role == 'community' || sessionScope.role == 'hospital' || sessionScope.role == 'product'}">
 	 	<input type="submit" class="btn btn-outline-secondary" value="답글" onClick="location.href='qnaReplyForm?pageNum=${paging.currentPage}&qna_no=${qna.qna_no}' ">
 		<input type="submit" class="btn btn-outline-secondary" value="수정" onClick="location.href='qnaUpdateForm?pageNum=${paging.currentPage}&qna_no=${qna.qna_no}' ">
-		<input type="submit" class="btn btn-outline-secondary" value="삭제" onClick="location.href='qnaDelete?pageNum=${paging.currentPage}&qna_no=${qna.qna_no}' ">
+		<input type="submit" class="btn btn-outline-secondary" value="삭제" onClick="deleteCheck()">
 		</c:if>
 
 		<!-- 사용자 -->
-		<c:if test="${sessionScope.id == qna.qna_writer}">
+		<c:if test="${sessionScope.id == qna.qna_writer && sessionScope.role == 'user'}">
 		<input type="submit" class="btn btn-outline-secondary" value="수정" onClick="location.href='qnaUpdateForm?pageNum=${paging.currentPage}&qna_no=${qna.qna_no}' ">
-		<input type="submit" class="btn btn-outline-secondary" value="삭제" onClick="location.href='qnaDelete?pageNum=${paging.currentPage}&qna_no=${qna.qna_no}' ">
+		<input type="submit" class="btn btn-outline-secondary" value="삭제" onClick="deleteCheck()">
 		</c:if>
 	</c:if>
 	<c:if test="${qna.qna_lev != 0}"><!-- 답글 -->
@@ -60,7 +60,7 @@
                       sessionScope.role == 'master' || sessionScope.role == 'notice' || 
                       sessionScope.role == 'community' || sessionScope.role == 'hospital' || sessionScope.role == 'product'}">
         <input type="submit" class="btn btn-outline-secondary" value="수정" onClick="location.href='qnaUpdateForm?pageNum=${paging.currentPage}&qna_no=${qna.qna_no}' ">
-		<input type="submit" class="btn btn-outline-secondary" value="삭제" onClick="location.href='qnaDelete?pageNum=${paging.currentPage}&qna_no=${qna.qna_no}' ">
+		<input type="submit" class="btn btn-outline-secondary" value="삭제" onClick="deleteCheck()">
         </c:if>
 	</c:if>
 		<!-- 전체 : 목록으로 -->
@@ -70,5 +70,16 @@
 	
 	</div>
 </section>
-	
+
+<script>
+	function deleteCheck() {
+		if (confirm("정말로 삭제하시겠습니까?") == true) { // 확인
+			location.href="qnaDelete?pageNum=${paging.currentPage}&qna_no=${qna.qna_no}"
+		} else { // 취소
+			alert("취소되었습니다.");
+			return false;
+		}
+	}
+</script>
+
 <%@ include file="../layout/footer.jsp"%>
