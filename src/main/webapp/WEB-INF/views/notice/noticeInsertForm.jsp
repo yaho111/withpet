@@ -42,10 +42,10 @@
     <tr>
      <th>공지 내용</th>
      <td>
-      <textarea class="" name="not_content" id="not_content" cols=40 rows=5 width="600px"></textarea>
+      <textarea name="not_content" id="not_content" cols=40 rows=5 width="600px"></textarea>
       			<script type="text/javascript">
                     CKEDITOR.replace('not_content',{
-                        filebrowserUploadUrl: '${path}/adm/fileUpload'
+                        filebrowserUploadUrl: '${pageContext.request.contextPath}/adm/fileUpload'
                         		// path = pageContext.request.contextPath
                     }); // 에디터로 생성
                 </script >
@@ -54,10 +54,10 @@
     
    </table>
    
-
-    <input type="submit" value="등록" class="form-control"/>
-    <input type="reset" value="취소" class="form-control" onClick="history.back()"/>
-  
+	<div class="body-menu" align="right">
+    <input type="submit" value="등록" class="btn btn-primary"/>
+    <input type="reset" value="취소" class="btn btn-danger" onClick="history.back()"/>
+  	</div>
   </form>
 </div>
 </section>

@@ -26,7 +26,7 @@
 		<!-- '%'||#{keyword}||'%'에서 || : +의미 -->
 		
 		
-	<!-- 목록 구하기 --><!-- list = null 여기서 sql 문제인듯 -->
+	<!-- 목록 구하기 -->
 	<select id="noticeList" parameterType="notice" resultType="notice">
 		select * from (select rowNum rn, noticeBoard.* from 
 				  	  (select * from notice
