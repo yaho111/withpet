@@ -220,7 +220,7 @@ public class MemberController {
         List<String> foundId = memberService.findId(member);
 
 
-        if (foundId == null) {
+        if (foundId.isEmpty()) {
             return "member/idResult";
         } else {
 
