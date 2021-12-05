@@ -14,7 +14,7 @@
                 </select>
 
                 <c:if test="${sessionScope.role == 'hospital' || sessionScope.role == 'hospital_pro'|| sessionScope.role == 'master'}">
-                    <input type="button" class="btn btn-outline-secondary" value="글쓰기"
+                    <input type="button" class="btn btn-outline-secondary" value="글작성"
                            onclick="location.href='insertForm'"/>
                 </c:if>
             </div>
