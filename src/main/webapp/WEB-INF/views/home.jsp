@@ -82,7 +82,7 @@
                             <img class="card-img-top" src="${path}/images/basic_product.jpg"/>
                         </c:if>
                         <c:if test="${not empty product.pro_img}">
-                            <img class="card-img-top" src="${path}/upload/product/${product.pro_img}"/>
+                            <img class="card-img-top" src="${path}/upload/${product.pro_img}"/>
                         </c:if>
                         <!-- Product details-->
                         <div class="card-body p-4">
