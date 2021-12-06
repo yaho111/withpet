@@ -95,7 +95,7 @@
 	<update id="boardUpdate" parameterType="community">
 		update community set
 		com_writer=#{com_writer}, com_title=#{com_title}
-		,com_content=#{com_content}, com_reg=sysdate, COM_FILE=#{com_file} where com_no=#{com_no}
+		,com_content=#{com_content}, com_reg=sysdate, COM_FILE=#{com_file,jdbcType=VARCHAR} where com_no=#{com_no}
 	</update>
 
 	<!-- 글삭제 -->
