@@ -82,7 +82,7 @@
             <td><fmt:formatNumber pattern="###,###,###" value = "${product.price }"/>원</td>
         </tr>
         <tr>
-<c:if test="${sessionScope.role == 'user' || sessionScope.role == 'product_pro'|| sessionScope.role == 'master'}">
+            <c:if test="${sessionScope.id != null}">
             <th> 구매 수량</th>
             <td>
                 <form name="form1" method="post" action="${path}/basketInsert">
