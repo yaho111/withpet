@@ -50,7 +50,7 @@
 		</c:if>
 
 		<!-- 사용자 -->
-		<c:if test="${sessionScope.id == qna.qna_writer && sessionScope.role == 'user'}">
+		<c:if test="${sessionScope.id == qna.qna_writer && sessionScope.role == 'user' || sessionScope.role == 'product_pro' || sessionScope.role == 'hospital_pro'}">
 		<input type="submit" class="btn btn-outline-secondary" value="수정" onClick="location.href='qnaUpdateForm?pageNum=${paging.currentPage}&qna_no=${qna.qna_no}' ">
 		<input type="submit" class="btn btn-outline-secondary" value="삭제" onClick="deleteCheck()">
 		</c:if>

@@ -34,16 +34,6 @@
                         <!-- 비공개 -->
                         <c:if test="${qna.qna_secret == 'N'}">
                             <td>
-                                <!-- 일반 회원 -->
-                                <c:if test="${sessionScope.id == null || qna.qna_writer != sessionScope.id && 
-                                			  sessionScope.role == 'user' || sessionScope.role == 'product_pro'|| sessionScope.role == 'hospital_pro'}">
-                                    <img width="16px" height="16px" src="./images/locked.png">비밀글입니다.
-                                </c:if>
-
-                                <!-- 작성자, 관리자 -->
-                                <c:if test="${qna.qna_writer == sessionScope.id || sessionScope.role == 'qna' || 
-                                			  sessionScope.role == 'master' || sessionScope.role == 'notice' || 
-                                			  sessionScope.role == 'community' || sessionScope.role == 'hospital' || sessionScope.role == 'product'}">
                                     <!-- 답글처리 -->
                                     <div align="left">
                                         <c:if test="${qna.qna_lev != 0}">
@@ -52,13 +42,40 @@
                                             </c:forEach>
                                             <img src="./images/AnswerLine.gif">
                                         </c:if>
-                                        <!-- 답글처리 끝 -->
-
-                                        <a href="qnaView?qna_no=${qna.qna_no}&pageNum=${paging.currentPage}">
+                                        <!-- 답글처리 끝 -->                                       
+ 								<c:choose>
+ 									<c:when test="${sessionScope.id == null}"><!-- 비회원  -->
+ 										<img width="16px" height="16px" src="./images/locked.png">비밀글입니다.
+ 									</c:when>
+ 									<c:when test="${sessionScope.role == 'user' && qna.qna_writer != sessionScope.id}"><!-- 회원 중 작성자 아님  -->
+ 										<img width="16px" height="16px" src="./images/locked.png">비밀글입니다.
+ 									</c:when>
+ 									
+ 									<c:when test="${sessionScope.role == 'product_pro' || sessionScope.role == 'hospital_pro' && qna.qna_writer != sessionScope.id}">
+ 										<img width="16px" height="16px" src="./images/locked.png">비밀글입니다.
+ 									</c:when>
+ 									
+ 									<c:when test="${qna.qna_writer == sessionScope.id && sessionScope.role == 'user'}">
+ 										<a href="qnaView?qna_no=${qna.qna_no}&pageNum=${paging.currentPage}">
                                             <img width="16px" height="16px" src="./images/locked.png">${qna.qna_title}
-                                        </a>
-                                    </div>
-                                </c:if>
+                                   		</a>
+ 									</c:when>
+ 									
+ 									<c:when test="${qna.qna_writer == sessionScope.id && sessionScope.role == 'product_pro' || sessionScope.role == 'hospital_pro'}">
+ 										<a href="qnaView?qna_no=${qna.qna_no}&pageNum=${paging.currentPage}">
+                                            <img width="16px" height="16px" src="./images/locked.png">${qna.qna_title}
+                                   		</a>
+ 									</c:when>
+ 									
+ 									<c:when test="${sessionScope.role == 'qna' || sessionScope.role == 'master' || sessionScope.role == 'notice' || 
+                                			  		sessionScope.role == 'community' || sessionScope.role == 'hospital' || sessionScope.role == 'product'}">
+                                		<a href="qnaView?qna_no=${qna.qna_no}&pageNum=${paging.currentPage}">
+                                            <img width="16px" height="16px" src="./images/locked.png">${qna.qna_title}
+                                   		</a> 			  		
+ 									</c:when>
+ 								</c:choose>
+
+                                </div>
 
                             </td>
                             <td>
