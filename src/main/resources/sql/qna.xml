@@ -70,10 +70,10 @@
 	update qna set qna_title = #{qna_title}, qna_content = #{qna_content}, qna_reg = sysdate, qna_file = #{qna_file,jdbcType=VARCHAR}, 
 	qna_secret = #{qna_secret} where qna_no = #{qna_no}
 	</update>
-	
+		
 	<!-- 삭제 -->
 	<delete id="qnaDelete" parameterType="qna">
-	delete from qna where qna_no=#{qna_no} <!-- and qna_ref = #{qna_ref} -->
+	delete from qna where qna_no=#{qna_no} or qna_ref=#{qna_no}
 	</delete>
 	
 	
