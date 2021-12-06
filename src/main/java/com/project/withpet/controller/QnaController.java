@@ -369,7 +369,7 @@ public class QnaController {
 	public String qnaDelete(Qna qna, String pageNum, Model model) {	// 매개변수 : 세션 객체 필요
 		
 		int result = qnaService.qnaDelete(qna);
-		if (result == 1)
+		if (result >= 1)
 			model.addAttribute("result", result);
 		
 		return "qna/qnaDelete";
