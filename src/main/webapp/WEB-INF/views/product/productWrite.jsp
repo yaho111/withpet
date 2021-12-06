@@ -11,10 +11,45 @@
 
 <script type="text/javascript" src="${path}/ckeditor/ckeditor.js" ></script>
 
+<script type="text/javascript">
+
+    function productcheck() {
+        if ($("#pro_name").val() == "") {
+            alert("상품 이름을 입력하세요!");
+            $("#pro_name").focus();
+            return false;
+        }
+
+        if ($("#stock").val() == "") {
+            alert("상품 수량을 넣어주세요!");
+            $("#stock").focus();
+            return false;
+        }
+
+        if  ($("#price").val() == "") {
+            alert("가격을 정해주세요!");
+            $("#price").focus();
+            return false;
+        }
+
+        if(CKEDITOR.instances.pro_content.getData() ==''
+            || CKEDITOR.instances.pro_content.getData().length ==0) {
+            alert("상품 내용을 입력하세요!");
+            $("#pro_content").focus();
+            return false;
+        }
+
+
+        return true;
+
+    }
+
+
+</script>
 
 <section class="py-5">
     <div class="container">
-<form method="post" action="${path}/productResult" enctype="multipart/form-data">
+<form method="post" enctype="multipart/form-data" onsubmit="return productcheck()" action="${path}/productResult">
     <h2 class="body-title">상품 등록</h2>
     <table class="table">
         <c:if test="${product ne null and product.pro_no ne null and product.pro_no ne ''}">
@@ -28,17 +63,17 @@
 
         <tr>
             <th>제목</th>
-            <td><input type="text" name="pro_name" class="form-control" value="${product.pro_name}"></td>
+            <td><input id="pro_name" type="text" name="pro_name" class="form-control" value="${product.pro_name}"></td>
         </tr>
 
         <tr>
             <th>재고</th>
-            <td><input type="number" name="stock" class="form-control"  value = "${product.stock }"></td>
+            <td><input id="stock" type="text" name="stock" class="form-control"  value = "${product.stock }" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');"></td>
         </tr>
 
         <tr>
             <th>가격</th>
-            <td><input type ="number" name="price" class="form-control"  value = "${product.price }"/></td>
+            <td><input id="price" type ="text" name="price" class="form-control"  value = "${product.price }" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" /></td>
         </tr>
 
         <tr>
@@ -63,7 +98,7 @@
         </tr>
     </table>
     <div class="body-menu" align="right">
-        <input type=submit value="상품 등록"  class="btn btn-primary">
+        <input type=submit value="상품 등록" class="btn btn-primary">
         <input type=reset value="취소" class="btn btn-danger">
     </div>
 </form>
