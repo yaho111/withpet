@@ -6,7 +6,7 @@
     <div class="container">
 
 <input type="submit" value="관리자 메인 페이지"
-			onclick="location.href='manager'" class="form-control">
+			onclick="location.href='managerwithpet'" class="form-control">
 
 
 <!-- 검색 기능 -->

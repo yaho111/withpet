@@ -37,7 +37,7 @@ public class ManagerController {
 	private BusinessService businessService;
 
 	// 관리자 메인 페이지
-	@RequestMapping(value = "manager", method = RequestMethod.GET)
+	@RequestMapping(value = "managerwithpet", method = RequestMethod.GET)
 	public String mangerPage() {
 		return "manager/manager";
 	}
