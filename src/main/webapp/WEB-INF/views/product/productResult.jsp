@@ -12,7 +12,7 @@
 <c:if test="${result == 1 }">
     <script>
         alert("글작성 성공");
-        location.href="${path}/productList/?page=1";
+        location.href="${path}/productList?page=1";
     </script>
 </c:if>
 

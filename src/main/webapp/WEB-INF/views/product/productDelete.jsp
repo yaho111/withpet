@@ -11,7 +11,7 @@
 
     <script>
         alert("글삭제 성공");
-        location.href="${path}/productList/?page=1";
+        location.href="${path}/productList?page=1";
     </script>
 
 
