@@ -1,4 +1,4 @@
-function check() {
+﻿function check() {
     if ($("input[name=pet_sort]:radio:checked").length < 1) {
         alert("종류를 선택하세요!");
         $("#cat").focus();

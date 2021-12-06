@@ -1,4 +1,4 @@
-function notice_check() {
+﻿function notice_check() {
 	if ($.trim($("#not_title").val()) == "") {
 		alert("제목를 입력하세요!");
 		$("#qna_title").val("").focus();

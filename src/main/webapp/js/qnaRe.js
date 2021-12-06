@@ -1,4 +1,4 @@
-function qnaRe_check() {
+﻿function qnaRe_check() {
 	if ($.trim($("#qna_title").val()) == "") {
 		alert("제목를 입력하세요!");
 		$("#qna_title").val("").focus();

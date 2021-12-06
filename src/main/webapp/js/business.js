@@ -1,4 +1,4 @@
-function check() {
+﻿function check() {
     if($.trim($("#bus_name").val()) == ""){
         alert("사업명을 입력하세요!");
         $("#bus_name").val("").focus();

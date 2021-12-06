@@ -1,4 +1,4 @@
-function check() {
+﻿function check() {
     if ($.trim($("#id").val()) == "") {
         alert("아이디를 입력하세요!");
         $("#join_id").val("").focus();
