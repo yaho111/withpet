@@ -49,7 +49,7 @@ public class HomeController {
 
 		if(loginId != null){
 			Member loginMember = memberService.selectMember(loginId);
-			String address = loginMember.getAddr().split("\\+")[1];
+			String address = loginMember.getAddr().split("\\+")[1].substring(0,5);
 
 			System.out.println(address);
 
