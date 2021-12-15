@@ -112,11 +112,51 @@
 	}
 ```  
 
-#### 5-2. API 활용 기능
-- **다음 주소 API**  
+#### 5-2. API 활용
+- 다음 주소 API   
 
-- **카카오맵 API**  
+- 카카오맵 API  
 
-- **CK Editor API**  
+- CK Editor API    
 
+#### 5-3. 보안 처리
+- **메일 계정**  
+
+``` java
+
+	// .properties 파일 읽어오기
+        Properties properties = new Properties();
+        try {
+            Reader reader = Resources.getResourceAsReader("application.properties");
+            properties.load(reader);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+        // appKey 변수 선언
+        String appKey = properties.getProperty("daumpost.appKey");
+	
+```
+
+- **카카오맵 앱 키**  
+
+``` java
+
+	// .properties 파일 읽어오기
+        Properties properties = new Properties();
+        try {
+            Reader reader = Resources.getResourceAsReader("application.properties");
+            properties.load(reader);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        // Mail Server 설정
+        String charSet = "utf-8";
+        String hostSmtp = "smtp.naver.com";
+        String hostSmtpId = properties.getProperty("mail.hostSmtpId");
+        String hostSmtpPwd = properties.getProperty("mail.hostSmtpPwd");
+	    
+```  
 
