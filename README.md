@@ -117,7 +117,9 @@
 
 - 카카오맵 API  
 
-- CK Editor API    
+- CK Editor API 
+  
+- NHN KCP API  
 
 ### 5-3. 보안 처리
 - **메일 계정**  
@@ -159,4 +161,3 @@
         String hostSmtpPwd = properties.getProperty("mail.hostSmtpPwd");
 	    
 ```  
-
